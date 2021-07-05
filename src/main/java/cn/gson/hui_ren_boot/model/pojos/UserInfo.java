@@ -2,7 +2,6 @@ package cn.gson.hui_ren_boot.model.pojos;
 
 import javax.persistence.*;
 import java.util.Objects;
-
 @Entity
 @Table(name = "USER_INFO", schema = "HUIREN")
 public class UserInfo {
@@ -85,5 +84,4 @@ public class UserInfo {
                 ", userPossword='" + userPossword + '\'' +
                 ", userStaff=" + userStaff +
                 '}';
-    }
-}
+    }}
