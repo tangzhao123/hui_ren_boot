@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.OutRegisterMapper">
+    <resultMap id="registerMapper" type="cn.gson.hui_ren_boot.model.pojos.OutpatientRegister">
+        <id column="OUTPATIENT_ID" property="outpatientId"/>
+        <result column="OUTPATIENT_NAME" property="outpatientName"/>
+        <result column="OUTPATIENT_SEX" property="outpatientSex"/>
+        <result column="OUTPATIENT_BIRTH" property="outpatientBirth"/>
+        <result column="OUTPATIENT_AGE" property="outpatientAge"/>
+        <result column="OUTPATIENT_MARRY" property="outpatientMarry"/>
+        <result column="OUTPATIENT_VOCATION" property="outpatientVocation"/>
+        <result column="OUTPATIENT_NATIVE" property="outpatientNative"/>
+        <result column="OUTPATIENT_NATION" property="outpatientNation"/>
+        <result column="OUTPATIENT_CARD" property="outpatientCard"/>
+        <result column="OUTPATIENT_WORK" property="outpatientWork"/>
+        <result column="OUTPATIENT_PHONE" property="outpatientPhone"/>
+        <result column="OUTPATIENT_ADDRESS" property="outpatientAddress"/>
+        <result column="OUTPATIENT_WEIGHT" property="outpatientWeight"/>
+        <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
+    </resultMap>
+
+    <!--查询患者-->
+    <select id="allRegister" resultMap="registerMapper">
+        select * from OUTPATIENT_REGISTER
+    </select>
+</mapper>
