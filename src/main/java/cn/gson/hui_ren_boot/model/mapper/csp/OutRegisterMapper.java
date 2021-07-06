@@ -1,6 +1,6 @@
-package cn.gson.hui_ren_boot.model.mapper;
+package cn.gson.hui_ren_boot.model.mapper.csp;
 
-import cn.gson.hui_ren_boot.model.pojos.OutpatientRegister;
+import cn.gson.hui_ren_boot.model.pojos.csp.OutpatientRegister;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

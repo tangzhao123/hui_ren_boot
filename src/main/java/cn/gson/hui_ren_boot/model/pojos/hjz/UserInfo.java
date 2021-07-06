@@ -1,4 +1,4 @@
-package cn.gson.hui_ren_boot.model.pojos;
+package cn.gson.hui_ren_boot.model.pojos.hjz;
 
 import javax.persistence.*;
 import java.util.Objects;

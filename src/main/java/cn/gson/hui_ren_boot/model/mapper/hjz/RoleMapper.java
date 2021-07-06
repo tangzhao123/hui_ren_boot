@@ -1,6 +1,6 @@
-package cn.gson.hui_ren_boot.model.mapper;
+package cn.gson.hui_ren_boot.model.mapper.hjz;
 
-import cn.gson.hui_ren_boot.model.pojos.Function;
+import cn.gson.hui_ren_boot.model.pojos.hjz.Function;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

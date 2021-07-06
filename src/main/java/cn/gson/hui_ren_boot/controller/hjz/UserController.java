@@ -1,15 +1,11 @@
-package cn.gson.hui_ren_boot.controller;
+package cn.gson.hui_ren_boot.controller.hjz;
 
-import cn.gson.hui_ren_boot.model.pojos.UserInfo;
-import cn.gson.hui_ren_boot.model.service.UserService;
+import cn.gson.hui_ren_boot.model.pojos.hjz.UserInfo;
+import cn.gson.hui_ren_boot.model.service.hjz.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpSession;
 
 @RestController
 public class UserController {

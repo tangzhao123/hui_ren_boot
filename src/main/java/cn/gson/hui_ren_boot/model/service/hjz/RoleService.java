@@ -1,8 +1,8 @@
-package cn.gson.hui_ren_boot.model.service;
+package cn.gson.hui_ren_boot.model.service.hjz;
 
 
-import cn.gson.hui_ren_boot.model.mapper.RoleMapper;
-import cn.gson.hui_ren_boot.model.pojos.Function;
+import cn.gson.hui_ren_boot.model.mapper.hjz.RoleMapper;
+import cn.gson.hui_ren_boot.model.pojos.hjz.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

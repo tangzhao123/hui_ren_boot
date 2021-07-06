@@ -1,7 +1,7 @@
-package cn.gson.hui_ren_boot.model.service;
+package cn.gson.hui_ren_boot.model.service.hjz;
 
-import cn.gson.hui_ren_boot.model.mapper.UserMapper;
-import cn.gson.hui_ren_boot.model.pojos.UserInfo;
+import cn.gson.hui_ren_boot.model.mapper.hjz.UserMapper;
+import cn.gson.hui_ren_boot.model.pojos.hjz.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

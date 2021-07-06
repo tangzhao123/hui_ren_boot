@@ -1,12 +1,9 @@
-package cn.gson.hui_ren_boot.controller;
+package cn.gson.hui_ren_boot.controller.csp;
 
-import cn.gson.hui_ren_boot.model.pojos.OutpatientRegister;
-import cn.gson.hui_ren_boot.model.service.OutRegisterService;
+import cn.gson.hui_ren_boot.model.service.csp.OutRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/outpatient")

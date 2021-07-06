@@ -1,4 +1,4 @@
-package cn.gson.hui_ren_boot.model.pojos;
+package cn.gson.hui_ren_boot.model.pojos.csp;
 
 import javax.persistence.*;
 import java.util.Date;

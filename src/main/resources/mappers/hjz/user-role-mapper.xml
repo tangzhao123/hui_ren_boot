@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.gson.hui_ren_boot.model.mapper.RoleMapper">
-    <resultMap id="func" type="cn.gson.hui_ren_boot.model.pojos.Function">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hjz.RoleMapper">
+    <resultMap id="func" type="cn.gson.hui_ren_boot.model.pojos.hjz.Function">
         <id property="authityId" column="authity_id"/>
         <result property="authitySuperior" column="authity_superior"/>
         <result property="authityPath" column="authity_path"/>
@@ -12,7 +12,7 @@
         <result property="aurhityGrade" column="aurhity_grade"/>
     </resultMap>
 
-    <resultMap id="funs" type="cn.gson.hui_ren_boot.model.pojos.Function">
+    <resultMap id="funs" type="cn.gson.hui_ren_boot.model.pojos.hjz.Function">
         <id property="authityId" column="Parent_ID"/>
         <result property="authitySuperior" column="Parent_SUPERIOR"/>
         <result property="authityPath" column="Parent_PATH"/>
@@ -20,7 +20,7 @@
         <result property="authityLeadaers" column="Parent_LEADAERS"/>
         <result property="aurhityState" column="Parent_STATE"/>
         <result property="aurhityGrade" column="Parent_GRADE"/>
-        <collection  property="children" ofType="cn.gson.hui_ren_boot.model.pojos.Function" resultMap="func"></collection>
+        <collection property="children" ofType="cn.gson.hui_ren_boot.model.pojos.hjz.Function" resultMap="func"></collection>
     </resultMap>
 
     <!-- 查询菜单栏 -->

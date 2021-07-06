@@ -1,8 +1,7 @@
-package cn.gson.hui_ren_boot.controller;
+package cn.gson.hui_ren_boot.controller.hjz;
 
-import cn.gson.hui_ren_boot.model.pojos.Function;
-import cn.gson.hui_ren_boot.model.pojos.UserInfo;
-import cn.gson.hui_ren_boot.model.service.RoleService;
+import cn.gson.hui_ren_boot.model.pojos.hjz.Function;
+import cn.gson.hui_ren_boot.model.service.hjz.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
