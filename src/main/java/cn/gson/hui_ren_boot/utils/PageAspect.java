@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 public class PageAspect {
     //ByPage是分页查询的业务方法的后缀，用来区分其他增删改查的方法
-    @Pointcut("execution(* cn.gson.hui_ren_boot.model.service.*Service.*ByPage(..))")
+    @Pointcut("execution(* cn.gson.hui_ren_boot.model.service.*.*Service.*ByPage(..))")
     public void pc(){}
 
     @Around("pc()")
