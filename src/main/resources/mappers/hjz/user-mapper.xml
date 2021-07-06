@@ -8,6 +8,7 @@
         <result property="userPossword" column="user_possword"/>
         <result property="userStaff" column="user_staff"/>
     </resultMap>
+    <!-- 登录 -->
     <select id="allUser" resultMap="userMapper">
         select * from user_info where user_name = #{userName} and user_possword = #{userPossword}
     </select>

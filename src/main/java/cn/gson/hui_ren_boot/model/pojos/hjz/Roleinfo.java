@@ -53,4 +53,21 @@ public class Roleinfo {
     public int hashCode() {
         return Objects.hash(roleinfoId, roleinfoName, roleinfoSuperior);
     }
+
+    public Roleinfo(String roleinfoName, Long roleinfoSuperior) {
+        this.roleinfoName = roleinfoName;
+        this.roleinfoSuperior = roleinfoSuperior;
+    }
+
+    public Roleinfo() {
+    }
+
+    @Override
+    public String toString() {
+        return "Roleinfo{" +
+                "roleinfoId=" + roleinfoId +
+                ", roleinfoName='" + roleinfoName + '\'' +
+                ", roleinfoSuperior=" + roleinfoSuperior +
+                '}';
+    }
 }

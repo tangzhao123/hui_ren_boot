@@ -14,14 +14,10 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
+    //菜单栏的查询
     @GetMapping("/role-list")
     public Object login(Long userId){
         List<Function> functions = roleService.userRole(userId);
-//        int user = roleService.user(userId);
-//        List<Function> functions1 = roleService.userMenu((long) user);
-//        System.out.println(functions.toString());
-//        System.out.println(functions1.toString());
-//        System.out.println(user);
         return functions;
     }
 }

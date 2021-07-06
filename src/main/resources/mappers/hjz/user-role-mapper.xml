@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.hjz.RoleMapper">
+    <!-- 父级权限结果集映射 -->
     <resultMap id="func" type="cn.gson.hui_ren_boot.model.pojos.hjz.Function">
         <id property="authityId" column="authity_id"/>
         <result property="authitySuperior" column="authity_superior"/>
@@ -12,6 +13,7 @@
         <result property="aurhityGrade" column="aurhity_grade"/>
     </resultMap>
 
+    <!-- 菜单栏结果集映射 -->
     <resultMap id="funs" type="cn.gson.hui_ren_boot.model.pojos.hjz.Function">
         <id property="authityId" column="Parent_ID"/>
         <result property="authitySuperior" column="Parent_SUPERIOR"/>
@@ -28,13 +30,5 @@
         select fs.authity_id Parent_ID,fs.authity_superior Parent_SUPERIOR,fs.authity_path Parent_PATH,fs.authity_icon Parent_ICON,fs.authity_leadaers Parent_LEADAERS,fs.aurhity_state Parent_STATE,fs.aurhity_grade Parent_GRADE,f.* from function f inner join function fs on f.authity_leadaers = fs.authity_id  inner join permission p on f.authity_id = p.authity_id inner join userole us on p.roleinfo_id = us.roleinfo_id where us.user_id = #{userId} and fs.authity_leadaers=0
     </select>
 
-    <!-- 查询导航栏 -->
-    <select id="userMenu" resultMap="func">
-        select f.* from function f inner join permission p on f.authity_id = p.authity_id where p.roleinfo_id = #{roleinfoId} and f.authity_leadaers = 0
-    </select>
 
-    <!-- 根据用户查询角色编号 -->
-    <select id="user" resultType="_int">
-        select roleinfo_id  from userole us where user_id = #{userId}
-    </select>
 </mapper>

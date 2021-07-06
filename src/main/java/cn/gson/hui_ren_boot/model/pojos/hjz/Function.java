@@ -110,4 +110,5 @@ public class Function {
     public int hashCode() {
         return Objects.hash(authityId, authitySuperior, authityPath, authityIcon, authityLeadaers, aurhityState, aurhityGrade);
     }
+
 }

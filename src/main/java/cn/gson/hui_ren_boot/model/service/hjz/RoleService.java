@@ -21,13 +21,4 @@ public class RoleService {
         return roleMapper.userRole(userId);
     }
 
-    //查询导航栏
-    public List<Function> userMenu(Long roleinfoId){
-        return roleMapper.userMenu(roleinfoId);
-    }
-
-    //根据用户查询角色编号
-    public Integer user(Long userId){
-        return roleMapper.user(userId);
-    }
 }

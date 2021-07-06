@@ -11,9 +11,5 @@ public interface RoleMapper {
     //查询菜单栏
     public List<Function> userRole(Long userId);
 
-    //查询导航栏
-    public List<Function> userMenu(Long roleinfoId);
 
-    //根据用户查询角色编号
-    public int user(Long userId);
 }

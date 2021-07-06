@@ -13,6 +13,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //登录
     @PostMapping("/login")
     public Object login(@RequestBody UserInfo user){
         UserInfo info = userService.login(user);
