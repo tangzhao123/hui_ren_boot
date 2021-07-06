@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.RoleMapper">
+    <!-- 父级权限结果集映射 -->
+    <resultMap id="func" type="cn.gson.hui_ren_boot.model.pojos.permissions.Function">
+        <id property="authityId" column="authity_id"/>
+        <result property="authitySuperior" column="authity_superior"/>
+        <result property="authityPath" column="authity_path"/>
+        <result property="authityIcon" column="authity_icon"/>
+        <result property="authityLeadaers" column="authity_leadaers"/>
+        <result property="aurhityState" column="aurhity_state"/>
+        <result property="aurhityGrade" column="aurhity_grade"/>
+    </resultMap>
+
+    <!-- 菜单栏结果集映射 -->
+    <resultMap id="funs" type="cn.gson.hui_ren_boot.model.pojos.permissions.Function">
+        <id property="authityId" column="Parent_ID"/>
+        <result property="authitySuperior" column="Parent_SUPERIOR"/>
+        <result property="authityPath" column="Parent_PATH"/>
+        <result property="authityIcon" column="Parent_ICON"/>
+        <result property="authityLeadaers" column="Parent_LEADAERS"/>
+        <result property="aurhityState" column="Parent_STATE"/>
+        <result property="aurhityGrade" column="Parent_GRADE"/>
+        <collection property="children" ofType="cn.gson.hui_ren_boot.model.pojos.permissions.Function" resultMap="func"></collection>
+    </resultMap>
+
+    <!-- 查询菜单栏 -->
+    <select id="userRole" resultMap="funs">
+        select fs.authity_id Parent_ID,fs.authity_superior Parent_SUPERIOR,fs.authity_path Parent_PATH,fs.authity_icon Parent_ICON,fs.authity_leadaers Parent_LEADAERS,fs.aurhity_state Parent_STATE,fs.aurhity_grade Parent_GRADE,f.* from function f inner join function fs on f.authity_leadaers = fs.authity_id  inner join permission p on f.authity_id = p.authity_id inner join userole us on p.roleinfo_id = us.roleinfo_id where us.user_id = #{userId} and fs.authity_leadaers=0
+    </select>
+
+
+</mapper>

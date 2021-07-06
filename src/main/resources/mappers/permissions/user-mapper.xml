@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.UserMapper">
+    <resultMap id="userMapper" type="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPossword" column="user_possword"/>
+        <result property="userStaff" column="user_staff"/>
+    </resultMap>
+    <!-- 登录 -->
+    <select id="allUser" resultMap="userMapper">
+        select * from user_info where user_name = #{userName} and user_possword = #{userPossword}
+    </select>
+</mapper>
