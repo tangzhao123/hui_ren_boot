@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--门诊患者库-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.csp.OutRegisterMapper">
     <resultMap id="registerMapper" type="cn.gson.hui_ren_boot.model.pojos.csp.OutpatientRegister">
         <id column="OUTPATIENT_ID" property="outpatientId"/>
@@ -20,8 +21,22 @@
         <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
     </resultMap>
 
-    <!--查询患者-->
+    <!--多条件查询患者-->
     <select id="allRegister" resultMap="registerMapper">
         select * from OUTPATIENT_REGISTER
+        <where>
+            <if test="outpatientName != null and '' != outpatientName">
+                or OUTPATIENT_NAME like '%${outpatientName}%'
+            </if>
+            <if test="outpatientCard != null and '' != outpatientCard">
+                or OUTPATIENT_CARD like '%${outpatientCard}%'
+            </if>
+            <if test="outpatientPhone != null and '' != outpatientPhone">
+                or OUTPATIENT_PHONE like '%${outpatientPhone}%'
+            </if>
+            <if test="outpatientAddress != null and '' != outpatientAddress">
+                or OUTPATIENT_ADDRESS like '%${outpatientAddress}%'
+            </if>
+        </where>
     </select>
 </mapper>

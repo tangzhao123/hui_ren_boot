@@ -185,4 +185,14 @@ public class OutpatientRegister {
     public int hashCode() {
         return Objects.hash(outpatientId, outpatientName, outpatientSex, outpatientBirth, outpatientAge, outpatientMarry, outpatientVocation, outpatientNative, outpatientNation, outpatientCard, outpatientWork, outpatientPhone, outpatientAddress, outpatientWeight, outpatientBlood);
     }
+
+    @Override
+    public String toString() {
+        return "OutpatientRegister{" +
+                "outpatientName='" + outpatientName + '\'' +
+                ", outpatientCard='" + outpatientCard + '\'' +
+                ", outpatientPhone='" + outpatientPhone + '\'' +
+                ", outpatientAddress='" + outpatientAddress + '\'' +
+                '}';
+    }
 }
