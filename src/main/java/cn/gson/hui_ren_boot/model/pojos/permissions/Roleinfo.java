@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.permissions;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,9 +10,27 @@ public class Roleinfo {
     private long roleinfoId;
     private String roleinfoName;
     private Long roleinfoSuperior;
+    private List<Function> func;
 
+    @ManyToMany
+    @JoinTable(name = "permission",
+            joinColumns = {
+                    @JoinColumn(name = "ROLEINFO_ID"),
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "AUTHITY_ID"),
+            })
+    public List<Function> getFunc() {
+        return func;
+    }
+
+    public void setFunc(List<Function> func) {
+        this.func = func;
+    }
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "ROLEINFO_ID")
     public long getRoleinfoId() {
         return roleinfoId;

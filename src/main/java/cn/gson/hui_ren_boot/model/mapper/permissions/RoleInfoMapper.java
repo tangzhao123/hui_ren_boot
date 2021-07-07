@@ -8,5 +8,6 @@ import java.util.List;
 @Mapper
 public interface RoleInfoMapper {
     //查询所有角色
-    public List<Roleinfo> allRole(Roleinfo roleinfo);
+    public List<Roleinfo> allRole(String roleinfoName);
+
 }

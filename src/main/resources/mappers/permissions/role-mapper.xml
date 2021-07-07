@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.gson.hui_ren_boot.model.pojos.permissions.Roleinfo">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.RoleInfoMapper">
    <!-- 结果集映射 -->
     <resultMap id="roleMapper" type="cn.gson.hui_ren_boot.model.pojos.permissions.Roleinfo">
         <id property="roleinfoId" column="roleinfo_id"/>
@@ -17,5 +17,8 @@
                 and roleinfo_name like '%${roleinfoName}%'
             </if>
         </where>
+        order by roleinfo_id asc
     </select>
+
+
 </mapper>
