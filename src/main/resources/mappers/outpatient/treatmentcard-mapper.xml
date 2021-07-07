@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--诊疗卡-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TreatmentCardMapper">
+    <resultMap id="cardMapper" type="cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard">
+        <id column="TREATMENT_ID" property="treatmentId"/>
+        <result column="TREATMENT_NO" property="treatmentNo"/>
+        <result column="TREATMENT_PASSWORD" property="treatmentPassword"/>
+        <result column="TREATMENT_BALANCE" property="treatmentBalance"/>
+        <result column="TREATMENT_NAME" property="treatmentName"/>
+        <result column="TREATMENT_CARD" property="treatmentCard"/>
+        <result column="TREATMENT_LOCK" property="treatmentLock"/>
+    </resultMap>
+
+    <!--多条件查询诊疗卡-->
+    <select id="allCard" resultMap="cardMapper">
+        select * from TREATMENT_CARD
+        <where>
+            <if test="treatmentNo != null and '' != treatmentNo">
+                or TREATMENT_NO like '%${treatmentNo}%'
+            </if>
+            <if test="treatmentName != null and '' != treatmentName">
+                or TREATMENT_NAME like '%${treatmentName}%'
+            </if>
+            <if test="treatmentCard != null and '' != treatmentCard">
+                or TREATMENT_CARD like '%${treatmentCard}%'
+            </if>
+        </where>
+    </select>
+    
+    <!--新增诊疗卡-->
+    <insert id="addCard">
+        insert into TREATMENT_CARD
+        values (seq_huiren.nextval,#{treatmentNo},#{treatmentPassword},#{treatmentBalance},#{treatmentName},#{treatmentCard},0)
+    </insert>
+</mapper>

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * 门诊患者库
+ */
 @Entity
 @Table(name = "OUTPATIENT_REGISTER", schema = "HUIREN")
 public class OutpatientRegister {
