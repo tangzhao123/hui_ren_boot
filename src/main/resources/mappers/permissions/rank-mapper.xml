@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.RankMapper">
+    <!-- 职称结果集的映射 -->
+    <resultMap id="rankMap" type="cn.gson.hui_ren_boot.model.pojos.permissions.Rank">
+        <id property="rankId" column="rank_id"/>
+        <result property="rankName" column="rank_name"/>
+        <result property="rankSection" column="rank_section"/>
+    </resultMap>
+
+    <!-- 查询所有的职称 -->
+    <select id="allRank" resultMap="rankMap">
+        select * from rank
+    </select>
+
+    <!-- 根据名称查询编号 -->
+    <select id="byRankId" resultType="_int">
+        select rank_id from rank where rank_name = #{rankName}
+    </select>
+</mapper>

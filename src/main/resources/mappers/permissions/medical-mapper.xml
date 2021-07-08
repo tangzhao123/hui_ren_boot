@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.MedicalMapper">
+    <!-- 科室的结果集映射 -->
+    <resultMap id="medicalMap" type="cn.gson.hui_ren_boot.model.pojos.permissions.Medical">
+        <id property="medicalId" column="medical_id"/>
+        <result property="medicalName" column="medical_name"/>
+        <result property="medicalSublevel" column="medical_sublevel"/>
+    </resultMap>
+
+    <!-- 查询所有的科室 -->
+    <select id="allMedical" resultMap="medicalMap">
+        select * from medical
+    </select>
+
+    <!-- 根据名称查询编号 -->
+    <select id="byMedicalId" resultType="_int">
+        select medical_id from medical where medical_name = #{medicalName}
+    </select>
+</mapper>

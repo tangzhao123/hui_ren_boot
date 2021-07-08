@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.StaffMapper">
+
+    <!-- 查询所有员工 -->
+    <select id="allStaff" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+        select st.staff_id staffId,st.staff_name staffName,us.user_name userName,us.user_possword passWord,st.staff_card staffCard,st.staff_phone staffPhone,se.section_name sectionName,me.medical_name medicalName,r.rank_name rankName,st.staff_state staffState from staff st inner join section se on st.section_id = se.section_id inner join medical me on st.medical_id = me.medical_id inner join rank r on st.rank_id = r.rank_id inner join user_info us on us.staff_id = st.staff_id
+        <where>
+            <if test="search !=null and ''!=search">
+                st.staff_name like '%${search}%' or us.user_name like '%${search}%' or st.staff_card like '%${search}%' or st.staff_phone  like '%${search}%' or se.section_name like '%${search}%' or me.medical_name like '%${search}%' or r.rank_name like '%${search}%'
+            </if>
+        </where>
+    </select>
+
+    <!-- 新增员工 -->
+    <insert id="addStaff">
+        <selectKey keyProperty="staffId" resultType="_int" order="BEFORE">
+            select seq_huiren.nextval from dual
+        </selectKey>
+
+        insert into staff values(#{staffId},#{staffName},#{staffPhone},#{sectionId},#{medicalId},#{rankId},0,#{staffCard})
+    </insert>
+
+    <!-- 全字段修改员工或修改单个字段 -->
+    <update id="updateStaff">
+        update  staff
+        <set>
+            staff_id = #{staffId},
+            <if test="staffName !=null and staffName !=''">
+                staff_name = #{staffName},
+            </if>
+            <if test="staffPhone !=null and staffPhone!=''">
+                staff_phone = #{staffPhone},
+            </if>
+            <if test="sectionId !=null and sectionId!=''">
+                section_id = #{sectionId},
+            </if>
+            <if test="medicalId !=null and medicalId !=''">
+                medical_id = #{medicalId},
+            </if>
+            <if test="rankId !=null and rankId!=''" >
+                rank_id = #{rankId}
+            </if>
+            where staff_id = #{staffId}
+        </set>
+    </update>
+</mapper>

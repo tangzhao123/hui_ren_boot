@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.SectionMapper">
+    <!-- 部门的映射 -->
+    <resultMap id="sectionMap" type="cn.gson.hui_ren_boot.model.pojos.permissions.Section">
+        <id property="sectionId" column="section_id"/>
+        <result property="sectionName" column="section_name"/>
+        <result property="sectionTimestamp" column="section_timestamp"/>
+    </resultMap>
+    <!-- 查询所有的部门 -->
+    <select id="allSection" resultMap="sectionMap">
+        select * from section
+    </select>
+
+    <!-- 根据名称查询编号 -->
+    <select id="bySectionId" resultType="_int">
+        select section_id from section where section_name=#{sectionName}
+    </select>
+</mapper>

@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.permissions;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 @Entity
 @Table(name = "USER_INFO", schema = "HUIREN")
@@ -9,9 +10,25 @@ public class UserInfo {
     private long userId;
     private String userName;
     private String userPossword;
-    private Long userStaff;
+    private Long staffId;
+    private List<Roleinfo> roleinfos;
 
 
+    @ManyToMany
+    @JoinTable(name = "userole",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID"),
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLEINFO_ID"),
+            })
+    public List<Roleinfo> getRoleinfos() {
+        return roleinfos;
+    }
+
+    public void setRoleinfos(List<Roleinfo> roleinfos) {
+        this.roleinfos = roleinfos;
+    }
 
     @Id
     @Column(name = "USER_ID")
@@ -44,34 +61,30 @@ public class UserInfo {
     }
 
     @Basic
-    @Column(name = "USER_STAFF")
-    public Long getUserStaff() {
-        return userStaff;
+    @Column(name = "STAFF_ID")
+    public Long getStaffId() {
+        return staffId;
     }
 
-    public void setUserStaff(Long userStaff) {
-        this.userStaff = userStaff;
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
-        return userId == userInfo.userId && Objects.equals(userName, userInfo.userName) && Objects.equals(userPossword, userInfo.userPossword) && Objects.equals(userStaff, userInfo.userStaff);
+        return userId == userInfo.userId && Objects.equals(userName, userInfo.userName) && Objects.equals(userPossword, userInfo.userPossword) && Objects.equals(staffId, userInfo.staffId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userName, userPossword, userStaff);
+        return Objects.hash(userId, userName, userPossword, staffId);
     }
 
-    public UserInfo(long userId, String userName, String userPossword, Long userStaff) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userPossword = userPossword;
-        this.userStaff = userStaff;
-    }
 
     public UserInfo() {
     }
@@ -82,6 +95,6 @@ public class UserInfo {
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", userPossword='" + userPossword + '\'' +
-                ", userStaff=" + userStaff +
+                ", userStaff=" + staffId +
                 '}';
     }}

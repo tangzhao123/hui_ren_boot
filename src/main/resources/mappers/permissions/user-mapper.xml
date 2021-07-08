@@ -12,4 +12,24 @@
     <select id="allUser" resultMap="userMapper">
         select * from user_info where user_name = #{userName} and user_possword = #{userPossword}
     </select>
+
+    <!-- 新增用户 -->
+    <insert id="addUser">
+        insert into user_info values(seq_huiren.nextval,#{userName},#{userPossword},#{staffId})
+    </insert>
+
+    <!-- 全字段修改或修改单个字段 -->
+    <update id="updateUser">
+        update user_info
+        <set>
+            user_id = #{userId},
+            <if test="userName !=null and userName!='' ">
+                user_name = #{userName},
+            </if>
+            <if test="userPossword != null and userPossword !=''">
+                user_possword = #{userPossword}
+            </if>
+        </set>
+        where  user_id = #{userId}
+    </update>
 </mapper>
