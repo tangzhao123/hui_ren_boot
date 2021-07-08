@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--诊疗卡充值记录-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TreatmentRechargeMapper">
+    <!--新增诊疗卡充值记录-->
+    <insert id="addCharge">
+        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney})
+    </insert>
+</mapper>

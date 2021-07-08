@@ -15,4 +15,10 @@ public interface TreatmentCardMapper {
 
     //新增诊疗卡
     public void addCard(TreatmentCard treatmentCard);
+    
+    //充值，根据卡号修改余额
+    public void editBalance(TreatmentCard treatmentCard);
+
+    //挂失，根据卡号修改卡的状态
+    public void delCard(String treatmentNo);
 }

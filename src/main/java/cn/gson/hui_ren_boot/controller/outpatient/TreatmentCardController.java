@@ -35,4 +35,16 @@ public class TreatmentCardController {
         System.out.println(treatmentCard);
         treatmentCardService.addCard(treatmentCard);
     }
+
+    //充值，根据卡号修改余额
+    @RequestMapping("/edit-balance")
+    public void editBalance(@RequestBody TreatmentCard treatmentCard){
+        treatmentCardService.editBalance(treatmentCard);
+    }
+
+    //挂失，根据卡号修改卡的状态
+    @RequestMapping("/del-card")
+    public void delCard(@RequestBody String treatmentNo){
+        treatmentCardService.delCard(treatmentNo.substring(0,treatmentNo.length()-1));
+    }
 }

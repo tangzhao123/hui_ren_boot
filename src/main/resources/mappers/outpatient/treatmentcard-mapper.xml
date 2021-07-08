@@ -34,4 +34,14 @@
         insert into TREATMENT_CARD
         values (seq_huiren.nextval,#{treatmentNo},#{treatmentPassword},#{treatmentBalance},#{treatmentName},#{treatmentCard},0)
     </insert>
+
+    <!--充值，根据卡号修改余额-->
+    <update id="editBalance">
+        update TREATMENT_CARD set TREATMENT_BALANCE=#{treatmentBalance} where TREATMENT_NO=#{treatmentNo}
+    </update>
+
+    <!--挂失，根据卡号修改卡的状态-->
+    <update id="delCard">
+        update TREATMENT_CARD set TREATMENT_LOCK=1 where TREATMENT_NO=#{treatmentNo}
+    </update>
 </mapper>
