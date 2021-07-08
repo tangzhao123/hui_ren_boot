@@ -16,6 +16,7 @@ public class TreatmentCard {
     private String treatmentName;
     private String treatmentCard;
     private Long treatmentLock;
+    private long money;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -87,6 +88,14 @@ public class TreatmentCard {
 
     public void setTreatmentLock(Long treatmentLock) {
         this.treatmentLock = treatmentLock;
+    }
+
+    public long getMoney() {
+        return money;
+    }
+
+    public void setMoney(long money) {
+        this.money = money;
     }
 
     @Override
