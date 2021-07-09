@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.ComboitemMapper">
+    <!-- 体检项目结果集映射-->
+    <resultMap id="seeAll" type="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        <id property="itemId" column="ITEM_ID"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="itemOffice" column="ITEM_OFFICE"/>
+        <result property="itemMoney" column="ITEM_MONEY"/>
+        <result property="itemType" column="ITEM_TYPE"/>
+    </resultMap>
+
+    <!-- 查询所有体检项目 -->
+    <select id="selectAll" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        select * from comboitem
+    </select>
+</mapper>
