@@ -10,4 +10,9 @@ public interface RoleInfoMapper {
     //查询所有角色
     public List<Roleinfo> allRole(String roleinfoName);
 
+//    //查询父级角色
+//    public List<Roleinfo> allRole();
+//
+//    //查询子级角色
+//    public List<Roleinfo> childrenRole(Long roleinfoId);
 }

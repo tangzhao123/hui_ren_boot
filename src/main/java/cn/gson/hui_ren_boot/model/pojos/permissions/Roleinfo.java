@@ -11,6 +11,16 @@ public class Roleinfo {
     private String roleinfoName;
     private Long roleinfoSuperior;
     private List<Function> func;
+    private List<Roleinfo> roleinfos;
+
+    @OneToMany
+    public List<Roleinfo> getRoleinfos() {
+        return roleinfos;
+    }
+
+    public void setRoleinfos(List<Roleinfo> roleinfos) {
+        this.roleinfos = roleinfos;
+    }
 
     @ManyToMany
     @JoinTable(name = "permission",
@@ -77,6 +87,7 @@ public class Roleinfo {
         this.roleinfoName = roleinfoName;
         this.roleinfoSuperior = roleinfoSuperior;
     }
+
 
     public Roleinfo() {
     }

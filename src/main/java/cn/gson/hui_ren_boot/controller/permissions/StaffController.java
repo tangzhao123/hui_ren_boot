@@ -1,11 +1,9 @@
 package cn.gson.hui_ren_boot.controller.permissions;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.Roleinfo;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
-import cn.gson.hui_ren_boot.model.service.permissions.MedicalService;
-import cn.gson.hui_ren_boot.model.service.permissions.RankService;
-import cn.gson.hui_ren_boot.model.service.permissions.SectionService;
-import cn.gson.hui_ren_boot.model.service.permissions.StaffService;
+import cn.gson.hui_ren_boot.model.service.permissions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +26,9 @@ public class StaffController {
 
     @Autowired
     MedicalService medicalService;
+
+    @Autowired
+    RoleInfoService roleInfoService;
 
     //查询所有员工
     @GetMapping("staff-list")
@@ -106,4 +107,10 @@ public class StaffController {
             return "fail";
         }
     }
+
+//    //查询所有的角色
+//    @RequestMapping("roleInfo-list")
+//    public List<Roleinfo> allRole(){
+//        return roleInfoService.allRole();
+//    }
 }
