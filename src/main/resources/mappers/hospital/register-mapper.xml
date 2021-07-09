@@ -1,0 +1,67 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.RegisterMapper">
+    <resultMap id="allRegisMapper" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_SEX" property="registerSex"/>
+        <result column="REGISTER_SITE" property="registerSite"/>
+        <result column="REGISTER_CARD" property="registerCard"/>
+        <result column="REGISTER_PRINT" property="registerPrint"/>
+        <result column="REGISTER_AGE" property="registerAge"/>
+        <result column="REGISTER_HOME" property="registerHome"/>
+        <result column="REGISTER_ADDRESS" property="registerAddress"/>
+        <result column="REGISTER_PHONE" property="registerPhone"/>
+        <result column="REGISTER_RELATION" property="registerRelation"/>
+        <result column="REGISTER_CONTACT" property="registerContact"/>
+        <result column="REGISTER_CALL" property="registerCall"/>
+        <result column="REGISTER_MEDICAL" property="registerMedical"/>
+        <result column="REGISTER_RECORD" property="registerRecord"/>
+        <result column="REGISTER_USER" property="registerUser"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
+    </resultMap>
+   <!-- 查询病人信息-->
+    <select id="allRegis" resultMap="allRegisMapper">
+        select * from REGISTER
+        <where>
+            <if test="registerId != null and '' != registerId">
+                or REGISTER_ID like '%${registerId}%'
+            </if>
+            <if test="registerName != null and '' != registerName">
+                or REGISTER_NAME like '%${registerName}%'
+            </if>
+            <if test="registerPrint != null and '' != registerPrint">
+                or REGISTER_PRINT like '%${registerPrint}%'
+            </if>
+            <if test="registerHome != null and '' != registerHome">
+                or REGISTER_HOME like '%${registerHome}%'
+            </if>
+            <if test="registerAddress != null and '' != registerAddress">
+                or REGISTER_ADDRESS like '%${registerAddress}%'
+            </if>
+            <if test="registerPhone != null and '' != registerPhone">
+                or REGISTER_PHONE like '%${registerPhone}%'
+            </if>
+            <if test="registerRelation != null and '' != registerRelation">
+                or REGISTER_RELATION like '%${registerRelation}%'
+            </if>
+            <if test="registerContact != null and '' != registerContact">
+                or REGISTER_CONTACT like '%${registerContact}%'
+            </if>
+            <if test="registerCall != null and '' != registerCall">
+                or REGISTER_CALL like '%${registerCall}%'
+            </if>
+            <if test="registerRecord != null and '' != registerRecord">
+                or REGISTER_RECORD like '%${registerRecord}%'
+            </if>
+            <if test="registerClinic != null and '' != registerClinic">
+                or REGISTER_CLINIC like '%${registerClinic}%'
+            </if>
+        </where>
+    </select>
+    <select id="allMedica" resultType="Medical">
+        select*from MEDICAL
+     </select>
+</mapper>
