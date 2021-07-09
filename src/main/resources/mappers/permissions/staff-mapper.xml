@@ -5,7 +5,7 @@
 
     <!-- 查询所有员工 -->
     <select id="allStaff" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
-        select st.staff_id staffId,st.staff_name staffName,us.user_name userName,us.user_possword passWord,st.staff_card staffCard,st.staff_phone staffPhone,se.section_name sectionName,me.medical_name medicalName,r.rank_name rankName,st.staff_state staffState from staff st inner join section se on st.section_id = se.section_id inner join medical me on st.medical_id = me.medical_id inner join rank r on st.rank_id = r.rank_id inner join user_info us on us.staff_id = st.staff_id
+        select st.staff_id staffId,st.staff_name staffName,us.user_name userName,us.user_possword passWord,us.user_id userId,st.staff_card staffCard,st.staff_phone staffPhone,se.section_name sectionName,me.medical_name medicalName,r.rank_name rankName,st.staff_state staffState from staff st inner join section se on st.section_id = se.section_id inner join medical me on st.medical_id = me.medical_id inner join rank r on st.rank_id = r.rank_id inner join user_info us on us.staff_id = st.staff_id
         <where>
             <if test="search !=null and ''!=search">
                 st.staff_name like '%${search}%' or us.user_name like '%${search}%' or st.staff_card like '%${search}%' or st.staff_phone  like '%${search}%' or se.section_name like '%${search}%' or me.medical_name like '%${search}%' or r.rank_name like '%${search}%'

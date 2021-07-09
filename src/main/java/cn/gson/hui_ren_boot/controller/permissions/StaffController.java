@@ -73,12 +73,15 @@ public class StaffController {
     //修改员工和用户
     @RequestMapping("update-staff")
     public String updateStaff(@RequestBody Staff staff){
+
+        Long userId = Long.valueOf(staff.getUserId());
         Long staffId = Long.valueOf(staff.getStaffId());
         String staffName = staff.getStaffName();
         Long staffPhone =Long.valueOf(staff.getStaffPhone());
-        Long sectionId = new Long(sectionService.byId(staff.getSectionName()));
-        Long medicalId = new Long(medicalService.byMedicalId(staff.getMedicalName()));
-        Long rankId = new Long(rankService.byId(staff.getRankName()));
+
+        Long sectionId = Long.valueOf(staff.getSectionName());
+        Long medicalId = Long.valueOf(staff.getMedicalName());
+        Long rankId = Long.valueOf(staff.getRankName());
         String userName = staff.getUserName();
         String passWord = staff.getPassWord();
         String staffCard = staff.getStaffCard();
@@ -91,10 +94,16 @@ public class StaffController {
         staffs.setRankId(rankId);
         staffs.setStaffCard(staffCard);
         UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(userId);
         userInfo.setUserName(userName);
         userInfo.setUserPossword(passWord);
-        System.out.println(staffs);
-        System.out.println(userInfo);
-        return  null;
+
+        try {
+            staffService.updateStaff(userInfo,staffs);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
     }
 }

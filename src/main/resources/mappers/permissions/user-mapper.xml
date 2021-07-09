@@ -6,7 +6,7 @@
         <id property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
         <result property="userPossword" column="user_possword"/>
-        <result property="userStaff" column="user_staff"/>
+        <result property="staffId" column="STAFF_ID"/>
     </resultMap>
     <!-- 登录 -->
     <select id="allUser" resultMap="userMapper">
