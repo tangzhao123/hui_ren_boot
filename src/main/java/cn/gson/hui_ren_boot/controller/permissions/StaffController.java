@@ -108,9 +108,15 @@ public class StaffController {
         }
     }
 
-//    //查询所有的角色
-//    @RequestMapping("roleInfo-list")
-//    public List<Roleinfo> allRole(){
-//        return roleInfoService.allRole();
-//    }
+    //查询所有的角色
+    @RequestMapping("roleInfos-list")
+    public List<Roleinfo> allRole(){
+        return roleInfoService.allRole();
+    }
+
+    //查询用户已经拥有的权限
+    @RequestMapping("user-role")
+    public List<Integer> userRole(Long userId){
+        return roleInfoService.userRole(userId);
+    }
 }

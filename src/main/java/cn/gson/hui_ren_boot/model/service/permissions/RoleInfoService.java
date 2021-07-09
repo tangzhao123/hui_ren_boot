@@ -29,22 +29,27 @@ public class RoleInfoService {
         roleInfoDao.save(roleinfo);
     }
 
-//    //查询一级角色
-//    public List<Roleinfo> allRole(){
-//        //查询所有的一级角色然后给他的子级赋值
-//        List<Roleinfo> firstRole = roleInfoMapper.allRole();
-//        for (Roleinfo roleinfo : firstRole) {
-//            roleinfo.setRoleinfos(childrenRole(roleinfo.getRoleinfoId()));
-//        }
-//        return firstRole;
-//    }
-//
-//    //查询子级角色
-//    public List<Roleinfo> childrenRole(Long roleinfoId){
-//        List<Roleinfo> childrenRole = roleInfoMapper.childrenRole(roleinfoId);
-//        for (Roleinfo roleinfo : childrenRole) {
-//            roleinfo.setRoleinfos(childrenRole(roleinfo.getRoleinfoId()));
-//        }
-//        return childrenRole;
-//    }
+    //查询一级角色
+    public List<Roleinfo> allRole(){
+        //查询所有的一级角色然后给他的子级赋值
+        List<Roleinfo> firstRole = roleInfoMapper.allRoleInfo();
+        for (Roleinfo roleinfo : firstRole) {
+            roleinfo.setRoleinfos(childrenRole(roleinfo.getRoleinfoId()));
+        }
+        return firstRole;
+    }
+
+    //查询子级角色
+    public List<Roleinfo> childrenRole(Long roleinfoId){
+        List<Roleinfo> childrenRole = roleInfoMapper.childrenRole(roleinfoId);
+        for (Roleinfo roleinfo : childrenRole) {
+            roleinfo.setRoleinfos(childrenRole(roleinfo.getRoleinfoId()));
+        }
+        return childrenRole;
+    }
+
+    //查询用户已经拥有的角色
+    public List<Integer> userRole(Long userId){
+        return roleInfoMapper.userRole(userId);
+    }
 }
