@@ -19,4 +19,10 @@ public class MedicalController {
     public List<Medical> allMedical(){
         return medicalService.allMedical();
     }
+
+    //分页查询所有的科室加模糊查询
+    @GetMapping("medical")
+    public Object byName(Integer pageNo, Integer size, String medicalName){
+        return medicalService.byNameByPage(pageNo, size, medicalName);
+    }
 }

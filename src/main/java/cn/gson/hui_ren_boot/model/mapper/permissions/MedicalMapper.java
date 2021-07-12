@@ -13,4 +13,7 @@ public interface MedicalMapper {
 
     //根据名称查询编号
     public int byMedicalId(String medicalName);
+
+    //查询所有的科室
+    public List<Medical> byName(String medicalName);
 }

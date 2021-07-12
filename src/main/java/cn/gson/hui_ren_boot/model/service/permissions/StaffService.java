@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -36,5 +37,15 @@ public class StaffService {
     public void updateStaff(UserInfo userInfo,Staff staff){
         staffMapper.updateStaff(staff);
         userMapper.updateUser(userInfo);
+    }
+
+    //员工离职
+    public void departure(Long staffId){
+        staffMapper.departure(staffId);
+    }
+
+    //批量员工离职
+    public void departures(List<Long> staffId){
+        staffMapper.departures(staffId);
     }
 }

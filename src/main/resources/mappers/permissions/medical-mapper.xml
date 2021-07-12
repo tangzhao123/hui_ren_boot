@@ -18,4 +18,15 @@
     <select id="byMedicalId" resultType="_int">
         select medical_id from medical where medical_name = #{medicalName}
     </select>
+
+
+    <!-- 查询所有的科室和模糊查询 -->
+    <select id="byName" resultMap="medicalMap">
+        select * from medical
+        <where>
+            <if test="medicalName != null and medicalName != ''">
+                medical_name like'%${medicalName}%'
+            </if>
+        </where>
+    </select>
 </mapper>

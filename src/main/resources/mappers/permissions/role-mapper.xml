@@ -20,6 +20,10 @@
         order by roleinfo_id asc
     </select>
 
+    <select id="findAllRole" resultMap="roleMapper">
+        select * from roleinfo
+    </select>
+
     <!-- 查询父级角色 -->
     <select id="allRoleInfo" resultMap="roleMapper">
         select * from roleinfo where roleinfo_superior = 0

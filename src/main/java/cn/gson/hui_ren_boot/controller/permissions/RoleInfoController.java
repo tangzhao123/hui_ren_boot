@@ -21,11 +21,17 @@ public class RoleInfoController {
     @Autowired
     RoleService roleService;
 
-    //查询所有角色列表
+    //分页模糊查询所有角色列表
     @GetMapping("roleInfo-list")
     public Object allRoleInfo(Integer pageNo, Integer size, String roleInfo){
 
         return roleInfoService.allRoleByPage(pageNo,size,roleInfo);
+    }
+
+    //查询所有的角色列表
+    @GetMapping("role")
+    public List<Roleinfo> findAllRole(){
+        return roleInfoService.findAllRole();
     }
 
     //新增角色

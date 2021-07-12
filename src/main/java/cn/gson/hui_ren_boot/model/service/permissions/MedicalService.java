@@ -23,4 +23,9 @@ public class MedicalService {
     public int byMedicalId(String medicalName){
         return medicalMapper.byMedicalId(medicalName);
     }
+
+    //分页查询所有科室加模糊查询科室
+    public Object byNameByPage(Integer  pageNo,Integer size,String medicalName){
+        return medicalMapper.byName(medicalName);
+    }
 }

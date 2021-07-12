@@ -45,4 +45,18 @@
             where staff_id = #{staffId}
         </set>
     </update>
+
+    <!-- 员工离职 -->
+    <update id="departure">
+        update staff set staff_state = 1 where staff_id = #{staffId}
+    </update>
+
+    <!-- 员工批量离职 -->
+    <update id="departures">
+        update staff set staff_state = 1
+        where staff_id in
+        <foreach collection="list" item="staffId"  open="(" separator="," close=")">
+            #{staffId}
+        </foreach>
+    </update>
 </mapper>
