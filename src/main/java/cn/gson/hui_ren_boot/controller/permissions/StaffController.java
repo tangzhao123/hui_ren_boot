@@ -4,13 +4,14 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Roleinfo;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
 import cn.gson.hui_ren_boot.model.service.permissions.*;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class StaffController {
@@ -108,9 +109,62 @@ public class StaffController {
         }
     }
 
-//    //查询所有的角色
-//    @RequestMapping("roleInfo-list")
-//    public List<Roleinfo> allRole(){
-//        return roleInfoService.allRole();
-//    }
+    //查询所有的角色
+    @RequestMapping("roleInfos-list")
+    public List<Roleinfo> allRole(){
+        return roleInfoService.allRole();
+    }
+
+    //查询用户已经拥有的权限
+    @RequestMapping("user-role")
+    public List<Integer> userRole(Long userId){
+        return roleInfoService.userRole(userId);
+    }
+
+    //给用户授权
+    @PostMapping("save-grade-role")
+    public String saveGrade(@RequestParam("grant") String grant){
+        JSONObject o = JSONObject.parseObject(grant);
+        Long userId = Long.valueOf(o.get("userId").toString());
+        List<Long> role = JSONArray.parseArray(o.get("roles").toString(),Long.TYPE);
+        try {
+            roleInfoService.saveGrant(userId,role);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+
+    }
+
+    //员工离职
+    @RequestMapping("departure")
+    public String departure(Long staffId){
+        try {
+            staffService.departure(staffId);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    //批量员工离职
+    @RequestMapping("departures")
+    public String departures(String staffId){
+        String str[] = staffId.split(",");
+        List<Long> list = new ArrayList<>();
+        for (String s : str) {
+            if(s!=null && !s.equals("")){
+               list.add(Long.parseLong(s));
+            }
+        }
+        try {
+            staffService.departures(list);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

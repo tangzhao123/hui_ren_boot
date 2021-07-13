@@ -4,6 +4,7 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface StaffMapper {
@@ -16,4 +17,10 @@ public interface StaffMapper {
 
     //修改员工
     public void updateStaff(Staff staff);
+
+    //员工离职
+    public void departure(Long staffId);
+
+    //批量员工离职
+    public void departures(List<Long> staffId);
 }

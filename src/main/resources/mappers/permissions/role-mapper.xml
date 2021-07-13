@@ -20,13 +20,22 @@
         order by roleinfo_id asc
     </select>
 
-<!--    &lt;!&ndash; 查询父级角色 &ndash;&gt;-->
-<!--    <select id="allRole" resultMap="roleMapper">-->
-<!--        select * from roleinfo where roleinfo_superior = 0-->
-<!--    </select>-->
+    <select id="findAllRole" resultMap="roleMapper">
+        select * from roleinfo where roleinfo_superior = 0 or roleinfo_superior = 1
+    </select>
 
-<!--    &lt;!&ndash; 查询子级角色 &ndash;&gt;-->
-<!--    <select id="childrenRole" resultMap="roleMapper">-->
-<!--        select * from roleinfo where roleinfo_superior =#{roleinfoId}-->
-<!--    </select>-->
+    <!-- 查询父级角色 -->
+    <select id="allRoleInfo" resultMap="roleMapper">
+        select * from roleinfo where roleinfo_superior = 0
+    </select>
+
+    <!-- 查询子级角色 -->
+    <select id="childrenRole" resultMap="roleMapper">
+        select * from roleinfo where roleinfo_superior =#{roleinfoId}
+    </select>
+
+    <!-- 查询用户已经拥有的角色 -->
+    <select id="userRole" resultType="_int">
+        select ro.roleinfo_id from roleinfo ro inner join userole us on ro.roleinfo_id = us.roleinfo_id where us.user_id = #{userId}
+    </select>
 </mapper>
