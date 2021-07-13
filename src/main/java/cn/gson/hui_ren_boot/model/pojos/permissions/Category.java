@@ -9,12 +9,14 @@ public class Category {
 
     private long categoryId;
     private String categoryShift;
-    private Time userroleStart;
-    private Time userroleOver;
+    private String userroleStart;
+    private String userroleOver;
 
 
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "CATEGORY_ID")
     public long getCategoryId() {
         return categoryId;
@@ -36,21 +38,21 @@ public class Category {
 
     @Basic
     @Column(name = "USERROLE_START")
-    public Time getUserroleStart() {
+    public String getUserroleStart() {
         return userroleStart;
     }
 
-    public void setUserroleStart(Time userroleStart) {
+    public void setUserroleStart(String userroleStart) {
         this.userroleStart = userroleStart;
     }
 
     @Basic
     @Column(name = "USERROLE_OVER")
-    public Time getUserroleOver() {
+    public String getUserroleOver() {
         return userroleOver;
     }
 
-    public void setUserroleOver(Time userroleOver) {
+    public void setUserroleOver(String userroleOver) {
         this.userroleOver = userroleOver;
     }
 
@@ -65,5 +67,15 @@ public class Category {
     @Override
     public int hashCode() {
         return Objects.hash(categoryId, categoryShift, userroleStart, userroleOver);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", categoryShift='" + categoryShift + '\'' +
+                ", userroleStart=" + userroleStart +
+                ", userroleOver=" + userroleOver +
+                '}';
     }
 }
