@@ -11,7 +11,7 @@
 
     <!-- 查询所有的科室 -->
     <select id="allMedical" resultMap="medicalMap">
-        select * from medical
+        select * from medical where medical_sublevel = 0
     </select>
 
     <!-- 根据名称查询编号 -->
@@ -28,5 +28,6 @@
                 medical_name like'%${medicalName}%'
             </if>
         </where>
+        order by medical_id desc
     </select>
 </mapper>

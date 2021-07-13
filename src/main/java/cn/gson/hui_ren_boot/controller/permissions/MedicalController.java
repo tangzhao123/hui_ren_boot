@@ -4,6 +4,8 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.service.permissions.MedicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,5 +26,17 @@ public class MedicalController {
     @GetMapping("medical")
     public Object byName(Integer pageNo, Integer size, String medicalName){
         return medicalService.byNameByPage(pageNo, size, medicalName);
+    }
+
+    //新增或修改科室
+    @RequestMapping("add-medical")
+    public String addMedical(@RequestBody Medical medical){
+        try {
+           medicalService.addMedical(medical);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
     }
 }

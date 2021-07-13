@@ -13,6 +13,8 @@ public class Medical {
 
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "MEDICAL_ID")
     public long getMedicalId() {
         return medicalId;
@@ -53,5 +55,15 @@ public class Medical {
     @Override
     public int hashCode() {
         return Objects.hash(medicalId, medicalName, medicalSublevel);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Medical{" +
+                "medicalId=" + medicalId +
+                ", medicalName='" + medicalName + '\'' +
+                ", medicalSublevel=" + medicalSublevel +
+                '}';
     }
 }

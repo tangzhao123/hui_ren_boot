@@ -21,7 +21,7 @@
     </select>
 
     <select id="findAllRole" resultMap="roleMapper">
-        select * from roleinfo
+        select * from roleinfo where roleinfo_superior = 0 or roleinfo_superior = 1
     </select>
 
     <!-- 查询父级角色 -->

@@ -27,7 +27,7 @@
 
     <!-- 查询菜单栏 -->
     <select id="userRole" resultMap="funs">
-        select fs.authity_id Parent_ID,fs.authity_superior Parent_SUPERIOR,fs.authity_path Parent_PATH,fs.authity_icon Parent_ICON,fs.authity_leadaers Parent_LEADAERS,fs.aurhity_state Parent_STATE,fs.aurhity_grade Parent_GRADE,f.* from function f inner join function fs on f.authity_leadaers = fs.authity_id  inner join permission p on f.authity_id = p.authity_id inner join userole us on p.roleinfo_id = us.roleinfo_id where us.user_id = #{userId} and fs.authity_leadaers=0
+        select fs.authity_id Parent_ID,fs.authity_superior Parent_SUPERIOR,fs.authity_path Parent_PATH,fs.authity_icon Parent_ICON,fs.authity_leadaers Parent_LEADAERS,fs.aurhity_state Parent_STATE,fs.aurhity_grade Parent_GRADE,f.* from function f inner join function fs on f.authity_leadaers = fs.authity_id  inner join permission p on f.authity_id = p.authity_id inner join userole us on p.roleinfo_id = us.roleinfo_id where us.user_id = #{userId} and fs.authity_leadaers=0 order by f.authity_id asc
     </select>
 
     <!-- 查询父级功能权限 -->
