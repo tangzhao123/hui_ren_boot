@@ -23,7 +23,38 @@ public class BookingForm {
     private Medical officeId;
     private Staff outdoctorId;
 
+
+    @OneToOne
+    public OutpatientRegister getOutpatientId() {
+        return outpatientId;
+    }
+
+    public void setOutpatientId(OutpatientRegister outpatientId) {
+        this.outpatientId = outpatientId;
+    }
+
+
+    @OneToOne
+    public Medical getOfficeId() {
+        return officeId;
+    }
+
+    public void setOfficeId(Medical officeId) {
+        this.officeId = officeId;
+    }
+
+    @OneToOne
+    public Staff getOutdoctorId() {
+        return outdoctorId;
+    }
+
+    public void setOutdoctorId(Staff outdoctorId) {
+        this.outdoctorId = outdoctorId;
+    }
+
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "BOOKING_ID")
     public long getBookingId() {
         return bookingId;
@@ -125,4 +156,5 @@ public class BookingForm {
     public int hashCode() {
         return Objects.hash(bookingId, bookingNo, outpatientId, officeId, outdoctorId, bookingDate, bookingType, treatmentNo, bookingFee, bookingOther, bookingOrder, bookingReturn);
     }
+
 }
