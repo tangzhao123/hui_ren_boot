@@ -6,22 +6,14 @@ import java.util.Objects;
 
 @Entity
 public class Arrange {
-    private Long id;
+
     private long arrangeId;
     private Long staffId;
     private Long categoryId;
     private Timestamp arrangeStart;
     private Timestamp arrangeEnd;
 
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Id
     @Column(name = "ARRANGE_ID")
