@@ -17,7 +17,6 @@ public class RegisterService {
     @Autowired
     RegisterDao registerDao;
     public Object allRegisByPage(Integer pageNo, Integer size, Register inputboxs){
-
         return registerMapper.allRegis(inputboxs);
     }
 

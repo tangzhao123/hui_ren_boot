@@ -17,15 +17,30 @@
         <result column="REGISTER_RELATION" property="registerRelation"/>
         <result column="REGISTER_CONTACT" property="registerContact"/>
         <result column="REGISTER_CALL" property="registerCall"/>
-        <result column="REGISTER_MEDICAL" property="registerMedical"/>
         <result column="REGISTER_RECORD" property="registerRecord"/>
-        <result column="REGISTER_USER" property="registerUser"/>
         <result column="REGISTER_CLINIC" property="registerClinic"/>
+<!--        科室-->
+        <association property="medical" javaType="Medical">
+            <id column="MEDICAL_ID" property="medicalId"/>
+            <result column="MEDICAL_NAME" property="medicalName"/>
+        </association>
+        <association property="staff" javaType="Staff" >
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
+        </association>
+        <association property="sickbed" javaType="Sickbed">
+            <id column="SICKBED_ID" property="sickbedId"/>
+            <result column="SICKBED_MARK" property="sickbedMark"/>
+        </association>
     </resultMap>
    <!-- 查询病人信息-->
     <select id="allRegis" resultMap="allRegisMapper">
-        select * from REGISTER
-        <where>
+        SELECT*from register  hg
+            left join sickbed kjs on hg.sickbed_mark=kjs.sickbed_mark
+            left join medical o on o.medical_id=hg.medical_id
+            left join staff  fh on fh.staff_id=hg.staff_id
+
+     <where>
             <if test="registerId != null and '' != registerId">
                 or REGISTER_ID like '%${registerId}%'
             </if>
@@ -60,6 +75,7 @@
                 or REGISTER_CLINIC like '%${registerClinic}%'
             </if>
         </where>
+        order by hg.register_serica asc
     </select>
     <select id="allMedica" resultType="Medical">
         select*from MEDICAL

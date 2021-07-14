@@ -22,4 +22,7 @@ public class HospialService {
     public Object allhosptialByPage(Integer pageNo, Integer size, Hospital inputboxt){
             return hosptialMapper.allHosptial(inputboxt);
     }
+    public Hospital allspital(String idCard){
+        return  hosptialMapper.allsptal(idCard);
+    }
 }

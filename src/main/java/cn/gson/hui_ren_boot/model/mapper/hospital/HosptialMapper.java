@@ -6,5 +6,6 @@ import java.util.List;
 
 @Mapper
 public interface HosptialMapper {
-    public List<Hospital> allHosptial(Hospital inputboxt);
+    public List<Hospital> allHosptial(Hospital inputboxt);//连表条件分页查询
+    public Hospital allsptal(String idCard);
 }

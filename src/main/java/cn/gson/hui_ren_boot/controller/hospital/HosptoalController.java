@@ -19,14 +19,23 @@ public class HosptoalController {
     @Autowired
     HospialService hospialService;
     @RequestMapping("/saveg")
-    public String saveHospoal(@RequestBody Hospital p){
+    public String saveHospoal(@RequestBody Hospital p){//新增住院申请表
         try {
-            System.out.println(p.getHospitalName());
-            p.setHospitalDate(new Date());
-            hospialService.saveHospoal(p);
-            return"ok";
+            Hospital   spat=  hospialService.allspital(p.getHospitalCard());//查询身份证重复
+            System.out.println(spat);
+            if(spat!=null){
+                System.out.println(1);
+                return"fail2";
+            }else{
+                System.out.println(p.getHospitalName());
+                p.setHospitalDate(new Date());
+                hospialService.saveHospoal(p);
+                return"ok";
+            }
+
         }catch (Exception e){
             e.printStackTrace();
+            System.out.println(1);
             return"fail";
         }
 

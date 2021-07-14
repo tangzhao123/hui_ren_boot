@@ -24,8 +24,8 @@ public class RegisterConvertor {
         Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
         System.out.println("数据" + inputboxs);
         return registerService.allRegisByPage(pageNo, size, inputboxs);
-    }
-
+    }//新增住院病人信息
+    @RequestMapping("/saveRegis")
     public String saveRegis(@RequestBody Register j) {
         try {
             j.setRegisterDate(new Date());
