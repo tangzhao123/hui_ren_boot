@@ -39,4 +39,17 @@
             </if>
         </where>
     </select>
+
+    <!--新增患者基本信息-->
+    <insert id="addOutregister">
+        <selectKey keyProperty="outpatientId" resultType="_int" order="BEFORE">
+            select seq_huiren.nextval from dual
+        </selectKey>
+        insert into
+            outpatient_register(OUTPATIENT_ID,OUTPATIENT_NAME,OUTPATIENT_SEX,OUTPATIENT_BIRTH,
+                                OUTPATIENT_AGE,OUTPATIENT_CARD,OUTPATIENT_PHONE,OUTPATIENT_ADDRESS)
+                                values (#{outpatientId},#{outpatientName},#{outpatientSex},
+                                  #{outpatientBirth},#{outpatientAge},#{outpatientCard},#{outpatientPhone},
+                                  #{outpatientAddress})
+    </insert>
 </mapper>

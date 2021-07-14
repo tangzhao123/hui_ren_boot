@@ -19,18 +19,21 @@ public class BookingForm {
     private Long bookingOther;
     private Date bookingOrder;
     private String bookingReturn;
-    private OutpatientRegister outpatientId;
+    private int outpatientId;
+    private int medicalId;
+    private int staffId;
+    private OutpatientRegister outpatient;
     private Medical officeId;
     private Staff outdoctorId;
 
 
     @OneToOne
-    public OutpatientRegister getOutpatientId() {
-        return outpatientId;
+    public OutpatientRegister getOutpatient() {
+        return outpatient;
     }
 
-    public void setOutpatientId(OutpatientRegister outpatientId) {
-        this.outpatientId = outpatientId;
+    public void setOutpatient(OutpatientRegister outpatient) {
+        this.outpatient = outpatient;
     }
 
 
@@ -144,17 +147,51 @@ public class BookingForm {
         this.bookingReturn = bookingReturn;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookingForm that = (BookingForm) o;
-        return bookingId == that.bookingId && officeId == that.officeId && outdoctorId == that.outdoctorId && Objects.equals(bookingNo, that.bookingNo) && Objects.equals(outpatientId, that.outpatientId) && Objects.equals(bookingDate, that.bookingDate) && Objects.equals(bookingType, that.bookingType) && Objects.equals(treatmentNo, that.treatmentNo) && Objects.equals(bookingFee, that.bookingFee) && Objects.equals(bookingOther, that.bookingOther) && Objects.equals(bookingOrder, that.bookingOrder) && Objects.equals(bookingReturn, that.bookingReturn);
+    @Basic
+    @Column(name = "OUTPATIENT_ID")
+    public int getOutpatientId() {
+        return outpatientId;
+    }
+
+    public void setOutpatientId(int outpatientId) {
+        this.outpatientId = outpatientId;
+    }
+
+    @Basic
+    @Column(name = "MEDICAL_ID")
+    public int getMedicalId() {
+        return medicalId;
+    }
+
+    public void setMedicalId(int medicalId) {
+        this.medicalId = medicalId;
+    }
+
+    @Basic
+    @Column(name = "STAFF_ID")
+    public int getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(bookingId, bookingNo, outpatientId, officeId, outdoctorId, bookingDate, bookingType, treatmentNo, bookingFee, bookingOther, bookingOrder, bookingReturn);
+    public String toString() {
+        return "BookingForm{" +
+                "bookingId=" + bookingId +
+                ", bookingNo='" + bookingNo + '\'' +
+                ", bookingDate=" + bookingDate +
+                ", bookingType=" + bookingType +
+                ", treatmentNo='" + treatmentNo + '\'' +
+                ", bookingFee=" + bookingFee +
+                ", bookingOther=" + bookingOther +
+                ", bookingOrder=" + bookingOrder +
+                ", bookingReturn='" + bookingReturn + '\'' +
+                ", outpatient=" + outpatient +
+                ", officeId=" + officeId +
+                ", outdoctorId=" + outdoctorId +
+                '}';
     }
-
 }

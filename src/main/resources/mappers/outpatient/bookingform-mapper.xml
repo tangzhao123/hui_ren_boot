@@ -79,4 +79,11 @@
                           inner join arrange ar on s.staff_id = ar.staff_id
         where me.medical_id = #{medicalId} and se.section_id = 1 and #{bookingOrder} between to_char(ar.arrange_start,'yyyy-mm-dd')and to_char(ar.arrange_end,'yyyy-mm-dd')
     </select>
+
+    <!--新增挂号单-->
+    <insert id="addBooking">
+        insert into booking_form
+        values (seq_huiren.nextval,#{bookingNo},#{outpatientId},#{medicalId},#{staffId},current_timestamp ,
+                #{bookingType},#{treatmentNo},#{bookingFee},#{bookingOther},#{bookingOrder},#{bookingReturn})
+    </insert>
 </mapper>

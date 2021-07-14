@@ -12,4 +12,7 @@ import java.util.List;
 public interface OutRegisterMapper {
     //多条件查询患者
     public List<OutpatientRegister> allRegister(OutpatientRegister outpatientRegister);
+
+    //新增患者信息
+    public void addOutregister(OutpatientRegister outpatientRegister);
 }
