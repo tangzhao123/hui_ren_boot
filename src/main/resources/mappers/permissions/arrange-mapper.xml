@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.ArrangeMapper">
+    <!-- 查询所有的排班表 -->
+    <select id="allArrange" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Arrange">
+        select ar.arrange_id arrangeId,s.staff_name staffName,c.category_shift categoryShift,ar.arrange_start arrangeStart,arrange_end arrangeEnd from arrange ar inner join staff s on ar.staff_id = s.staff_id inner join category c on ar.category_id = c.category_id
+        <where>
+            <if test="search != null and search != ''">
+                s.staff_name like '%${search}%' or c.category_shift like '%${search}%'
+            </if>
+        </where>
+        order by ar.arrange_start desc
+    </select>
+
+    <!-- 新增排班 -->
+    <insert id="addArrange">
+        insert into arrange values (seq_huiren.nextval,#{staffId},#{categoryId},#{arrangeStart},#{arrangeEnd})
+    </insert>
+</mapper>

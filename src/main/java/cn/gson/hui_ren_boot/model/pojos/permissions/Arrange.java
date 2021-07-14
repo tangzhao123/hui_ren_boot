@@ -12,6 +12,8 @@ public class Arrange {
     private Long categoryId;
     private Timestamp arrangeStart;
     private Timestamp arrangeEnd;
+    private String staffName;
+    private String categoryShift;
 
 
 
@@ -65,6 +67,22 @@ public class Arrange {
 
     public void setArrangeEnd(Timestamp arrangeEnd) {
         this.arrangeEnd = arrangeEnd;
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
+    }
+
+    public String getCategoryShift() {
+        return categoryShift;
+    }
+
+    public void setCategoryShift(String categoryShift) {
+        this.categoryShift = categoryShift;
     }
 
     @Override

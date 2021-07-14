@@ -11,6 +11,7 @@
                 st.staff_name like '%${search}%' or us.user_name like '%${search}%' or st.staff_card like '%${search}%' or st.staff_phone  like '%${search}%' or se.section_name like '%${search}%' or me.medical_name like '%${search}%' or r.rank_name like '%${search}%'
             </if>
         </where>
+        order by st.staff_id desc
     </select>
 
     <!-- 新增员工 -->
@@ -59,4 +60,9 @@
             #{staffId}
         </foreach>
     </update>
+
+    <!-- 查询所有的员工 -->
+    <select id="findStaff" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+        select  staff_id staffId,staff_name staffName,staff_card staffCard,staff_phone staffPhone,staff_state staffState from staff where staff_card is not null
+    </select>
 </mapper>

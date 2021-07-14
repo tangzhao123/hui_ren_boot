@@ -17,7 +17,7 @@
                 and roleinfo_name like '%${roleinfoName}%'
             </if>
         </where>
-        order by roleinfo_id asc
+        order by roleinfo_id desc
     </select>
 
     <select id="findAllRole" resultMap="roleMapper">

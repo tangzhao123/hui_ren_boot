@@ -48,4 +48,9 @@ public class StaffService {
     public void departures(List<Long> staffId){
         staffMapper.departures(staffId);
     }
+
+    //查询所有的员工
+    public List<Staff> findStaff(){
+        return staffMapper.findStaff();
+    }
 }

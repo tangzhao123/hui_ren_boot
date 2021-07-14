@@ -23,4 +23,7 @@ public interface StaffMapper {
 
     //批量员工离职
     public void departures(List<Long> staffId);
+
+    //查询所有的员工
+    public List<Staff> findStaff();
 }

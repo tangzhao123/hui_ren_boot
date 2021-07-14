@@ -19,5 +19,20 @@
                 category_shift = #{categoryShift}
             </if>
         </where>
+        order by category_id desc
+    </select>
+
+    <!-- 先查询无子记录再删除班次 --> 
+    <select id="cate" resultMap="categoryMap">
+        select ca.* from category ca inner join arrange ar on ca.category_id = ar.category_id where ca.category_id = #{categoryId}
+    </select>
+
+    <delete id="delCategory">
+        delete from category where category_id = #{categoryId}
+    </delete>
+
+    <!--查询所有的班次-->
+    <select id="allCategory" resultMap="categoryMap">
+        select * from category
     </select>
 </mapper>

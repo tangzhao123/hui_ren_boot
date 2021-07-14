@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class CategoryController {
 
@@ -28,6 +30,24 @@ public class CategoryController {
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    //删除班次
+    @RequestMapping("del-category")
+    public String delCategory(Integer categoryId){
+        System.out.println(categoryId);
+        List<Category> cate = categoryService.cate(categoryId);
+        if(cate.isEmpty()){
+            try {
+                categoryService.delCategory(categoryId);
+                return "ok";
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "fail";
+            }
+        }else {
             return "fail";
         }
     }
