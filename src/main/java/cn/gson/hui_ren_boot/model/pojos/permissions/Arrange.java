@@ -6,11 +6,13 @@ import java.util.Objects;
 
 @Entity
 public class Arrange {
+
     private long arrangeId;
     private Long staffId;
     private Long categoryId;
     private Timestamp arrangeStart;
     private Timestamp arrangeEnd;
+
 
 
     @Id
