@@ -19,7 +19,21 @@ public class HospialService {
         hosptialDao.save(k);
 
     }
-    public Object allhosptialByPage(Integer pageNo, Integer size, Hospital inputboxt){
+    public Object allhosptialByPage(Integer pageNo, Integer size, Hospital inputboxt){//分页查询
             return hosptialMapper.allHosptial(inputboxt);
     }
+    public Hospital allspital(String idCard){//出重
+        return  hosptialMapper.allSptal(idCard);
+    }
+    public void addHostp(Hospital add){//新增
+        hosptialMapper.addHostp(add);
+    }
+    public void upHostp(Hospital up){//修改
+
+        hosptialMapper.upHostp(up);
+    }
+    public void deHostp(int id){//删除
+            hosptialMapper.deHostp(id);
+    }
+
 }

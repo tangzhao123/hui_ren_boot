@@ -1,5 +1,8 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
@@ -7,48 +10,38 @@ import java.util.Objects;
 
 @Entity
 public class Register {
-    private int registerSerica;//序号
-    private String registerId;//住院号
-    private Date registerDate;//入院时间
-    private String registerName;//姓名
-    private int registerSex;//性别
-    private Date registerSite;//出生日期
-    private int registerCard;//婚否
-    private String registerPrint;//职业
-    private int registerAge;//年龄
-    private String registerHome;//身份证
-    private String registerAddress;//家庭住址
-    private String registerPhone;//患者电话
-    private String registerRelation;//病人关系
-    private String registerContact;//联系人
-    private String registerCall;//联系电话
+
+    private int registerSerica;//序号1
+    private String registerId;//住院号2
+    private Date registerDate;//入院时间3
+    private String registerName;//姓名4
+    private int registerSex;//性别5
+    private Date registerSite;//出生日期6
+    private int registerCard;//婚否7
+    private String registerPrint;//职业8
+    private int registerAge;//年龄9
+    private String registerHome;//身份证10
+    private String registerAddress;//家庭住址11
+    private String registerPhone;//患者电话12
+    private String registerRelation;//病人关系13
+    private String registerContact;//联系人14
+    private String registerCall;//联系电话15
     private int registerMethod;//付款方式
-    private int registerMedical;//科室
-    private String registerRecord;//入院诊断
-    private int registerUser;//主治医生
-    private String registerClinic;//就诊卡号
+    private int medicalId;//科室
+    private String registerRecord;//入院诊断16
+    private int staffId;//主治医生
+    private String registerClinic;//就诊卡号17
+    private String  sickbedMark;//病床号
+    private Medical medical;//科室
+    private Staff staff;//员工
+    private Sickbed sickbed;//病床
 
     public Register() {
     }
 
-    public Register(String registerId, String registerName, String registerPrint, String registerHome, String registerAddress, String registerPhone, String registerRelation, String registerContact, String registerCall, String registerRecord, String registerClinic) {
-        this.registerId = registerId;
-        this.registerName = registerName;
-        this.registerPrint = registerPrint;
-        this.registerHome = registerHome;
-        this.registerAddress = registerAddress;
-        this.registerPhone = registerPhone;
-        this.registerRelation = registerRelation;
-        this.registerContact = registerContact;
-        this.registerCall = registerCall;
-        this.registerRecord = registerRecord;
-        this.registerClinic = registerClinic;
-    }
-
-    public Register(int registerSerica, String registerId, Date registerDate, String registerName, int registerSex, Date registerSite, int registerCard, String registerPrint, int registerAge, String registerHome, String registerAddress, String registerPhone, String registerRelation, String registerContact, String registerCall, int registerMethod, int registerMedical, String registerRecord, int registerUser, String registerClinic) {
+    public Register(int registerSerica, String registerId, String registerName, int registerSex, Date registerSite, int registerCard, String registerPrint, int registerAge, String registerHome, String registerAddress, String registerPhone, String registerRelation, String registerContact, String registerCall, int medicalId, String registerRecord, String registerClinic) {
         this.registerSerica = registerSerica;
         this.registerId = registerId;
-        this.registerDate = registerDate;
         this.registerName = registerName;
         this.registerSex = registerSex;
         this.registerSite = registerSite;
@@ -61,16 +54,35 @@ public class Register {
         this.registerRelation = registerRelation;
         this.registerContact = registerContact;
         this.registerCall = registerCall;
-        this.registerMethod = registerMethod;
-        this.registerMedical = registerMedical;
+        this.medicalId = medicalId;
         this.registerRecord = registerRecord;
-        this.registerUser = registerUser;
         this.registerClinic = registerClinic;
     }
 
+    //科室关系
+    @OneToOne
+    public Medical getMedical() {
+        return medical;
+    }
+    public void setMedical(Medical medical) {
+        this.medical = medical;
+    }
+//    //员工关系
+   @OneToOne
+    public Staff getStaff() {
+        return staff;
+    }
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+   @OneToOne
+    public Sickbed getSickbed() {
+        return sickbed;
+    }
+    public void setSickbed(Sickbed sickbed) {
+        this.sickbed = sickbed;
+    }
     @Id
-    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
-    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "REGISTER_SERICA")
     public int getRegisterSerica() {
         return registerSerica;
@@ -230,15 +242,15 @@ public class Register {
         this.registerMethod = registerMethod;
     }
 
-    @Basic
-    @Column(name = "REGISTER_MEDICAL")
-    public int getRegisterMedical() {
-        return registerMedical;
-    }
+   @Basic
+    @Column(name = "MEDICAL_ID")
+    public int getMedicalId() {
+       return medicalId;
+   }
 
-    public void setRegisterMedical(int registerMedical) {
-        this.registerMedical = registerMedical;
-    }
+    public void setMedicalId(int medicalId) {
+       this.medicalId = medicalId;
+   }
 
     @Basic
     @Column(name = "REGISTER_RECORD")
@@ -251,13 +263,13 @@ public class Register {
     }
 
     @Basic
-    @Column(name = "REGISTER_USER")
-    public int getRegisterUser() {
-        return registerUser;
+    @Column(name = "STAFF_ID")
+    public int getStaffId() {
+        return staffId;
     }
 
-    public void setRegisterUser(int registerUser) {
-        this.registerUser = registerUser;
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
     }
 
     @Basic
@@ -270,16 +282,59 @@ public class Register {
         this.registerClinic = registerClinic;
     }
 
+    @Basic
+    @Column(name = "SICKBED_MARK")
+    public String getSickbedMark() {
+        return sickbedMark;
+    }
+
+    public void setSickbedMark(String sickbedMark) {
+        this.sickbedMark = sickbedMark;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Register register = (Register) o;
-        return registerSerica == register.registerSerica && Objects.equals(registerId, register.registerId) && Objects.equals(registerDate, register.registerDate) && Objects.equals(registerName, register.registerName) && Objects.equals(registerSex, register.registerSex) && Objects.equals(registerSite, register.registerSite) && Objects.equals(registerCard, register.registerCard) && Objects.equals(registerPrint, register.registerPrint) && Objects.equals(registerAge, register.registerAge) && Objects.equals(registerHome, register.registerHome) && Objects.equals(registerAddress, register.registerAddress) && Objects.equals(registerPhone, register.registerPhone) && Objects.equals(registerRelation, register.registerRelation) && Objects.equals(registerContact, register.registerContact) && Objects.equals(registerCall, register.registerCall) && Objects.equals(registerMethod, register.registerMethod) && Objects.equals(registerMedical, register.registerMedical) && Objects.equals(registerRecord, register.registerRecord) && Objects.equals(registerUser, register.registerUser) && Objects.equals(registerClinic, register.registerClinic);
+        return registerSerica == register.registerSerica && Objects.equals(registerId, register.registerId) && Objects.equals(registerDate, register.registerDate) && Objects.equals(registerName, register.registerName) && Objects.equals(registerSex, register.registerSex) && Objects.equals(registerSite, register.registerSite) && Objects.equals(registerCard, register.registerCard) && Objects.equals(registerPrint, register.registerPrint) && Objects.equals(registerAge, register.registerAge) && Objects.equals(registerHome, register.registerHome) && Objects.equals(registerAddress, register.registerAddress) && Objects.equals(registerPhone, register.registerPhone) && Objects.equals(registerRelation, register.registerRelation) && Objects.equals(registerContact, register.registerContact) && Objects.equals(registerCall, register.registerCall) && Objects.equals(registerMethod, register.registerMethod)  && Objects.equals(registerRecord, register.registerRecord) && Objects.equals(staffId, register.staffId) && Objects.equals(registerClinic, register.registerClinic) && Objects.equals(sickbedMark, register.sickbedMark);
+    }
+
+    //&& Objects.equals(medicalId, register.medicalId)
+
+    //medicalId,
+    @Override
+    public int hashCode() {
+        return Objects.hash(registerSerica, registerId, registerDate, registerName, registerSex, registerSite, registerCard, registerPrint, registerAge, registerHome, registerAddress, registerPhone, registerRelation, registerContact, registerCall, registerMethod, registerRecord, staffId, registerClinic, sickbedMark);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(registerSerica, registerId, registerDate, registerName, registerSex, registerSite, registerCard, registerPrint, registerAge, registerHome, registerAddress, registerPhone, registerRelation, registerContact, registerCall, registerMethod, registerMedical, registerRecord, registerUser, registerClinic);
+    public String toString() {
+        return "Register{" +
+                "registerSerica=" + registerSerica +
+                ", registerId='" + registerId + '\'' +
+                ", registerDate=" + registerDate +
+                ", registerName='" + registerName + '\'' +
+                ", registerSex=" + registerSex +
+                ", registerSite=" + registerSite +
+                ", registerCard=" + registerCard +
+                ", registerPrint='" + registerPrint + '\'' +
+                ", registerAge=" + registerAge +
+                ", registerHome='" + registerHome + '\'' +
+                ", registerAddress='" + registerAddress + '\'' +
+                ", registerPhone='" + registerPhone + '\'' +
+                ", registerRelation='" + registerRelation + '\'' +
+                ", registerContact='" + registerContact + '\'' +
+                ", registerCall='" + registerCall + '\'' +
+                ", registerMethod=" + registerMethod +
+                ", medicalId=" + medicalId +
+                ", registerRecord='" + registerRecord + '\'' +
+                ", staffId=" + staffId +
+                ", registerClinic='" + registerClinic + '\'' +
+                ", sickbedMark='" + sickbedMark + '\'' +
+                ", medical=" + medical +
+                ", staff=" + staff +
+                ", sickbed=" + sickbed +
+                '}';
     }
 }

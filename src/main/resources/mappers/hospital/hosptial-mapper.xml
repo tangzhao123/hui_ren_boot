@@ -1,26 +1,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.HosptialMapper">
+<resultMap id="hosptials" type="cn.gson.hui_ren_boot.model.pojos.hospital.Hospital">
+    <id column="HOSPITAL_ID" property="hospitalId"/>
+    <result column="HOSPITAL_CAUSE" property="hospitalCause"/>
+    <result column="HOSPITAL_NAME" property="hospitalName"/>
+    <result column="HOSPITAL_DATE" property="hospitalDate"/>
+    <result column="HOSPITAL_SITE" property="hospitalSite"/>
+    <result column="HOSPITAL_CARD" property="hospitalCard"/>
+    <result column="HOSPITAL_DOCTOR" property="hospitalDoctor"/>
+    <result column="HOSPITAL_STATE" property="hospitalState"/>
+    <result column="HOSPITAL_CLINIC" property="hospitalClinic"/>
+    <association property="medicals" javaType="Medical">
+         <id column="MEDICAL_ID" property="medicalId"/>
+        <result column="MEDICAL_NAME" property= "medicalName"/>
+    </association>
 
+
+</resultMap >
     <!-- 查询病人信息-->
-    <select id="allHosptial" resultType="Hospital">
-        select * from HOSPITAL
+    <select id="allHosptial" resultMap="hosptials">
+        select * from hospital kl Left join medical o on kl.hospital_medical=o.medical_id
         <where>
             <if test="hospitalCause != null and '' != hospitalCause">
-                or HOSPITAL_CAUSE like '%${hospitalCause}%'
+                or kl.HOSPITAL_CAUSE like '%${hospitalCause}%'
             </if>
             <if test="hospitalName != null and '' != hospitalName">
-                or HOSPITAL_NAME like '%${hospitalName}%'
+                or kl.HOSPITAL_NAME like '%${hospitalName}%'
             </if>
             <if test="hospitalSite != null and '' != hospitalSite">
-                or HOSPITAL_SITE like '%${hospitalSite}%'
+                or kl.HOSPITAL_SITE like '%${hospitalSite}%'
             </if>
             <if test="hospitalCard != null and '' != hospitalCard">
-                or HOSPITAL_CARD like '%${hospitalCard}%'
+                or kl.HOSPITAL_CARD like '%${hospitalCard}%'
             </if>
             <if test="hospitalDoctor != null and '' != hospitalDoctor">
-                or HOSPITAL_DOCTOR like '%${hospitalDoctor}%'
+                or kl.HOSPITAL_DOCTOR like '%${hospitalDoctor}%'
             </if>
         </where>
+        order by kl.hospital_id asc
     </select>
+    <select id="allSptal" resultType="Hospital">
+        select*from hospital where hospital_card=#{hospitalCard}
+    </select>
+    <insert id="addHostp">
+        insert into hospital(hospital_id,hospital_cause,hospital_name,hospital_date,hospital_site,hospital_card,hospital_state) values(seq_huiren.nextval,#{hospitalCause},#{hospitalName},systimestamp,#{hospitalSite},#{hospitalCard},#{hospitalState})
+    </insert>
+    <update id="upHostp">
+        update hospital set hospital_name=#{hospitalName},hospital_site=#{hospitalSite},hospital_card=#{hospitalCard} where hospital_id=#{hospitalId}
+    </update>
+    <delete id="deHostp">
+        delete from hopuital where hospital_id=#{hospitalId}
+    </delete>
 </mapper>
