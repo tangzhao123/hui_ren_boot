@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -14,9 +15,9 @@ public class DrugStock {
     private Long stockXnum;
     private Long stockZnum;
     private Long stockNumber;
-    private Time stockDate;
+    private Date stockDate;
     private String stockBatch;
-    private Time stockIndate;
+    private Date stockIndate;
 
 
 
@@ -92,11 +93,11 @@ public class DrugStock {
 
     @Basic
     @Column(name = "STOCK_DATE")
-    public Time getStockDate() {
+    public Date getStockDate() {
         return stockDate;
     }
 
-    public void setStockDate(Time stockDate) {
+    public void setStockDate(Date stockDate) {
         this.stockDate = stockDate;
     }
 
@@ -112,11 +113,11 @@ public class DrugStock {
 
     @Basic
     @Column(name = "STOCK_INDATE")
-    public Time getStockIndate() {
+    public Date getStockIndate() {
         return stockIndate;
     }
 
-    public void setStockIndate(Time stockIndate) {
+    public void setStockIndate(Date stockIndate) {
         this.stockIndate = stockIndate;
     }
 

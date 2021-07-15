@@ -5,52 +5,55 @@
     <resultMap id="DrugMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
         <id column="DRUG_SERIAL" property="drugSerial"/>
         <result column="DRUG_ID" property="drugId"/><!--药品编码-->
-        <result column="DRUG_SORT" property="drugSort"/><!--药品类别-->
         <result column="DRUG_NAME" property="drugName"/><!--药品名称-->
-       <!-- <result column="DRUG_USE" property="drugUse"/>-->
-        <!--<result column="DRUG_DOSAGE" property="drugDosage"/>-->
         <result column="DRUG_TACK" property="drugTack"/><!--拆零-->
-       <!-- <result column="DRUG_REMARK" property="drugRemark"/>-->
         <result column="DRUG_SELLING" property="drugSelling"/><!--中售价-->
         <result column="PURCHASE_PRICE" property="purchasePrice"/><!--中进价-->
-        <result column="SUPPLIER_ID" property="supplierId"/><!--供应商外键-->
         <result column="DRUG_NEXT" property="drugNext"/><!--次/天-->
         <result column="DRUG_BIG" property="drugBig"/><!--中单位-->
         <result column="DRUG_SMALL" property="drugSmall"/><!--小单位-->
-        <result column="DRUG_STOCK" property="drugStock"/><!--药品库存-->
-        <result column="DRUG_SURPLUS" property="drugSurplus"/><!--规格-->
         <result column="SMALL_SELLING" property="smallSelling"/><!--小售价-->
         <result column="SMALL_PRICE" property="smallPrice"/><!--小进价-->
+        <association property="types" javaType="DrugType">
+            <id column="TYPE_ID" property="typeId"/>
+            <result column="TYPE_NAME" property="typeName"/>
+        </association>
+        <association property="suppliers" javaType="DrugSupplier">
+            <id column="SUPPLIER_ID" property="supplierId"/>
+            <result column="SUPPLIER_NAME" property="supplierName"/>
+        </association>
+        <association property="standards" javaType="DrugStandard">
+            <id column="STANDARD_ID" property="standardId"/>
+            <result column="STANDARD_NAME" property="standardName"/>
+            <result column="STANDARD_NUM" property="standardNum"/>
+            <result column="STANDARD_DOSAGE" property="standardDosage"/>
+            <result column="STANDARD_USE" property="standardUse"/>
+        </association>
+        <association property="stocks" javaType="DrugStock">
+            <id column="STOCK_ID" property="stockId"/>
+            <result column="STOCK_LIMIT" property="stockLimit"/>
+            <result column="STOCK_FLOOR" property="stockFloor"/>
+            <result column="STOCK_DATE" property="stockIndate"/>
+        </association>
     </resultMap>
-    <resultMap id="typeMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugType">
-        <id column="TYPE_ID" property="typeId"/>
-        <result column="" property="typeName"/>
-        <result column="" property="typeRank"/>
-    </resultMap>
-    <resultMap id="standMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStandard">
-        <id column="STANDARD_ID" property="standardId"/>
-        <result column="STANDARD_NAME" property="standardName"/>
-        <result column="STANDARD_NUM" property="standardNum"/>
-        <result column="STANDARD_DOSAGE" property="standardDosage"/>
-        <result column="STANDARD_DOSAGE" property="standardDosage"/>
-        <result column="STANDARD_USE" property="standardUse"/>
-    </resultMap>
-    <resultMap id="supMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugSupplier">
-        <id column="SUPPLIER_ID" property="supplierId"/>
-        <result column="SUPPLIER_NAME" property="supplierName"/>
-        <result column="SUPPLIER_ADDRESS" property="supplierAddress"/>
-        <result column="SUPPLIER_PHONE" property="supplierPhone"/>
-    </resultMap>
-    <!--多条件查询药品信息-->
+    <!--多条件联表查询药品信息-->
     <select id="allDrug" resultMap="DrugMapper">
-      select * from DRUG_INFO
+    select * from DRUG_INFO di
+        left join DRUG_TYPE dt on di.TYPE_ID=dt.TYPE_ID
+        left join DRUG_SUPPLIER ds on di.SUPPLIER_ID=ds.SUPPLIER_ID
+        left join DRUG_STANDARD dd on di.SURPLUS_ID=dd.STANDARD_ID
+        left join DRUG_STOCK dk on di.STOCK_ID=dk.STOCK_ID
       <where>
           <if test="drugId != null and '' !=drugId">
-              or DRUG_ID like '%${drugId}%'
+              or di.DRUG_ID like '%${drugId}%'
           </if>
           <if test="drugName != null and '' !=drugName">
-              or DRUG_NAME like '%${drugName}%'
+              or di.DRUG_NAME like '%${drugName}%'
           </if>
       </where>
+    </select>
+    <!--查询药品新增类别-->
+    <select id="allType" resultType="DrugType">
+        select * from DRUG_TYPE
     </select>
 </mapper>
