@@ -21,8 +21,13 @@ public class ArrangeService {
         return arrangeMapper.allArrange(search);
     }
 
-    //新增排班
+    //新增或修改排班
     public void addArrange(Arrange arrange){
         arrangeMapper.addArrange(arrange);
+//        if(arrange.getArrangeId()==0){
+//            arrangeMapper.addArrange(arrange);
+//        }else{
+//            arrangeMapper.updateArrange(arrange);
+//        }
     }
 }

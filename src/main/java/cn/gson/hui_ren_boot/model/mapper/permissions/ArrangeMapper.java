@@ -13,4 +13,7 @@ public interface ArrangeMapper {
 
     //新增排班
     public void addArrange(Arrange arrange);
+
+    //修改排班
+//    public void updateArrange(Arrange arrange);
 }

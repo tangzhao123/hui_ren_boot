@@ -8,6 +8,7 @@ import cn.gson.hui_ren_boot.model.service.permissions.ArrangeService;
 import cn.gson.hui_ren_boot.model.service.permissions.CategoryService;
 import cn.gson.hui_ren_boot.model.service.permissions.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,7 +47,7 @@ public class ArrangeController {
 
     //新增排班
     @RequestMapping("add-arrange")
-    public String addArrange(Arrange arrange){
+    public String addArrange(@RequestBody Arrange arrange){
         try {
             arrangeService.addArrange(arrange);
             return "ok";

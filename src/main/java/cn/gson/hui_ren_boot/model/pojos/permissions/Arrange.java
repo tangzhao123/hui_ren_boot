@@ -97,4 +97,17 @@ public class Arrange {
     public int hashCode() {
         return Objects.hash(arrangeId, staffId, categoryId, arrangeStart, arrangeEnd);
     }
+
+    @Override
+    public String toString() {
+        return "Arrange{" +
+                "arrangeId=" + arrangeId +
+                ", staffId=" + staffId +
+                ", categoryId=" + categoryId +
+                ", arrangeStart=" + arrangeStart +
+                ", arrangeEnd=" + arrangeEnd +
+                ", staffName='" + staffName + '\'' +
+                ", categoryShift='" + categoryShift + '\'' +
+                '}';
+    }
 }

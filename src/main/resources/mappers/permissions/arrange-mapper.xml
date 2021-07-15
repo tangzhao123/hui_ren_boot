@@ -17,4 +17,9 @@
     <insert id="addArrange">
         insert into arrange values (seq_huiren.nextval,#{staffId},#{categoryId},#{arrangeStart},#{arrangeEnd})
     </insert>
+
+    <!-- 修改排班 -->
+<!--   <update id="updateArrange">-->
+<!--       update arrange set arrange_id = #{arrangeId},staff_id = #{staffId},category_id = #{categoryId},arrange_start = #{arrangeStart},arrange_end = #{arrangeEnd}-->
+<!--   </update>-->
 </mapper>
