@@ -53,4 +53,9 @@ public class StaffService {
     public List<Staff> findStaff(){
         return staffMapper.findStaff();
     }
+
+    //重置员工密码
+    public void updatePassWord(String passWord,Long userId){
+        staffMapper.updatePassword(passWord, userId);
+    }
 }

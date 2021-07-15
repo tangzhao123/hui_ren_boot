@@ -9,5 +9,5 @@ import java.util.List;
 public interface FunctionMapper {
 
     //分页模糊查询权限
-    public List<Function> findAllFunction();
+    public List<Function> findAllFunction(String search);
 }
