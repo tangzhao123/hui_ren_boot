@@ -43,4 +43,10 @@ public class BookingFormController {
         System.out.println(bookingForm);
         bookingFormService.addOutBooking(bookingForm.getOutpatient(),bookingForm);
     }
+
+    //分页查询挂号单
+    @RequestMapping("/all-booking")
+    public Object allBooking(Integer pageNo,Integer size){
+        return bookingFormService.allBookingByPage(pageNo, size);
+    }
 }

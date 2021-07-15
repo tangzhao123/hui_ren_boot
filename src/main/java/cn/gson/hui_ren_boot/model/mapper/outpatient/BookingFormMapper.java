@@ -21,4 +21,7 @@ public interface BookingFormMapper {
 
     //新增挂号单
     public void addBooking(BookingForm bookingForm);
+
+    //查询挂号单
+    public List<BookingForm> allBooking();
 }

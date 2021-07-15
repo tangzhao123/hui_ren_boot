@@ -36,8 +36,19 @@ public class BookingFormService {
 
     //新增挂号单，同时新增患者表
     public void addOutBooking(OutpatientRegister outPatient, BookingForm bookingForm){
-        outRegisterMapper.addOutregister(outPatient);
-        bookingForm.setOutpatientId(outPatient.getOutpatientId());
-        bookingFormMapper.addBooking(bookingForm);
+        OutpatientRegister register = outRegisterMapper.selRegister(outPatient.getOutpatientCard());
+        if(register == null){
+            outRegisterMapper.addOutregister(outPatient);
+            bookingForm.setOutpatientId(outPatient.getOutpatientId());
+            bookingFormMapper.addBooking(bookingForm);
+        }else{
+            bookingForm.setOutpatientId(register.getOutpatientId());
+            bookingFormMapper.addBooking(bookingForm);
+        }
+    }
+
+    //分页查询挂号单
+    public Object allBookingByPage(Integer pageNo,Integer size){
+        return bookingFormMapper.allBooking();
     }
 }
