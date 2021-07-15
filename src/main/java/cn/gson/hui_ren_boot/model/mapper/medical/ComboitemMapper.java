@@ -9,5 +9,11 @@ import java.util.List;
 public interface ComboitemMapper {
 
     //体检项目查询
-    public List<Comboitem> selectAll();
+    public List<Comboitem> selectAll(Comboitem comboitem);
+
+    //体检项目新增
+    public void addComboitem(Comboitem comboitem);
+
+    //修改体检项目
+    public void updateComboitem(Comboitem comboitem);
 }

@@ -12,6 +12,8 @@ public class Comboitem {
     private String itemType;
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "ITEM_ID")
     public long getItemId() {
         return itemId;
