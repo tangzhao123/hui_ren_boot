@@ -14,5 +14,29 @@
     <!-- 查询所有体检项目 -->
     <select id="selectAll" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
         select * from comboitem
+        <where>
+            <if test="itemName != null and itemName != ''">
+                or ITEM_NAME like '%${itemName}%'
+            </if>
+            <if test="itemOffice != null and itemOffice != ''">
+                or ITEM_OFFICE like '%${itemOffice}%'
+            </if>
+            <if test="itemType != null and itemType != ''">
+                or ITEM_TYPE like '%${itemType}%'
+            </if>
+        </where>
     </select>
+    <!-- 新增体检项目 -->
+    <insert id="addComboitem">
+        insert into comboitem values(seq_huiren.nextval,#{itemName},#{itemOffice},#{itemMoney},#{itemType})
+    </insert>
+    <!-- 修改体检项目 -->
+    <update id="updateComboitem">
+        update COMBOITEM set ITEM_NAME = #{itemName},ITEM_OFFICE = #{itemOffice},
+            ITEM_MONEY = #{itemMoney},ITEM_TYPE = #{itemType} where ITEM_ID = #{itemId}
+    </update>
+<!--    删除体检项目，只有刚新增的次可以删除-->
+<!--    <delete id="delComboitem">-->
+<!--        delete from comboitem where ITEM_ID = #{itemId} -->
+<!--    </delete>-->
 </mapper>
