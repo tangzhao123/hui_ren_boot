@@ -21,4 +21,7 @@ public interface TreatmentCardMapper {
 
     //挂失，根据卡号修改卡的状态
     public void delCard(String treatmentNo);
+
+    //挂号时选择卡号，只显示未锁定的卡号，根据身份证号查询
+    public List<TreatmentCard> selLock(String treatmentCard);
 }

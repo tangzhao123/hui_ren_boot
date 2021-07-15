@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "OUTPATIENT_REGISTER", schema = "HUIREN")
 public class OutpatientRegister {
-    private String outpatientId;
+    private int outpatientId;
     private String outpatientName;
     private int outpatientSex;
     private Date outpatientBirth;
@@ -28,11 +28,11 @@ public class OutpatientRegister {
 
     @Id
     @Column(name = "OUTPATIENT_ID")
-    public String getOutpatientId() {
+    public int getOutpatientId() {
         return outpatientId;
     }
 
-    public void setOutpatientId(String outpatientId) {
+    public void setOutpatientId(int outpatientId) {
         this.outpatientId = outpatientId;
     }
 
@@ -192,10 +192,21 @@ public class OutpatientRegister {
     @Override
     public String toString() {
         return "OutpatientRegister{" +
-                "outpatientName='" + outpatientName + '\'' +
+                "outpatientId='" + outpatientId + '\'' +
+                ", outpatientName='" + outpatientName + '\'' +
+                ", outpatientSex=" + outpatientSex +
+                ", outpatientBirth=" + outpatientBirth +
+                ", outpatientAge='" + outpatientAge + '\'' +
+                ", outpatientMarry=" + outpatientMarry +
+                ", outpatientVocation='" + outpatientVocation + '\'' +
+                ", outpatientNative='" + outpatientNative + '\'' +
+                ", outpatientNation='" + outpatientNation + '\'' +
                 ", outpatientCard='" + outpatientCard + '\'' +
+                ", outpatientWork='" + outpatientWork + '\'' +
                 ", outpatientPhone='" + outpatientPhone + '\'' +
                 ", outpatientAddress='" + outpatientAddress + '\'' +
+                ", outpatientWeight='" + outpatientWeight + '\'' +
+                ", outpatientBlood='" + outpatientBlood + '\'' +
                 '}';
     }
 }
