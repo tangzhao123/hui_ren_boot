@@ -21,14 +21,31 @@ public class Hospital {
     private long hospitalState;//申请状态
     private Medical medicals;//科室
 
-   @OneToOne
-   public Medical getMedical() {
-       return medicals;
+    public Hospital(long hospitalId, String hospitalName, String hospitalSite, String hospitalCard) {
+        this.hospitalId = hospitalId;
+        this.hospitalName = hospitalName;
+        this.hospitalSite = hospitalSite;
+        this.hospitalCard = hospitalCard;
     }
 
-   public void setMedical(Medical medicals) {
-       this.medicals = medicals;
+    @OneToOne
+   public Medical getMedical() {
+      return medicals;
+   }
+
+    public Hospital(long hospitalId, String hospitalCause, String hospitalName, Date hospitalDate, String hospitalSite, String hospitalCard, long hospitalState) {
+        this.hospitalId = hospitalId;
+        this.hospitalCause = hospitalCause;
+        this.hospitalName = hospitalName;
+        this.hospitalDate = hospitalDate;
+        this.hospitalSite = hospitalSite;
+        this.hospitalCard = hospitalCard;
+        this.hospitalState = hospitalState;
     }
+
+    public void setMedical(Medical medicals) {
+     this.medicals = medicals;
+  }
 
     public Hospital() {
     }

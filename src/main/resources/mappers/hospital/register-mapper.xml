@@ -31,6 +31,7 @@
         <association property="sickbed" javaType="Sickbed">
             <id column="SICKBED_ID" property="sickbedId"/>
             <result column="SICKBED_MARK" property="sickbedMark"/>
+            <result column="WARD_MARK" property="wardMark"/>
         </association>
     </resultMap>
    <!-- 查询病人信息-->
@@ -80,4 +81,18 @@
     <select id="allMedica" resultType="Medical">
         select*from MEDICAL
      </select>
+    <insert id="addRegister">
+        insert into register (register_serica,register_id,register_date,register_name,register_sex,register_site,
+                register_card,register_print,register_age,register_home,register_address,register_phone,register_relation,
+                register_contact,register_call,medical_id,register_record,register_clinic)
+            values(seq_huiren.nextval,#{registerId},systimestamp,#{registerName}
+                ,#{registerSex},#{registerSite},#{registerCard},#{registerPrint},
+                #{registerAge},#{registerHome},#{registerAddress},#{registerPhone},
+                #{registerRelation},#{registerContact},#{registerCall},#{medicalId},
+                 #{registerRecord},#{registerClinic})
+    </insert>
+<!--    //查询诊疗卡-->
+    <select id="allRegiMedical" resultType="Register">
+        select*from register where register_clinic=#{registerClinic} and register_id=#{registerId}
+    </select>
 </mapper>

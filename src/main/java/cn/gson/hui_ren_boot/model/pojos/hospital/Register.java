@@ -11,30 +11,54 @@ import java.util.Objects;
 @Entity
 public class Register {
 
-    private int registerSerica;//序号
-    private String registerId;//住院号
-    private Date registerDate;//入院时间
-    private String registerName;//姓名
-    private int registerSex;//性别
-    private Date registerSite;//出生日期
-    private int registerCard;//婚否
-    private String registerPrint;//职业
-    private int registerAge;//年龄
-    private String registerHome;//身份证
-    private String registerAddress;//家庭住址
-    private String registerPhone;//患者电话
-    private String registerRelation;//病人关系
-    private String registerContact;//联系人
-    private String registerCall;//联系电话
+    private int registerSerica;//序号1
+    private String registerId;//住院号2
+    private Date registerDate;//入院时间3
+    private String registerName;//姓名4
+    private int registerSex;//性别5
+    private Date registerSite;//出生日期6
+    private int registerCard;//婚否7
+    private String registerPrint;//职业8
+    private int registerAge;//年龄9
+    private String registerHome;//身份证10
+    private String registerAddress;//家庭住址11
+    private String registerPhone;//患者电话12
+    private String registerRelation;//病人关系13
+    private String registerContact;//联系人14
+    private String registerCall;//联系电话15
     private int registerMethod;//付款方式
     private int medicalId;//科室
-    private String registerRecord;//入院诊断
+    private String registerRecord;//入院诊断16
     private int staffId;//主治医生
-    private String registerClinic;//就诊卡号
-    private String  sickbedMark;//病房号
+    private String registerClinic;//就诊卡号17
+    private String  sickbedMark;//病床号
     private Medical medical;//科室
     private Staff staff;//员工
     private Sickbed sickbed;//病床
+
+    public Register() {
+    }
+
+    public Register(int registerSerica, String registerId, String registerName, int registerSex, Date registerSite, int registerCard, String registerPrint, int registerAge, String registerHome, String registerAddress, String registerPhone, String registerRelation, String registerContact, String registerCall, int medicalId, String registerRecord, String registerClinic) {
+        this.registerSerica = registerSerica;
+        this.registerId = registerId;
+        this.registerName = registerName;
+        this.registerSex = registerSex;
+        this.registerSite = registerSite;
+        this.registerCard = registerCard;
+        this.registerPrint = registerPrint;
+        this.registerAge = registerAge;
+        this.registerHome = registerHome;
+        this.registerAddress = registerAddress;
+        this.registerPhone = registerPhone;
+        this.registerRelation = registerRelation;
+        this.registerContact = registerContact;
+        this.registerCall = registerCall;
+        this.medicalId = medicalId;
+        this.registerRecord = registerRecord;
+        this.registerClinic = registerClinic;
+    }
+
     //科室关系
     @OneToOne
     public Medical getMedical() {
@@ -282,5 +306,35 @@ public class Register {
     @Override
     public int hashCode() {
         return Objects.hash(registerSerica, registerId, registerDate, registerName, registerSex, registerSite, registerCard, registerPrint, registerAge, registerHome, registerAddress, registerPhone, registerRelation, registerContact, registerCall, registerMethod, registerRecord, staffId, registerClinic, sickbedMark);
+    }
+
+    @Override
+    public String toString() {
+        return "Register{" +
+                "registerSerica=" + registerSerica +
+                ", registerId='" + registerId + '\'' +
+                ", registerDate=" + registerDate +
+                ", registerName='" + registerName + '\'' +
+                ", registerSex=" + registerSex +
+                ", registerSite=" + registerSite +
+                ", registerCard=" + registerCard +
+                ", registerPrint='" + registerPrint + '\'' +
+                ", registerAge=" + registerAge +
+                ", registerHome='" + registerHome + '\'' +
+                ", registerAddress='" + registerAddress + '\'' +
+                ", registerPhone='" + registerPhone + '\'' +
+                ", registerRelation='" + registerRelation + '\'' +
+                ", registerContact='" + registerContact + '\'' +
+                ", registerCall='" + registerCall + '\'' +
+                ", registerMethod=" + registerMethod +
+                ", medicalId=" + medicalId +
+                ", registerRecord='" + registerRecord + '\'' +
+                ", staffId=" + staffId +
+                ", registerClinic='" + registerClinic + '\'' +
+                ", sickbedMark='" + sickbedMark + '\'' +
+                ", medical=" + medical +
+                ", staff=" + staff +
+                ", sickbed=" + sickbed +
+                '}';
     }
 }

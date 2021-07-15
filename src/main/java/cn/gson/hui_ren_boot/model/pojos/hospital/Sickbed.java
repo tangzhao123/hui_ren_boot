@@ -29,7 +29,7 @@ public class Sickbed {//病床信息表
         return wardMark;
     }
 
-    public void setWardMark(String sickbedWrd) {
+    public void setWardMark(String wardMark) {
         this.wardMark = wardMark;
     }
 

@@ -21,29 +21,59 @@ public class HosptoalController {
     @RequestMapping("/saveg")
     public String saveHospoal(@RequestBody Hospital p){//新增住院申请表
         try {
-            Hospital   spat=  hospialService.allspital(p.getHospitalCard());//查询身份证重复
-            System.out.println(spat);
-            if(spat!=null){
-                System.out.println(1);
-                return"fail2";
-            }else{
-                System.out.println(p.getHospitalName());
-                p.setHospitalDate(new Date());
-                hospialService.saveHospoal(p);
-                return"ok";
-            }
 
+            if(judgeToBeRepeated(p)==false){//身份证判断重复
+                return"fail2";//返回前台身份证重复
+            }else{
+               if(judgmentIsEmpty(p)==true){//修改
+                   hospialService.upHostp(p);
+                   return"ok2";//返回前台修改成功
+               }else{//新增
+//                   p.setHospitalDate(new Date());
+                   p.setHospitalState(0);
+                   hospialService.addHostp(p);
+                   return"ok";//新增成功
+               }
+
+            }
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(1);
-            return"fail";
+            return"fail";//异常判断新增失败
         }
 
 
+    }
+    public boolean judgeToBeRepeated(Hospital p){//判断身份证重复
+        Hospital   spat=  hospialService.allspital(p.getHospitalCard());//查询身份证重复
+          if(spat!=null){
+              return false;
+          }else{
+              return true;
+          }
+
+    }
+    public boolean judgmentIsEmpty(Hospital p){//判断申请表是否新增和修改
+        if(p.getHospitalId()>0){
+            return true;
+        }else{
+            return false;
+        }
     }
     @RequestMapping("/allHospt")
     public Object allHopsts(Integer pageNo, Integer size,String shuk){
         Hospital hop= JSONObject.toJavaObject(JSON.parseObject(shuk),Hospital.class);
         return hospialService.allhosptialByPage(pageNo,size,hop);
+    }
+    @RequestMapping("/deHospot")
+    public String deHopspot(int id){
+        try{
+            hospialService.deHostp(id);
+            return "ok";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+
+        }
     }
 }

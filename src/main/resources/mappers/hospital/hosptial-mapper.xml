@@ -10,6 +10,7 @@
     <result column="HOSPITAL_CARD" property="hospitalCard"/>
     <result column="HOSPITAL_DOCTOR" property="hospitalDoctor"/>
     <result column="HOSPITAL_STATE" property="hospitalState"/>
+    <result column="HOSPITAL_CLINIC" property="hospitalClinic"/>
     <association property="medicals" javaType="Medical">
          <id column="MEDICAL_ID" property="medicalId"/>
         <result column="MEDICAL_NAME" property= "medicalName"/>
@@ -39,8 +40,16 @@
         </where>
         order by kl.hospital_id asc
     </select>
-    <select id="allsptal" resultType="Hospital">
+    <select id="allSptal" resultType="Hospital">
         select*from hospital where hospital_card=#{hospitalCard}
     </select>
-
+    <insert id="addHostp">
+        insert into hospital(hospital_id,hospital_cause,hospital_name,hospital_date,hospital_site,hospital_card,hospital_state) values(seq_huiren.nextval,#{hospitalCause},#{hospitalName},systimestamp,#{hospitalSite},#{hospitalCard},#{hospitalState})
+    </insert>
+    <update id="upHostp">
+        update hospital set hospital_name=#{hospitalName},hospital_site=#{hospitalSite},hospital_card=#{hospitalCard} where hospital_id=#{hospitalId}
+    </update>
+    <delete id="deHostp">
+        delete from hopuital where hospital_id=#{hospitalId}
+    </delete>
 </mapper>
