@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class RegisterService {
@@ -23,7 +25,9 @@ public class RegisterService {
     public Object allRegisByPage(Integer pageNo, Integer size, Register inputboxs){
         return registerMapper.allRegis(inputboxs);
     }
-
+    public Object allRegistByPage(Integer pageNo, Integer size, Register inputboxs){
+        return registerMapper.allRegist(inputboxs);
+    }
     public void saveRegis(Register j){
         registerDao.save(j);
     }
@@ -35,5 +39,11 @@ public class RegisterService {
     }
     public Register allRegiMedical(String clinic,String id){//修改时查询诊疗卡
        return registerMapper.allRegiMedical(clinic,id);
+    }
+    public void upRegiste(Register k){//修改
+        registerMapper.upRegister(k);
+    }
+    public  void upMajor(Register terx){//转科
+        registerMapper.upMajor(terx);
     }
 }

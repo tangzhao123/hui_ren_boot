@@ -50,6 +50,9 @@
         update hospital set hospital_name=#{hospitalName},hospital_site=#{hospitalSite},hospital_card=#{hospitalCard} where hospital_id=#{hospitalId}
     </update>
     <delete id="deHostp">
-        delete from hopuital where hospital_id=#{hospitalId}
+        delete from hospital where hospital_id=#{hospitalId}
     </delete>
+    <update id="upHostpState">
+        update hospital set hospital_state=#{hospitalState} where hospital_card=#{hospitalCard}
+    </update>
 </mapper>
