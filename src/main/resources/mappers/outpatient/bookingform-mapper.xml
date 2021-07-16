@@ -95,4 +95,21 @@
                           left JOIN staff s on b.staff_id = s.staff_id
                           left JOIN medical me on b.medical_id = me.medical_id
     </select>
+
+    <!--查询未诊的挂号单-->
+    <select id="selBooking" resultMap="formMap">
+        select * from booking_form b
+        left JOIN outpatient_register o on b.outpatient_id = o.outpatient_id
+        left JOIN staff s on b.staff_id = s.staff_id
+        left JOIN medical me on b.medical_id = me.medical_id
+        where b.BOOKING_STATE = 0
+        <if test="bookingNo != null and '' != bookingNo">
+           and b.BOOKING_NO like '%${bookingNo}%'
+        </if>
+    </select>
+
+    <!--修改挂号单为退号状态-->
+    <update id="editState">
+        update booking_form set BOOKING_STATE = 3 where BOOKING_NO = #{bookingNo}
+    </update>
 </mapper>

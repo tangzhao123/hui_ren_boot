@@ -2,8 +2,10 @@ package cn.gson.hui_ren_boot.model.service.outpatient;
 
 import cn.gson.hui_ren_boot.model.mapper.outpatient.BookingFormMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.OutRegisterMapper;
+import cn.gson.hui_ren_boot.model.mapper.outpatient.WithdrawalMapper;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.BookingForm;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.Withdrawal;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class BookingFormService {
 
     @Autowired
     OutRegisterMapper outRegisterMapper;
+
+    @Autowired
+    WithdrawalMapper withdrawalMapper;
 
     //查询挂号时的科室
     public List<Medical> allMedicals(){
@@ -50,5 +55,16 @@ public class BookingFormService {
     //分页查询挂号单
     public Object allBookingByPage(Integer pageNo,Integer size){
         return bookingFormMapper.allBooking();
+    }
+
+    //分页查询未诊的挂号单
+    public Object selBookingByPage(Integer pageNo,Integer size,String bookingNo){
+        return bookingFormMapper.selBooking(bookingNo);
+    }
+
+    //退号，修改挂号单的状态，同时新增一条退号单
+    public void addDrawal(Withdrawal withdrawal){
+        bookingFormMapper.editState(withdrawal.getBookingNo());
+        withdrawalMapper.addDrawal(withdrawal);
     }
 }
