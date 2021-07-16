@@ -19,6 +19,7 @@ public class BookingForm {
     private Long bookingOther;
     private Date bookingOrder;
     private String bookingReturn;
+    private Long bookingState;
     private int outpatientId;
     private int medicalId;
     private int staffId;
@@ -145,6 +146,16 @@ public class BookingForm {
 
     public void setBookingReturn(String bookingReturn) {
         this.bookingReturn = bookingReturn;
+    }
+
+    @Basic
+    @Column(name = "BOOKING_STATE")
+    public Long getBookingState() {
+        return bookingState;
+    }
+
+    public void setBookingState(Long bookingState) {
+        this.bookingState = bookingState;
     }
 
     @Basic

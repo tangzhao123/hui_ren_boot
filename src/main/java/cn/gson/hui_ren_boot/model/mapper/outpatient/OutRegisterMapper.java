@@ -15,4 +15,7 @@ public interface OutRegisterMapper {
 
     //新增患者信息
     public void addOutregister(OutpatientRegister outpatientRegister);
+
+    //根据身份证号查询是否存在某患者
+    public OutpatientRegister selRegister(String outpatientCard);
 }
