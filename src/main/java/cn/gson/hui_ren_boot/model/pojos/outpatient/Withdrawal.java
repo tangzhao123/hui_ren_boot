@@ -1,15 +1,15 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.util.Objects;
+import java.util.Date;
 
 @Entity
 @Table(name = "WITHDRAWAL", schema = "HUIREN", catalog = "")
 public class Withdrawal {
     private long withdrawalId;
     private String bookingNo;
-    private Time withdrawalDate;
+    private Date withdrawalDate;
+    private String cause;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -35,24 +35,22 @@ public class Withdrawal {
 
     @Basic
     @Column(name = "WITHDRAWAL_DATE")
-    public Time getWithdrawalDate() {
+    public Date getWithdrawalDate() {
         return withdrawalDate;
     }
 
-    public void setWithdrawalDate(Time withdrawalDate) {
+    public void setWithdrawalDate(Date withdrawalDate) {
         this.withdrawalDate = withdrawalDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Withdrawal that = (Withdrawal) o;
-        return withdrawalId == that.withdrawalId && Objects.equals(bookingNo, that.bookingNo) && Objects.equals(withdrawalDate, that.withdrawalDate);
+    @Basic
+    @Column(name = "CAUSE")
+    public String getCause() {
+        return cause;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(withdrawalId, bookingNo, withdrawalDate);
+    public void setCause(String cause) {
+        this.cause = cause;
     }
+
 }

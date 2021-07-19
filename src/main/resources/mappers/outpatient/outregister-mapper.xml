@@ -47,9 +47,9 @@
         </selectKey>
         insert into
             outpatient_register(OUTPATIENT_ID,OUTPATIENT_NAME,OUTPATIENT_SEX,OUTPATIENT_BIRTH,
-                                OUTPATIENT_AGE,OUTPATIENT_CARD,OUTPATIENT_PHONE,OUTPATIENT_ADDRESS)
+                                OUTPATIENT_AGE,OUTPATIENT_NATION,OUTPATIENT_CARD,OUTPATIENT_PHONE,OUTPATIENT_ADDRESS)
                                 values (#{outpatientId},#{outpatientName},#{outpatientSex},
-                                  #{outpatientBirth},#{outpatientAge},#{outpatientCard},#{outpatientPhone},
+                                  #{outpatientBirth},#{outpatientAge},#{outpatientNation},#{outpatientCard},#{outpatientPhone},
                                   #{outpatientAddress})
     </insert>
 

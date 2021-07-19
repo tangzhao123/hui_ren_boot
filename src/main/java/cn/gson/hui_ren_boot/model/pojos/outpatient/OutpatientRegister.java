@@ -1,7 +1,10 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,6 +16,7 @@ public class OutpatientRegister {
     private int outpatientId;
     private String outpatientName;
     private int outpatientSex;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date outpatientBirth;
     private String outpatientAge;
     private int outpatientMarry;
@@ -25,6 +29,26 @@ public class OutpatientRegister {
     private String outpatientAddress;
     private String outpatientWeight;
     private String outpatientBlood;
+    private List<MedicalRecord> medicalRecord;
+    private List<MedicalRecordInfo> medicalInfo;
+
+    @OneToMany
+    public List<MedicalRecord> getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(List<MedicalRecord> medicalRecord) {
+        this.medicalRecord = medicalRecord;
+    }
+
+    @OneToMany
+    public List<MedicalRecordInfo> getMedicalInfo() {
+        return medicalInfo;
+    }
+
+    public void setMedicalInfo(List<MedicalRecordInfo> medicalInfo) {
+        this.medicalInfo = medicalInfo;
+    }
 
     @Id
     @Column(name = "OUTPATIENT_ID")
