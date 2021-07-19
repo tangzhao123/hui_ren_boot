@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
+import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 
@@ -35,7 +36,7 @@ public class Register {
     private Medical medical;//科室
     private Staff staff;//员工
     private Sickbed sickbed;//病床
-
+    private TreatmentCard treatment;//就诊卡
     public Register() {
     }
 
@@ -75,13 +76,24 @@ public class Register {
     public void setStaff(Staff staff) {
         this.staff = staff;
     }
-   @OneToOne
+   @OneToOne//病床关系
     public Sickbed getSickbed() {
         return sickbed;
     }
     public void setSickbed(Sickbed sickbed) {
         this.sickbed = sickbed;
     }
+    @OneToOne//就诊卡关系
+    public TreatmentCard getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(TreatmentCard treatment) {
+        this.treatment = treatment;
+    }
+
+
+
     @Id
     @Column(name = "REGISTER_SERICA")
     public int getRegisterSerica() {

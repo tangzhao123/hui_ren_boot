@@ -65,4 +65,9 @@
     <select id="findStaff" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
         select  staff_id staffId,staff_name staffName,staff_card staffCard,staff_phone staffPhone,staff_state staffState from staff where staff_card is not null
     </select>
+
+    <!-- 重置用户密码 -->
+    <update id="updatePassword">
+        update user_info set user_possword = #{passWord} where user_id = #{userId}
+    </update>
 </mapper>

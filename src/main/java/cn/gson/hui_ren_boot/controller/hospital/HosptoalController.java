@@ -32,6 +32,7 @@ public class HosptoalController {
 //                   p.setHospitalDate(new Date());
                    p.setHospitalState(0);
                    hospialService.addHostp(p);
+
                    return"ok";//新增成功
                }
 
@@ -60,15 +61,16 @@ public class HosptoalController {
             return false;
         }
     }
-    @RequestMapping("/allHospt")
+    @RequestMapping("/allHospt")//查询分页
     public Object allHopsts(Integer pageNo, Integer size,String shuk){
         Hospital hop= JSONObject.toJavaObject(JSON.parseObject(shuk),Hospital.class);
         return hospialService.allhosptialByPage(pageNo,size,hop);
     }
-    @RequestMapping("/deHospot")
-    public String deHopspot(int id){
+    @RequestMapping("/deHospot")//删除
+    public String deHopspot(Integer hospitalId){
+        System.out.println(hospitalId);
         try{
-            hospialService.deHostp(id);
+            hospialService.deHostp(hospitalId);
             return "ok";
         }catch (Exception e){
             e.printStackTrace();

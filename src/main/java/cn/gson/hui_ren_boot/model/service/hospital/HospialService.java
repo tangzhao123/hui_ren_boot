@@ -32,8 +32,11 @@ public class HospialService {
 
         hosptialMapper.upHostp(up);
     }
-    public void deHostp(int id){//删除
-            hosptialMapper.deHostp(id);
+    public void deHostp(int HospitalId){//删除
+            hosptialMapper.deHostp(HospitalId);
+    }
+    public void upHostpState(Hospital state){//修改申请状态
+        hosptialMapper.upHostpState(state);
     }
 
 }
