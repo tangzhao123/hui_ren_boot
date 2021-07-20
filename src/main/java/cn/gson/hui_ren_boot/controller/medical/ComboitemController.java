@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.controller.medical;
 
+import cn.gson.hui_ren_boot.model.pojos.medical.Cmobo;
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.medical.Test;
 import cn.gson.hui_ren_boot.model.service.medical.ComboitemService;
@@ -18,6 +19,12 @@ import java.util.Map;
 public class ComboitemController {
     @Autowired
     ComboitemService comboitemService;
+
+    //查询体检套餐
+    @GetMapping("cmobo-select")
+    public List<Cmobo> seeCmobo(){
+       return comboitemService.seeCmobo();
+    }
 
     //查询所有体检项目
     @GetMapping("/comboitem-list")

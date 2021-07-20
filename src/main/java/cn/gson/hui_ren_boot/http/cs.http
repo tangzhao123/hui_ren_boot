@@ -1,4 +1,8 @@
-GET http://localhost:8889/druginfo/drugmanger?pageNO=2&size=1&drugInfo=null
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
+GET http://localhost:8889/allTest
 Accept: application/json
 
 ###
