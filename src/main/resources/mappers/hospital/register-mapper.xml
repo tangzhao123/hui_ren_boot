@@ -113,8 +113,9 @@
                 or REGISTER_CLINIC like '%${registerClinic}%'
             </if>
         </where>
-        order by hg.register_serica asc
+        order by hg.register_date desc
     </select>
+<!--    查询病人缴费信息-->
     <select id="allRegist" resultMap="allRegisMappert">
         SELECT*from register  hg
             left join sickbed kjs  on hg.sickbed_mark=kjs.sickbed_mark
@@ -135,12 +136,23 @@
             <if test="registerId != null and '' != registerId">
                 or REGISTER_ID  like '%${registerId}%'
             </if>
+            <if test="registerId != null and '' != registerId">
+                or REGISTER_ID  like '%${registerId}%'
+            </if>
+            <if test="medicalId != null and '' != medicalId">
+                or medical_id  like '%${medicalId}%'
+            </if>
+            <if test="staffId != null and '' != staffId">
+                or hg.staff_id = #{staffId}
+            </if>
         </where>
-        order by hg.register_serica asc
+        order by hg.register_date desc
     </select>
+<!--    查询科室-->
     <select id="allMedica" resultType="Medical">
         select*from MEDICAL
      </select>
+<!--    添加病人信息-->
     <insert id="addRegister">
         insert into register (register_serica,register_id,register_date,register_name,register_sex,register_site,
                 register_card,register_print,register_age,register_home,register_address,register_phone,register_relation,
@@ -169,5 +181,21 @@
 <!--    //查询诊疗卡-->
     <select id="allRegiMedical" resultType="Register">
         select*from register where register_clinic=#{registerClinic} and register_id=#{registerId}
+    </select>
+<!-- 充值修改金额-->
+    <update id="upMedicalCard">
+        update TREATMENT_CARD set TREATMENT_BALANCE=#{treatmentBalance} where TREATMENT_NO=#{treatmentNo}
+    </update>
+<!-- 新增充值记录 -->
+    <insert id="reCharge">
+        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney})
+    </insert>
+    <!--查询诊疗卡余额 -->
+    <select id="selRecharge" resultType="TreatmentCard">
+        select*from TREATMENT_CARD where TREATMENT_NO=#{treatmentNo}
+    </select>
+    <!--查询诊疗卡 -->
+    <select id="selseRecharge" resultType="TreatmentRecharge">
+        select*from treatment_recharge where treatment_no=#{treatmentNo}
     </select>
 </mapper>

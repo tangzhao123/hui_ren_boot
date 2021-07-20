@@ -6,6 +6,7 @@ import cn.gson.hui_ren_boot.model.mapper.outpatient.TreatmentCardMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
 import org.junit.validator.PublicClassValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class RegisterService {
     public Object allRegistByPage(Integer pageNo, Integer size, Register inputboxs){
         return registerMapper.allRegist(inputboxs);
     }
+    public List<Register>allRegisw(Register inputboxs){
+        return registerMapper.allRegist(inputboxs);
+    }
     public void saveRegis(Register j){
         registerDao.save(j);
     }
@@ -45,5 +49,17 @@ public class RegisterService {
     }
     public  void upMajor(Register terx){//转科
         registerMapper.upMajor(terx);
+    }
+    public void reCharge(TreatmentRecharge p){//新增
+        registerMapper.reCharge(p);
+    }
+    public TreatmentCard Recharge(String k){
+        return registerMapper.selRecharge(k);//查询诊疗卡
+    }
+    public void upMedicalCard(TreatmentCard j){//充值
+        registerMapper.upMedicalCard(j);
+    }
+    public List<TreatmentRecharge> selseRecharge (String treatmentNo){//查询记录
+        return registerMapper.selseRecharge(treatmentNo);
     }
 }

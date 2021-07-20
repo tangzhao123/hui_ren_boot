@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.AdviceMapper">
+    <!--查找医嘱-->
+    <resultMap id="allAdvicve" type="cn.gson.hui_ren_boot.model.pojos.hospital.Advice">
+        <id column="advice_serial" property="adviceSerial"/>
+        <result column="advice_id" property="adviceId"/>
+        <result column="advice_start" property="adviceStart"/>
+        <result column="advice_sickbed" property="adviceSickbed"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="advice_cost" property="adviceCost"/>
+        <result column="advice_cost" property="adviceCost"/>
+        <!-- 病人信息表-->
+        <association property="register" javaType="Register">
+            <id column="MEDICAL_ID" property="medicalId"/>
+            <result column="MEDICAL_NAME" property="medicalName"/>
+        </association>
+        <!--员工表-->
+        <association property="staff" javaType="Staff">
+            <id column="staff_id" property="staffId"/>
+            <result column="staff_name" property="staffName"/>
+        </association>
+    </resultMap>
+
+    <select id="allDispensing" parameterMap="allAdvicve">
+        select * from ADVICE  ai left join register hg on ai.register_id=hg.register_id left join staff km on km.staff_id=ai.staff_id    </select>
+</mapper>

@@ -3,6 +3,7 @@ package cn.gson.hui_ren_boot.controller.hospital;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Hospital;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
 import cn.gson.hui_ren_boot.model.service.hospital.HospialService;
 import cn.gson.hui_ren_boot.model.service.hospital.RegisterService;
 import com.alibaba.fastjson.JSON;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/PatientRegistration")
@@ -26,16 +28,21 @@ public class RegisterConvertor {
     public Object allregis(Integer pageNo, Integer size, String shu) {
         // Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(inputbox),Register.class);
         Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
-        System.out.println("数据" + inputboxs);
+
         return registerService.allRegisByPage(pageNo, size, inputboxs);
     }
     @RequestMapping("/registerst")//缴费表
     public Object allregist(Integer pageNo, Integer size, String shu) {
         // Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(inputbox),Register.class);
         Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
-        System.out.println("数据" + inputboxs);
         return registerService.allRegistByPage(pageNo, size, inputboxs);
     }
+    @RequestMapping("/registersw")//医生患者表
+    public List<Register>allregistw(String shu){
+        System.out.println(shu+"wwwwwwwwwwwwwwwwww");
+        Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
+        return registerService.allRegisw(inputboxs);
+     }
     //新增住院病人信息
     @RequestMapping("/saveRegis")
     public String saveRegis(@RequestBody Register j) {
@@ -77,9 +84,42 @@ public class RegisterConvertor {
             return false;
         }
     }
+    @RequestMapping("/upRecharge")
+    public String upRecharge(@RequestBody TreatmentCard k){
+        try{
+            TreatmentCard lj= registerService.Recharge(k.getTreatmentNo());//查询诊疗卡
+            System.out.println(lj.getTreatmentBalance());
+            TreatmentRecharge p=new TreatmentRecharge();//新增记录
+            p.setRechargeMoney(k.getTreatmentBalance());
+            p.setTreatmentNo(k.getTreatmentNo());
+            registerService.reCharge(p);
+
+            long ljBalance= lj.getTreatmentBalance()+k.getTreatmentBalance();//金额累加
+            k.setTreatmentBalance(ljBalance);//累加赋值
+            registerService.upMedicalCard(k);//修改金额
+            //————————————————————————
+
+
+            return "ok";
+        }catch (Exception e){
+            return "fail";
+        }
+    }
+//    @RequestMapping("/selseRecords")
+//    public Object allRecords(@RequestBody Integer pageNo, Integer size, TreatmentRecharge treatmentNo){//查询记录
+//        System.out.println(treatmentNo.getTreatmentNo());
+//
+//      return   registerService.selseRechargeByPage(pageNo,size,treatmentNo);
+//    }
+    @RequestMapping("/selseRecords")
+    public List<TreatmentRecharge> allRecords(String treatmentNo){//查询记录
+        System.out.println(treatmentNo);
+
+        return   registerService.selseRecharge(treatmentNo);
+    }
     @RequestMapping("/upMajor")
-    public  String upMajor(@RequestBody Register lk){
-        System.out.println("来---------------------");
+    public  String upMajor(@RequestBody Register lk){//修改病人信息
+
         System.out.println(lk);
         try {
             registerService.upMajor(lk);
