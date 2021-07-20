@@ -34,6 +34,43 @@
             <result column="WARD_MARK" property="wardMark"/>
         </association>
     </resultMap>
+    <resultMap id="allRegisMappert" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_SEX" property="registerSex"/>
+        <result column="REGISTER_SITE" property="registerSite"/>
+        <result column="REGISTER_CARD" property="registerCard"/>
+        <result column="REGISTER_PRINT" property="registerPrint"/>
+        <result column="REGISTER_AGE" property="registerAge"/>
+        <result column="REGISTER_HOME" property="registerHome"/>
+        <result column="REGISTER_ADDRESS" property="registerAddress"/>
+        <result column="REGISTER_PHONE" property="registerPhone"/>
+        <result column="REGISTER_RELATION" property="registerRelation"/>
+        <result column="REGISTER_CONTACT" property="registerContact"/>
+        <result column="REGISTER_CALL" property="registerCall"/>
+        <result column="REGISTER_RECORD" property="registerRecord"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <!--        科室-->
+        <association property="medical" javaType="Medical">
+            <id column="MEDICAL_ID" property="medicalId"/>
+            <result column="MEDICAL_NAME" property="medicalName"/>
+        </association>
+        <association property="staff" javaType="Staff" >
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
+        </association>
+        <association property="sickbed" javaType="Sickbed">
+            <id column="SICKBED_ID" property="sickbedId"/>
+            <result column="SICKBED_MARK" property="sickbedMark"/>
+            <result column="WARD_MARK" property="wardMark"/>
+        </association>
+        <association property="treatment" javaType="TreatmentCard">
+            <id column="treatment_id" property="treatmentId"/>
+            <result column="treatment_balance" property="treatmentBalance"/>
+        </association>
+    </resultMap>
    <!-- 查询病人信息-->
     <select id="allRegis" resultMap="allRegisMapper">
         SELECT*from register  hg
@@ -78,6 +115,29 @@
         </where>
         order by hg.register_serica asc
     </select>
+    <select id="allRegist" resultMap="allRegisMappert">
+        SELECT*from register  hg
+            left join sickbed kjs  on hg.sickbed_mark=kjs.sickbed_mark
+            left join  medical o on o.medical_id=hg.medical_id
+            left join staff  fh on fh.staff_id=hg.staff_id
+            left join treatment_card kjh on  kjh.treatment_no=hg.register_clinic
+        <where>
+
+            <if test="registerName != null and '' != registerName">
+                or REGISTER_NAME like '%${registerName}%'
+            </if>
+            <if test="registerPhone != null and '' != registerPhone">
+                or REGISTER_PHONE like '%${registerPhone}%'
+            </if>
+            <if test="registerClinic != null and '' != registerClinic">
+                or REGISTER_CLINIC like '%${registerClinic}%'
+            </if>
+            <if test="registerId != null and '' != registerId">
+                or REGISTER_ID  like '%${registerId}%'
+            </if>
+        </where>
+        order by hg.register_serica asc
+    </select>
     <select id="allMedica" resultType="Medical">
         select*from MEDICAL
      </select>
@@ -91,6 +151,21 @@
                 #{registerRelation},#{registerContact},#{registerCall},#{medicalId},
                  #{registerRecord},#{registerClinic})
     </insert>
+    <!--修改个人信息-->
+    <update id="upRegister">
+        update register set register_name=#{registerName},
+        register_card=#{registerCard},register_print=#{registerPrint},
+        register_site=#{registerSite}, register_sex=#{registerSex},
+        register_home=#{registerHome},register_age=#{registerAge},
+        register_address=#{registerAddress},register_phone=#{registerPhone},
+        register_relation=#{registerRelation},register_contact=#{registerContact},
+        register_call=#{registerCall} where register_serica=#{registerSerica}
+    </update>
+    <!-- 转科-->
+    <update id="upMajor">
+        update register set medical_id=#{medicalId} where register_id=#{registerId}
+    </update>
+
 <!--    //查询诊疗卡-->
     <select id="allRegiMedical" resultType="Register">
         select*from register where register_clinic=#{registerClinic} and register_id=#{registerId}

@@ -52,4 +52,9 @@
                                   #{outpatientBirth},#{outpatientAge},#{outpatientCard},#{outpatientPhone},
                                   #{outpatientAddress})
     </insert>
+
+    <!--根据身份证号查询患者表是否存在某患者-->
+    <select id="selRegister" resultMap="registerMapper">
+        select * from OUTPATIENT_REGISTER where OUTPATIENT_CARD = #{outpatientCard}
+    </select>
 </mapper>
