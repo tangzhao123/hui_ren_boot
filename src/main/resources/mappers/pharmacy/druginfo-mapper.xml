@@ -52,7 +52,7 @@
               or di.DRUG_NAME like '%${drugName}%'
           </if>
       </where>
-    </select>
+     </select>
     <!--查询药品新增类别-->
     <select id="allType" resultType="DrugType">
         select * from DRUG_TYPE

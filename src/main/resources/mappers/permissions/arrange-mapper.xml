@@ -2,24 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.ArrangeMapper">
-    <!-- 查询所有的排班表 -->
-    <select id="allArrange" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Arrange">
-        select ar.arrange_id arrangeId,s.staff_name staffName,c.category_shift categoryShift,ar.arrange_start arrangeStart,arrange_end arrangeEnd from arrange ar inner join staff s on ar.staff_id = s.staff_id inner join category c on ar.category_id = c.category_id
-        <where>
-            <if test="search != null and search != ''">
-                s.staff_name like '%${search}%' or c.category_shift like '%${search}%'
-            </if>
-        </where>
-        order by ar.arrange_start desc
-    </select>
 
     <!-- 新增排班 -->
     <insert id="addArrange">
         insert into arrange values (seq_huiren.nextval,#{staffId},#{categoryId},#{arrangeStart},#{arrangeEnd})
     </insert>
 
-    <!-- 修改排班 -->
-<!--   <update id="updateArrange">-->
-<!--       update arrange set arrange_id = #{arrangeId},staff_id = #{staffId},category_id = #{categoryId},arrange_start = #{arrangeStart},arrange_end = #{arrangeEnd}-->
-<!--   </update>-->
+    <!-- 删除排班 -->
+    <delete id="delArrange">
+        delete from arrange where arrange_id = #{arrangeId}
+    </delete>
+
+    <!-- 根据员工查询排班记录 -->
+    <select id="findAllArrange" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Arrange">
+        select ca.category_shift categoryShift,ca.userrole_start userroleStart,ca.userrole_over userroleOver,
+               s.staff_name staffName,s.staff_phone staffPhone,ar.arrange_start "Start",ar.arrange_end "End",me.medical_name medicalName,ca.color Color from arrange ar
+               left join staff s on ar.staff_id =s.staff_id
+               left join category ca on ar.category_id = ca.category_id
+               left join medical me on s.medical_id = me.medical_id
+        where s.staff_id = #{staffId}
+    </select>
+
+    <!-- 根据科室查询排班记录 -->
+    <select id="arrangeByMedical" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Arrange">
+        select ar.arrange_id arrangeId,ca.category_shift categoryShift,ca.userrole_start userroleStart,ca.userrole_over userroleOver,
+               s.staff_name staffName,s.staff_phone staffPhone,ar.arrange_start "Start",ar.arrange_end "End",me.medical_name medicalName,ca.color Color from arrange ar
+               left join staff s on ar.staff_id =s.staff_id
+               left join category ca on ar.category_id = ca.category_id
+               left join medical me on s.medical_id = me.medical_id
+       <where>
+           <if test="medicalId !=null and medicalId != '' ">
+               s.medical_id  = #{medicalId}
+           </if>
+          <if test="staffId != null and staffId != ''">
+              and s.staff_id = #{staffId}
+          </if>
+       </where>
+    </select>
 </mapper>
