@@ -2,6 +2,8 @@ package cn.gson.hui_ren_boot.model.mapper.permissions;
 
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 
 import java.util.List;
 import java.util.Map;
@@ -26,4 +28,8 @@ public interface StaffMapper {
 
     //查询所有的员工
     public List<Staff> findStaff();
+
+    //重置用户密码
+    public void updatePassword(@Param("passWord") String passWord, @Param("userId") Long usrId);
+
 }

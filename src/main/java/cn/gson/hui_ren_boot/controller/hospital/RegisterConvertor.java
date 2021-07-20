@@ -1,7 +1,9 @@
 package cn.gson.hui_ren_boot.controller.hospital;
 
+import cn.gson.hui_ren_boot.model.pojos.hospital.Hospital;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
+import cn.gson.hui_ren_boot.model.service.hospital.HospialService;
 import cn.gson.hui_ren_boot.model.service.hospital.RegisterService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,15 +19,24 @@ import java.util.Date;
 public class RegisterConvertor {
     @Autowired
     RegisterService registerService;
-
-    //多条件分页查询患者信息
+    @Autowired
+    HospialService hospialService;
+    //病人信息多条件分页查询患者信息
     @RequestMapping("/registers")
     public Object allregis(Integer pageNo, Integer size, String shu) {
         // Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(inputbox),Register.class);
         Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
         System.out.println("数据" + inputboxs);
         return registerService.allRegisByPage(pageNo, size, inputboxs);
-    }//新增住院病人信息
+    }
+    @RequestMapping("/registerst")//缴费表
+    public Object allregist(Integer pageNo, Integer size, String shu) {
+        // Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(inputbox),Register.class);
+        Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
+        System.out.println("数据" + inputboxs);
+        return registerService.allRegistByPage(pageNo, size, inputboxs);
+    }
+    //新增住院病人信息
     @RequestMapping("/saveRegis")
     public String saveRegis(@RequestBody Register j) {
         System.out.println(j);
@@ -42,9 +53,16 @@ public class RegisterConvertor {
                ya.setTreatmentBalance(0L);//金额
                registerService.addtreatmentCard(ya);//新增就诊卡
                registerService.addRegister(j);//新增病人信息
+               Hospital hj=new Hospital();
+               hj.setHospitalCard(j.getRegisterHome());
+               System.out.println(j.getRegisterHome());
+               hj.setHospitalState(1);
+               hospialService.upHostpState(hj);//修改申请表状态
                return "ok";//新增成功
            }else {//不为空就修改
-               return "ok2";//修改失败
+               registerService.upRegiste(j);
+               return "ok2";//修改成功
+
            }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,6 +75,17 @@ public class RegisterConvertor {
             return true;
         }else{
             return false;
+        }
+    }
+    @RequestMapping("/upMajor")
+    public  String upMajor(@RequestBody Register lk){
+        System.out.println("来---------------------");
+        System.out.println(lk);
+        try {
+            registerService.upMajor(lk);
+            return "ok";
+        }catch (Exception e){
+            return "fail";
         }
     }
 }

@@ -3,4 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.permissions.FunctionMapper">
 
+    <!-- 权限的映射 -->
+    <resultMap id="functionMap" type="cn.gson.hui_ren_boot.model.pojos.permissions.Function">
+        <id property="authityId" column="authity_id"/>
+        <result property="authitySuperior" column="authity_superior"/>
+        <result property="authityPath" column="authity_path"/>
+        <result property="authityIcon" column="authity_icon"/>
+        <result property="authityLeadaers" column="authity_leadaers"/>
+        <result property="aurhityState" column="aurhity_state"/>
+        <result property="aurhityGrade" column="aurhity_grade"/>
+    </resultMap>
+    <select id="findAllFunction" resultMap="functionMap">
+        select * from function
+        <where>
+            <if test="search != null and search !=''">
+                authity_superior like '%${search}%' or authity_path like '%${search}%' or authity_icon like '%${search}%'
+            </if>
+        </where>
+    </select>
 </mapper>
