@@ -38,7 +38,7 @@
                 or kl.HOSPITAL_DOCTOR like '%${hospitalDoctor}%'
             </if>
         </where>
-        order by kl.hospital_id asc
+        order by kl.hospital_date desc
     </select>
     <select id="allSptal" resultType="Hospital">
         select*from hospital where hospital_card=#{hospitalCard}

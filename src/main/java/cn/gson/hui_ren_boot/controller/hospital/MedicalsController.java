@@ -13,7 +13,7 @@ import java.util.List;
 public class MedicalsController {
     @Autowired
     MedicalsService medicalService;
-    @RequestMapping("/departs")
+    @RequestMapping("/departs")//科室查询
     public List<Medical> allmedical(){
         return  medicalService.allMedical();
     }
