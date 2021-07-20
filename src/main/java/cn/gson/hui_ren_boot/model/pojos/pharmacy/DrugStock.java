@@ -9,7 +9,7 @@ import java.util.Objects;
 @Table(name = "DRUG_STOCK", schema = "HUIREN")
 public class DrugStock {
     private Long stockId;
-    private Long stockSurplus;
+    private Long stockSurplus;//剩余库存
     private Long stockLimit;
     private Long stockFloor;
     private Long stockXnum;
@@ -17,7 +17,7 @@ public class DrugStock {
     private Long stockNumber;
     private Date stockDate;
     private String stockBatch;
-    private Date stockIndate;
+    private String stockIndate;
 
 
 
@@ -113,11 +113,11 @@ public class DrugStock {
 
     @Basic
     @Column(name = "STOCK_INDATE")
-    public Date getStockIndate() {
+    public String getStockIndate() {
         return stockIndate;
     }
 
-    public void setStockIndate(Date stockIndate) {
+    public void setStockIndate(String stockIndate) {
         this.stockIndate = stockIndate;
     }
 

@@ -32,9 +32,14 @@
         </association>
         <association property="stocks" javaType="DrugStock">
             <id column="STOCK_ID" property="stockId"/>
+            <result column="STOCK_SURPLUS" property="stockSurplus"/>
             <result column="STOCK_LIMIT" property="stockLimit"/>
             <result column="STOCK_FLOOR" property="stockFloor"/>
-            <result column="STOCK_DATE" property="stockIndate"/>
+            <result column="STOCK_INDATE" property="stockIndate"/>
+            <result column="STOCK_DATE" property="stockDate"/>
+            <result column="STOCK_limit" property="stockLimit"/>
+            <result column="STOCK_FLOOR" property="stockFloor"/>
+            <result column="STOCK_BATCH" property="stockBatch"/>
         </association>
     </resultMap>
     <!--多条件联表查询药品信息-->
@@ -52,7 +57,8 @@
               or di.DRUG_NAME like '%${drugName}%'
           </if>
       </where>
-     </select>
+    order by di.DRUG_ID asc
+    </select>
     <!--查询药品新增类别-->
     <select id="allType" resultType="DrugType">
         select * from DRUG_TYPE

@@ -16,7 +16,6 @@ public class DrugService {
     DruginfoDao druginfoDao;
 
     //查询药品信息
-
     public Object allDrugByPage(Integer pageNo, Integer size,DrugInfo drugInfo){
         return drugMapper.allDrug(drugInfo);
     }
