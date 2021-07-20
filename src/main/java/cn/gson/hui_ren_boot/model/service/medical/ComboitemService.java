@@ -1,8 +1,10 @@
 package cn.gson.hui_ren_boot.model.service.medical;
 
 import cn.gson.hui_ren_boot.model.dao.medical.ComboitemDao;
+import cn.gson.hui_ren_boot.model.mapper.medical.CmoboMapper;
 import cn.gson.hui_ren_boot.model.mapper.medical.ComboitemMapper;
 import cn.gson.hui_ren_boot.model.mapper.medical.TestMapper;
+import cn.gson.hui_ren_boot.model.pojos.medical.Cmobo;
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.medical.Test;
 import com.github.pagehelper.Page;
@@ -24,6 +26,15 @@ public class ComboitemService {
     @Autowired
     ComboitemDao comboitemDao;//体检道层
 
+    @Autowired
+    CmoboMapper cmoboMapper;//体检套餐mapper
+
+    //查询体检套餐
+    public List<Cmobo> seeCmobo(){
+        return cmoboMapper.seeCmobo();
+    };
+
+    //查询体检项目
     public Object selectAllByPage(int pageNo,int size,Comboitem comboitem){
         return com.selectAll(comboitem);
     }

@@ -1,7 +1,9 @@
 package cn.gson.hui_ren_boot.model.pojos.medical;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -10,10 +12,22 @@ public class Test {
     private String testName;
     private Long testSex;
     private String testPhone;
-    private Long testCombo;
     private String testGenre;
-    private Time testTime;
+    //将数据库的类型返回成指定类型
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="Asia/Shanghai")
+    private Date testTime;
     private Long testMoney;
+    private Cmobo cmobo;//体检套餐的实体类
+
+    @ManyToOne
+    @JoinColumn(name = "TEST_COMBO" , referencedColumnName = "COMBO_ID")
+    public Cmobo getCmobo() {
+        return cmobo;
+    }
+
+    public void setCmobo(Cmobo cmobo) {
+        this.cmobo = cmobo;
+    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -57,7 +71,7 @@ public class Test {
         this.testPhone = testPhone;
     }
 
-    @Basic
+    /*@Basic
     @Column(name = "TEST_COMBO")
     public Long getTestCombo() {
         return testCombo;
@@ -65,7 +79,7 @@ public class Test {
 
     public void setTestCombo(Long testCombo) {
         this.testCombo = testCombo;
-    }
+    }*/
 
     @Basic
     @Column(name = "TEST_GENRE")
@@ -77,15 +91,17 @@ public class Test {
         this.testGenre = testGenre;
     }
 
+
     @Basic
     @Column(name = "TEST_TIME")
-    public Time getTestTime() {
+    public Date getTestTime() {
         return testTime;
     }
 
-    public void setTestTime(Time testTime) {
+    public void setTestTime(Date testTime) {
         this.testTime = testTime;
     }
+
 
     @Basic
     @Column(name = "TEST_MONEY")
@@ -102,11 +118,11 @@ public class Test {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Test test = (Test) o;
-        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(testCombo, test.testCombo) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney);
+        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(cmobo, test.cmobo) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(testId, testName, testSex, testPhone, testCombo, testGenre, testTime, testMoney);
+        return Objects.hash(testId, testName, testSex, testPhone, cmobo, testGenre, testTime, testMoney);
     }
 }
