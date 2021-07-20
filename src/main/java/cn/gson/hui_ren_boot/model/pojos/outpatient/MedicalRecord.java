@@ -1,19 +1,22 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
+/**
+ * 门诊病历
+ */
 @Entity
 @Table(name = "MEDICAL_RECORD", schema = "HUIREN", catalog = "")
 public class MedicalRecord {
     private String recordNo;
     private String outpatientId;
-    private String recordId;
-    private Long outdoctorId;
-    private Date recordSymptom;
+    private String recordsNo;
+    private Long staffId;
+    private String recordSymptom;
     private String recordResult;
     private String recordPlan;
     private String recordHpi;
@@ -22,9 +25,14 @@ public class MedicalRecord {
     private String checkUps;
     private String recordAssistant;
     private String outpatientAllergic;
+    private Date onset;
+    private Long medicalId;
+    private String infoNo;
+    private String treatmentNo;
     private OutpatientRegister outpatient;
     private MedicalRecordInfo medicalInfo;
     private Staff outdoctor;
+    private Medical medical;
 
     @OneToOne
     public OutpatientRegister getOutpatient() {
@@ -53,6 +61,15 @@ public class MedicalRecord {
         this.outdoctor = outdoctor;
     }
 
+    @OneToOne
+    public Medical getMedical() {
+        return medical;
+    }
+
+    public void setMedical(Medical medical) {
+        this.medical = medical;
+    }
+
     @Id
     @Column(name = "RECORD_NO")
     public String getRecordNo() {
@@ -74,32 +91,32 @@ public class MedicalRecord {
     }
 
     @Basic
-    @Column(name = "RECORD_ID")
-    public String getRecordId() {
-        return recordId;
+    @Column(name = "RECORDS_NO")
+    public String getRecordsNo() {
+        return recordsNo;
     }
 
-    public void setRecordId(String recordId) {
-        this.recordId = recordId;
+    public void setRecordsNo(String recordsNo) {
+        this.recordsNo = recordsNo;
     }
 
     @Basic
-    @Column(name = "OUTDOCTOR_ID")
-    public Long getOutdoctorId() {
-        return outdoctorId;
+    @Column(name = "STAFF_ID")
+    public Long getStaffId() {
+        return staffId;
     }
 
-    public void setOutdoctorId(Long outdoctorId) {
-        this.outdoctorId = outdoctorId;
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
     }
 
     @Basic
     @Column(name = "RECORD_SYMPTOM")
-    public Date getRecordSymptom() {
+    public String getRecordSymptom() {
         return recordSymptom;
     }
 
-    public void setRecordSymptom(Date recordSymptom) {
+    public void setRecordSymptom(String recordSymptom) {
         this.recordSymptom = recordSymptom;
     }
 
@@ -183,16 +200,39 @@ public class MedicalRecord {
         this.outpatientAllergic = outpatientAllergic;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MedicalRecord that = (MedicalRecord) o;
-        return Objects.equals(recordNo, that.recordNo) && Objects.equals(outpatientId, that.outpatientId) && Objects.equals(recordId, that.recordId) && Objects.equals(outdoctorId, that.outdoctorId) && Objects.equals(recordSymptom, that.recordSymptom) && Objects.equals(recordResult, that.recordResult) && Objects.equals(recordPlan, that.recordPlan) && Objects.equals(recordHpi, that.recordHpi) && Objects.equals(recordPh, that.recordPh) && Objects.equals(recordFamily, that.recordFamily) && Objects.equals(checkUps, that.checkUps) && Objects.equals(recordAssistant, that.recordAssistant) && Objects.equals(outpatientAllergic, that.outpatientAllergic);
+    @Basic
+    @Column(name = "ONSET")
+    public Date getOnset() {
+        return onset;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(recordNo, outpatientId, recordId, outdoctorId, recordSymptom, recordResult, recordPlan, recordHpi, recordPh, recordFamily, checkUps, recordAssistant, outpatientAllergic);
+    public void setOnset(Date onset) {
+        this.onset = onset;
+    }
+
+    @Basic
+    @Column(name = "MEDICAL_ID")
+    public Long getMedicalId() {
+        return medicalId;
+    }
+
+    public void setMedicalId(Long medicalId) {
+        this.medicalId = medicalId;
+    }
+
+    public String getInfoNo() {
+        return infoNo;
+    }
+
+    public void setInfoNo(String infoNo) {
+        this.infoNo = infoNo;
+    }
+
+    public String getTreatmentNo() {
+        return treatmentNo;
+    }
+
+    public void setTreatmentNo(String treatmentNo) {
+        this.treatmentNo = treatmentNo;
     }
 }

@@ -1,23 +1,27 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
+/**
+ * 就诊记录
+ */
 @Entity
 @Table(name = "MEDICAL_RECORD_INFO", schema = "HUIREN", catalog = "")
 public class MedicalRecordInfo {
-    private long recordId;
-    private String recordNo;
+    private long recordsId;
+    private String recordsNo;
     private String treatmentNo;
-    private String outdoctorName;
-    private long outdoctorNo;
-    private long technicalOffice;
+    private String staffName;
+    private Long staffId;
+    private Long medicalId;
     private String diagnosticRecord;
     private Date recordTime;
     private Staff outdoctor;
+    private Medical medical;
 
     @OneToOne
     public Staff getOutdoctor() {
@@ -28,26 +32,35 @@ public class MedicalRecordInfo {
         this.outdoctor = outdoctor;
     }
 
+    @OneToOne
+    public Medical getMedical() {
+        return medical;
+    }
+
+    public void setMedical(Medical medical) {
+        this.medical = medical;
+    }
+
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
     @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
-    @Column(name = "RECORD_ID")
-    public long getRecordId() {
-        return recordId;
+    @Column(name = "RECORDS_ID")
+    public long getRecordsId() {
+        return recordsId;
     }
 
-    public void setRecordId(long recordId) {
-        this.recordId = recordId;
+    public void setRecordsId(long recordsId) {
+        this.recordsId = recordsId;
     }
 
     @Basic
-    @Column(name = "RECORD_NO")
-    public String getRecordNo() {
-        return recordNo;
+    @Column(name = "RECORDS_NO")
+    public String getRecordsNo() {
+        return recordsNo;
     }
 
-    public void setRecordNo(String recordNo) {
-        this.recordNo = recordNo;
+    public void setRecordsNo(String recordsNo) {
+        this.recordsNo = recordsNo;
     }
 
     @Basic
@@ -61,33 +74,33 @@ public class MedicalRecordInfo {
     }
 
     @Basic
-    @Column(name = "OUTDOCTOR_NAME")
-    public String getOutdoctorName() {
-        return outdoctorName;
+    @Column(name = "STAFF_NAME")
+    public String getStaffName() {
+        return staffName;
     }
 
-    public void setOutdoctorName(String outdoctorName) {
-        this.outdoctorName = outdoctorName;
-    }
-
-    @Basic
-    @Column(name = "OUTDOCTOR_NO")
-    public long getOutdoctorNo() {
-        return outdoctorNo;
-    }
-
-    public void setOutdoctorNo(long outdoctorNo) {
-        this.outdoctorNo = outdoctorNo;
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
     }
 
     @Basic
-    @Column(name = "TECHNICAL_OFFICE")
-    public long getTechnicalOffice() {
-        return technicalOffice;
+    @Column(name = "STAFF_ID")
+    public Long getStaffId() {
+        return staffId;
     }
 
-    public void setTechnicalOffice(long technicalOffice) {
-        this.technicalOffice = technicalOffice;
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
+    }
+
+    @Basic
+    @Column(name = "MEDICAL_ID")
+    public Long getMedicalId() {
+        return medicalId;
+    }
+
+    public void setMedicalId(Long medicalId) {
+        this.medicalId = medicalId;
     }
 
     @Basic
@@ -110,16 +123,4 @@ public class MedicalRecordInfo {
         this.recordTime = recordTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MedicalRecordInfo that = (MedicalRecordInfo) o;
-        return recordId == that.recordId && outdoctorNo == that.outdoctorNo && technicalOffice == that.technicalOffice && Objects.equals(recordNo, that.recordNo) && Objects.equals(treatmentNo, that.treatmentNo) && Objects.equals(outdoctorName, that.outdoctorName) && Objects.equals(diagnosticRecord, that.diagnosticRecord) && Objects.equals(recordTime, that.recordTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(recordId, recordNo, treatmentNo, outdoctorName, outdoctorNo, technicalOffice, diagnosticRecord, recordTime);
-    }
 }
