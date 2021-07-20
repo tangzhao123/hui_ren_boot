@@ -167,4 +167,19 @@ public class StaffController {
             return "fail";
         }
     }
+
+    //重置密码
+    @RequestMapping("update-password")
+    public String update(@RequestBody Staff staff){
+       Long userId = staff.getUserId();
+       String card = staff.getStaffCard();
+       String passWord = card.substring(card.length()-6,card.length());
+        try {
+           staffService.updatePassWord(passWord,userId);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

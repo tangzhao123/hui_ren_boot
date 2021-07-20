@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--退号-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.WithdrawalMapper">
+    <!--新增退号-->
+    <insert id="addDrawal">
+        insert into WITHDRAWAL values (seq_huiren.nextval,#{bookingNo},current_timestamp )
+    </insert>
+</mapper>

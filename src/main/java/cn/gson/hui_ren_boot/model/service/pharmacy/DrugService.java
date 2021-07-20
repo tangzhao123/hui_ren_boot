@@ -25,4 +25,8 @@ public class DrugService {
         druginfoDao.save(drugInfo);
 
     }
+    //修改药品状态
+    public DrugInfo allState(String id){
+        return drugMapper.allState(id);
+    }
 }
