@@ -56,8 +56,8 @@
           <if test="drugName != null and '' !=drugName">
               or di.DRUG_NAME like '%${drugName}%'
           </if>
-          <if test="typeId != null and '' !=typeId">
-              or di.type_id =#{typeId}
+          <if test="types.typeId != null and '' !=types.typeId">
+              and di.type_id =#{types.typeId}
           </if>
       </where>
     order by di.DRUG_ID asc
