@@ -27,7 +27,7 @@ public interface StaffMapper {
     public void departures(List<Long> staffId);
 
     //查询所有的员工
-    public List<Staff> findStaff();
+    public List<Staff> findStaff(Long medicalId);
 
     //重置用户密码
     public void updatePassword(@Param("passWord") String passWord, @Param("userId") Long usrId);

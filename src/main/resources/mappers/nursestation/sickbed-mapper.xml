@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.nursestation.SickbedMapper">
+<!--    <resultMap id="selSick" type="cn.gson.hui_ren_boot.model.pojos.nursestation.Sickbed">-->
+<!--        <id property="" column=""/>-->
+<!--    </resultMap>-->
+<!--    查询病床-->
+    <select id="selSick" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Sickbed">
+        select * from sickbed
+    </select>
+</mapper>

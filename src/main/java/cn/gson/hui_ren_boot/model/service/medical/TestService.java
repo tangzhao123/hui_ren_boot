@@ -16,18 +16,21 @@ public class TestService {
     @Autowired
     TestDao testDao;//体检预约Dao
 
-    //预约体检查询
-    public Object testAllByPage(int pageNo, int size, String testName){
-        return testMapper.testAll(testName);
-    }
-
     //删除
     public void delTest(Long id){
         testDao.deleteById(id);
     }
 
-    //新增预约体检
+    //修改预约体检
     public void addTest(Test test){
         testDao.save(test);
+    }
+    //新增
+    public void insertTest(Test test){
+        testMapper.insertTest(test);
+    }
+
+    public Object selectCmoboByPage(int pageNo, int size, String testName){
+        return testMapper.selectCmobo(testName);
     }
 }

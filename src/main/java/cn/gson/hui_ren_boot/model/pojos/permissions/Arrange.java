@@ -1,7 +1,11 @@
 package cn.gson.hui_ren_boot.model.pojos.permissions;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,8 +18,13 @@ public class Arrange {
     private Timestamp arrangeEnd;
     private String staffName;
     private String categoryShift;
-
-
+    private String staffPhone;
+    private String userroleStart;
+    private String userroleOver;
+    private String medicalName;
+    private String color;
+    private Date start;
+    private Date end;
 
     @Id
     @Column(name = "ARRANGE_ID")
@@ -84,6 +93,63 @@ public class Arrange {
     public void setCategoryShift(String categoryShift) {
         this.categoryShift = categoryShift;
     }
+
+    public String getStaffPhone() {
+        return staffPhone;
+    }
+
+    public void setStaffPhone(String staffPhone) {
+        this.staffPhone = staffPhone;
+    }
+
+    public String getUserroleStart() {
+        return userroleStart;
+    }
+
+    public void setUserroleStart(String userroleStart) {
+        this.userroleStart = userroleStart;
+    }
+
+    public String getUserroleOver() {
+        return userroleOver;
+    }
+
+    public void setUserroleOver(String userroleOver) {
+        this.userroleOver = userroleOver;
+    }
+
+    public String getMedicalName() {
+        return medicalName;
+    }
+
+    public void setMedicalName(String medicalName) {
+        this.medicalName = medicalName;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
 
     @Override
     public boolean equals(Object o) {

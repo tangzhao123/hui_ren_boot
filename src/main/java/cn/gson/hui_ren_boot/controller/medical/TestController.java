@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class TestController {
     @Autowired
@@ -17,6 +19,13 @@ public class TestController {
     //修改预约体检的信息
     @RequestMapping("/test-update")
     public String updateTest(@RequestBody Test test){
+        System.out.println("id:"+test.getTestId());
+        System.out.println("名字："+test.getTestName());
+//        if (test.getTestId() == 0){
+//            testService.insertTest(test);
+//        }else{
+//            testService.addTest(test);
+//        }
         testService.addTest(test);
         return "ok";
     }
@@ -31,7 +40,11 @@ public class TestController {
     //查询预约体检
     @GetMapping("/test-list")
     public Object testAll(int pageNo,int size,String testName){
-        System.out.println(testService.testAllByPage(pageNo,size,testName));
-        return testService.testAllByPage(pageNo,size,testName);
+        System.out.println("页码"+pageNo);
+        System.out.println("大小"+size);
+        System.out.println("名字"+testName);
+        System.out.println(testService.selectCmoboByPage(pageNo,size,testName));
+        return testService.selectCmoboByPage(pageNo,size,testName);
     }
+
 }

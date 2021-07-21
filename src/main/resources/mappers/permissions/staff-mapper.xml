@@ -61,9 +61,9 @@
         </foreach>
     </update>
 
-    <!-- 查询所有的员工 -->
+    <!-- 根据科室查询员工 -->
     <select id="findStaff" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
-        select  staff_id staffId,staff_name staffName,staff_card staffCard,staff_phone staffPhone,staff_state staffState from staff where staff_card is not null
+        select  staff_id staffId,staff_name staffName,staff_card staffCard,staff_phone staffPhone,staff_state staffState from staff where  medical_id = #{medicalId}
     </select>
 
     <!-- 重置用户密码 -->

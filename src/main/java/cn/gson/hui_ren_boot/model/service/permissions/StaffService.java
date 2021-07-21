@@ -50,8 +50,8 @@ public class StaffService {
     }
 
     //查询所有的员工
-    public List<Staff> findStaff(){
-        return staffMapper.findStaff();
+    public List<Staff> findStaff(Long medicalId){
+        return staffMapper.findStaff(medicalId);
     }
 
     //重置员工密码

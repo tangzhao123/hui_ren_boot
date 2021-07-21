@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--就诊记录-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.MedicalRecordInfoMapper">
+    <!--新增就诊记录-->
+    <insert id="addInfo">
+        insert into MEDICAL_RECORD_INFO(RECORDS_ID,RECORDS_NO,TREATMENT_NO,
+                                        STAFF_NAME,STAFF_ID,RECORD_TIME)
+        values (seq_huiren.nextval,#{recordsNo},#{treatmentNo}, #{outdoctor.staffName},
+          #{outdoctor.staffName},#{medical.medicalId},current_timestamp )
+    </insert>
+</mapper>

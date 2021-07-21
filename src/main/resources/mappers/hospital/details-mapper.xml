@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.DetailsMapper">
+    <resultMap id="alldetailt" type="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+        <id column="details_serial" property="detailsSerial"/>
+        <result column="details_drip" property="detailsDrip"/>
+        <result column="details_way" property="detailsWay"/>
+        <result column="datails_dosage" property="datailsDosage"/>
+        <result column="daralis_usage" property="daralisUsage"/>
+        <result column="daralis_time" property="daralisTime"/>
+        <result column="daralis_cost" property="daralisCost"/>
+        <result column="daralis_dstate" property="daralisDstate"/>
+        <result column="daralis_start" property="daralisStart"/>
+        <result column="daralis_price" property="daralisPrice"/>
+        <association property="drug" javaType="DrugInfo">
+            <id column="drug_serial" property="detailsSerial"/>
+            <result column="drug_name" property="drugName"/>
+            <result column="drug_big" property="drugBig"/>
+            <result column="drug_selling" property="drugSelling"/>
+        </association>
+    </resultMap>
+    <select id="0allDetails" resultMap="alldetailt">
+        select *from details nm left join  drug_info bn on bn.drug_id=nm.drug_id where nm.advice_id=#{adviceId}
+    </select>
+
+</mapper>

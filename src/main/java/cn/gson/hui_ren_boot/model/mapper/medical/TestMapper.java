@@ -7,6 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface TestMapper {
-    //查询预约体检人员
-    public List<Test> testAll(String testName);
+
+    //新增体检人员
+    public void insertTest(Test test);
+
+    //查询体检套餐（表格内）
+    public List<Test> selectCmobo(String testName);
 }

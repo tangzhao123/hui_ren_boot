@@ -5,6 +5,6 @@
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.WithdrawalMapper">
     <!--新增退号-->
     <insert id="addDrawal">
-        insert into WITHDRAWAL values (seq_huiren.nextval,#{bookingNo},current_timestamp )
+        insert into WITHDRAWAL values (seq_huiren.nextval,#{bookingNo},current_timestamp ,#{cause})
     </insert>
 </mapper>
