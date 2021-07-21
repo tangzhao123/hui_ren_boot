@@ -8,7 +8,7 @@
         <result column="advice_id" property="adviceId"/>
         <result column="advice_start" property="adviceStart"/>
         <result column="advice_sickbed" property="adviceSickbed"/>
-        <result column="staff_id" property="staffId"/>
+<!--        <result column="staff_id" property="staffId"/>-->
         <result column="advice_cost" property="adviceCost"/>
         <result column="advice_cost" property="adviceCost"/>
         <!-- 病人信息表-->
@@ -23,6 +23,6 @@
         </association>
     </resultMap>
 
-    <select id="allDispensing" parameterMap="allAdvicve">
+    <select id="allDispensing" resultMap="allAdvicve">
         select * from ADVICE  ai left join register hg on ai.register_id=hg.register_id left join staff km on km.staff_id=ai.staff_id    </select>
 </mapper>

@@ -13,6 +13,8 @@ public class Ward {
     private Long wardSite;
     private String wardBeds;
     private Long wardHave;
+    private Long wardCost;
+    private Long wardNursing;
 
 
 
@@ -86,16 +88,36 @@ public class Ward {
         this.wardHave = wardHave;
     }
 
+    @Basic
+    @Column(name = "WARD_COST")
+    public Long getWardCost() {
+        return wardCost;
+    }
+
+    public void setWardCost(Long wardCost) {
+        this.wardCost = wardCost;
+    }
+
+    @Basic
+    @Column(name = "WARD_NURSING")
+    public Long getWardNursing() {
+        return wardNursing;
+    }
+
+    public void setWardNursing(Long wardNursing) {
+        this.wardNursing = wardNursing;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ward ward = (Ward) o;
-        return wardId == ward.wardId && Objects.equals(wardMark, ward.wardMark) && Objects.equals(medicalId, ward.medicalId) && Objects.equals(staffId, ward.staffId) && Objects.equals(wardSite, ward.wardSite) && Objects.equals(wardBeds, ward.wardBeds) && Objects.equals(wardHave, ward.wardHave);
+        return wardId == ward.wardId && Objects.equals(wardMark, ward.wardMark) && Objects.equals(medicalId, ward.medicalId) && Objects.equals(staffId, ward.staffId) && Objects.equals(wardSite, ward.wardSite) && Objects.equals(wardBeds, ward.wardBeds) && Objects.equals(wardHave, ward.wardHave) && Objects.equals(wardCost, ward.wardCost) && Objects.equals(wardNursing, ward.wardNursing);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(wardId, wardMark, medicalId, staffId, wardSite, wardBeds, wardHave);
+        return Objects.hash(wardId, wardMark, medicalId, staffId, wardSite, wardBeds, wardHave, wardCost, wardNursing);
     }
 }

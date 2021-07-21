@@ -7,10 +7,9 @@ import java.util.Objects;
 public class Sickbed {//病床信息表
     private long sickbedSerial;//序号
     private String wardMark;//病房编号
-    private Long sickbedCost;//床位费
     private String sickbedMark;//床位号
     private Long sickbedState;//使用状态
-    private Long sickbedNursing;//护理费
+
 
 
     @Id
@@ -33,15 +32,7 @@ public class Sickbed {//病床信息表
         this.wardMark = wardMark;
     }
 
-    @Basic
-    @Column(name = "SICKBED_COST")
-    public Long getSickbedCost() {
-        return sickbedCost;
-    }
 
-    public void setSickbedCost(Long sickbedCost) {
-        this.sickbedCost = sickbedCost;
-    }
 
     @Basic
     @Column(name = "SICKBED_MARK")
@@ -63,26 +54,17 @@ public class Sickbed {//病床信息表
         this.sickbedState = sickbedState;
     }
 
-    @Basic
-    @Column(name = "SICKBED_NURSING")
-    public Long getSickbedNursing() {
-        return sickbedNursing;
-    }
-
-    public void setSickbedNursing(Long sickbedNursing) {
-        this.sickbedNursing = sickbedNursing;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sickbed sickbed = (Sickbed) o;
-        return sickbedSerial == sickbed.sickbedSerial && Objects.equals(wardMark, sickbed.wardMark) && Objects.equals(sickbedCost, sickbed.sickbedCost) && Objects.equals(sickbedMark, sickbed.sickbedMark) && Objects.equals(sickbedState, sickbed.sickbedState) && Objects.equals(sickbedNursing, sickbed.sickbedNursing);
+        return sickbedSerial == sickbed.sickbedSerial && Objects.equals(wardMark, sickbed.wardMark)  && Objects.equals(sickbedMark, sickbed.sickbedMark) && Objects.equals(sickbedState, sickbed.sickbedState) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sickbedSerial, wardMark, sickbedCost, sickbedMark, sickbedState, sickbedNursing);
+        return Objects.hash(sickbedSerial, wardMark, sickbedMark, sickbedState);
     }
 }
