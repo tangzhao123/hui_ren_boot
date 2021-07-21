@@ -25,6 +25,7 @@ public class DruginfoController {
         System.out.println(drugInfos);
         return drugService.allDrugByPage(pageNo,size,drugInfos);
     }
+    //新增
     @RequestMapping("/savedrug")
     public String saveDrug(@RequestBody DrugInfo drugInfo){
         try{

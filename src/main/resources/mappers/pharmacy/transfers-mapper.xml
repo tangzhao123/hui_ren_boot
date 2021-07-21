@@ -22,6 +22,12 @@
             <id column="GO_ID" property="goId"/>
             <result column="GO_NUM" property="goNum"/>
         </association>
-
     </resultMap>
+    <select id="allTransfers" resultMap="TransfersMapper">
+        select * from TRANSFERS ts
+            left join USER_INFO us on ts.TRANSFERS_EXECUTOR=us.USER_ID
+            left join DRUG_DEPORT dd on ts.TRANSFERS_DEPORT=dd.DEPORT_ID
+            left join PHARMACY pm on ts.TRANSFERS_PHARMACY=pm.PHARMACY_ID
+            left join GO_BANK gb on ts.TRANSFERS_GO=gb.GO_ID
+    </select>
 </mapper>
