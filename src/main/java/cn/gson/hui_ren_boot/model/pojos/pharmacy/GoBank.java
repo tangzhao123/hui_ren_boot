@@ -5,7 +5,7 @@ import java.sql.Time;
 import java.util.Objects;
 
 @Entity
-@Table(name = "GO_BANK", schema = "HUIREN", catalog = "")
+@Table(name = "GO_BANK", schema = "HUIREN")
 public class GoBank {
     private Long goId;
     private String goNum;

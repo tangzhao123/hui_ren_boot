@@ -7,7 +7,20 @@
         <result column="TRANSFERS_DATE" property="transfersDate"/>
         <result column="TRANSFERS_TIME" property="transfersTime"/>
         <association property="users" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
-
+            <id column="USER_ID" property="userId"/>
+            <result column="USER_NAME" property="userName"/>
+        </association>
+        <association property="deports" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+            <id column="DEPORT_ID" property="deportId"/>
+            <result column="DEPORT_NAME" property="deportName"/>
+        </association>
+        <association property="pharmacys" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Pharmacy">
+            <id column="PHARMACY_ID" property="pharmacyId"/>
+            <result column="PHARMACY_NAME" property="pharmacyName"/>
+        </association>
+        <association property="banks" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.GoBank">
+            <id column="GO_ID" property="goId"/>
+            <result column="GO_NUM" property="goNum"/>
         </association>
 
     </resultMap>
