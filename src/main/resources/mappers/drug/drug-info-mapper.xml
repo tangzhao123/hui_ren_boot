@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DrugMapper">
+
+    <resultMap id="drugMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+        <id property="drugSerial" column="drug_serial"/>
+        <result property="drugId" column="drug_id"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="drugUse" column="drug_use"/>
+        <result property="drugDosage" column="drug_dosage"/>
+        <result property="drugTack" column="drug_tack"/>
+        <result property="drugRemark" column="drug_remark"/>
+        <result property="drugSelling" column="drug_selling"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="drugNext" column="drug_next"/>
+        <result property="drugBig" column="drug_big"/>
+        <result property="drugSmall" column="drug_small"/>
+        <result property="smallSelling" column="small_selling"/>
+        <result property="smallPrice" column="small_price"/>
+        <result property="drugState" column="drug_state"/>
+
+        <!-- 药品类别实体类映射 -->
+        <association property="types" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugType">
+            <id property="typeId" column="type_id"/>
+            <result property="typeName" column="type_name"/>
+            <result property="typeSon" column="typeSon"/>
+            <result property="typeRank" column="type_rank"/>
+        </association>
+
+        <!-- 供应商实体类映射 -->
+        <association property="suppliers" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugSupplier">
+            <id property="supplierId" column="supplier_id"/>
+            <result property="supplierName" column="supplier_name"/>
+            <result property="supplierAddress" column="supplier_address"/>
+            <result property="supplierPhone" column="supplier_phone"/>
+        </association>
+
+        <!-- 药品规格实体类映射 -->
+        <association property="standards" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStandard">
+            <id column="STANDARD_ID" property="standardId"/>
+            <result column="STANDARD_NAME" property="standardName"/>
+            <result column="STANDARD_NUM" property="standardNum"/>
+            <result column="STANDARD_DOSAGE" property="standardDosage"/>
+            <result column="STANDARD_USE" property="standardUse"/>
+        </association>
+    </resultMap>
+    <!-- 根据供货商，药品名称，药品类别查询药品 -->
+    <select id="allDrugInfo" resultMap="drugMap">
+        select * from drug_info dr left join drug_type de on dr.type_id= de.type_id
+        left join drug_supplier sup on dr.supplier_id = sup.supplier_id left join drug_standard dt on dr.surplus_id = dt.standard_id
+        <where>
+            <if test="suppliers!=null">
+                <if test="suppliers.supplierId != null and '' != suppliers.supplierId">
+                    and  dr.supplier_id = #{suppliers.supplierId}
+                </if>
+            </if>
+           <if test="types!=null">
+               <if test="types.typeId != null and '' != types.typeId ">
+                   and  dr.type_id = #{types.typeId}
+               </if>
+           </if>
+            <if test="drugName != null and ''!=drugName ">
+             and dr.drug_name like '%${drugName}%'
+            </if>
+        </where>
+    </select>
+</mapper>
