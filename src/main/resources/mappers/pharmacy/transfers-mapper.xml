@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.TransfersMapper">
-<!--    <resultMap id="TransfersMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Transfers">-->
-<!--        <id column=""-->
-<!--    </resultMap>-->
+    <resultMap id="TransfersMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Transfers">
+        <id column="TRANSFERS_ID" property="transfersId"/>
+        <result column="TRANSFERS_DATE" property="transfersDate"/>
+        <result column="TRANSFERS_TIME" property="transfersTime"/>
+        <association property="users" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+
+        </association>
+
+    </resultMap>
 </mapper>

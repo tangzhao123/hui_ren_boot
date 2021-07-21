@@ -1,21 +1,59 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
+
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Transfers {
-    private Long transfersId;
-    private Time transfersDate;
-    private Time transfersTime;
-    private Long transfersExecutor;
-    private Long transfersReviewer;
-    private Long transfersDeport;
-    private Long transfersPharmacy;
-    private String transfersGo;
-    private String transfersOrder;
+    private Long transfersId;//调拨编号
+    private Time transfersDate;//调拨时间
+    private Time transfersTime;//申请时间
+    private String transfersOrder;//调拨单号
+    private UserInfo users;//执行人外键,审核人外键
+    private DrugDeport deports;//仓库外键
+    private Pharmacy pharmacys;//调拨药房外键
+    private GoBank banks;//出库单号外键
 
+    @OneToOne
+    public UserInfo getUsers() {
+        return users;
+    }
+
+    public void setUsers(UserInfo users) {
+        this.users = users;
+    }
+
+
+    @OneToOne
+    public DrugDeport getDeports() {
+        return deports;
+    }
+
+    public void setDeports(DrugDeport deports) {
+        this.deports = deports;
+    }
+
+    @OneToOne
+    public Pharmacy getPharmacys() {
+        return pharmacys;
+    }
+
+    public void setPharmacys(Pharmacy pharmacys) {
+        this.pharmacys = pharmacys;
+    }
+
+    @OneToOne
+    public GoBank getBanks() {
+        return banks;
+    }
+
+    public void setBanks(GoBank banks) {
+        this.banks = banks;
+    }
 
     @Id
     @Column(name = "TRANSFERS_ID")
@@ -48,56 +86,6 @@ public class Transfers {
     }
 
     @Basic
-    @Column(name = "TRANSFERS_EXECUTOR")
-    public Long getTransfersExecutor() {
-        return transfersExecutor;
-    }
-
-    public void setTransfersExecutor(Long transfersExecutor) {
-        this.transfersExecutor = transfersExecutor;
-    }
-
-    @Basic
-    @Column(name = "TRANSFERS_REVIEWER")
-    public Long getTransfersReviewer() {
-        return transfersReviewer;
-    }
-
-    public void setTransfersReviewer(Long transfersReviewer) {
-        this.transfersReviewer = transfersReviewer;
-    }
-
-    @Basic
-    @Column(name = "TRANSFERS_DEPORT")
-    public Long getTransfersDeport() {
-        return transfersDeport;
-    }
-
-    public void setTransfersDeport(Long transfersDeport) {
-        this.transfersDeport = transfersDeport;
-    }
-
-    @Basic
-    @Column(name = "TRANSFERS_PHARMACY")
-    public Long getTransfersPharmacy() {
-        return transfersPharmacy;
-    }
-
-    public void setTransfersPharmacy(Long transfersPharmacy) {
-        this.transfersPharmacy = transfersPharmacy;
-    }
-
-    @Basic
-    @Column(name = "TRANSFERS_GO")
-    public String getTransfersGo() {
-        return transfersGo;
-    }
-
-    public void setTransfersGo(String transfersGo) {
-        this.transfersGo = transfersGo;
-    }
-
-    @Basic
     @Column(name = "TRANSFERS_ORDER")
     public String getTransfersOrder() {
         return transfersOrder;
@@ -112,11 +100,11 @@ public class Transfers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transfers transfers = (Transfers) o;
-        return Objects.equals(transfersId, transfers.transfersId) && Objects.equals(transfersDate, transfers.transfersDate) && Objects.equals(transfersTime, transfers.transfersTime) && Objects.equals(transfersExecutor, transfers.transfersExecutor) && Objects.equals(transfersReviewer, transfers.transfersReviewer) && Objects.equals(transfersDeport, transfers.transfersDeport) && Objects.equals(transfersPharmacy, transfers.transfersPharmacy) && Objects.equals(transfersGo, transfers.transfersGo) && Objects.equals(transfersOrder, transfers.transfersOrder);
+        return Objects.equals(transfersId, transfers.transfersId)&& Objects.equals(transfersOrder, transfers.transfersOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transfersId, transfersDate, transfersTime, transfersExecutor, transfersReviewer, transfersDeport, transfersPharmacy, transfersGo, transfersOrder);
+        return Objects.hash(transfersId, transfersDate, transfersTime, transfersOrder);
     }
 }
