@@ -17,7 +17,7 @@ import java.util.List;
 public class DruginfoController {
     @Autowired
     DrugService drugService;
-//分页
+//分页查询处方选药
     @RequestMapping("/drugmanger")
     public Object allDrug(Integer pageNo,Integer size,String drugInfo){
         System.out.println(drugInfo);
