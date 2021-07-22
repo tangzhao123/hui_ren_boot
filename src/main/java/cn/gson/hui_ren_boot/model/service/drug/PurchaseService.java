@@ -1,0 +1,35 @@
+package cn.gson.hui_ren_boot.model.service.drug;
+
+import cn.gson.hui_ren_boot.model.mapper.drug.PlanDetailsMapper;
+import cn.gson.hui_ren_boot.model.mapper.drug.PurchaseMapper;
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails;
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchasePlan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@Transactional
+public class PurchaseService {
+
+    @Autowired
+    PurchaseMapper purchaseMapper;
+
+    @Autowired
+    PlanDetailsMapper planDetailsMapper;
+
+    //新增采购计划单跟计划详单
+    public void addPlanDetails(PurchasePlan purchasePlan, List<PlanDetails> planDetails){
+        System.out.println(purchasePlan);
+        System.out.println(planDetails);
+        purchaseMapper.addPurchase(purchasePlan);
+        planDetailsMapper.addDetails(planDetails,purchasePlan.getPurchaseId());
+    }
+
+    //查询所有未审核的采购计划单
+    public Object allPurchaseByPage(Integer pageNo,Integer size){
+        return purchaseMapper.allPurchase();
+    }
+}

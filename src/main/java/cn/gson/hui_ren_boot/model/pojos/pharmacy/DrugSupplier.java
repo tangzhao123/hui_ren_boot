@@ -63,4 +63,14 @@ public class DrugSupplier {
     public int hashCode() {
         return Objects.hash(supplierId, supplierName, supplierAddress, supplierPhone);
     }
+
+    @Override
+    public String toString() {
+        return "DrugSupplier{" +
+                "supplierId=" + supplierId +
+                ", supplierName='" + supplierName + '\'' +
+                ", supplierAddress='" + supplierAddress + '\'' +
+                ", supplierPhone=" + supplierPhone +
+                '}';
+    }
 }

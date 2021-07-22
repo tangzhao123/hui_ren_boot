@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PlanDetailsMapper">
+<!--&lt;!&ndash; 采购详单映射 &ndash;&gt;-->
+<!--    <collection property="planDetails" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchasePlan">-->
+<!--    <id property="planId" column="plan_id"/>-->
+<!--    <result property="planSerial" column="plan_serial"/>-->
+<!--    <result property="purchasePrice" column="purchaseprice"/>-->
+<!--    <result property="planNum" column="plan_num"/>-->
+<!--    <result property="purchaseId" column="purchaseId"/>-->
+
+<!--    &lt;!&ndash; 供应商实体类映射 &ndash;&gt;-->
+<!--    <association property="suppliers" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugSupplier">-->
+<!--        <id property="supplierId" column="supplier_id"/>-->
+<!--        <result property="supplierName" column="supplier_name"/>-->
+<!--        <result property="supplierAddress" column="supplier_address"/>-->
+<!--        <result property="supplierPhone" column="supplier_phone"/>-->
+<!--    </association>-->
+<!--    &lt;!&ndash;药品的映射&ndash;&gt;-->
+<!--    <collection property="drugInfos" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">-->
+<!--        <id property="drugSerial" column="drug_serial"/>-->
+<!--        <result property="drugId" column="drug_id"/>-->
+<!--        <result property="drugName" column="drug_name"/>-->
+<!--        <result property="drugUse" column="drug_use"/>-->
+<!--        <result property="drugDosage" column="drug_dosage"/>-->
+<!--        <result property="drugTack" column="drug_tack"/>-->
+<!--        <result property="drugRemark" column="drug_remark"/>-->
+<!--        <result property="drugSelling" column="drug_selling"/>-->
+<!--        <result property="purchasePrice" column="purchase_price"/>-->
+<!--        <result property="drugNext" column="drug_next"/>-->
+<!--        <result property="drugBig" column="drug_big"/>-->
+<!--        <result property="drugSmall" column="drug_small"/>-->
+<!--        <result property="smallSelling" column="small_selling"/>-->
+<!--        <result property="smallPrice" column="small_price"/>-->
+<!--        <result property="drugState" column="drug_state"/>-->
+
+<!--        &lt;!&ndash; 药品类别实体类映射 &ndash;&gt;-->
+<!--        <association property="types" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugType">-->
+<!--            <id property="typeId" column="type_id"/>-->
+<!--            <result property="typeName" column="type_name"/>-->
+<!--            <result property="typeSon" column="typeSon"/>-->
+<!--            <result property="typeRank" column="type_rank"/>-->
+<!--        </association>-->
+
+<!--        &lt;!&ndash; 药品规格实体类映射 &ndash;&gt;-->
+<!--        <association property="standards" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStandard">-->
+<!--            <id column="STANDARD_ID" property="standardId"/>-->
+<!--            <result column="STANDARD_NAME" property="standardName"/>-->
+<!--            <result column="STANDARD_NUM" property="standardNum"/>-->
+<!--            <result column="STANDARD_DOSAGE" property="standardDosage"/>-->
+<!--            <result column="STANDARD_USE" property="standardUse"/>-->
+<!--        </association>-->
+<!--    </collection>-->
+
+
+<!--    &lt;!&ndash; 查询采购计划详单 &ndash;&gt;-->
+<!--    <select id="">-->
+<!--        select * from purchase_plan pu-->
+<!--                          left join plan_details pl on pu.purchase_id = pl.purchase_id-->
+<!--                          left join drug_info dr on pl.drug_id = dr.drug_id-->
+<!--                          left join drug_supplier sup on pl.supplier_id = sup.supplier_id-->
+<!--                          left join drug_standard st on dr.surplus_id = st.standard_id-->
+<!--        where pu.purchase_state = 0-->
+<!--    </select>-->
+
+    <!-- 批量新增采购计划详单 -->
+    <insert id="addDetails" parameterType="java.util.List">
+                    insert all into plan_details
+                    <selectKey keyProperty="planId" resultType="_int" order="BEFORE">
+                        select seq_huiren.nextval from dual
+                    </selectKey>
+                    <foreach collection="planDetails" item="p" index="i" separator=" ">
+                       <if test="i!=planDetails.size()-1">
+                           into plan_details
+                           values
+                           (#{planId},#{p.planSerial},#{p.purchasePrice},#{p.drugId},#{p.suppliers.supplierId},#{p.planNum},#{purchaseId})
+                       </if>
+                       <if test="i==planDetails.size()-1">
+                           select #{planId},#{p.planSerial},#{p.purchasePrice},#{p.drugId},#{p.suppliers.supplierId},#{p.planNum},#{purchaseId} from dual
+                       </if>
+                    </foreach>
+
+    </insert>
+</mapper>

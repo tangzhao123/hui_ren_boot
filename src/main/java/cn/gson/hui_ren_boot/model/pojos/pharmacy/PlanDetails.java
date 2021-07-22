@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,13 +10,13 @@ public class PlanDetails {
 
     private long planId;
     private String planSerial;
-    private Long planPrice;
+    private Long purchasePrice;
     private String drugId;
     private Long supplierId;
     private Long planNum;
     private String purchaseId;
-
-
+    private DrugSupplier suppliers;
+    private List<DrugInfo> drugInfos;
 
     @Id
     @Column(name = "PLAN_ID")
@@ -38,13 +39,13 @@ public class PlanDetails {
     }
 
     @Basic
-    @Column(name = "PLAN_PRICE")
-    public Long getPlanPrice() {
-        return planPrice;
+    @Column(name = "PURCHASE_PRICE")
+    public Long getPurchasePrice() {
+        return purchasePrice;
     }
 
-    public void setPlanPrice(Long planPrice) {
-        this.planPrice = planPrice;
+    public void setPurchasePrice(Long purchasePrice) {
+        this.purchasePrice = purchasePrice;
     }
 
     @Basic
@@ -87,16 +88,49 @@ public class PlanDetails {
         this.purchaseId = purchaseId;
     }
 
+    @OneToOne
+    public DrugSupplier getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(DrugSupplier suppliers) {
+        this.suppliers = suppliers;
+    }
+
+
+    @OneToMany
+    public List<DrugInfo> getDrugInfos() {
+        return drugInfos;
+    }
+
+    public void setDrugInfos(List<DrugInfo> drugInfos) {
+        this.drugInfos = drugInfos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlanDetails that = (PlanDetails) o;
-        return planId == that.planId && Objects.equals(planSerial, that.planSerial) && Objects.equals(planPrice, that.planPrice) && Objects.equals(drugId, that.drugId) && Objects.equals(supplierId, that.supplierId) && Objects.equals(planNum, that.planNum) && Objects.equals(purchaseId, that.purchaseId);
+        return planId == that.planId && Objects.equals(planSerial, that.planSerial) && Objects.equals(purchasePrice, that.purchasePrice) && Objects.equals(drugId, that.drugId) && Objects.equals(supplierId, that.supplierId) && Objects.equals(planNum, that.planNum) && Objects.equals(purchaseId, that.purchaseId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(planId, planSerial, planPrice, drugId, supplierId, planNum, purchaseId);
+        return Objects.hash(planId, planSerial, purchasePrice, drugId, supplierId, planNum, purchaseId);
+    }
+
+    @Override
+    public String toString() {
+        return "PlanDetails{" +
+                "planId=" + planId +
+                ", planSerial='" + planSerial + '\'' +
+                ", purchasePrice=" + purchasePrice +
+                ", drugId='" + drugId + '\'' +
+                ", supplierId=" + supplierId +
+                ", planNum=" + planNum +
+                ", purchaseId='" + purchaseId + '\'' +
+                ", suppliers=" + suppliers +
+                '}';
     }
 }
