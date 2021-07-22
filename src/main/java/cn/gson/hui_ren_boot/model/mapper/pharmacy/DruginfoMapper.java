@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface DruginfoMapper {
-    //分页查询药品信息
+    //查询处方选药
     public List<DrugInfo> allDrug(DrugInfo drugInfo);
 
     //修改药品状态

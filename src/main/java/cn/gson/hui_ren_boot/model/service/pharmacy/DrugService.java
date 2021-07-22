@@ -15,7 +15,7 @@ public class DrugService {
     @Autowired
     DruginfoDao druginfoDao;
 
-    //查询药品信息
+    //查询处方选药/查药品信息
     public Object allDrugByPage(Integer pageNo, Integer size,DrugInfo drugInfo){
         return drugMapper.allDrug(drugInfo);
     }
