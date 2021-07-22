@@ -3,6 +3,9 @@ package cn.gson.hui_ren_boot.model.pojos.outpatient;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * 门诊处方详单
+ */
 @Entity
 @Table(name = "PRESCRIPTION_DETAIL", schema = "HUIREN", catalog = "")
 public class PrescriptionDetail {

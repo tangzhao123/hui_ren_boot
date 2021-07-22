@@ -8,6 +8,9 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 门诊处方单
+ */
 @Entity
 @Table(name = "PRESCRIPTION_LIST", schema = "HUIREN", catalog = "")
 public class PrescriptionList {
