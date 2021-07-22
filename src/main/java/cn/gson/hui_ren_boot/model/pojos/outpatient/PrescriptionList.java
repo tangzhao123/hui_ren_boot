@@ -5,12 +5,10 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * 门诊处方单
- */
 @Entity
 @Table(name = "PRESCRIPTION_LIST", schema = "HUIREN", catalog = "")
 public class PrescriptionList {
@@ -18,24 +16,26 @@ public class PrescriptionList {
     private String prescriptionNo;
     private String recordNo;
     private Long prescriptionType;
-    private Time prescriptionDate;
+    private Date prescriptionDate;
     private String prescriptionDiagnosis;
     private String outpatientId;
     private Long staffId;
     private Long medicalId;
     private String doctorAdvice;
-    private List<PrescriptionDetail> details;
+    private Long sumMoney;
+    private MedicalRecordInfo info;
     private OutpatientRegister outpatient;
     private Staff outdoctor;
     private Medical medical;
+    private List<PrescriptionDetail> details;
 
-    @OneToMany
-    public List<PrescriptionDetail> getDetails() {
-        return details;
+    @OneToOne
+    public MedicalRecordInfo getInfo() {
+        return info;
     }
 
-    public void setDetails(List<PrescriptionDetail> details) {
-        this.details = details;
+    public void setInfo(MedicalRecordInfo info) {
+        this.info = info;
     }
 
     @OneToOne
@@ -63,6 +63,15 @@ public class PrescriptionList {
 
     public void setMedical(Medical medical) {
         this.medical = medical;
+    }
+
+    @OneToMany
+    public List<PrescriptionDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<PrescriptionDetail> details) {
+        this.details = details;
     }
 
     @Id
@@ -109,11 +118,11 @@ public class PrescriptionList {
 
     @Basic
     @Column(name = "PRESCRIPTION_DATE")
-    public Time getPrescriptionDate() {
+    public Date getPrescriptionDate() {
         return prescriptionDate;
     }
 
-    public void setPrescriptionDate(Time prescriptionDate) {
+    public void setPrescriptionDate(Date prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
     }
 
@@ -167,16 +176,26 @@ public class PrescriptionList {
         this.doctorAdvice = doctorAdvice;
     }
 
+    @Basic
+    @Column(name = "SUM_MONEY")
+    public Long getSumMoney() {
+        return sumMoney;
+    }
+
+    public void setSumMoney(Long sumMoney) {
+        this.sumMoney = sumMoney;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrescriptionList that = (PrescriptionList) o;
-        return prescriptionId == that.prescriptionId && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(recordNo, that.recordNo) && Objects.equals(prescriptionType, that.prescriptionType) && Objects.equals(prescriptionDate, that.prescriptionDate) && Objects.equals(prescriptionDiagnosis, that.prescriptionDiagnosis) && Objects.equals(outpatientId, that.outpatientId);
+        return prescriptionId == that.prescriptionId && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(recordNo, that.recordNo) && Objects.equals(prescriptionType, that.prescriptionType) && Objects.equals(prescriptionDate, that.prescriptionDate) && Objects.equals(prescriptionDiagnosis, that.prescriptionDiagnosis) && Objects.equals(outpatientId, that.outpatientId) && Objects.equals(staffId, that.staffId) && Objects.equals(medicalId, that.medicalId) && Objects.equals(doctorAdvice, that.doctorAdvice) && Objects.equals(sumMoney, that.sumMoney);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prescriptionId, prescriptionNo, recordNo, prescriptionType, prescriptionDate, prescriptionDiagnosis, outpatientId);
+        return Objects.hash(prescriptionId, prescriptionNo, recordNo, prescriptionType, prescriptionDate, prescriptionDiagnosis, outpatientId, staffId, medicalId, doctorAdvice, sumMoney);
     }
 }

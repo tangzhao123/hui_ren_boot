@@ -3,16 +3,13 @@ package cn.gson.hui_ren_boot.model.pojos.outpatient;
 import javax.persistence.*;
 import java.util.Objects;
 
-/**
- * 门诊处方详单
- */
 @Entity
 @Table(name = "PRESCRIPTION_DETAIL", schema = "HUIREN", catalog = "")
 public class PrescriptionDetail {
     private long prescribeId;
     private String recipelNo;
     private String prescriptionNo;
-    private String drugNo;
+    private String drugName;
     private Long dose;
     private String drugRoute;
     private String usage;
@@ -22,6 +19,8 @@ public class PrescriptionDetail {
     private Long inject;
     private Long carryOut;
     private String remark;
+    private String standardName;
+    private Long subtotal;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -56,13 +55,13 @@ public class PrescriptionDetail {
     }
 
     @Basic
-    @Column(name = "DRUG_NO")
-    public String getDrugNo() {
-        return drugNo;
+    @Column(name = "DRUG_NAME")
+    public String getDrugName() {
+        return drugName;
     }
 
-    public void setDrugNo(String drugNo) {
-        this.drugNo = drugNo;
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
     }
 
     @Basic
@@ -155,16 +154,36 @@ public class PrescriptionDetail {
         this.remark = remark;
     }
 
+    @Basic
+    @Column(name = "STANDARD_NAME")
+    public String getStandardName() {
+        return standardName;
+    }
+
+    public void setStandardName(String standardName) {
+        this.standardName = standardName;
+    }
+
+    @Basic
+    @Column(name = "SUBTOTAL")
+    public Long getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Long subtotal) {
+        this.subtotal = subtotal;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrescriptionDetail that = (PrescriptionDetail) o;
-        return prescribeId == that.prescribeId && Objects.equals(recipelNo, that.recipelNo) && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(drugNo, that.drugNo) && Objects.equals(dose, that.dose) && Objects.equals(drugRoute, that.drugRoute) && Objects.equals(usage, that.usage) && Objects.equals(days, that.days) && Objects.equals(aggregate, that.aggregate) && Objects.equals(totalUnit, that.totalUnit) && Objects.equals(inject, that.inject) && Objects.equals(carryOut, that.carryOut) && Objects.equals(remark, that.remark);
+        return prescribeId == that.prescribeId && Objects.equals(recipelNo, that.recipelNo) && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(drugName, that.drugName) && Objects.equals(dose, that.dose) && Objects.equals(drugRoute, that.drugRoute) && Objects.equals(usage, that.usage) && Objects.equals(days, that.days) && Objects.equals(aggregate, that.aggregate) && Objects.equals(totalUnit, that.totalUnit) && Objects.equals(inject, that.inject) && Objects.equals(carryOut, that.carryOut) && Objects.equals(remark, that.remark) && Objects.equals(standardName, that.standardName) && Objects.equals(subtotal, that.subtotal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prescribeId, recipelNo, prescriptionNo, drugNo, dose, drugRoute, usage, days, aggregate, totalUnit, inject, carryOut, remark);
+        return Objects.hash(prescribeId, recipelNo, prescriptionNo, drugName, dose, drugRoute, usage, days, aggregate, totalUnit, inject, carryOut, remark, standardName, subtotal);
     }
 }
