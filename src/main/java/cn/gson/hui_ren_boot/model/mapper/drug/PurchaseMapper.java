@@ -13,4 +13,10 @@ public interface PurchaseMapper {
 
     //查询所有未审核的采购计划单
     public List<PurchasePlan> allPurchase();
+
+    //采购计划单审批通过
+    public void trial(String purchaseId);
+
+    //查询所有的采购计划单
+    public List<PurchasePlan> findAllPurchase();
 }

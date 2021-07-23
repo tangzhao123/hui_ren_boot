@@ -17,6 +17,10 @@ public class PlanDetails {
     private String purchaseId;
     private DrugSupplier suppliers;
     private List<DrugInfo> drugInfos;
+    private String drugName;
+    private String standardName;
+    private String supplierName;
+    private String typeName;
 
     @Id
     @Column(name = "PLAN_ID")
@@ -105,6 +109,38 @@ public class PlanDetails {
 
     public void setDrugInfos(List<DrugInfo> drugInfos) {
         this.drugInfos = drugInfos;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public String getStandardName() {
+        return standardName;
+    }
+
+    public void setStandardName(String standardName) {
+        this.standardName = standardName;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     @Override

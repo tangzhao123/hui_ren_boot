@@ -37,10 +37,9 @@ public class PlanDetailsController {
     @RequestMapping("add-purchase")
     public String addPlanDetails(@RequestBody PurchasePlan purchasePlan){
        try{
-           String dh = getOrderIdByTime();
            List<PlanDetails> p = purchasePlan.getPlanDetails();
            for (PlanDetails planDetails : p) {
-               planDetails.setPlanSerial(dh);
+               planDetails.setPlanSerial(getOrderIdByTime());
            }
            purchaseService.addPlanDetails(purchasePlan, purchasePlan.getPlanDetails());
            return "ok";
@@ -50,9 +49,33 @@ public class PlanDetailsController {
        }
     }
 
-    //查询采购计划单
+    //查询未审核的采购计划单
     @RequestMapping("all-purchase")
     public Object allPurchase(Integer pageNo,Integer size){
         return purchaseService.allPurchaseByPage(pageNo, size);
+    }
+
+    //查询所有的采购计划单
+    @RequestMapping("findAll-purchase")
+    public Object findAllPurchase(Integer pageNo,Integer size){
+        return purchaseService.findAllPurchaseByPage(pageNo, size);
+    }
+
+    //根据采购计划单号查询详单
+    @RequestMapping("all-planDetails")
+    public Object allDetails(Integer pageNo,Integer size,String purchaseId){
+        return purchaseService.allDetailsByPage(pageNo, size, purchaseId);
+    }
+
+    //通过采购计划单审核
+    @RequestMapping("trial")
+    public String trial(String purchaseId){
+        try{
+           purchaseService.trial(purchaseId);
+            return "ok";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 }

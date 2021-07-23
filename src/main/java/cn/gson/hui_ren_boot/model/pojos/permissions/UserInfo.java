@@ -11,6 +11,7 @@ public class UserInfo {
     private String userName;
     private String userPossword;
     private Long staffId;
+    private Long medicalId;
     private List<Roleinfo> roleinfos;
 
 
@@ -70,7 +71,13 @@ public class UserInfo {
         this.staffId = staffId;
     }
 
+    public Long getMedicalId() {
+        return medicalId;
+    }
 
+    public void setMedicalId(Long medicalId) {
+        this.medicalId = medicalId;
+    }
 
     @Override
     public boolean equals(Object o) {
