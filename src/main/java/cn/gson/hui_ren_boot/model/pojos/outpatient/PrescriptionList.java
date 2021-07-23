@@ -198,4 +198,26 @@ public class PrescriptionList {
     public int hashCode() {
         return Objects.hash(prescriptionId, prescriptionNo, recordNo, prescriptionType, prescriptionDate, prescriptionDiagnosis, outpatientId, staffId, medicalId, doctorAdvice, sumMoney);
     }
+
+    @Override
+    public String toString() {
+        return "PrescriptionList{" +
+                "prescriptionId=" + prescriptionId +
+                ", prescriptionNo='" + prescriptionNo + '\'' +
+                ", recordNo='" + recordNo + '\'' +
+                ", prescriptionType=" + prescriptionType +
+                ", prescriptionDate=" + prescriptionDate +
+                ", prescriptionDiagnosis='" + prescriptionDiagnosis + '\'' +
+                ", outpatientId='" + outpatientId + '\'' +
+                ", staffId=" + staffId +
+                ", medicalId=" + medicalId +
+                ", doctorAdvice='" + doctorAdvice + '\'' +
+                ", sumMoney=" + sumMoney +
+                ", info=" + info +
+                ", outpatient=" + outpatient +
+                ", outdoctor=" + outdoctor +
+                ", medical=" + medical +
+                ", details=" + details +
+                '}';
+    }
 }
