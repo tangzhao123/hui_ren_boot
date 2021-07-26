@@ -133,4 +133,20 @@ public class DrugStock {
     public int hashCode() {
         return Objects.hash(stockId, stockSurplus, stockLimit, stockFloor, stockXnum, stockZnum, stockNumber, stockDate, stockBatch, stockIndate);
     }
+
+    @Override
+    public String toString() {
+        return "DrugStock{" +
+                "stockId=" + stockId +
+                ", stockSurplus=" + stockSurplus +
+                ", stockLimit=" + stockLimit +
+                ", stockFloor=" + stockFloor +
+                ", stockXnum=" + stockXnum +
+                ", stockZnum=" + stockZnum +
+                ", stockNumber=" + stockNumber +
+                ", stockDate=" + stockDate +
+                ", stockBatch='" + stockBatch + '\'' +
+                ", stockIndate='" + stockIndate + '\'' +
+                '}';
+    }
 }

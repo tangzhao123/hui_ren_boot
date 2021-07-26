@@ -63,4 +63,14 @@ public class DrugType {
     public int hashCode() {
         return Objects.hash(typeId, typeName, typeSon, typeRank);
     }
+
+    @Override
+    public String toString() {
+        return "DrugType{" +
+                "typeId=" + typeId +
+                ", typeName='" + typeName + '\'' +
+                ", typeSon=" + typeSon +
+                ", typeRank='" + typeRank + '\'' +
+                '}';
+    }
 }

@@ -3,8 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.DrugSupplierMapper">
     <!--查询供应商信息-->
-    <select id="allSupplier" resultType="DrugSupplier">
+    <resultMap id="supplierMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugSupplier">
+        <id column="SUPPLIER_ID" property="supplierId"/>
+        <result column="SUPPLIER_NAME" property="supplierName"/>
+        <result column="SUPPLIER_ADDRESS" property="supplierAddress"/>
+        <result column="SUPPLIER_PHONE" property="supplierPhone"/>
+    </resultMap>
+    <select id="allSupplier" resultMap="supplierMapper">
+        select * from DRUG_SUPPLIER
+            <where>
+                <if test="supplierName != null and '' !=supplierName">
+                    or SUPPLIER_NAME like '%${supplierName}%'
+                </if>
+                <if test="supplierAddress != null and '' !=supplierAddress">
+                    or SUPPLIER_ADDRESS like '%${supplierAddress}%'
+                </if>
+            </where>
+    </select>
+    <select id="allSuppt" resultType="DrugSupplier">
         select * from DRUG_SUPPLIER
     </select>
 
+    <!-- 查询所有的供货商 -->
+    <select id="findAllSupplier" resultMap="supplierMapper">
+        select * from drug_supplier
+    </select>
 </mapper>

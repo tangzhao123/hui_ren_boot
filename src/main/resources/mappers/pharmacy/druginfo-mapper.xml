@@ -7,6 +7,8 @@
         <result column="DRUG_ID" property="drugId"/><!--药品编码-->
         <result column="DRUG_NAME" property="drugName"/><!--药品名称-->
         <result column="DRUG_TACK" property="drugTack"/><!--拆零-->
+        <result column="DRUG_USE" property="drugUse"/><!--用途-->
+        <result column="DRUG_DOSAGE" property="drugDosage"/><!--剂型-->
         <result column="DRUG_SELLING" property="drugSelling"/><!--中售价-->
         <result column="PURCHASE_PRICE" property="purchasePrice"/><!--中进价-->
         <result column="DRUG_NEXT" property="drugNext"/><!--次/天-->
@@ -69,7 +71,13 @@
         select * from DRUG_TYPE
     </select>
     <!--修改药品状态-->
-    <update id="allState" >
-        update DRUG_INFO set DRUG_STATE = #{drugState} where DRUG_ID = #{drugId}
+    <update id="allState">
+        update DRUG_INFO set DRUG_STATE=#{drugState} where DRUG_ID=#{drugId}
     </update>
+
+    <insert id="addDrug">
+        insert into DRUG_INFO(DRUG_SERIAL,DRUG_ID,DRUG_NAME,DRUG_USE,DRUG_DOSAGE,SURPLUS_ID,TYPE_ID,DRUG_SMALL,DRUG_BIG,SUPPLIER_ID,DRUG_SELLING,PURCHASE_PRICE)
+        values (seq_huiren.nextval,#{drugId},#{drugName},#{drugUse},#{drugDosage},#{standards.standardId},#{types.typeId},
+                #{drugSmall},#{drugBig},#{suppliers.supplierId},#{drugSelling},#{purchasePrice})
+    </insert>
 </mapper>

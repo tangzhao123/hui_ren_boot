@@ -1,6 +1,5 @@
 package cn.gson.hui_ren_boot.model.service.pharmacy;
 
-import cn.gson.hui_ren_boot.model.mapper.pharmacy.DruginfoDao;
 import cn.gson.hui_ren_boot.model.mapper.pharmacy.DruginfoMapper;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +11,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class DrugService {
     @Autowired
     DruginfoMapper drugMapper;
-    @Autowired
-    DruginfoDao druginfoDao;
+
 
     //查询处方选药/查药品信息
     public Object allDrugByPage(Integer pageNo, Integer size,DrugInfo drugInfo){
         return drugMapper.allDrug(drugInfo);
     }
-    //新增药品
-    public void saveDruginfo(DrugInfo drugInfo){
-        druginfoDao.save(drugInfo);
-
-    }
     //修改药品状态
-    public DrugInfo allState(String id){
-        return drugMapper.allState(id);
+    public void allState(DrugInfo drugInfo){
+        System.out.println(drugInfo);
+        drugMapper.allState(drugInfo);
+    }
+
+    //新增药品
+    public void addDrug(DrugInfo drugInfo){
+        drugMapper.addDrug(drugInfo);
     }
 }

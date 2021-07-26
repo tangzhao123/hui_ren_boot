@@ -6,10 +6,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "DRUG_SUPPLIER", schema = "HUIREN")
 public class DrugSupplier {
-    private Long supplierId;
-    private String supplierName;
-    private String supplierAddress;
-    private Long supplierPhone;
+    private Long supplierId;//编号
+    private String supplierName;//姓名
+    private String supplierAddress;//地址
+    private Long supplierPhone;//电话
 
     @Id
     @Column(name = "SUPPLIER_ID")
