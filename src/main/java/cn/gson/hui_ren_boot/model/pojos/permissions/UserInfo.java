@@ -12,6 +12,8 @@ public class UserInfo {
     private String userPossword;
     private Long staffId;
     private Long medicalId;
+    private String staffName;
+    private String medicalName;
     private List<Roleinfo> roleinfos;
 
 
@@ -92,8 +94,23 @@ public class UserInfo {
         return Objects.hash(userId, userName, userPossword, staffId);
     }
 
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
+    }
 
     public UserInfo() {
+    }
+
+    public String getMedicalName() {
+        return medicalName;
+    }
+
+    public void setMedicalName(String medicalName) {
+        this.medicalName = medicalName;
     }
 
     @Override

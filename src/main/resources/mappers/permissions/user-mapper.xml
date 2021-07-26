@@ -8,6 +8,8 @@
         <result property="userPossword" column="user_possword"/>
         <result property="staffId" column="STAFF_ID"/>
         <result property="medicalId" column="medical_id"/>
+        <result property="staffName" column="staff_name"/>
+        <result property="medicalName" column="medical_name"/>
     </resultMap>
     <!-- 登录 -->
     <select id="allUser" resultMap="userMapper">
