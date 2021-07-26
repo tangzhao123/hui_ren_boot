@@ -1,7 +1,8 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStandard;
+
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "PRESCRIPTION_DETAIL", schema = "HUIREN", catalog = "")
@@ -17,8 +18,17 @@ public class PrescriptionDetail {
     private String drugBig;
     private Long inject;
     private Long carryOut;
-    private String standardName;
     private Long subtotal;
+    private DrugStandard standards;
+
+    @OneToOne
+    public DrugStandard getStandards() {
+        return standards;
+    }
+
+    public void setStandards(DrugStandard standards) {
+        this.standards = standards;
+    }
 
     @Id
     @Column(name = "RECIPEL_NO")
@@ -131,16 +141,6 @@ public class PrescriptionDetail {
     }
 
     @Basic
-    @Column(name = "STANDARD_NAME")
-    public String getStandardName() {
-        return standardName;
-    }
-
-    public void setStandardName(String standardName) {
-        this.standardName = standardName;
-    }
-
-    @Basic
     @Column(name = "SUBTOTAL")
     public Long getSubtotal() {
         return subtotal;
@@ -148,19 +148,6 @@ public class PrescriptionDetail {
 
     public void setSubtotal(Long subtotal) {
         this.subtotal = subtotal;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PrescriptionDetail that = (PrescriptionDetail) o;
-        return Objects.equals(recipelNo, that.recipelNo) && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(drugName, that.drugName) && Objects.equals(dose, that.dose) && Objects.equals(drugRoute, that.drugRoute) && Objects.equals(drugUse, that.drugUse) && Objects.equals(drugNext, that.drugNext) && Objects.equals(aggregate, that.aggregate) && Objects.equals(drugBig, that.drugBig) && Objects.equals(inject, that.inject) && Objects.equals(carryOut, that.carryOut) && Objects.equals(standardName, that.standardName) && Objects.equals(subtotal, that.subtotal);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(recipelNo, prescriptionNo, drugName, dose, drugRoute, drugUse, drugNext, aggregate, drugBig, inject, carryOut, standardName, subtotal);
     }
 
     @Override
@@ -177,8 +164,8 @@ public class PrescriptionDetail {
                 ", drugBig='" + drugBig + '\'' +
                 ", inject=" + inject +
                 ", carryOut=" + carryOut +
-                ", standardName='" + standardName + '\'' +
                 ", subtotal=" + subtotal +
+                ", standards=" + standards +
                 '}';
     }
 }

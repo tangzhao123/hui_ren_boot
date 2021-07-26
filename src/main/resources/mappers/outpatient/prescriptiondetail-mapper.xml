@@ -3,5 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--门诊处方详单-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionDetailMapper">
-
+    <!--批量新增门诊处方详单-->
+    <insert id="addDetail" parameterType="java.util.List">
+        insert all into prescription_detail(RECIPEL_NO,PRESCRIPTION_NO,DRUG_NAME,DRUG_USE,
+        DRUG_NEXT,AGGREGATE,DRUG_BIG,STANDARD_NAME,SUBTOTAL)
+        <foreach collection="details" item="d" index="i" separator=" ">
+            <if test="i!=details.size()-1">
+                into prescription_detail(RECIPEL_NO,PRESCRIPTION_NO,DRUG_NAME,DRUG_USE,
+                DRUG_NEXT,AGGREGATE,DRUG_BIG,STANDARD_NAME,SUBTOTAL)
+                values(#{d.recipelNo},#{prescriptionNo},#{d.drugName},#{d.drugUse},#{d.drugNext},
+                #{d.aggregate},#{d.drugBig},#{d.standards.standardName},#{d.subtotal})
+            </if>
+            <if test="i==details.size()-1">
+                select #{d.recipelNo},#{prescriptionNo},#{d.drugName},#{d.drugUse},#{d.drugNext},
+                #{d.aggregate},#{d.drugBig},#{d.standards.standardName},#{d.subtotal} from dual
+            </if>
+        </foreach>
+    </insert>
 </mapper>
