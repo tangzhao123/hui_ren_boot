@@ -20,4 +20,7 @@ public class DrugSupplierService {
     public List<DrugSupplier> findAllSupplier(){
         return drugSupplierMapper.findAllSupplier();
     }
+    public List<DrugSupplier> allSuppt(DrugSupplier drugSupplier){
+        return drugSupplierMapper.allSuppt(drugSupplier);
+    }
 }

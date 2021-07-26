@@ -37,14 +37,16 @@ public class DruginfoController {
     }
     //修改药品状态
     @RequestMapping("/upstate")
-    public String allState(@RequestBody String id){
-        try{
-            drugService.allState(id);
+    public String allState(@RequestBody  DrugInfo drugInfow){
+//        try{
+
+            drugInfow.setDrugState(1L);
+            drugService.allState(drugInfow);
             return "ok";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "fail";
-        }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return "fail";
+//        }
 
     }
 }

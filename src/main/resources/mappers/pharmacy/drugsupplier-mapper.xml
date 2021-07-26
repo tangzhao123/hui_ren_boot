@@ -20,6 +20,9 @@
                 </if>
             </where>
     </select>
+    <select id="allSuppt" resultType="DrugSupplier">
+        select * from DRUG_SUPPLIER
+    </select>
 
     <!-- 查询所有的供货商 -->
     <select id="findAllSupplier" resultMap="supplierMapper">

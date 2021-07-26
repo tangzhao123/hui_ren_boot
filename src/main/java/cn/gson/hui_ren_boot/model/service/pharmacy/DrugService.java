@@ -18,8 +18,9 @@ public class DrugService {
         return drugMapper.allDrug(drugInfo);
     }
     //修改药品状态
-    public DrugInfo allState(String id){
-        return drugMapper.allState(id);
+    public void allState(DrugInfo drugInfo){
+        System.out.println(drugInfo);
+        drugMapper.allState(drugInfo);
     }
 
     //新增药品

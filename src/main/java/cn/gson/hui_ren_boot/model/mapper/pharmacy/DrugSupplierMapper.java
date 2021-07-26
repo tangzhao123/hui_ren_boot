@@ -12,4 +12,7 @@ public interface DrugSupplierMapper {
 
     //查询所有供货商
     public List<DrugSupplier> findAllSupplier();
+
+    //查询供应商信息（药品弹框）
+    public List<DrugSupplier> allSuppt(DrugSupplier drugSupplier);
 }

@@ -28,4 +28,8 @@ public class DrugSupplierController {
     public List<DrugSupplier> findAllSupplier(){
         return drugSupplierService.findAllSupplier();
     }
+    @RequestMapping("/suppt")
+    public List<DrugSupplier> allSuppt(DrugSupplier drugSupplier){
+        return drugSupplierService.allSuppt(drugSupplier);
+    }
 }

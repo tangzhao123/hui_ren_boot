@@ -13,7 +13,7 @@ public interface DruginfoMapper {
     public List<DrugInfo> allDrug(DrugInfo drugInfo);
 
     //修改药品状态
-    public DrugInfo allState(@Param("drugId")String id);
+    public void allState(DrugInfo drugInfo);
 
     //新增药品
     public void addDrug(DrugInfo drugInfo);
