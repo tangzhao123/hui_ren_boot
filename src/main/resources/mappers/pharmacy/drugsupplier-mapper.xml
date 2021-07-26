@@ -20,5 +20,8 @@
                 </if>
             </where>
     </select>
+    <select id="allSuppt" resultType="DrugSupplier">
+        select * from DRUG_SUPPLIER
+    </select>
 
 </mapper>
