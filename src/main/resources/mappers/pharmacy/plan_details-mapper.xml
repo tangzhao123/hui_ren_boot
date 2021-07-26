@@ -16,19 +16,16 @@
 
     <!-- 批量新增采购计划详单 -->
     <insert id="addDetails" parameterType="java.util.List">
-                    insert all into plan_details
-                    <selectKey keyProperty="planId" resultType="_int" order="BEFORE">
-                        select seq_huiren.nextval from dual
-                    </selectKey>
-                    <foreach collection="planDetails" item="p" index="i" separator=" ">
-                       <if test="i!=planDetails.size()-1">
-                           into plan_details
-                           values
-                           (#{planId},#{p.planSerial},#{p.purchasePrice},#{p.drugId},#{p.suppliers.supplierId},#{p.planNum},#{purchaseId})
-                       </if>
-                       <if test="i==planDetails.size()-1">
-                           select #{planId},#{p.planSerial},#{p.purchasePrice},#{p.drugId},#{p.suppliers.supplierId},#{p.planNum},#{purchaseId} from dual
-                       </if>
+                    insert into plan_details
+                    select seq_huiren.nextval,plan_serial,purchase_price,drug_id,supplier_id,plan_num,purchase_id from
+                    <foreach collection="planDetails" item="p" index="i" separator=" " open="(" close=")">
+                        <if test="i!=planDetails.size()-1">
+                            select #{p.planSerial} as plan_serial,#{p.purchasePrice} as purchase_price,#{p.drugId} as drug_id,#{p.suppliers.supplierId} as supplier_id,#{p.planNum} as plan_num,#{purchaseId} as purchase_id from dual
+                            union
+                        </if>
+                        <if test="i==planDetails.size()-1">
+                            select #{p.planSerial} as plan_serial,#{p.purchasePrice} as purchase_price,#{p.drugId} as drug_id,#{p.suppliers.supplierId} as supplier_id,#{p.planNum} as plan_num,#{purchaseId} as purchase_id from dual
+                        </if>
                     </foreach>
 
     </insert>
