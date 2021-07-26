@@ -18,6 +18,8 @@ public class Record {//床位使用表
     private Long recordDays;//住院天数
     private String registerId;//住院号
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "RECORD_ID")
     public long getRecordId() {
         return recordId;
