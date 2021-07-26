@@ -23,4 +23,9 @@ public class DrugSupplierController {
        System.out.println(drugSuppliers);
        return drugSupplierService.allSupplierByPage(pageNo,size,drugSuppliers);
     }
+
+    @RequestMapping("supplier-list")
+    public List<DrugSupplier> findAllSupplier(){
+        return drugSupplierService.findAllSupplier();
+    }
 }

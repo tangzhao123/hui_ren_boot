@@ -9,4 +9,7 @@ import java.util.List;
 public interface DrugSupplierMapper {
     //查询供应商信息
     public List<DrugSupplier> allSupplier(DrugSupplier drugSupplier);
+
+    //查询所有供货商
+    public List<DrugSupplier> findAllSupplier();
 }

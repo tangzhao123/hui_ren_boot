@@ -21,4 +21,8 @@
             </where>
     </select>
 
+    <!-- 查询所有的供货商 -->
+    <select id="findAllSupplier" resultMap="supplierMapper">
+        select * from drug_supplier
+    </select>
 </mapper>

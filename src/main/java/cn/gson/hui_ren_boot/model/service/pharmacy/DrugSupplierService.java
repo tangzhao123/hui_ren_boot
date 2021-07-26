@@ -16,4 +16,8 @@ public class DrugSupplierService {
     public Object allSupplierByPage(Integer pageNo, Integer size,DrugSupplier drugSupplier){
         return drugSupplierMapper.allSupplier(drugSupplier);
     }
+
+    public List<DrugSupplier> findAllSupplier(){
+        return drugSupplierMapper.findAllSupplier();
+    }
 }

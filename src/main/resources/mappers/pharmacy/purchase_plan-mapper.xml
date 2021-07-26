@@ -20,10 +20,11 @@
             order by pu.purchase_date desc
         </select>
 
-    <!-- 查询所有的采购计划单 -->
+    <!-- 查询已审核的采购计划单 -->
     <select id="findAllPurchase" resultMap="purchaseMap">
         select pu.*,s.staff_name from purchase_plan pu
         left join staff s on pu.operator = s.staff_id
+        where pu.purchase_state = 1
         order by pu.purchase_date desc
     </select>
     <!-- 新增采购计划单表 -->
