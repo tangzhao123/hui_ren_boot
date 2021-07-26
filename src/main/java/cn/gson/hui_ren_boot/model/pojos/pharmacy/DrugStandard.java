@@ -86,4 +86,16 @@ public class DrugStandard {
     public int hashCode() {
         return Objects.hash(standardId, standardName, standardUnit, standardNum, standardDosage, standardUse);
     }
+
+    @Override
+    public String toString() {
+        return "DrugStandard{" +
+                "standardId=" + standardId +
+                ", standardName='" + standardName + '\'' +
+                ", standardUnit='" + standardUnit + '\'' +
+                ", standardNum=" + standardNum +
+                ", standardDosage='" + standardDosage + '\'' +
+                ", standardUse='" + standardUse + '\'' +
+                '}';
+    }
 }

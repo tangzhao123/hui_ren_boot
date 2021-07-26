@@ -13,7 +13,7 @@ import java.util.List;
 public class DrugSupplierService {
     @Autowired
     DrugSupplierMapper drugSupplierMapper;
-    public List<DrugSupplier> allSupplier(){
-        return drugSupplierMapper.allSupplier();
+    public Object allSupplierByPage(Integer pageNo, Integer size,DrugSupplier drugSupplier){
+        return drugSupplierMapper.allSupplier(drugSupplier);
     }
 }

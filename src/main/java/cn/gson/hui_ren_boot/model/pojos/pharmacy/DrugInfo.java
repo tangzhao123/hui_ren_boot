@@ -65,6 +65,8 @@ public class DrugInfo {
 
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "DRUG_SERIAL")
     public Long getDrugSerial() {
         return drugSerial;
@@ -226,5 +228,30 @@ public class DrugInfo {
     @Override
     public int hashCode() {
         return Objects.hash(drugSerial, drugId, drugName, drugUse, drugDosage, drugTack, drugRemark, drugSelling, purchasePrice, drugNext, drugBig, drugSmall, smallSelling, smallPrice,drugState);
+    }
+
+    @Override
+    public String toString() {
+        return "DrugInfo{" +
+                "drugSerial=" + drugSerial +
+                ", drugId='" + drugId + '\'' +
+                ", drugName='" + drugName + '\'' +
+                ", drugUse='" + drugUse + '\'' +
+                ", drugDosage='" + drugDosage + '\'' +
+                ", drugTack='" + drugTack + '\'' +
+                ", drugRemark='" + drugRemark + '\'' +
+                ", drugSelling=" + drugSelling +
+                ", purchasePrice=" + purchasePrice +
+                ", drugNext='" + drugNext + '\'' +
+                ", drugBig='" + drugBig + '\'' +
+                ", drugSmall='" + drugSmall + '\'' +
+                ", smallSelling=" + smallSelling +
+                ", smallPrice=" + smallPrice +
+                ", drugState=" + drugState +
+                ", types=" + types +
+                ", suppliers=" + suppliers +
+                ", standards=" + standards +
+                ", stocks=" + stocks +
+                '}';
     }
 }

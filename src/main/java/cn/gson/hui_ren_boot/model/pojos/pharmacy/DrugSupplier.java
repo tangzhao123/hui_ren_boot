@@ -6,10 +6,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "DRUG_SUPPLIER", schema = "HUIREN")
 public class DrugSupplier {
-    private Long supplierId;
-    private String supplierName;
-    private String supplierAddress;
-    private Long supplierPhone;
+    private Long supplierId;//编号
+    private String supplierName;//姓名
+    private String supplierAddress;//地址
+    private Long supplierPhone;//电话
 
     @Id
     @Column(name = "SUPPLIER_ID")
@@ -62,5 +62,15 @@ public class DrugSupplier {
     @Override
     public int hashCode() {
         return Objects.hash(supplierId, supplierName, supplierAddress, supplierPhone);
+    }
+
+    @Override
+    public String toString() {
+        return "DrugSupplier{" +
+                "supplierId=" + supplierId +
+                ", supplierName='" + supplierName + '\'' +
+                ", supplierAddress='" + supplierAddress + '\'' +
+                ", supplierPhone=" + supplierPhone +
+                '}';
     }
 }
