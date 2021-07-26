@@ -13,15 +13,48 @@
         <result column="daralis_dstate" property="daralisDstate"/>
         <result column="daralis_start" property="daralisStart"/>
         <result column="daralis_price" property="daralisPrice"/>
-        <association property="drug" javaType="DrugInfo">
-            <id column="drug_serial" property="detailsSerial"/>
-            <result column="drug_name" property="drugName"/>
-            <result column="drug_big" property="drugBig"/>
-            <result column="drug_selling" property="drugSelling"/>
-        </association>
+<!--        <association property="drug" javaType="DrugInfo">-->
+<!--            <id column="drug_serial" property="detailsSerial"/>-->
+<!--            <result column="drug_name" property="drugName"/>-->
+<!--            <result column="drug_big" property="drugBig"/>-->
+<!--            <result column="drug_selling" property="drugSelling"/>-->
+<!--        </association>-->
     </resultMap>
-    <select id="0allDetails" resultMap="alldetailt">
+<!--    药房医嘱详情查询-->
+    <select id="allDetails" resultMap="alldetailt">
         select *from details nm left join  drug_info bn on bn.drug_id=nm.drug_id where nm.advice_id=#{adviceId}
     </select>
-
+<!--    医嘱详情管理-->
+    <select id="seletDetails" resultType="Details">
+        select *from details where advice_id=#{adviceId}
+    </select>
+<!--    <insert id="addDetails">-->
+<!--        insert  into details-->
+<!--        (details_serial,drug_name,details_drip,etails_way,datails_dosage,-->
+<!--        daralis_usage,daralis_time,advice_id,daralis_dstate,-->
+<!--        daralis_disable,daralis_start,daralis_price,daralis_number,-->
+<!--         standard_name,drug_big,standard_use-->
+<!--        ) values(seq_huiren.nextval,#{drug.drugName},#{detailsDrip},#{detailsWay},-->
+<!--           #{datailsDosage},#{daralisUsage},#{daralisTime},#{adviceId},1,-->
+<!--           #{daralisDisable},#{daralisStart},#{daralisPrice},#{daralisNumber},-->
+<!--           #{standardName},#{drugBig},#{standardUse}-->
+<!--        )-->
+<!--    </insert>-->
+    <insert id="addDetails" parameterType="java.util.List">
+            insert all into details
+        <selectKey keyProperty="detailsSerial" resultType="_int" order="BEFORE">
+            select seq_huiren.nextval from dual
+        </selectKey>
+        <foreach collection="detail" item="p" index="i" separator="">
+            <if test="i!=detail.size()-1">
+                into details
+                        (details_serial,drug_name,details_drip,details_way,datails_dosage,daralis_usage,daralis_time,advice_id,daralis_dstate,daralis_disable,daralis_start,daralis_price,daralis_number,standard_name,drug_big,standard_use,daralis_mark)
+                values(#{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.detailsWay},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},#{p.standardName},#{p.drugBig},#{p.standardUse},#{daralisMark})
+            </if>
+            <if test="i==detail.size()-1">
+                select #{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.detailsWay},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},
+                        #{p.standardName},#{p.drugBig},#{p.standardUse},#{daralisMark} from dual
+            </if>
+        </foreach>
+    </insert>
 </mapper>

@@ -39,7 +39,7 @@ public class RegisterConvertor {
     }
     @RequestMapping("/registersw")//医生患者表
     public List<Register>allregistw(String shu){
-        System.out.println(shu+"wwwwwwwwwwwwwwwwww");
+
         Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
         return registerService.allRegisw(inputboxs);
      }
