@@ -8,21 +8,27 @@
         <result column="advice_id" property="adviceId"/>
         <result column="advice_start" property="adviceStart"/>
         <result column="advice_sickbed" property="adviceSickbed"/>
-<!--        <result column="staff_id" property="staffId"/>-->
+        <result column="staff_name" property="staffName"/>
         <result column="advice_cost" property="adviceCost"/>
-        <result column="advice_cost" property="adviceCost"/>
-        <!-- 病人信息表-->
-        <association property="register" javaType="Register">
-            <id column="MEDICAL_ID" property="medicalId"/>
-            <result column="MEDICAL_NAME" property="medicalName"/>
-        </association>
-        <!--员工表-->
-        <association property="staff" javaType="Staff">
-            <id column="staff_id" property="staffId"/>
-            <result column="staff_name" property="staffName"/>
-        </association>
+        <result column="advice_type" property="adviceType"/>
+        <result column="advice_end" property="adviceEnd"/>
+        <result column="advice_chinese" property="adviceChinese"/>
+        <result column="advice_doctors" property="adviceDoctors"/>
+        <result column="register_name" property="registerName"/>
+
     </resultMap>
 
     <select id="allDispensing" resultMap="allAdvicve">
-        select * from ADVICE  ai left join register hg on ai.register_id=hg.register_id left join staff km on km.staff_id=ai.staff_id    </select>
+        select * from ADVICE  ai left join register hg on ai.register_id=hg.register_id left join staff km on km.staff_id=ai.staff_id
+    </select>
+    <select id="selectAdvice" resultType="Advice">
+        select * from ADVICE
+        <if test="registerId != null and '' != registerId">
+            or register_id = #{registerId}
+        </if>
+    </select>
+    <insert id="addAdvice">
+        insert  into advice(advice_serial,advice_id,register_id,advice_start,advice_sickbed,staff_name,advice_cost,advice_end,advice_chinese,advice_doctors,register_name)
+        values (seq_huiren.nextval,#{adviceId},#{registerId},#{adviceStart},#{adviceSickbed},#{staffName},1,#{adviceEnd},#{adviceChinese},#{adviceDoctors},#{registerName})
+    </insert>
 </mapper>
