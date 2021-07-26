@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PurchaseMapper">
+
+    <!-- 采购计划单跟采购计划详单的映射 -->
+    <resultMap id="purchaseMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchasePlan">
+        <id property="purchaseSerial" column="purchase_serial"/>
+        <result property="purchaseId" column="purchase_id"/>
+        <result property="staffName" column="staff_name"/>
+        <result property="purchaseAmount" column="purchase_amount"/>
+        <result property="purchaseDate" column="purchase_date"/>
+        <result property="purchaseState" column="purchase_state"/>
+    </resultMap>
+
+    <!-- 查询未审核的采购计划单 -->
+        <select id="allPurchase" resultMap="purchaseMap">
+            select pu.*,s.staff_name from purchase_plan pu
+            left join staff s on pu.operator = s.staff_id where pu.purchase_state = 0
+            order by pu.purchase_date desc
+        </select>
+
+    <!-- 查询所有的采购计划单 -->
+    <select id="findAllPurchase" resultMap="purchaseMap">
+        select pu.*,s.staff_name from purchase_plan pu
+        left join staff s on pu.operator = s.staff_id
+        order by pu.purchase_date desc
+    </select>
+    <!-- 新增采购计划单表 -->
+    <insert id="addPurchase">
+        insert into  purchase_plan values (seq_huiren.nextval,#{purchaseId},#{operator},#{purchaseAmount},#{purchaseDate},0)
+    </insert>
+    
+    <!-- 通过采购计划单审批 -->
+    <update id="trial">
+        update purchase_plan set purchase_state = 1 where purchase_id = #{purchaseId}
+    </update>
+</mapper>

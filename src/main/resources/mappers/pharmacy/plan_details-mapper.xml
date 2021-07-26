@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PlanDetailsMapper">
+
+    <!-- 查询采购计划详单 -->
+    <select id="allDetails" resultType="cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails">
+        select pl.plan_serial planSerial,dr.drug_id drugId,dr.drug_name drugName,st.standard_name standardName,ty.type_name typeName,sup.supplier_name supplierName,
+               pl.purchase_price purchasePrice,pl.plan_num planNum from plan_details pl
+        left join drug_info dr on pl.drug_id = dr.drug_id
+        left join drug_supplier sup on pl.supplier_id = sup.supplier_id
+        left join drug_standard st on dr.surplus_id = st.standard_id
+        left join drug_type ty on dr.type_id = ty.type_id
+        where pl.purchase_id = #{purchaseId}
+    </select>
+
+    <!-- 批量新增采购计划详单 -->
+    <insert id="addDetails" parameterType="java.util.List">
+                    insert all into plan_details
+                    <selectKey keyProperty="planId" resultType="_int" order="BEFORE">
+                        select seq_huiren.nextval from dual
+                    </selectKey>
+                    <foreach collection="planDetails" item="p" index="i" separator=" ">
+                       <if test="i!=planDetails.size()-1">
+                           into plan_details
+                           values
+                           (#{planId},#{p.planSerial},#{p.purchasePrice},#{p.drugId},#{p.suppliers.supplierId},#{p.planNum},#{purchaseId})
+                       </if>
+                       <if test="i==planDetails.size()-1">
+                           select #{planId},#{p.planSerial},#{p.purchasePrice},#{p.drugId},#{p.suppliers.supplierId},#{p.planNum},#{purchaseId} from dual
+                       </if>
+                    </foreach>
+
+    </insert>
+</mapper>

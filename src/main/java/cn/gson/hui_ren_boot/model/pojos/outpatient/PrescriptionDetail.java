@@ -6,33 +6,21 @@ import java.util.Objects;
 @Entity
 @Table(name = "PRESCRIPTION_DETAIL", schema = "HUIREN", catalog = "")
 public class PrescriptionDetail {
-    private long prescribeId;
     private String recipelNo;
     private String prescriptionNo;
-    private String drugNo;
+    private String drugName;
     private Long dose;
     private String drugRoute;
-    private String usage;
-    private Long days;
+    private String drugUse;
+    private Long drugNext;
     private Long aggregate;
-    private String totalUnit;
+    private String drugBig;
     private Long inject;
     private Long carryOut;
-    private String remark;
+    private String standardName;
+    private Long subtotal;
 
     @Id
-    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
-    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
-    @Column(name = "PRESCRIBE_ID")
-    public long getPrescribeId() {
-        return prescribeId;
-    }
-
-    public void setPrescribeId(long prescribeId) {
-        this.prescribeId = prescribeId;
-    }
-
-    @Basic
     @Column(name = "RECIPEL_NO")
     public String getRecipelNo() {
         return recipelNo;
@@ -53,13 +41,13 @@ public class PrescriptionDetail {
     }
 
     @Basic
-    @Column(name = "DRUG_NO")
-    public String getDrugNo() {
-        return drugNo;
+    @Column(name = "DRUG_NAME")
+    public String getDrugName() {
+        return drugName;
     }
 
-    public void setDrugNo(String drugNo) {
-        this.drugNo = drugNo;
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
     }
 
     @Basic
@@ -83,23 +71,23 @@ public class PrescriptionDetail {
     }
 
     @Basic
-    @Column(name = "USAGE")
-    public String getUsage() {
-        return usage;
+    @Column(name = "DRUG_USE")
+    public String getDrugUse() {
+        return drugUse;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage;
+    public void setDrugUse(String drugUse) {
+        this.drugUse = drugUse;
     }
 
     @Basic
-    @Column(name = "DAYS")
-    public Long getDays() {
-        return days;
+    @Column(name = "DRUG_NEXT")
+    public Long getDrugNext() {
+        return drugNext;
     }
 
-    public void setDays(Long days) {
-        this.days = days;
+    public void setDrugNext(Long drugNext) {
+        this.drugNext = drugNext;
     }
 
     @Basic
@@ -113,13 +101,13 @@ public class PrescriptionDetail {
     }
 
     @Basic
-    @Column(name = "TOTAL_UNIT")
-    public String getTotalUnit() {
-        return totalUnit;
+    @Column(name = "DRUG_BIG")
+    public String getDrugBig() {
+        return drugBig;
     }
 
-    public void setTotalUnit(String totalUnit) {
-        this.totalUnit = totalUnit;
+    public void setDrugBig(String drugBig) {
+        this.drugBig = drugBig;
     }
 
     @Basic
@@ -143,13 +131,23 @@ public class PrescriptionDetail {
     }
 
     @Basic
-    @Column(name = "REMARK")
-    public String getRemark() {
-        return remark;
+    @Column(name = "STANDARD_NAME")
+    public String getStandardName() {
+        return standardName;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setStandardName(String standardName) {
+        this.standardName = standardName;
+    }
+
+    @Basic
+    @Column(name = "SUBTOTAL")
+    public Long getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Long subtotal) {
+        this.subtotal = subtotal;
     }
 
     @Override
@@ -157,11 +155,30 @@ public class PrescriptionDetail {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrescriptionDetail that = (PrescriptionDetail) o;
-        return prescribeId == that.prescribeId && Objects.equals(recipelNo, that.recipelNo) && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(drugNo, that.drugNo) && Objects.equals(dose, that.dose) && Objects.equals(drugRoute, that.drugRoute) && Objects.equals(usage, that.usage) && Objects.equals(days, that.days) && Objects.equals(aggregate, that.aggregate) && Objects.equals(totalUnit, that.totalUnit) && Objects.equals(inject, that.inject) && Objects.equals(carryOut, that.carryOut) && Objects.equals(remark, that.remark);
+        return Objects.equals(recipelNo, that.recipelNo) && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(drugName, that.drugName) && Objects.equals(dose, that.dose) && Objects.equals(drugRoute, that.drugRoute) && Objects.equals(drugUse, that.drugUse) && Objects.equals(drugNext, that.drugNext) && Objects.equals(aggregate, that.aggregate) && Objects.equals(drugBig, that.drugBig) && Objects.equals(inject, that.inject) && Objects.equals(carryOut, that.carryOut) && Objects.equals(standardName, that.standardName) && Objects.equals(subtotal, that.subtotal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prescribeId, recipelNo, prescriptionNo, drugNo, dose, drugRoute, usage, days, aggregate, totalUnit, inject, carryOut, remark);
+        return Objects.hash(recipelNo, prescriptionNo, drugName, dose, drugRoute, drugUse, drugNext, aggregate, drugBig, inject, carryOut, standardName, subtotal);
+    }
+
+    @Override
+    public String toString() {
+        return "PrescriptionDetail{" +
+                "recipelNo='" + recipelNo + '\'' +
+                ", prescriptionNo='" + prescriptionNo + '\'' +
+                ", drugName='" + drugName + '\'' +
+                ", dose=" + dose +
+                ", drugRoute='" + drugRoute + '\'' +
+                ", drugUse='" + drugUse + '\'' +
+                ", drugNext=" + drugNext +
+                ", aggregate=" + aggregate +
+                ", drugBig='" + drugBig + '\'' +
+                ", inject=" + inject +
+                ", carryOut=" + carryOut +
+                ", standardName='" + standardName + '\'' +
+                ", subtotal=" + subtotal +
+                '}';
     }
 }
