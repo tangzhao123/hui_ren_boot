@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--门诊处方单-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionListMapper">
+    <insert id="addList">
+        insert into PRESCRIPTION_LIST values (seq_huiren.nextval,#{prescriptionNo},#{recordNo},
+                                              #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
+                                              #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
+                                              #{doctorAdvice},#{sumMoney})
+    </insert>
+</mapper>
