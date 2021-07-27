@@ -34,6 +34,33 @@
         </where>
     </select>
 
+<!--    修改病床状态-->
+    <update id="updateSickbed">
+        UPDATE SICKBED set sickbed_state = 1 where sickbed_mark = #{sickbedMark}
+    </update>
+<!--    调换病床后秀给病床的状态-->
+    <update id="updateTwo">
+        UPDATE SICKBED set sickbed_state = 0 where sickbed_mark = #{sickbedMark}
+    </update>
+<!--    新增病床使用记录-->
+    <insert id="addRecord" >
+            insert into record(RECORD_ID,RECORD_SERIAL,SICKBED_MARK,RECORD_NAME,RECORD_DATE,RECORD_STATE,REGISTER_ID)
+                values(seq_huiren.nextval,#{recordSerial},#{sickbedMark},#{recordName},current_timestamp ,1,#{registerId})
+    </insert>
+<!--    修改病床使用记录-->
+    <update id="updateRecord">
+        UPDATE RECORD SET SICKBED_MARK = #{sickbedMark} where RECORD_SERIAL = #{recordSerial}
+    </update>
+<!--    修改病人资料，添加床位-->
+    <update id="updateRegister">
+        UPDATE REGISTER set sickbed_mark  = #{sickbedMark} where register_id = #{registerId}
+    </update>
+
+<!--    查询病床使用记录表-->
+    <select id="selectRecord" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Record">
+        SELECT * FROM RECORD
+    </select>
+
     <resultMap id="allRegisMapper" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
         <id column="REGISTER_SERICA" property="registerSerica"/>
         <result column="REGISTER_ID" property="registerId"/>
@@ -70,6 +97,6 @@
 <!--    查询病人信息-->
     <select id="registerSelect" resultMap="allRegisMapper">
         select * from register r LEFT JOIN MEDICAL m on r.MEDICAL_ID = m.MEDICAL_ID
-            LEFT JOIN staff s on r.STAFF_ID = s.STAFF_ID
+            LEFT JOIN staff s on r.STAFF_ID = s.STAFF_ID WHERE r.sickbed_mark is null
     </select>
 </mapper>
