@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 门诊开处方
@@ -26,8 +27,12 @@ public class RecipelController {
     public static String getOrderIdByTime() {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
         String newDate=sdf.format(new Date());
-        String result="CF" + newDate;
-        return result;
+        String result="CF";
+        Random random=new Random();
+        for(int i=0;i<3;i++){
+            result+=random.nextInt(10);
+        }
+        return newDate+result;
     }
 
     //新增门诊西药处方单和处方详单
@@ -46,5 +51,18 @@ public class RecipelController {
             e.printStackTrace();
             return "fail";
         }
+    }
+
+    //查询门诊西药处方单
+    @RequestMapping("/all-recipel")
+    public List<PrescriptionList> allRecipel(){
+        return recipelService.allRecipel();
+    }
+
+    //根据处方号查询处方详单
+    @RequestMapping("/sel-no")
+    public List<PrescriptionDetail> selNo(String prescriptionNo){
+        System.out.println(prescriptionNo);
+        return recipelService.selNo(prescriptionNo);
     }
 }

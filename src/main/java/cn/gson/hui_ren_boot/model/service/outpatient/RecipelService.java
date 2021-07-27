@@ -26,4 +26,14 @@ public class RecipelService {
         listMapper.addList(prescriptionList);
         detailMapper.addDetail(details, prescriptionList.getPrescriptionNo());
     }
+
+    //查询门诊西药处方单
+    public List<PrescriptionList> allRecipel(){
+        return listMapper.allRecipel();
+    }
+
+    //根据处方号查询处方详单
+    public List<PrescriptionDetail> selNo(String prescriptionNo){
+        return detailMapper.selNo(prescriptionNo);
+    }
 }
