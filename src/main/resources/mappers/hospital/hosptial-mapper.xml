@@ -44,7 +44,7 @@
         select*from hospital where hospital_card=#{hospitalCard}
     </select>
     <insert id="addHostp">
-        insert into hospital(hospital_id,hospital_cause,hospital_name,hospital_date,hospital_site,hospital_card,hospital_state) values(seq_huiren.nextval,#{hospitalCause},#{hospitalName},systimestamp,#{hospitalSite},#{hospitalCard},#{hospitalState})
+        insert into hospital(hospital_id,hospital_cause,hospital_name,hospital_date,hospital_site,hospital_card,hospital_state) values(seq_huiren.nextval,#{hospitalCause},#{hospitalName},current_timestamp,#{hospitalSite},#{hospitalCard},#{hospitalState})
     </insert>
     <update id="upHostp">
         update hospital set hospital_name=#{hospitalName},hospital_site=#{hospitalSite},hospital_card=#{hospitalCard} where hospital_id=#{hospitalId}
