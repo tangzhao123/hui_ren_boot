@@ -33,7 +33,8 @@
         update DRUG_SUPPLIER set SUPPLIER_NAME=#{supplierName},SUPPLIER_ADDRESS=#{supplierAddress},SUPPLIER_PHONE=#{supplierPhone} where SUPPLIER_ID=#{supplierId}
     </update>
 
-    <delete id="deSupplier">
-        delete from DRUG_SUPPLIER where SUPPLIER_ID=#{supplierId}
-    </delete>
+    <!-- 查询所有的供货商 -->
+    <select id="findAllSupplier" resultMap="supplierMapper">
+        select * from drug_supplier
+    </select>
 </mapper>

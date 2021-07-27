@@ -25,6 +25,11 @@ public class DrugSupplierController {
        return drugSupplierService.allSupplierByPage(pageNo,size,drugSuppliers);
     }
     //药品表单供应商
+
+    @RequestMapping("supplier-list")
+    public List<DrugSupplier> findAllSupplier(){
+        return drugSupplierService.findAllSupplier();
+    }
     @RequestMapping("/suppt")
     public List<DrugSupplier> allSuppt(DrugSupplier drugSupplier){
         return drugSupplierService.allSuppt(drugSupplier);
