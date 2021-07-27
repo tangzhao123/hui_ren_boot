@@ -23,4 +23,13 @@ public class DrugSupplierService {
     public List<DrugSupplier> allSuppt(DrugSupplier drugSupplier){
         return drugSupplierMapper.allSuppt(drugSupplier);
     }
+    public void addSupplier(DrugSupplier drugSupplier){
+        drugSupplierMapper.addSupplier(drugSupplier);
+    }
+    public void upSupplier(DrugSupplier drugSupplier){
+        drugSupplierMapper.upSupplier(drugSupplier);
+    }
+    public void deSupplier(int supplierId){
+        drugSupplierMapper.deSupplier(supplierId);
+    }
 }

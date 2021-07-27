@@ -23,6 +23,15 @@
     <select id="allSuppt" resultType="DrugSupplier">
         select * from DRUG_SUPPLIER
     </select>
+<!--//新增-->
+    <insert id="addSupplier">
+        insert into DRUG_SUPPLIER
+        values (seq_huiren.nextval,#{supplierName},#{supplierAddress},#{supplierPhone})
+    </insert>
+    <!--//修改-->
+    <update id="upSupplier">
+        update DRUG_SUPPLIER set SUPPLIER_NAME=#{supplierName},SUPPLIER_ADDRESS=#{supplierAddress},SUPPLIER_PHONE=#{supplierPhone} where SUPPLIER_ID=#{supplierId}
+    </update>
 
     <!-- 查询所有的供货商 -->
     <select id="findAllSupplier" resultMap="supplierMapper">
