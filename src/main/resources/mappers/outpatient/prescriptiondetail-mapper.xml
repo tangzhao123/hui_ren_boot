@@ -3,5 +3,50 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--门诊处方详单-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionDetailMapper">
+    <resultMap id="detailMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail">
+        <id column="RECIPEL_NO" property="recipelNo"/>
+        <result column="PRESCRIPTION_NO" property="prescriptionNo"/>
+        <result column="DRUG_NAME" property="drugName"/>
+        <result column="DOSE" property="dose"/>
+        <result column="DRUG_ROUTE" property="drugRoute"/>
+        <result column="DRUG_USE" property="drugUse"/>
+        <result column="DRUG_NEXT" property="drugNext"/>
+        <result column="AGGREGATE" property="aggregate"/>
+        <result column="DRUG_BIG" property="drugBig"/>
+        <result column="INJECT" property="inject"/>
+        <result column="CARRY_OUT" property="carryOut"/>
+        <result column="SUBTOTAL" property="subtotal"/>
+        <association property="standards" javaType="DrugStandard">
+            <id column="STANDARD_ID" property="standardId"/>
+            <result column="STANDARD_NAME" property="standardName"/>
+            <result column="STANDARD_NUM" property="standardNum"/>
+            <result column="STANDARD_DOSAGE" property="standardDosage"/>
+            <result column="STANDARD_USE" property="standardUse"/>
+        </association>
+    </resultMap>
 
+    <!--批量新增门诊处方详单-->
+    <insert id="addDetail" parameterType="java.util.List">
+        insert all into prescription_detail(RECIPEL_NO,PRESCRIPTION_NO,DRUG_NAME,DRUG_USE,
+        DRUG_NEXT,AGGREGATE,DRUG_BIG,STANDARD_NAME,SUBTOTAL)
+        <foreach collection="details" item="d" index="i" separator=" ">
+            <if test="i!=details.size()-1">
+                into prescription_detail(RECIPEL_NO,PRESCRIPTION_NO,DRUG_NAME,DRUG_USE,
+                DRUG_NEXT,AGGREGATE,DRUG_BIG,STANDARD_NAME,SUBTOTAL)
+                values(#{d.recipelNo},#{prescriptionNo},#{d.drugName},#{d.drugUse},#{d.drugNext},
+                #{d.aggregate},#{d.drugBig},#{d.standards.standardName},#{d.subtotal})
+            </if>
+            <if test="i==details.size()-1">
+                select #{d.recipelNo},#{prescriptionNo},#{d.drugName},#{d.drugUse},#{d.drugNext},
+                #{d.aggregate},#{d.drugBig},#{d.standards.standardName},#{d.subtotal} from dual
+            </if>
+        </foreach>
+    </insert>
+
+    <!--根据处方号查询处方详单-->
+    <select id="selNo" resultMap="detailMap">
+        select * from prescription_detail pd
+                          left join prescription_list pl on pd.prescription_no = pl.prescription_no
+        where pd.prescription_no = #{prescriptionNo}
+    </select>
 </mapper>
