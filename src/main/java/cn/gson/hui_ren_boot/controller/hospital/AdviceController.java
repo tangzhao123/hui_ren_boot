@@ -29,13 +29,15 @@ public class AdviceController {
       try{
 //            double price=0;//单价
             List<Details>detail=advice.getDetailst();
-            String danhao=  MyUtil.genrateNo("YZXD");//订单编号
+
             for (Details p:detail) {
+                String danhao=  MyUtil.genrateNo("YZXD");//订单编号
+                System.out.println(danhao);
                 p.setDaralisStart(advice.getAdviceStart());//开始时间
                 p.setDaralisDisable(advice.getAdviceEnd());
                 p.setAdviceId(advice.getAdviceId());//医嘱号
                 p.setDaralisDstate(1L);
-                p.setDaralismark(danhao);
+                p.setDaralisMark(danhao);
                 System.out.println(p.getDetailsDrip());
                 if(p.getDetailsDrip()==null){
                     p.setDetailsDrip("null");

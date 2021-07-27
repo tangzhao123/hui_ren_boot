@@ -26,7 +26,24 @@
     </select>
 <!--    医嘱详情管理-->
     <select id="seletDetails" resultType="Details">
-        select *from details where advice_id=#{adviceId}
+        select *from details
+        <where>
+            <if test="adviceId != null and '' != adviceId">
+                advice_id=#{adviceId}
+            </if>
+        </where>
+
+    </select>
+<!--    主表停嘱-->
+    <update id="upDetails">
+        update details set daralis_dstate=0 where advice_id=#{adviceId}
+    </update>
+    <!--从表停嘱-->
+    <update id="upDetailw">
+        update details set daralis_dstate=0 where daralis_mark=#{daralisMark}
+    </update>
+    <select id ="queryDeta" resultType="Details">
+        select *from details where  advice_id=#{adviceId}
     </select>
 <!--    <insert id="addDetails">-->
 <!--        insert  into details-->
@@ -49,12 +66,13 @@
             <if test="i!=detail.size()-1">
                 into details
                         (details_serial,drug_name,details_drip,details_way,datails_dosage,daralis_usage,daralis_time,advice_id,daralis_dstate,daralis_disable,daralis_start,daralis_price,daralis_number,standard_name,drug_big,standard_use,daralis_mark)
-                values(#{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.detailsWay},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},#{p.standardName},#{p.drugBig},#{p.standardUse},#{daralisMark})
+                values(#{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.detailsWay},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},#{p.standardName},#{p.drugBig},#{p.standardUse},#{p.daralisMark})
             </if>
             <if test="i==detail.size()-1">
                 select #{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.detailsWay},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},
-                        #{p.standardName},#{p.drugBig},#{p.standardUse},#{daralisMark} from dual
+                        #{p.standardName},#{p.drugBig},#{p.standardUse},#{p.daralisMark} from dual
             </if>
         </foreach>
     </insert>
+
 </mapper>

@@ -9,5 +9,8 @@ import java.util.List;
 public interface DetailsMapper {
     public List<Details> allDetails(Details jk);//药房医嘱详情查询
     public void addDetails(List<Details> detail);//批量新增医嘱详情
-    public List<Details>seletDetails(String adviceId);//医嘱详情管理
+    public List<Details>seletDetails(Details adviceId);//医嘱详情管理
+    public List<Details>queryDeta(String adviceId);//查询详单
+    public void upDetails(String adviceId);//主表停嘱
+    public void upDetailw(String daralisMark);//从表停嘱
 }

@@ -27,6 +27,7 @@ public class Details {
     private String daralisMark;//医嘱详情号
 
 
+
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
     @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
@@ -40,11 +41,11 @@ public class Details {
     }
     @Basic
     @Column(name = "DARALIS_MARK")
-    public String getDaralismark() {
+    public String getDaralisMark() {
         return daralisMark;
     }
 
-    public void setDaralismark(String daralisMark) {
+    public void setDaralisMark(String daralisMark) {
         this.daralisMark = daralisMark;
     }
 

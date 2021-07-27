@@ -157,7 +157,7 @@
         insert into register (register_serica,register_id,register_date,register_name,register_sex,register_site,
                 register_card,register_print,register_age,register_home,register_address,register_phone,register_relation,
                 register_contact,register_call,medical_id,register_record,register_clinic)
-            values(seq_huiren.nextval,#{registerId},systimestamp,#{registerName}
+            values(seq_huiren.nextval,#{registerId},current_timestamp,#{registerName}
                 ,#{registerSex},#{registerSite},#{registerCard},#{registerPrint},
                 #{registerAge},#{registerHome},#{registerAddress},#{registerPhone},
                 #{registerRelation},#{registerContact},#{registerCall},#{medicalId},
