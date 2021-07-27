@@ -2,8 +2,11 @@ package cn.gson.hui_ren_boot.controller.outpatient;
 
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails;
 import cn.gson.hui_ren_boot.model.service.outpatient.RecipelService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,13 @@ public class RecipelController {
             result+=random.nextInt(10);
         }
         return newDate+result;
+    }
+
+    //查询药品
+    @RequestMapping("/all-drug")
+    public List<DrugInfo> allDrug(String drugInfo){
+        DrugInfo drugInfos = JSONObject.toJavaObject(JSON.parseObject(drugInfo), DrugInfo.class);
+        return recipelService.allDrug(drugInfos);
     }
 
     //新增门诊西药处方单和处方详单
