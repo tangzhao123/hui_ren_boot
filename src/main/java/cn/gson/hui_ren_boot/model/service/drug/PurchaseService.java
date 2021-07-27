@@ -43,6 +43,11 @@ public class PurchaseService {
         purchaseMapper.trial(purchaseId);
     }
 
+    //更改采购计划单状态（根据采购计划生成采购订单）
+    public void trials(String purchaseId){
+        purchaseMapper.trials(purchaseId);
+    }
+
     //查询所有的采购计划单
     public Object findAllPurchaseByPage(Integer pageNo,Integer size){
         return purchaseMapper.findAllPurchase();

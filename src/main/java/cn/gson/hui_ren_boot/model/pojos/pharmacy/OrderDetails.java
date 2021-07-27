@@ -1,7 +1,10 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +16,8 @@ public class OrderDetails {
     private String ordersNum;
     private String ordersProduct;
     private Long ordersSum;
-    private Time ordersDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Timestamp ordersDate;
     private Long ordersPrice;
     private String ordersBatch;
     private String orderIndate;
@@ -70,13 +74,14 @@ public class OrderDetails {
         this.ordersSum = ordersSum;
     }
 
+
     @Basic
     @Column(name = "ORDERS_DATE")
-    public Time getOrdersDate() {
+    public Timestamp getOrdersDate() {
         return ordersDate;
     }
 
-    public void setOrdersDate(Time ordersDate) {
+    public void setOrdersDate(Timestamp ordersDate) {
         this.ordersDate = ordersDate;
     }
 
@@ -121,5 +126,20 @@ public class OrderDetails {
     @Override
     public int hashCode() {
         return Objects.hash(ordersSerial, ordersId, ordersNum, ordersProduct, ordersSum, ordersDate, ordersPrice, ordersBatch, orderIndate);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetails{" +
+                "ordersSerial=" + ordersSerial +
+                ", ordersId='" + ordersId + '\'' +
+                ", ordersNum='" + ordersNum + '\'' +
+                ", ordersProduct='" + ordersProduct + '\'' +
+                ", ordersSum=" + ordersSum +
+                ", ordersDate=" + ordersDate +
+                ", ordersPrice=" + ordersPrice +
+                ", ordersBatch='" + ordersBatch + '\'' +
+                ", orderIndate='" + orderIndate + '\'' +
+                '}';
     }
 }

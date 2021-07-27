@@ -1,7 +1,9 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,13 +12,15 @@ import java.util.Objects;
 public class PurchaseOrder {
 
     private long orderSerial;
-    private Time orderTime;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Timestamp orderTime;
     private String orderId;
     private Long orderTotal;
-    private Time stocksDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Timestamp stocksDate;
     private String orderAgent;
     private String purchaseDetails;
-    private List<OrderDetails> detailsList;
+    private List<OrderDetails> orderDetails;
 
 
 
@@ -30,13 +34,14 @@ public class PurchaseOrder {
         this.orderSerial = orderSerial;
     }
 
+
     @Basic
     @Column(name = "ORDER_TIME")
-    public Time getOrderTime() {
+    public Timestamp getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Time orderTime) {
+    public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -60,13 +65,15 @@ public class PurchaseOrder {
         this.orderTotal = orderTotal;
     }
 
+
     @Basic
     @Column(name = "STOCKS_DATE")
-    public Time getStocksDate() {
+
+    public Timestamp getStocksDate() {
         return stocksDate;
     }
 
-    public void setStocksDate(Time stocksDate) {
+    public void setStocksDate(Timestamp stocksDate) {
         this.stocksDate = stocksDate;
     }
 
@@ -92,12 +99,12 @@ public class PurchaseOrder {
 
 
     @OneToMany
-    public List<OrderDetails> getDetailsList() {
-        return detailsList;
+    public List<OrderDetails> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setDetailsList(List<OrderDetails> detailsList) {
-        this.detailsList = detailsList;
+    public void setOrderDetails(List<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     @Override
@@ -111,5 +118,20 @@ public class PurchaseOrder {
     @Override
     public int hashCode() {
         return Objects.hash(orderSerial, orderTime, orderId, orderTotal, stocksDate, orderAgent, purchaseDetails);
+    }
+
+
+    @Override
+    public String toString() {
+        return "PurchaseOrder{" +
+                "orderSerial=" + orderSerial +
+                ", orderTime=" + orderTime +
+                ", orderId='" + orderId + '\'' +
+                ", orderTotal=" + orderTotal +
+                ", stocksDate=" + stocksDate +
+                ", orderAgent='" + orderAgent + '\'' +
+                ", purchaseDetails='" + purchaseDetails + '\'' +
+                ", orderDetails=" + orderDetails +
+                '}';
     }
 }
