@@ -37,8 +37,8 @@ public class RecipelService {
     }
 
     //查询门诊西药处方单
-    public List<PrescriptionList> allRecipel(){
-        return listMapper.allRecipel();
+    public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList){
+        return listMapper.allRecipel(prescriptionList);
     }
 
     //根据处方号查询处方详单

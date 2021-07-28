@@ -65,8 +65,8 @@ public class RecipelController {
 
     //查询门诊西药处方单
     @RequestMapping("/all-recipel")
-    public List<PrescriptionList> allRecipel(){
-        return recipelService.allRecipel();
+    public List<PrescriptionList> allRecipel(@RequestBody PrescriptionList prescriptionList){
+        return recipelService.allRecipel(prescriptionList);
     }
 
     //根据处方号查询处方详单

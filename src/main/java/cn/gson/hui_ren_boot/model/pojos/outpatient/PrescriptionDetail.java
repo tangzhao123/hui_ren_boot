@@ -13,7 +13,7 @@ public class PrescriptionDetail {
     private Long dose;
     private String drugRoute;
     private String drugUse;
-    private Long drugNext;
+    private String drugNext;
     private Long aggregate;
     private String drugBig;
     private Long inject;
@@ -92,11 +92,11 @@ public class PrescriptionDetail {
 
     @Basic
     @Column(name = "DRUG_NEXT")
-    public Long getDrugNext() {
+    public String getDrugNext() {
         return drugNext;
     }
 
-    public void setDrugNext(Long drugNext) {
+    public void setDrugNext(String drugNext) {
         this.drugNext = drugNext;
     }
 

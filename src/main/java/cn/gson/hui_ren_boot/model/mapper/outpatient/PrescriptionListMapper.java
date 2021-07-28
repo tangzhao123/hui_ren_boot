@@ -15,5 +15,5 @@ public interface PrescriptionListMapper {
     public void addList(PrescriptionList prescriptionList);
 
     //查询门诊西药处方单
-    public List<PrescriptionList> allRecipel();
+    public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList);
 }

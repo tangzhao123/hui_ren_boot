@@ -81,5 +81,15 @@
                           left join staff s on pl.staff_id = s.staff_id
                           left JOIN medical me on pl.medical_id = me.medical_id
         where pl.prescription_type = 1
+        <if test="outpatient != null">
+            <if test="outpatient.outpatientName != null and '' != outpatient.outpatientName">
+                and o.OUTPATIENT_NAME like '%${outpatient.outpatientName}%'
+            </if>
+        </if>
+        <if test="prescriptionDiagnosis != null and '' != prescriptionDiagnosis">
+                or pl.prescription_diagnosis like '%${prescriptionDiagnosis}%'
+        </if>
     </select>
+
+    <!--查询门诊-->
 </mapper>
