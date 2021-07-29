@@ -12,6 +12,9 @@
         <result column="PRESCRIPTION_DIAGNOSIS" property="prescriptionDiagnosis"/>
         <result column="DOCTOR_ADVICE" property="doctorAdvice"/>
         <result column="SUM_MONEY" property="sumMoney"/>
+        <result column="DOSIS" property="dosis"/>
+        <result column="USAGE" property="usage"/>
+        <result column="STATE" property="state"/>
         <association property="outpatient" javaType="OutpatientRegister">
             <id column="OUTPATIENT_ID" property="outpatientId"/>
             <result column="OUTPATIENT_NAME" property="outpatientName"/>
@@ -67,11 +70,25 @@
     </resultMap>
 
     <!--新增门诊西药处方单-->
-    <insert id="addList">
-        insert into PRESCRIPTION_LIST values (seq_huiren.nextval,#{prescriptionNo},null,
+    <insert id="addList" >
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+                                      PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
+                                      STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY)
+                                      values (seq_huiren.nextval,#{prescriptionNo},
                                               #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
                                               #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
                                               #{doctorAdvice},#{sumMoney})
+    </insert>
+
+    <!--新增门诊中药处方单-->
+    <insert id="addChineseList" >
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+                                      PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
+                                      STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY,DOSIS,USAGE)
+        values (seq_huiren.nextval,#{prescriptionNo},
+                #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
+                #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
+                #{doctorAdvice},#{sumMoney},#{dosis},#{usage})
     </insert>
 
     <!--查询门诊西药处方-->
@@ -91,5 +108,4 @@
         </if>
     </select>
 
-    <!--查询门诊-->
 </mapper>

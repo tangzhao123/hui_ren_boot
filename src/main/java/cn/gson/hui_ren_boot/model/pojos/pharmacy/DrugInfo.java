@@ -13,13 +13,13 @@ public class DrugInfo {
     private String drugDosage;//剂型
     private String drugTack;//拆零
     private String drugRemark;//备注
-    private Long drugSelling;//售价
-    private Long purchasePrice;//进价
+    private double drugSelling;//售价
+    private double purchasePrice;//进价
     private String drugNext;//次/天
     private String drugBig;//大单位
     private String drugSmall;//小单位
-    private Long smallSelling;//小单位售价
-    private Long smallPrice;//小单位进价
+    private double smallSelling;//小单位售价
+    private double smallPrice;//小单位进价
     private Long drugState;//状态
     private DrugType types;//药品类别
     private DrugSupplier suppliers;//供应商
@@ -138,21 +138,21 @@ public class DrugInfo {
 
     @Basic
     @Column(name = "DRUG_SELLING")
-    public Long getDrugSelling() {
+    public double getDrugSelling() {
         return drugSelling;
     }
 
-    public void setDrugSelling(Long drugSelling) {
+    public void setDrugSelling(double drugSelling) {
         this.drugSelling = drugSelling;
     }
 
     @Basic
     @Column(name = "PURCHASE_PRICE")
-    public Long getPurchasePrice() {
+    public double getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(Long purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
@@ -190,21 +190,21 @@ public class DrugInfo {
 
     @Basic
     @Column(name = "SMALL_SELLING")
-    public Long getSmallSelling() {
+    public double getSmallSelling() {
         return smallSelling;
     }
 
-    public void setSmallSelling(Long smallSelling) {
+    public void setSmallSelling(double smallSelling) {
         this.smallSelling = smallSelling;
     }
 
     @Basic
     @Column(name = "SMALL_PRICE")
-    public Long getSmallPrice() {
+    public double getSmallPrice() {
         return smallPrice;
     }
 
-    public void setSmallPrice(Long smallPrice) {
+    public void setSmallPrice(double smallPrice) {
         this.smallPrice = smallPrice;
     }
 

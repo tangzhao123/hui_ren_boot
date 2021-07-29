@@ -22,7 +22,10 @@ public class PrescriptionList {
     private Long staffId;
     private Long medicalId;
     private String doctorAdvice;
-    private Long sumMoney;
+    private double sumMoney;
+    private Long dosis;
+    private String usage;
+    private Long state;
     private MedicalRecordInfo info;
     private OutpatientRegister outpatient;
     private Staff outdoctor;
@@ -178,12 +181,42 @@ public class PrescriptionList {
 
     @Basic
     @Column(name = "SUM_MONEY")
-    public Long getSumMoney() {
+    public double getSumMoney() {
         return sumMoney;
     }
 
-    public void setSumMoney(Long sumMoney) {
+    public void setSumMoney(double sumMoney) {
         this.sumMoney = sumMoney;
+    }
+
+    @Basic
+    @Column(name = "DOSIS")
+    public Long getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(Long dosis) {
+        this.dosis = dosis;
+    }
+
+    @Basic
+    @Column(name = "USAGE")
+    public String getUsage() {
+        return usage;
+    }
+
+    public void setUsage(String usage) {
+        this.usage = usage;
+    }
+
+    @Basic
+    @Column(name = "STATE")
+    public Long getState() {
+        return state;
+    }
+
+    public void setState(Long state) {
+        this.state = state;
     }
 
     @Override

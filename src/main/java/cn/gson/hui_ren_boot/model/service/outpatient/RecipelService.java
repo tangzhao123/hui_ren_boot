@@ -36,6 +36,12 @@ public class RecipelService {
         detailMapper.addDetail(details, prescriptionList.getPrescriptionNo());
     }
 
+    //新增门诊中药处方单和处方详单
+    public void recipelChinese(PrescriptionList prescriptionList, List<PrescriptionDetail> details){
+        listMapper.addChineseList(prescriptionList);
+        detailMapper.addChineseDetail(details, prescriptionList.getPrescriptionNo());
+    }
+
     //查询门诊西药处方单
     public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList){
         return listMapper.allRecipel(prescriptionList);

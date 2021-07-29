@@ -18,7 +18,7 @@ public class PrescriptionDetail {
     private String drugBig;
     private Long inject;
     private Long carryOut;
-    private Long subtotal;
+    private double subtotal;
     private DrugStandard standards;
 
     @OneToOne
@@ -142,11 +142,11 @@ public class PrescriptionDetail {
 
     @Basic
     @Column(name = "SUBTOTAL")
-    public Long getSubtotal() {
+    public double getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(Long subtotal) {
+    public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
 

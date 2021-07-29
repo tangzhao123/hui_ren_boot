@@ -63,6 +63,23 @@ public class RecipelController {
         }
     }
 
+    //新增门诊中药处方单和处方详单
+    @RequestMapping("/add-recipelChinese")
+    public String addChineseRecipel(@RequestBody PrescriptionList prescriptionList){
+        try{
+            List<PrescriptionDetail> detail = prescriptionList.getDetails();
+            for (PrescriptionDetail details : detail) {
+                details.setRecipelNo(getOrderIdByTime());
+            }
+            System.out.println(prescriptionList);
+            recipelService.recipelChinese(prescriptionList, prescriptionList.getDetails());
+            return "ok";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
     //查询门诊西药处方单
     @RequestMapping("/all-recipel")
     public List<PrescriptionList> allRecipel(@RequestBody PrescriptionList prescriptionList){

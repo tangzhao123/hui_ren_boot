@@ -14,6 +14,9 @@ public interface PrescriptionDetailMapper {
     //新增门诊西药处方详单
     public void addDetail(List<PrescriptionDetail> details,String prescriptionNo);
 
+    //新增门诊中药处方详单
+    public void addChineseDetail(List<PrescriptionDetail> details,String prescriptionNo);
+
     //根据处方号查询处方详单
     public List<PrescriptionDetail> selNo(String prescriptionNo);
 }
