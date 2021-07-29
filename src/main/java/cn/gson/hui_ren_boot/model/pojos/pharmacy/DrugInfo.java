@@ -21,6 +21,7 @@ public class DrugInfo {
     private Long smallSelling;//小单位售价
     private Long smallPrice;//小单位进价
     private Long drugState;//状态
+    private Integer drugLife;//保质期
     private DrugType types;//药品类别
     private DrugSupplier suppliers;//供应商
     private DrugStandard standards;//规格
@@ -217,6 +218,17 @@ public class DrugInfo {
     public void setDrugState(Long drugState) {
         this.drugState = drugState;
     }
+
+    @Basic
+    @Column(name = "DRUG_LIFE")
+    public Integer getDrugLife() {
+        return drugLife;
+    }
+
+    public void setDrugLife(Integer drugLife) {
+        this.drugLife = drugLife;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -248,6 +260,7 @@ public class DrugInfo {
                 ", smallSelling=" + smallSelling +
                 ", smallPrice=" + smallPrice +
                 ", drugState=" + drugState +
+                ", drugLife=" + drugLife +
                 ", types=" + types +
                 ", suppliers=" + suppliers +
                 ", standards=" + standards +

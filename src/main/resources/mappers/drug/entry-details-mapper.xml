@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.EntryDetailsMapper">
+
+    <!-- 新增入库详单 -->
+    <insert id="addEntryDetails">
+            insert into entry_details
+            select seq_huiren.nextval,details_drug,details_entry,detail_batch,detail_number,detail_production,detail_validity from
+            <foreach collection="entryDetailsData" item="t" index="i" separator=" " open="(" close=")">
+                <if test="i != entryDetailsData.size()-1">
+                    select #{t.detailsDrug} as details_drug,#{detailsEntry} as details_entry,#{t.detailBatch} as detail_batch,#{t.detailNumber} as detail_number
+                    ,#{t.detailProduction} as detail_production,#{t.detailValidity} as detail_validity from dual
+                    union
+                </if>
+                <if test=" i == entryDetailsData.size()-1">
+                    select #{t.detailsDrug} as details_drug,#{detailsEntry} as details_entry,#{t.detailBatch} as detail_batch,#{t.detailNumber} as detail_number
+                    ,#{t.detailProduction} as detail_production,#{t.detailValidity} as detail_validity from dual
+                </if>
+            </foreach>
+    </insert>
+</mapper>

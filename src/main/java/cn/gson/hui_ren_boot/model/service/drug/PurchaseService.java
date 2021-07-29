@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.model.service.drug;
 
 import cn.gson.hui_ren_boot.model.mapper.drug.PlanDetailsMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.PurchaseMapper;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchasePlan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class PurchaseService {
     }
 
     //根据采购单号查询详单号
-    public Object allDetailsByPage(Integer pageNo,Integer size,String purchaseId){
+    public List<PlanDetails> allDetails(String purchaseId){
         return planDetailsMapper.allDetails(purchaseId);
     }
 

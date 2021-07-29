@@ -45,12 +45,24 @@ public class PurchaseOrderController {
             for (OrderDetails orderDetails : o) {
                 orderDetails.setOrdersId(getOrderIdByTime());
             }
-            purchaseOrderService.addPurchaseOrder(purchaseOrder,purchaseOrder.getOrderDetails());
-            purchaseService.trials(purchaseOrder.getPurchaseDetails());
+           purchaseOrderService.addPurchaseOrder(purchaseOrder,purchaseOrder.getOrderDetails());
+           purchaseService.trials(purchaseOrder.getPurchaseDetails());
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
         }
+    }
+
+    //查询所有的采购订单
+    @RequestMapping("purchaseOrder-list")
+    public Object findAllPurchaseOrder(Integer pageNo,Integer size){
+        return purchaseOrderService.findAllPurchaseOrderByPage(pageNo, size);
+    }
+
+    //根据采购订单号查询采购详单
+    @RequestMapping("orderDetails-list")
+    public List<OrderDetails> findAllOrderDetails(String orderNum){
+        return purchaseOrderService.findAllOrderDetails(orderNum);
     }
 }
