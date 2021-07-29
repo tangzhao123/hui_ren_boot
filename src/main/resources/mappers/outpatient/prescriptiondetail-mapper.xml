@@ -25,7 +25,7 @@
         </association>
     </resultMap>
 
-    <!--批量新增门诊处方详单-->
+    <!--批量新增门诊西药处方详单-->
     <insert id="addDetail" parameterType="java.util.List">
         insert all into prescription_detail(RECIPEL_NO,PRESCRIPTION_NO,DRUG_NAME,DRUG_USE,
         DRUG_NEXT,AGGREGATE,DRUG_BIG,STANDARD_NAME,SUBTOTAL)
@@ -39,6 +39,24 @@
             <if test="i==details.size()-1">
                 select #{d.recipelNo},#{prescriptionNo},#{d.drugName},#{d.drugUse},#{d.drugNext},
                 #{d.aggregate},#{d.drugBig},#{d.standards.standardName},#{d.subtotal} from dual
+            </if>
+        </foreach>
+    </insert>
+
+    <!--批量新增门诊中药处方详单-->
+    <insert id="addChineseDetail" parameterType="java.util.List">
+        insert all into prescription_detail(RECIPEL_NO,PRESCRIPTION_NO,DRUG_NAME,
+        DOSE,DRUG_BIG,SUBTOTAL)
+        <foreach collection="details" item="d" index="i" separator=" ">
+            <if test="i!=details.size()-1">
+                into prescription_detail(RECIPEL_NO,PRESCRIPTION_NO,DRUG_NAME,
+                DOSE,DRUG_BIG,SUBTOTAL)
+                values(#{d.recipelNo},#{prescriptionNo},#{d.drugName},
+                #{d.dose},#{d.drugBig},#{d.subtotal})
+            </if>
+            <if test="i==details.size()-1">
+                select #{d.recipelNo},#{prescriptionNo},#{d.drugName},
+                #{d.dose},#{d.drugBig},#{d.subtotal} from dual
             </if>
         </foreach>
     </insert>

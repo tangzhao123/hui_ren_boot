@@ -2,8 +2,11 @@ package cn.gson.hui_ren_boot.controller.outpatient;
 
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails;
 import cn.gson.hui_ren_boot.model.service.outpatient.RecipelService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +38,13 @@ public class RecipelController {
         return newDate+result;
     }
 
+    //查询药品
+    @RequestMapping("/all-drug")
+    public List<DrugInfo> allDrug(String drugInfo){
+        DrugInfo drugInfos = JSONObject.toJavaObject(JSON.parseObject(drugInfo), DrugInfo.class);
+        return recipelService.allDrug(drugInfos);
+    }
+
     //新增门诊西药处方单和处方详单
     @RequestMapping("/add-recipel")
     public String addRecipel(@RequestBody PrescriptionList prescriptionList){
@@ -53,10 +63,27 @@ public class RecipelController {
         }
     }
 
+    //新增门诊中药处方单和处方详单
+    @RequestMapping("/add-recipelChinese")
+    public String addChineseRecipel(@RequestBody PrescriptionList prescriptionList){
+        try{
+            List<PrescriptionDetail> detail = prescriptionList.getDetails();
+            for (PrescriptionDetail details : detail) {
+                details.setRecipelNo(getOrderIdByTime());
+            }
+            System.out.println(prescriptionList);
+            recipelService.recipelChinese(prescriptionList, prescriptionList.getDetails());
+            return "ok";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
     //查询门诊西药处方单
     @RequestMapping("/all-recipel")
-    public List<PrescriptionList> allRecipel(){
-        return recipelService.allRecipel();
+    public List<PrescriptionList> allRecipel(@RequestBody PrescriptionList prescriptionList){
+        return recipelService.allRecipel(prescriptionList);
     }
 
     //根据处方号查询处方详单

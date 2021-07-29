@@ -13,12 +13,12 @@ public class PrescriptionDetail {
     private Long dose;
     private String drugRoute;
     private String drugUse;
-    private Long drugNext;
+    private String drugNext;
     private Long aggregate;
     private String drugBig;
     private Long inject;
     private Long carryOut;
-    private Long subtotal;
+    private double subtotal;
     private DrugStandard standards;
 
     @OneToOne
@@ -92,11 +92,11 @@ public class PrescriptionDetail {
 
     @Basic
     @Column(name = "DRUG_NEXT")
-    public Long getDrugNext() {
+    public String getDrugNext() {
         return drugNext;
     }
 
-    public void setDrugNext(Long drugNext) {
+    public void setDrugNext(String drugNext) {
         this.drugNext = drugNext;
     }
 
@@ -142,11 +142,11 @@ public class PrescriptionDetail {
 
     @Basic
     @Column(name = "SUBTOTAL")
-    public Long getSubtotal() {
+    public double getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(Long subtotal) {
+    public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
 
