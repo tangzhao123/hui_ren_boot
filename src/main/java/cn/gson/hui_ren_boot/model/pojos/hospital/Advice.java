@@ -20,9 +20,11 @@ public class Advice{
     private String adviceChinese;//中药用法
     private String adviceDoctors;//处方忌讳
     private String registerName;//患者姓名
-    private List<Details> detailst;//医嘱详情
+    private Long  adviceChindose;//中药数量
+    private List<Details> details;//医嘱详情
 
-    public Advice(long adviceSerial, String adviceId, String registerId, Date adviceStart, String adviceSickbed, String staffName, Long adviceCost, Long adviceType, Date adviceEnd, String adviceChinese, String adviceDoctors, String registerName) {
+
+    public Advice(long adviceSerial, String adviceId, String registerId, Date adviceStart, String adviceSickbed, String staffName, Long adviceCost, Long adviceType, Date adviceEnd, String adviceChinese, String adviceDoctors, String registerName, Long adviceChindose) {
         this.adviceSerial = adviceSerial;
         this.adviceId = adviceId;
         this.registerId = registerId;
@@ -35,6 +37,7 @@ public class Advice{
         this.adviceChinese = adviceChinese;
         this.adviceDoctors = adviceDoctors;
         this.registerName = registerName;
+        this.adviceChindose = adviceChindose;
     }
 
     public Advice() {
@@ -43,12 +46,12 @@ public class Advice{
 
 
     @OneToMany
-    public List<Details> getDetailst() {
-        return detailst;
+    public List<Details> getDetails() {
+        return details;
     }
 
-    public void setDetailst(List<Details> detailst) {
-        this.detailst = detailst;
+    public void setDetails(List<Details> details) {
+        this.details = details;
     }
 
 
@@ -65,6 +68,16 @@ public class Advice{
     public void setAdviceSerial(long adviceSerial) {
         this.adviceSerial = adviceSerial;
     }
+    @Basic
+    @Column(name = "ADVICE_CHINDOSE")
+    public Long getAdviceChindose() {
+        return adviceChindose;
+    }
+
+    public void setAdviceChindose(Long adviceChindose) {
+        this.adviceChindose = adviceChindose;
+    }
+
     @Basic
     @Column(name = "REGISTER_NAME")
     public String getRegisterName() {
@@ -180,12 +193,12 @@ public class Advice{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Advice advice = (Advice) o;
-        return adviceSerial == advice.adviceSerial && Objects.equals(adviceId, advice.adviceId) && Objects.equals(registerId, advice.registerId) && Objects.equals(adviceStart, advice.adviceStart) && Objects.equals(adviceSickbed, advice.adviceSickbed) && Objects.equals(staffName, advice.staffName) && Objects.equals(adviceCost, advice.adviceCost) && Objects.equals(adviceType, advice.adviceType) && Objects.equals(adviceEnd, advice.adviceEnd) && Objects.equals(adviceChinese, advice.adviceChinese) && Objects.equals(adviceDoctors, advice.adviceDoctors);
+        return adviceSerial == advice.adviceSerial && Objects.equals(adviceId, advice.adviceId) && Objects.equals(registerId, advice.registerId) && Objects.equals(adviceStart, advice.adviceStart) && Objects.equals(adviceSickbed, advice.adviceSickbed) && Objects.equals(staffName, advice.staffName) && Objects.equals(adviceCost, advice.adviceCost) && Objects.equals(adviceType, advice.adviceType) && Objects.equals(adviceEnd, advice.adviceEnd) && Objects.equals(adviceChinese, advice.adviceChinese) && Objects.equals(adviceDoctors, advice.adviceDoctors)&& Objects.equals(registerName, advice.registerName) && Objects.equals(adviceChindose, advice.adviceChindose);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(adviceSerial, adviceId, registerId, adviceStart, adviceSickbed, staffName, adviceCost, adviceType, adviceEnd, adviceChinese, adviceDoctors);
+        return Objects.hash(adviceSerial, adviceId, registerId, adviceStart, adviceSickbed, staffName, adviceCost, adviceType, adviceEnd, adviceChinese,registerName, adviceDoctors,adviceChindose);
     }
 
     @Override
@@ -203,7 +216,7 @@ public class Advice{
                 ", adviceChinese='" + adviceChinese + '\'' +
                 ", adviceDoctors='" + adviceDoctors + '\'' +
                 ", registerName='" + registerName + '\'' +
-                ", detailst=" + detailst +
+                ", details=" + details +
                 '}';
     }
 }

@@ -3,6 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.BlockupMapper">
     <insert id="addBlockup">
-        insert into blockup values (seq_huiren.nextval,#{detailsMark},current_timestamp,#{staffName},#{registerId},#{blockupWhy},#{adviceId})
+        insert into blockup values (seq_huiren.nextval,#{detailsMark},#{blockupDate},#{staffName},#{registerId},#{blockupWhy},#{adviceId})
     </insert>
 </mapper>

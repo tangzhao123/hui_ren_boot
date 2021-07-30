@@ -69,6 +69,7 @@
         <association property="treatment" javaType="TreatmentCard">
             <id column="treatment_id" property="treatmentId"/>
             <result column="treatment_balance" property="treatmentBalance"/>
+
         </association>
     </resultMap>
    <!-- 查询病人信息-->

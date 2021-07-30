@@ -3,6 +3,7 @@ package cn.gson.hui_ren_boot.controller.hospital;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Advice;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Blockup;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
+import cn.gson.hui_ren_boot.model.service.hospital.AdviceService;
 import cn.gson.hui_ren_boot.model.service.hospital.BlockupService;
 import cn.gson.hui_ren_boot.model.service.hospital.DetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,27 +21,37 @@ public class BlockupController {
     BlockupService blockupService;
     @Autowired
     DetailsService detailsService;
-
+    @Autowired
+    AdviceService adviceService;
 
     //新增修改
     @RequestMapping("/blockuptj")//医嘱管理
-    private String blockupTj(@RequestBody Blockup blockup,String advicewId){
+    private String blockupTj(@RequestBody Blockup blockup){
         //查询详单号
-        System.out.println(blockup);
-        System.out.println(advicewId);
-     List<Details> Jh=detailsService.queryDeta(advicewId);
-        for (Details h:Jh) {
-
-            blockup.setDetailsMark(h.getDaralisMark());
-            blockupService.addBlock(blockup);//添加记录
-
-            detailsService.upDetails(h.getAdviceId());//主表停嘱
+     List<Details> Jh=detailsService.queryDeta(blockup.getAdviceId());//按照医嘱号查询详单号
+        Details adv=new Details();
+        Advice a=new Advice();
+        for (Details h:Jh) {//循环查询出来集合
+             if(h.getDaralisDstate()==1){//主表停嘱让状态为1进sql语句
+                blockup.setDetailsMark(h.getDaralisMark());//把详表的详单号赋值给记录表
+                blockupService.addBlock(blockup);//添加记录
+                 adv.setAdviceId(blockup.getAdviceId());
+                 adv.setDaralisDisable(blockup.getBlockupDate());
+                 detailsService.upDetails(adv);//主表停嘱
+                 a.setAdviceId(blockup.getAdviceId());
+                 a.setAdviceEnd(blockup.getBlockupDate());
+                 adviceService.assAdvice(a);
+             }
         }
         return "ok";
     }
     @RequestMapping("/blockupcs")//医嘱管理
     private String blockupc(@RequestBody Blockup blockup){
-        detailsService.upDetailw(blockup.getDetailsMark());//从表停嘱
+        System.out.println(blockup);
+        Details k=new Details();
+        k.setDaralisDisable(blockup.getBlockupDate());
+        k.setDaralisMark(blockup.getDetailsMark());
+        detailsService.upDetailw(k);//从表停嘱
         blockupService.addBlock(blockup);//添加记录
         return "ok";
     }

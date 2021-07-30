@@ -16,7 +16,7 @@ public class Details {
     private String daralisUsage;//用法
     private String daralisTime;//每天次数
     private String adviceId;//医嘱号
-    private Long daralisDstate;//详情状况
+    private Long  daralisDstate;//详情状况
     private Date daralisDisable;//停用时间1
     private Date daralisStart;//开始时间
     private Long daralisPrice;//单价
@@ -25,7 +25,7 @@ public class Details {
     private String standardName;//单位
     private String standardUse;//剂型
     private String daralisMark;//医嘱详情号
-
+    private String registerId;//住院号
 
 
     @Id
@@ -48,8 +48,15 @@ public class Details {
     public void setDaralisMark(String daralisMark) {
         this.daralisMark = daralisMark;
     }
+    @Basic
+    @Column(name = "REGISTER_ID")
+    public String getRegisterId() {
+        return registerId;
+    }
 
-
+    public void setRegisterId(String registerId) {
+        this.registerId = registerId;
+    }
 
     @Basic
     @Column(name = "DRUG_NAME")

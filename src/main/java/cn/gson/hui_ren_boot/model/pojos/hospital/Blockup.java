@@ -2,17 +2,18 @@ package cn.gson.hui_ren_boot.model.pojos.hospital;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 public class Blockup {
-    private long blockupSeriald;
-    private String detailsMark;
-    private Time blockupDate;
-    private String staffName;
-    private String registerId;
-    private String blockupWhy;
-    private String adviceId;
+    private long blockupSeriald;//序号
+    private String detailsMark;//详单号
+    private Timestamp blockupDate;//时间
+    private String staffName;//医生名
+    private String registerId;//住院号
+    private String blockupWhy;//住院原因
+    private String adviceId;//医嘱号
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -47,11 +48,11 @@ public class Blockup {
 
     @Basic
     @Column(name = "BLOCKUP_DATE")
-    public Time getBlockupDate() {
+    public Timestamp getBlockupDate() {
         return blockupDate;
     }
 
-    public void setBlockupDate(Time blockupDate) {
+    public void setBlockupDate(Timestamp blockupDate) {
         this.blockupDate = blockupDate;
     }
 

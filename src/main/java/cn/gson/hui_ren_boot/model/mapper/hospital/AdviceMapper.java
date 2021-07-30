@@ -10,4 +10,5 @@ public interface AdviceMapper {
     public List<Advice> allDispensing();//药房查询医嘱
     public void addAdvice(Advice advice);//批量新增主医嘱
     public List<Advice> selectAdvice(Advice inputboxs);//医嘱管理查询
+    public void assAdvice(Advice j);//修改主表时间
 }
