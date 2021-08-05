@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.Transfers1Mapper">
+    <!-- 调拨申请映射 -->
+    <resultMap id="transfersMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Transfers">
+        <id property="transfersId" column="transfers_id"/>
+        <result property="transfersDate" column="transfers_date"/>
+        <result property="transfersTime" column="transfers_time"/>
+        <result property="transfersOrder" column="transfers_order"/>
+        <result property="transfersGo" column="transfers_go"/>
+        <!-- 员工映射 -->
+        <association property="staff" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+            <id property="staffId" column="staffId"/>
+            <result property="staffName" column="staff_name"/>
+        </association>
+        <!-- 仓库映射 -->
+        <association property="deports" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+            <id column="DEPORT_ID" property="deportId"/>
+            <result column="DEPORT_NAME" property="deportName"/>
+        </association>
+        <!-- 药房映射 -->
+        <association property="pharmacys" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Pharmacy">
+            <id column="PHARMACY_ID" property="pharmacyId"/>
+            <result column="PHARMACY_NAME" property="pharmacyName"/>
+        </association>
+    </resultMap>
+
+    <!-- 查询所有的调拨申请 -->
+    <select id="findAllTransfers" resultMap="transfersMap">
+        select * from transfers tr
+        left join staff st on tr.transfers_reviewer = st.staff_id
+        left join pharmacy ph on tr.transfers_pharmacy = ph.pharmacy_id
+        left join drug_deport dr on tr.transfers_deport = dr.deport_id
+        where transfers_go is null
+    </select>
+</mapper>

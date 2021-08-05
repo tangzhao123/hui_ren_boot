@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.AllocatingMapper">
+
+    <!-- 调拨详单的映射 -->
+    <resultMap id="allocatingMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Allocating">
+        <id property="allSerial" column="all_serial"/>
+        <result property="allId" column="all_id"/>
+        <result property="allDrug" column="all_drug"/>
+        <result property="allSum" column="all_sum"/>
+        <result property="transfersId" column="transfers_id"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="typeName" column="type_name"/>
+        <result property="materialName" column="material_name"/>
+    </resultMap>
+
+    <!-- 根据调拨单号查询详单 -->
+    <select id="findAllAllocating" resultMap="allocatingMap">
+        select * from allocating al
+        left join drug_info dr on al.all_drug = dr.drug_id
+        left join drug_type ty on dr.type_id = ty.type_id
+        left join drug_consumable dc on al.all_drug = dc.material_id
+        where transfers_id = #{transfersId}
+    </select>
+</mapper>
