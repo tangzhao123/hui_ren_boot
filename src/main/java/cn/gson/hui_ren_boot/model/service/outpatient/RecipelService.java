@@ -2,9 +2,11 @@ package cn.gson.hui_ren_boot.model.service.outpatient;
 
 import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionDetailMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionListMapper;
+import cn.gson.hui_ren_boot.model.mapper.outpatient.RowNumbersMapper;
 import cn.gson.hui_ren_boot.model.mapper.pharmacy.DruginfoMapper;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.RowNumbers;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ public class RecipelService {
     PrescriptionDetailMapper detailMapper;
     @Autowired
     DruginfoMapper druginfoMapper;
+    @Autowired
+    RowNumbersMapper rowNumbersMapper;
 
     //查询药品
     public List<DrugInfo> allDrug(DrugInfo drugInfo){
@@ -50,5 +54,10 @@ public class RecipelService {
     //根据处方号查询处方详单
     public List<PrescriptionDetail> selNo(String prescriptionNo){
         return detailMapper.selNo(prescriptionNo);
+    }
+
+    //查询排号
+    public List<RowNumbers> allNumber(int medicalId,int staffId,int rankId){
+        return rowNumbersMapper.allNumber(medicalId, staffId,rankId);
     }
 }

@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.model.service.outpatient;
 
 import cn.gson.hui_ren_boot.model.mapper.outpatient.BookingFormMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.OutRegisterMapper;
+import cn.gson.hui_ren_boot.model.mapper.outpatient.RowNumbersMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.WithdrawalMapper;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.BookingForm;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
@@ -29,6 +30,9 @@ public class BookingFormService {
     @Autowired
     WithdrawalMapper withdrawalMapper;
 
+    @Autowired
+    RowNumbersMapper rowNumbersMapper;
+
     //查询挂号时的科室
     public List<Medical> allMedicals(){
         return bookingFormMapper.allMedicals();
@@ -50,6 +54,7 @@ public class BookingFormService {
             bookingForm.setOutpatientId(register.getOutpatientId());
             bookingFormMapper.addBooking(bookingForm);
         }
+        rowNumbersMapper.addNumber(bookingForm.getBookingNo());
     }
 
     //分页查询挂号单
