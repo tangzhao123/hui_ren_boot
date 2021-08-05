@@ -2,8 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PurchaseOrderMapper">
+    <!-- 采购订单的映射 -->
+    <resultMap id="purchaseOrderMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchaseOrder">
+        <id property="orderSerial" column="order_serial"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderTotal" column="order_total"/>
+        <result property="orderAgent" column="order_agent"/>
+        <result property="purchaseDetails" column="purchase_details"/>
+    </resultMap>
     <!-- 新增订单表 -->
     <insert id="addPurchaseOrder">
         insert into purchase_order values (seq_huiren.nextval,#{orderTime},#{orderId},#{orderTotal},null,#{orderAgent},#{purchaseDetails})
     </insert>
+
+    <!--采购订单的查询 -->
+    <select id="findAllPurchaseOrder" resultMap="purchaseOrderMap">
+        select * from  purchase_order where stocks_date is null
+    </select>
+
+    <!-- 修改入库日期 -->
+    <update id="updatePurchaseOrder">
+        update purchase_order set stocks_date = current_date where order_id = #{orderId}
+    </update>
 </mapper>

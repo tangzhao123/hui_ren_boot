@@ -35,13 +35,11 @@
         <association property="stocks" javaType="DrugStock">
             <id column="STOCK_ID" property="stockId"/>
             <result column="STOCK_SURPLUS" property="stockSurplus"/>
-            <result column="STOCK_LIMIT" property="stockLimit"/>
-            <result column="STOCK_FLOOR" property="stockFloor"/>
+            <result column="STOCK_NUMBER" property="stockNumber"/>
             <result column="STOCK_INDATE" property="stockIndate"/>
             <result column="STOCK_DATE" property="stockDate"/>
-            <result column="STOCK_limit" property="stockLimit"/>
-            <result column="STOCK_FLOOR" property="stockFloor"/>
             <result column="STOCK_BATCH" property="stockBatch"/>
+            <result column="DRUG_ID" property="drugId"/>
         </association>
     </resultMap>
     <!--多条件联表查询药品信息-->
@@ -50,7 +48,7 @@
         left join DRUG_TYPE dt on di.TYPE_ID=dt.TYPE_ID
         left join DRUG_SUPPLIER ds on di.SUPPLIER_ID=ds.SUPPLIER_ID
         left join DRUG_STANDARD dd on di.SURPLUS_ID=dd.STANDARD_ID
-        left join DRUG_STOCK dk on di.STOCK_ID=dk.STOCK_ID
+        left join DRUG_STOCK dk on di.DRUG_ID=dk.DRUG_ID
       <where>
           <if test="drugId != null and '' !=drugId">
               or di.DRUG_ID like '%${drugId}%'

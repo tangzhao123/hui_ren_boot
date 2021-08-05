@@ -26,4 +26,19 @@ public class PurchaseOrderService {
         purchaseOrderMapper.addPurchaseOrder(purchaseOrder);
         orderDetailsMapper.addOrderDetails(orderDetails);
     }
+
+    //查询所有的采购订单
+    public Object findAllPurchaseOrderByPage(Integer pageNo,Integer size){
+        return purchaseOrderMapper.findAllPurchaseOrder();
+    }
+
+    //根据采购订单号查询采购详单
+    public List<OrderDetails> findAllOrderDetails(String orderNum){
+        return orderDetailsMapper.findAllOrderDetails(orderNum);
+    }
+
+    //根据单号修改入库日期
+    public void updatePurchaseOrder(String orderId){
+        purchaseOrderMapper.updatePurchaseOrder(orderId);
+    }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DrugDeportMapper">
+
+    <!-- 仓库的映射 -->
+    <resultMap id="deportMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+        <id property="deportId" column="deport_id"/>
+        <result property="deportName" column="deport_name"/>
+        <result property="deportForm" column="deport_form"/>
+        <result property="deportStock" column="deport_stock"/>
+    </resultMap>
+
+    <!-- 查询所有的仓库 -->
+    <select id="finAllDeport" resultMap="deportMap">
+        select * from drug_deport
+    </select>
+</mapper>

@@ -2,18 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.OrderDetailsMapper">
+    <!-- 采购订单详情的映射 -->
+    <resultMap id="orderDetailsMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.OrderDetails">
+        <id property="ordersSerial" column="orders_serial"/>
+        <result property="ordersId" column="orders_id"/>
+        <result property="ordersNum" column="orders_num"/>
+        <result property="ordersProduct" column="orders_product"/>
+        <result property="ordersSum" column="orders_sum"/>
+        <result property="ordersPrice" column="orders_price"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="drugLife" column="drug_life"/>
+    </resultMap>
     <!-- 批量新增采购订单详表 -->
     <insert id="addOrderDetails">
         insert into order_details
-        select seq_huiren.nextval,orders_id,orders_num,orders_product,orders_sum,orders_date,orders_price,orders_batch,order_indate from
+        select seq_huiren.nextval,orders_id,orders_num,orders_product,orders_sum,orders_price from
         <foreach collection="orderDetails" item="o" index="i" separator=" " open="(" close=")">
             <if test="i!=orderDetails.size()-1">
-                select #{o.ordersId} as orders_id,#{o.ordersNum} as orders_num,#{o.ordersProduct} as orders_product,#{o.ordersSum} as orders_sum,#{o.ordersDate} as orders_date,#{o.ordersPrice} as orders_price,#{o.ordersBatch} as orders_batch,#{o.orderIndate} as order_indate from dual
+                select #{o.ordersId} as orders_id,#{o.ordersNum} as orders_num,#{o.ordersProduct} as orders_product,#{o.ordersSum} as orders_sum,#{o.ordersPrice} as orders_price from dual
                 union
             </if>
             <if test="i==orderDetails.size()-1">
-                select #{o.ordersId} as orders_id,#{o.ordersNum} as orders_num,#{o.ordersProduct} as orders_product,#{o.ordersSum} as orders_sum,#{o.ordersDate} as orders_date,#{o.ordersPrice} as orders_price,#{o.ordersBatch} as orders_batch,#{o.orderIndate} as order_indate from dual
+                select #{o.ordersId} as orders_id,#{o.ordersNum} as orders_num,#{o.ordersProduct} as orders_product,#{o.ordersSum} as orders_sum,#{o.ordersPrice} as orders_price from dual
             </if>
         </foreach>
     </insert>
+
+    <!-- 根据采购订单号查询采购详单 -->
+    <select id="findAllOrderDetails" resultMap="orderDetailsMap">
+        select * from order_details od left join drug_info dr on od.orders_product = dr.drug_id where orders_num = #{orderNum}
+    </select>
 </mapper>

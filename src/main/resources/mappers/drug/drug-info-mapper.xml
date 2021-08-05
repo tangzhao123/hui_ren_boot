@@ -19,6 +19,7 @@
         <result property="smallSelling" column="small_selling"/>
         <result property="smallPrice" column="small_price"/>
         <result property="drugState" column="drug_state"/>
+        <result property="drugLife" column="drug_life"/>
 
         <!-- 药品类别实体类映射 -->
         <association property="types" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugType">
