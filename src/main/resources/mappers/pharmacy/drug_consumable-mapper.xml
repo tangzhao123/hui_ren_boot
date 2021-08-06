@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DrugConsumableMapper">
+
+    <!-- 耗材信息的映射 -->
+    <resultMap id="drugConsumableMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugConsumable">
+        <id property="materialId" column="material_id"/>
+        <result property="materialSerial" column="material_serial"/>
+        <result property="materialName" column="material_name"/>
+        <result property="sellingPrice" column="selling_price"/>
+        <result property="materialBatch" column="material_batch"/>
+        <result property="materialPrice" column="material_price"/>
+        <result property="materialIndate" column="material_indate"/>
+        <result property="materialDate" column="material_date"/>
+        <result property="materiaStandard" column="materia_standard"/>
+        <result property="materiaStock" column="materia_stock"/>
+    </resultMap>
+
+    <!-- 查询所有的耗材信息 -->
+    <select id="findAllConsumable" resultMap="drugConsumableMap">
+        select * from drug_consumable
+    </select>
+</mapper>

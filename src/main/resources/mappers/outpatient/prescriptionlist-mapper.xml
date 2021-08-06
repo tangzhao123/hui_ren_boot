@@ -3,10 +3,109 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--门诊处方单-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionListMapper">
-    <insert id="addList">
-        insert into PRESCRIPTION_LIST values (seq_huiren.nextval,#{prescriptionNo},#{recordNo},
+    <resultMap id="listMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList">
+        <id column="PRESCRIPTION_ID" property="prescriptionId"/>
+        <result column="PRESCRIPTION_NO" property="prescriptionNo"/>
+        <result column="RECORD_NO" property="recordNo"/>
+        <result column="PRESCRIPTION_TYPE" property="prescriptionType"/>
+        <result column="PRESCRIPTION_DATE" property="prescriptionDate"/>
+        <result column="PRESCRIPTION_DIAGNOSIS" property="prescriptionDiagnosis"/>
+        <result column="DOCTOR_ADVICE" property="doctorAdvice"/>
+        <result column="SUM_MONEY" property="sumMoney"/>
+        <result column="DOSIS" property="dosis"/>
+        <result column="USAGE" property="usage"/>
+        <result column="STATE" property="state"/>
+        <association property="outpatient" javaType="OutpatientRegister">
+            <id column="OUTPATIENT_ID" property="outpatientId"/>
+            <result column="OUTPATIENT_NAME" property="outpatientName"/>
+            <result column="OUTPATIENT_SEX" property="outpatientSex"/>
+            <result column="OUTPATIENT_BIRTH" property="outpatientBirth"/>
+            <result column="OUTPATIENT_AGE" property="outpatientAge"/>
+            <result column="OUTPATIENT_MARRY" property="outpatientMarry"/>
+            <result column="OUTPATIENT_VOCATION" property="outpatientVocation"/>
+            <result column="OUTPATIENT_NATIVE" property="outpatientNative"/>
+            <result column="OUTPATIENT_NATION" property="outpatientNation"/>
+            <result column="OUTPATIENT_CARD" property="outpatientCard"/>
+            <result column="OUTPATIENT_WORK" property="outpatientWork"/>
+            <result column="OUTPATIENT_PHONE" property="outpatientPhone"/>
+            <result column="OUTPATIENT_ADDRESS" property="outpatientAddress"/>
+            <result column="OUTPATIENT_WEIGHT" property="outpatientWeight"/>
+            <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
+        </association>
+        <association property="medical" javaType="Medical">
+            <id property="medicalId" column="medical_id"/>
+            <result property="medicalName" column="medical_name"/>
+            <result property="medicalSublevel" column="medical_sublevel"/>
+        </association>
+        <association property="outdoctor" javaType="Staff">
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
+            <result column="STAFF_PHONE" property="staffPhone"/>
+            <result column="SECTION_ID" property="sectionId"/>
+            <result column="MEDICAL_ID" property="medicalId"/>
+            <result column="RANK_ID" property="rankId"/>
+            <result column="STAFF_STATE" property="staffState"/>
+            <result column="STAFF_CARD" property="staffCard"/>
+        </association>
+        <collection property="details" ofType="PrescriptionDetail">
+            <id column="RECIPEL_NO" property="recipelNo"/>
+            <result column="DRUG_NAME" property="drugName"/>
+            <result column="DOSE" property="dose"/>
+            <result column="DRUG_ROUTE" property="drugRoute"/>
+            <result column="DRUG_USE" property="drugUse"/>
+            <result column="DRUG_NEXT" property="drugNext"/>
+            <result column="AGGREGATE" property="aggregate"/>
+            <result column="DRUG_BIG" property="drugBig"/>
+            <result column="INJECT" property="inject"/>
+            <result column="CARRY_OUT" property="carryOut"/>
+            <result column="SUBTOTAL" property="subtotal"/>
+            <association property="standards" javaType="DrugStandard">
+                <id column="STANDARD_ID" property="standardId"/>
+                <result column="STANDARD_NAME" property="standardName"/>
+                <result column="STANDARD_NUM" property="standardNum"/>
+                <result column="STANDARD_DOSAGE" property="standardDosage"/>
+                <result column="STANDARD_USE" property="standardUse"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <!--新增门诊西药处方单-->
+    <insert id="addList" >
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+                                      PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
+                                      STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY)
+                                      values (seq_huiren.nextval,#{prescriptionNo},
                                               #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
                                               #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
                                               #{doctorAdvice},#{sumMoney})
     </insert>
+
+    <!--新增门诊中药处方单-->
+    <insert id="addChineseList" >
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+                                      PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
+                                      STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY,DOSIS,USAGE)
+        values (seq_huiren.nextval,#{prescriptionNo},
+                #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
+                #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
+                #{doctorAdvice},#{sumMoney},#{dosis},#{usage})
+    </insert>
+
+    <!--查询门诊西药处方-->
+    <select id="allRecipel" resultMap="listMap">
+        select * from prescription_list pl
+                          left join outpatient_register o on pl.outpatient_id = o.outpatient_id
+                          left join staff s on pl.staff_id = s.staff_id
+                          left JOIN medical me on pl.medical_id = me.medical_id
+        where pl.prescription_type = 1
+        <if test="outpatient != null">
+            <if test="outpatient.outpatientName != null and '' != outpatient.outpatientName">
+                and o.OUTPATIENT_NAME like '%${outpatient.outpatientName}%'
+            </if>
+        </if>
+        <if test="prescriptionDiagnosis != null and '' != prescriptionDiagnosis">
+                or pl.prescription_diagnosis like '%${prescriptionDiagnosis}%'
+        </if>
+    </select>
+
 </mapper>

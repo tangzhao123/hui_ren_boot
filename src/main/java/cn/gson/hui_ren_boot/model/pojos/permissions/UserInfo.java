@@ -14,6 +14,7 @@ public class UserInfo {
     private Long medicalId;
     private String staffName;
     private String medicalName;
+    private Long rankId;
     private List<Roleinfo> roleinfos;
 
 
@@ -79,6 +80,14 @@ public class UserInfo {
 
     public void setMedicalId(Long medicalId) {
         this.medicalId = medicalId;
+    }
+
+    public Long getRankId() {
+        return rankId;
+    }
+
+    public void setRankId(Long rankId) {
+        this.rankId = rankId;
     }
 
     @Override

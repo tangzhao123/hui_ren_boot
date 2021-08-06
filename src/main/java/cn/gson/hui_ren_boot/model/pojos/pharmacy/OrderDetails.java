@@ -1,7 +1,8 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+
+
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Objects;
 
 @Entity
@@ -13,11 +14,9 @@ public class OrderDetails {
     private String ordersNum;
     private String ordersProduct;
     private Long ordersSum;
-    private Time ordersDate;
     private Long ordersPrice;
-    private String ordersBatch;
-    private String orderIndate;
-
+    private String drugName;
+    private Integer drugLife;
 
 
     @Id
@@ -70,15 +69,7 @@ public class OrderDetails {
         this.ordersSum = ordersSum;
     }
 
-    @Basic
-    @Column(name = "ORDERS_DATE")
-    public Time getOrdersDate() {
-        return ordersDate;
-    }
 
-    public void setOrdersDate(Time ordersDate) {
-        this.ordersDate = ordersDate;
-    }
 
     @Basic
     @Column(name = "ORDERS_PRICE")
@@ -90,24 +81,20 @@ public class OrderDetails {
         this.ordersPrice = ordersPrice;
     }
 
-    @Basic
-    @Column(name = "ORDERS_BATCH")
-    public String getOrdersBatch() {
-        return ordersBatch;
+    public String getDrugName() {
+        return drugName;
     }
 
-    public void setOrdersBatch(String ordersBatch) {
-        this.ordersBatch = ordersBatch;
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
     }
 
-    @Basic
-    @Column(name = "ORDER_INDATE")
-    public String getOrderIndate() {
-        return orderIndate;
+    public Integer getDrugLife() {
+        return drugLife;
     }
 
-    public void setOrderIndate(String orderIndate) {
-        this.orderIndate = orderIndate;
+    public void setDrugLife(Integer drugLife) {
+        this.drugLife = drugLife;
     }
 
     @Override
@@ -115,11 +102,23 @@ public class OrderDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDetails that = (OrderDetails) o;
-        return ordersSerial == that.ordersSerial && Objects.equals(ordersId, that.ordersId) && Objects.equals(ordersNum, that.ordersNum) && Objects.equals(ordersProduct, that.ordersProduct) && Objects.equals(ordersSum, that.ordersSum) && Objects.equals(ordersDate, that.ordersDate) && Objects.equals(ordersPrice, that.ordersPrice) && Objects.equals(ordersBatch, that.ordersBatch) && Objects.equals(orderIndate, that.orderIndate);
+        return ordersSerial == that.ordersSerial && Objects.equals(ordersId, that.ordersId) && Objects.equals(ordersNum, that.ordersNum) && Objects.equals(ordersProduct, that.ordersProduct) && Objects.equals(ordersSum, that.ordersSum)  && Objects.equals(ordersPrice, that.ordersPrice) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ordersSerial, ordersId, ordersNum, ordersProduct, ordersSum, ordersDate, ordersPrice, ordersBatch, orderIndate);
+        return Objects.hash(ordersSerial, ordersId, ordersNum, ordersProduct, ordersSum, ordersPrice);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetails{" +
+                "ordersSerial=" + ordersSerial +
+                ", ordersId='" + ordersId + '\'' +
+                ", ordersNum='" + ordersNum + '\'' +
+                ", ordersProduct='" + ordersProduct + '\'' +
+                ", ordersSum=" + ordersSum +
+                ", ordersPrice=" + ordersPrice +
+                '}';
     }
 }

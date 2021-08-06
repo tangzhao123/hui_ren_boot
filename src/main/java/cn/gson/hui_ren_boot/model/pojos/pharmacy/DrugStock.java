@@ -1,5 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
@@ -10,15 +12,13 @@ import java.util.Objects;
 public class DrugStock {
     private Long stockId;
     private Long stockSurplus;//剩余库存
-    private Long stockLimit;
-    private Long stockFloor;
-    private Long stockXnum;
-    private Long stockZnum;
     private Long stockNumber;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date stockDate;
     private String stockBatch;
-    private String stockIndate;
-
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date stockIndate;
+    private Long drugId;
 
 
     @Id
@@ -41,45 +41,7 @@ public class DrugStock {
         this.stockSurplus = stockSurplus;
     }
 
-    @Basic
-    @Column(name = "STOCK_LIMIT")
-    public Long getStockLimit() {
-        return stockLimit;
-    }
 
-    public void setStockLimit(Long stockLimit) {
-        this.stockLimit = stockLimit;
-    }
-
-    @Basic
-    @Column(name = "STOCK_FLOOR")
-    public Long getStockFloor() {
-        return stockFloor;
-    }
-
-    public void setStockFloor(Long stockFloor) {
-        this.stockFloor = stockFloor;
-    }
-
-    @Basic
-    @Column(name = "STOCK_XNUM")
-    public Long getStockXnum() {
-        return stockXnum;
-    }
-
-    public void setStockXnum(Long stockXnum) {
-        this.stockXnum = stockXnum;
-    }
-
-    @Basic
-    @Column(name = "STOCK_ZNUM")
-    public Long getStockZnum() {
-        return stockZnum;
-    }
-
-    public void setStockZnum(Long stockZnum) {
-        this.stockZnum = stockZnum;
-    }
 
     @Basic
     @Column(name = "STOCK_NUMBER")
@@ -111,14 +73,25 @@ public class DrugStock {
         this.stockBatch = stockBatch;
     }
 
+
     @Basic
     @Column(name = "STOCK_INDATE")
-    public String getStockIndate() {
+    public Date getStockIndate() {
         return stockIndate;
     }
 
-    public void setStockIndate(String stockIndate) {
+    public void setStockIndate(Date stockIndate) {
         this.stockIndate = stockIndate;
+    }
+
+    @Basic
+    @Column(name = "DRUG_ID")
+    public Long getDrugId() {
+        return drugId;
+    }
+
+    public void setDrugId(Long drugId) {
+        this.drugId = drugId;
     }
 
     @Override
@@ -126,12 +99,12 @@ public class DrugStock {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DrugStock drugStock = (DrugStock) o;
-        return Objects.equals(stockId, drugStock.stockId) && Objects.equals(stockSurplus, drugStock.stockSurplus) && Objects.equals(stockLimit, drugStock.stockLimit) && Objects.equals(stockFloor, drugStock.stockFloor) && Objects.equals(stockXnum, drugStock.stockXnum) && Objects.equals(stockZnum, drugStock.stockZnum) && Objects.equals(stockNumber, drugStock.stockNumber) && Objects.equals(stockDate, drugStock.stockDate) && Objects.equals(stockBatch, drugStock.stockBatch) && Objects.equals(stockIndate, drugStock.stockIndate);
+        return Objects.equals(stockId, drugStock.stockId) && Objects.equals(stockSurplus, drugStock.stockSurplus) && Objects.equals(stockNumber, drugStock.stockNumber) && Objects.equals(stockDate, drugStock.stockDate) && Objects.equals(stockBatch, drugStock.stockBatch) && Objects.equals(stockIndate, drugStock.stockIndate) && Objects.equals(drugId, drugStock.drugId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(stockId, stockSurplus, stockLimit, stockFloor, stockXnum, stockZnum, stockNumber, stockDate, stockBatch, stockIndate);
+        return Objects.hash(stockId, stockSurplus, stockNumber, stockDate, stockBatch, stockIndate, drugId);
     }
 
     @Override
@@ -139,14 +112,11 @@ public class DrugStock {
         return "DrugStock{" +
                 "stockId=" + stockId +
                 ", stockSurplus=" + stockSurplus +
-                ", stockLimit=" + stockLimit +
-                ", stockFloor=" + stockFloor +
-                ", stockXnum=" + stockXnum +
-                ", stockZnum=" + stockZnum +
                 ", stockNumber=" + stockNumber +
                 ", stockDate=" + stockDate +
                 ", stockBatch='" + stockBatch + '\'' +
-                ", stockIndate='" + stockIndate + '\'' +
+                ", stockIndate=" + stockIndate +
+                ", drugId=" + drugId +
                 '}';
     }
 }

@@ -4,6 +4,7 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,8 +13,8 @@ public class Record {//床位使用表
     private String recordSerial;//床位记录编号
     private String sickbedMark;//床位号
     private String recordName;//使用人
-    private Time recordDate;//使用日期
-    private Time recordLeave;//结束日期
+    private Date recordDate;//使用日期
+    private Date recordLeave;//结束日期
     private Long recordState;//占用情况
     private Long recordDays;//住院天数
     private String registerId;//住院号
@@ -59,25 +60,27 @@ public class Record {//床位使用表
         this.recordName = recordName;
     }
 
+
     @Basic
     @Column(name = "RECORD_DATE")
-    public Time getRecordDate() {
+    public Date getRecordDate() {
         return recordDate;
     }
 
-    public void setRecordDate(Time recordDate) {
+    public void setRecordDate(Date recordDate) {
         this.recordDate = recordDate;
     }
 
     @Basic
     @Column(name = "RECORD_LEAVE")
-    public Time getRecordLeave() {
+    public Date getRecordLeave() {
         return recordLeave;
     }
 
-    public void setRecordLeave(Time recordLeave) {
+    public void setRecordLeave(Date recordLeave) {
         this.recordLeave = recordLeave;
     }
+
     @Basic
     @Column(name = "RECORD_STATE")
     public Long getRecordState() {
@@ -119,5 +122,20 @@ public class Record {//床位使用表
     @Override
     public int hashCode() {
         return Objects.hash(recordId, recordSerial,recordName, recordName, recordDate, recordLeave, recordState, recordDays, registerId);
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "recordId=" + recordId +
+                ", recordSerial='" + recordSerial + '\'' +
+                ", sickbedMark='" + sickbedMark + '\'' +
+                ", recordName='" + recordName + '\'' +
+                ", recordDate=" + recordDate +
+                ", recordLeave=" + recordLeave +
+                ", recordState=" + recordState +
+                ", recordDays=" + recordDays +
+                ", registerId='" + registerId + '\'' +
+                '}';
     }
 }

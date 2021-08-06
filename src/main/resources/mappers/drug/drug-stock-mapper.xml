@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DrugStockMapper">
+
+    <!-- 新增库存表 -->
+    <insert id="addDrugStock">
+            insert  into drug_stock
+            select seq_huiren.nextval,stock_surplus,stock_number,stock_date,stock_batch,stock_indate,drug_id from
+            <foreach collection="drugStocks" item="d" index="i" separator=" " open="(" close=")">
+                <if test=" i != drugStocks.size()-1">
+                    select #{d.stockSurplus} as stock_surplus,#{d.stockNumber} as stock_number,#{d.stockDate} as stock_date,#{d.stockBatch} as stock_batch
+                    ,#{d.stockIndate} as stock_indate,#{d.drugId} as drug_id from dual
+                    union
+                </if>
+                <if test="i == drugStocks.size()-1">
+                    select #{d.stockSurplus} as stock_surplus,#{d.stockNumber} as stock_number,#{d.stockDate} as stock_date,#{d.stockBatch} as stock_batch
+                    ,#{d.stockIndate} as stock_indate,#{d.drugId} as drug_id from dual
+                </if>
+            </foreach>
+    </insert>
+</mapper>

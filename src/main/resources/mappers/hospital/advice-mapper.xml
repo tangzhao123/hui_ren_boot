@@ -22,9 +22,11 @@
     </select>
     <select id="selectAdvice" resultType="Advice">
         select * from ADVICE
-        <if test="registerId != null and '' != registerId">
-            or register_id = #{registerId}
-        </if>
+        <where>
+            <if test="registerId != null and '' != registerId">
+                or register_id = #{registerId}
+            </if>
+        </where>
     </select>
     <insert id="addAdvice">
         insert  into advice(advice_serial,advice_id,register_id,advice_start,advice_sickbed,staff_name,advice_cost,advice_end,advice_chinese,advice_doctors,register_name)

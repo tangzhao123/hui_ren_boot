@@ -17,7 +17,16 @@ public class DetailsService {
     public List<Details> allDetails(Details jk){//查询
         return detailsMapper.allDetails(jk);
     }
-    public Object seletDetailsByPage(Integer pageNo,Integer size,String detailsId){
-      return   detailsMapper.seletDetails(detailsId);
+    public Object seletDetailsByPage(Integer pageNo,Integer size,Details inputboxs){
+      return   detailsMapper.seletDetails(inputboxs);
+    }
+    public  List<Details>queryDeta(String adviceId){//
+        return  detailsMapper.queryDeta(adviceId);
+    }
+    public void upDetails(String adviceId){//主表停嘱
+            detailsMapper.upDetails(adviceId);
+    }
+    public void upDetailw(String daralisMark){//从表停嘱
+        detailsMapper.upDetailw(daralisMark);
     }
 }

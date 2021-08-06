@@ -63,8 +63,8 @@ public class PlanDetailsController {
 
     //根据采购计划单号查询详单
     @RequestMapping("all-planDetails")
-    public Object allDetails(Integer pageNo,Integer size,String purchaseId){
-        return purchaseService.allDetailsByPage(pageNo, size, purchaseId);
+    public  List<PlanDetails> allDetails(String purchaseId){
+        return purchaseService.allDetails(purchaseId);
     }
 
     //通过采购计划单审核

@@ -10,6 +10,7 @@
         <result property="medicalId" column="medical_id"/>
         <result property="staffName" column="staff_name"/>
         <result property="medicalName" column="medical_name"/>
+        <result property="rankId" column="rank_id"/>
     </resultMap>
     <!-- 登录 -->
     <select id="allUser" resultMap="userMapper">
