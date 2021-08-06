@@ -36,5 +36,8 @@
         where  user_id = #{userId}
     </update>
 
+    <select id="seUser" resultMap="userMapper">
+        select *from USER_INFO
+    </select>
 
 </mapper>

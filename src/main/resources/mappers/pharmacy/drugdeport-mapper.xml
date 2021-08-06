@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.DrugDeportMapper">
+    <resultMap id="deportMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+        <id column="DEPORT_ID" property="deportId"/>
+        <result column="DEPORT_NAME" property="deportName"/>
+        <result column="DEPORT_FORM" property="deportForm"/>
+        <result column="DEPORT_STOCK" property="deportStock"/>
+    </resultMap>
+    <select id="allDeport" resultMap="deportMapper">
+        select * from DRUG_DEPORT
+    </select>
+</mapper>
