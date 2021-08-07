@@ -2,7 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.BlockupMapper">
+    <resultMap id="even" type="cn.gson.hui_ren_boot.model.pojos.medical.Test">
+        <id column="test_id" property="testId"/>
+        <result column="test_name" property="testName"/>
+        <result column="test_sex" property="testSex"/>
+        <result column="test_phone" property="testPhone"/>
+        <result column="test_time" property="testTime"/>
+        <result column="test_money" property="testMoney"/>
+        <association property="cmobos" javaType="Cmobo">
+            <result column="combo_name" property="comboName"/>
+        </association>
+    </resultMap>
     <insert id="addBlockup">
         insert into blockup values (seq_huiren.nextval,#{detailsMark},#{blockupDate},#{staffName},#{registerId},#{blockupWhy},#{adviceId})
     </insert>
+    <insert id="addTest">
+        insert into test(test_id,test_name,test_sex,test_phone,test_time,test_money,test_combo) values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},current_timestamp,#{testMoney},#{cmobos.comboId})
+    </insert>
+    <select id="selText" resultMap="even">
+        select*from test km left join cmobo l on km.test_combo=l.combo_id where test_phone=#{testPhone}  order by test_time desc
+    </select>
+    <select id="allResults" resultType="Combinspection">
+        select *from  combinspection where inspection_phone=#{inspectionPhone}
+    </select>
 </mapper>

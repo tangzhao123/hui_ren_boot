@@ -11,7 +11,6 @@ import java.util.Objects;
 
 @Entity
 public class Register {
-
     private int registerSerica;//序号1
     private String registerId;//住院号2
     private Date registerDate;//入院时间3
