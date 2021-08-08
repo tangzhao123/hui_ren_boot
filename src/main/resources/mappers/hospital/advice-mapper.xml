@@ -16,20 +16,59 @@
         <result column="advice_doctors" property="adviceDoctors"/>
         <result column="register_name" property="registerName"/>
     </resultMap>
+    <resultMap id="vateAdvice" type="cn.gson.hui_ren_boot.model.pojos.hospital.Advice">
+        <id column="advice_serial" property="adviceSerial"/>
+        <result column="advice_id" property="adviceId"/>
+        <result column="register_id" property="registerId"/>
+        <result column="advice_start" property="adviceStart"/>
+        <result column="advice_sickbed" property="adviceSickbed"/>
+        <result column="staff_name" property="staffName"/>
+        <result column="advice_cost" property="adviceCost"/>
+        <result column="advice_type" property="adviceType"/>
+        <result column="advice_end" property="adviceEnd"/>
+        <result column="advice_chinese" property="adviceChinese"/>
+        <result column="advice_doctors" property="adviceDoctors"/>
+        <result column="register_name" property="registerName"/>
+        <result column="advice_chindose" property="adviceChindose"/>
+        <collection property="details" resultMap="daisy">
 
+        </collection>
+    </resultMap>
+    <resultMap id="daisy" type="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+        <id column="details_serial" property="detailsSerial"/>
+        <result column="drug_name" property="drugName"/>
+        <result column="details_drip" property="detailsDrip"/>
+        <result column="details_way" property="detailsWay"/>
+        <result column="datails_dosage" property="datailsDosage"/>
+        <result column="daralis_usage" property="daralisUsage"/>
+        <result column="daralis_Time" property="daralisTime"/>
+        <result column="daralis_dstate" property="daralisDstate"/>
+        <result column="daralis_disable" property="daralisDisable"/>
+        <result column="daralis_start" property="daralisStart"/>
+        <result column="daralis_price" property="daralisPrice"/>
+        <result column="daralis_number" property="daralisNumber"/>
+        <result column="drug_big" property="drugBig"/>
+        <result column="standard_name" property="standardName"/>
+        <result column="standard_use" property="standardUse"/>
+        <result column="daralis_mark" property="daralisMark"/>
+    </resultMap>
     <select id="allDispensing" resultMap="allAdvicve">
         select * from ADVICE  ai left join register hg on ai.register_id=hg.register_id left join staff km on km.staff_id=ai.staff_id
     </select>
+    <update id="assAdvice">
+        update advice set advice_end=#{adviceEnd} where advice_id=#{adviceId}
+    </update>
     <select id="selectAdvice" resultType="Advice">
-        select * from ADVICE
+        select * from advice
         <where>
             <if test="registerId != null and '' != registerId">
                 or register_id = #{registerId}
             </if>
         </where>
+
     </select>
     <insert id="addAdvice">
-        insert  into advice(advice_serial,advice_id,register_id,advice_start,advice_sickbed,staff_name,advice_cost,advice_end,advice_chinese,advice_doctors,register_name)
-        values (seq_huiren.nextval,#{adviceId},#{registerId},#{adviceStart},#{adviceSickbed},#{staffName},1,#{adviceEnd},#{adviceChinese},#{adviceDoctors},#{registerName})
+        insert  into advice(advice_serial,advice_id,register_id,advice_start,advice_sickbed,staff_name,advice_cost,advice_end,advice_chinese,advice_doctors,register_name,advice_chindose)
+        values (seq_huiren.nextval,#{adviceId},#{registerId},#{adviceStart},#{adviceSickbed},#{staffName},1,#{adviceEnd},#{adviceChinese},#{adviceDoctors},#{registerName},#{adviceChindose})
     </insert>
 </mapper>

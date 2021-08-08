@@ -31,4 +31,7 @@ public class AdviceService {
     public Object selectAdviceByPage(Integer pageNo,Integer size, Advice inputboxs){//医嘱管理查询
         return adviceMapper.selectAdvice(inputboxs);
     }
+    public void assAdvice(Advice j){//修改主单时间
+        adviceMapper.assAdvice(j);
+    }
 }

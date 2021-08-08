@@ -23,10 +23,10 @@ public class DetailsService {
     public  List<Details>queryDeta(String adviceId){//
         return  detailsMapper.queryDeta(adviceId);
     }
-    public void upDetails(String adviceId){//主表停嘱
-            detailsMapper.upDetails(adviceId);
+    public void upDetails(Details k){//主表停嘱
+            detailsMapper.upDetails(k);
     }
-    public void upDetailw(String daralisMark){//从表停嘱
-        detailsMapper.upDetailw(daralisMark);
+    public void upDetailw(Details avi){//从表停嘱
+        detailsMapper.upDetailw(avi);
     }
 }

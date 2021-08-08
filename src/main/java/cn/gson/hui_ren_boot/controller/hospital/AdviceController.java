@@ -27,8 +27,8 @@ public class AdviceController {
     public String addAdvice(@RequestBody Advice advice){//医嘱主表
         System.out.println(advice);
       try{
-//            double price=0;//单价
-            List<Details>detail=advice.getDetailst();
+            double price=0;//单价
+            List<Details>detail=advice.getDetails();
 
             for (Details p:detail) {
                 String danhao=  MyUtil.genrateNo("YZXD");//订单编号
@@ -36,6 +36,7 @@ public class AdviceController {
                 p.setDaralisStart(advice.getAdviceStart());//开始时间
                 p.setDaralisDisable(advice.getAdviceEnd());
                 p.setAdviceId(advice.getAdviceId());//医嘱号
+                p.setRegisterId(advice.getRegisterId());
                 p.setDaralisDstate(1L);
                 p.setDaralisMark(danhao);
                 System.out.println(p.getDetailsDrip());

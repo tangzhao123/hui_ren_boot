@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+
 @Entity
 public class Test {
     private long testId;
@@ -18,6 +19,17 @@ public class Test {
     private Date testTime;
     private Long testMoney;
     private Cmobo cmobo;//体检套餐的实体类
+    private Cmobo cmobos;
+    @OneToOne
+    public Cmobo getCmobos() {
+        return cmobos;
+    }
+
+    public void setCmobos(Cmobo cmobos) {
+        this.cmobos = cmobos;
+    }
+
+
 
     @ManyToOne
     @JoinColumn(name = "TEST_COMBO" , referencedColumnName = "COMBO_ID")
@@ -124,5 +136,20 @@ public class Test {
     @Override
     public int hashCode() {
         return Objects.hash(testId, testName, testSex, testPhone, cmobo, testGenre, testTime, testMoney);
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "testId=" + testId +
+                ", testName='" + testName + '\'' +
+                ", testSex=" + testSex +
+                ", testPhone='" + testPhone + '\'' +
+                ", testGenre='" + testGenre + '\'' +
+                ", testTime=" + testTime +
+                ", testMoney=" + testMoney +
+                ", cmobo=" + cmobo +
+                ", cmobos=" + cmobos +
+                '}';
     }
 }
