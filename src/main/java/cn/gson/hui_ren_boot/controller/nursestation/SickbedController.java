@@ -5,6 +5,7 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity;
 import cn.gson.hui_ren_boot.model.service.nursestation.SickbedService;
 import cn.gson.hui_ren_boot.utils.MyUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class SickbedController {
@@ -19,15 +21,17 @@ public class SickbedController {
     SickbedService sickbedService;
 
     //调换病床
-    @RequestMapping("/diaohuan")
-    public String ChangingBed(@RequestBody Record xgjl,String sickbedMarks){
-        Record r = new Record();
-        r.setRecordSerial(xgjl.getRecordSerial());
-        r.setSickbedMark(sickbedMarks);
-        sickbedService.updateRecord(r);//修改病床记录，调换病床
-        sickbedService.updateTwo(xgjl.getSickbedMark());//修改病床状态为未使用
-        sickbedService.updateSickbed(sickbedMarks);//修改病床状态为已使用
-        System.out.println("病床记录："+xgjl.toString());
+    @RequestMapping("/record-diaohuan")
+    public String ChangingBed(@RequestBody Map<String,Object> map){
+        System.out.println("=========open========");
+        ObjectMapper mapper = new ObjectMapper();
+        Record xgjl = mapper.convertValue(map.get("xgjl"), Record.class);
+        String sickbedMarks = map.get("sickbedMarks").toString();
+        sickbedService.updateRecord(xgjl);//修改床位记录
+        sickbedService.updateSickbed(xgjl.getSickbedMark());//把病床状态改成已使用
+        sickbedService.updateTwo(sickbedMarks);//把病床状态改成未使用
+        System.out.println(xgjl.toString());
+        System.out.println(sickbedMarks+"他爸");
         return "ok";
     }
 

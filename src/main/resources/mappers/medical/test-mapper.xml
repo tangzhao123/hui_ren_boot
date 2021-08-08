@@ -14,6 +14,7 @@
             <id property="comboId" column="COMBO_ID"></id>
             <result property="comboName" column="COMBO_NAME"></result>
             <result property="comboMoney" column="COMBO_MONEY"></result>
+            <result property="comboSerial" column="COMBO_SERIAL"></result>
         </association>
     </resultMap>
 

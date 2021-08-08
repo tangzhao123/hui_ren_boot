@@ -10,6 +10,7 @@ public class Comboitem {
     private String itemOffice;
     private Long itemMoney;
     private String itemType;
+    private String itemUnit;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -21,6 +22,16 @@ public class Comboitem {
 
     public void setItemId(long itemId) {
         this.itemId = itemId;
+    }
+
+    @Basic
+    @Column(name = "ITEM_UNIT")
+    public String getItemUnit() {
+        return itemUnit;
+    }
+
+    public void setItemUnit(String itemUnit) {
+        this.itemUnit = itemUnit;
     }
 
     @Basic
