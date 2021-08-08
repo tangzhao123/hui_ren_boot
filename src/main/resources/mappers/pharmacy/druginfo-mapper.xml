@@ -72,7 +72,6 @@
     <update id="allState">
         update DRUG_INFO set DRUG_STATE=#{drugState} where DRUG_ID=#{drugId}
     </update>
-
     <insert id="addDrug">
         insert into DRUG_INFO(DRUG_SERIAL,DRUG_ID,DRUG_NAME,DRUG_USE,DRUG_DOSAGE,SURPLUS_ID,TYPE_ID,DRUG_SMALL,DRUG_BIG,SUPPLIER_ID,DRUG_SELLING,PURCHASE_PRICE)
         values (seq_huiren.nextval,#{drugId},#{drugName},#{drugUse},#{drugDosage},#{standards.standardId},#{types.typeId},

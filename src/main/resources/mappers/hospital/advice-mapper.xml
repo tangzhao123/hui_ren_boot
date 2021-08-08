@@ -15,7 +15,6 @@
         <result column="advice_chinese" property="adviceChinese"/>
         <result column="advice_doctors" property="adviceDoctors"/>
         <result column="register_name" property="registerName"/>
-
     </resultMap>
 
     <select id="allDispensing" resultMap="allAdvicve">

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.PharmacyMapper">
+    <resultMap id="pharmacyMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Pharmacy">
+        <id column="PHARMACY_ID" property="pharmacyId"/>
+        <result column="PHARMACY_NAME" property="pharmacyName"/>
+    </resultMap>
+
+    <!--查找药房-->
+    <select id="allPharmacy" resultMap="pharmacyMapper">
+        select * from PHARMACY
+    </select>
+
+</mapper>

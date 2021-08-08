@@ -12,6 +12,10 @@
         <result property="medicalName" column="medical_name"/>
         <result property="rankId" column="rank_id"/>
     </resultMap>
+    <resultMap id="userMap" type="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+    </resultMap>
     <!-- 登录 -->
     <select id="allUser" resultMap="userMapper">
         select * from user_info us inner join staff s on us.staff_id = s.staff_id inner join medical me on s.medical_id = me.medical_id  where us.user_name = #{userName} and us.user_possword = #{userPossword} and s.staff_state = 0
@@ -37,5 +41,8 @@
         where  user_id = #{userId}
     </update>
 
+    <select id="seUser" resultMap="userMap">
+        select *from USER_INFO
+    </select>
 
 </mapper>
