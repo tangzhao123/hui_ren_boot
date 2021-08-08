@@ -24,6 +24,16 @@ public class Transfers {
     private DrugDeport deports;//仓库外键
     private Pharmacy pharmacys;//调拨药房外键
     private GoBank banks;//出库单号外键
+    private List<Allocating> allocatings;//详情外键
+
+    @OneToMany
+    public List<Allocating> getAllocatings() {
+        return allocatings;
+    }
+
+    public void setAllocatings(List<Allocating> allocatings) {
+        this.allocatings = allocatings;
+    }
 
     @OneToOne
     public UserInfo getUsers() {

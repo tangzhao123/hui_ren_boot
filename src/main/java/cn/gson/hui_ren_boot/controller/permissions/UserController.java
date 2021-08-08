@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/UserInfo")
 public class UserController {
 
     @Autowired
@@ -27,6 +26,7 @@ public class UserController {
             return "fail";
         }
     }
+
     @RequestMapping("/users")
     public List<UserInfo> seUser(UserInfo userInfo){
         return userService.seUser(userInfo);

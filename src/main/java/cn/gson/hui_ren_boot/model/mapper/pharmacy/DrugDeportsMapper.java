@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface DrugDeportMapper {
+public interface DrugDeportsMapper {
     public List<DrugDeport> allDeport(DrugDeport deport);
 }

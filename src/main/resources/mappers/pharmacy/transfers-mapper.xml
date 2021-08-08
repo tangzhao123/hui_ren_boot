@@ -6,6 +6,7 @@
         <id column="TRANSFERS_ID" property="transfersId"/>
         <result column="TRANSFERS_DATE" property="transfersDate"/>
         <result column="TRANSFERS_TIME" property="transfersTime"/>
+        <result column="TRANSFERS_ORDER" property="transfersOrder"/>
         <association property="users" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
             <id column="USER_ID" property="userId"/>
             <result column="USER_NAME" property="userName"/>
@@ -22,11 +23,20 @@
             <id column="GO_ID" property="goId"/>
             <result column="GO_NUM" property="goNum"/>
         </association>
+
+        <collection property="allocatings" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Allocating">
+            <id column="ALL_SERIAL" property="allSerial"/>
+            <result column="ALL_ID" property="allId"/>
+            <result column="ALL_DRUG" property="allDrug"/>
+            <result column="ALL_SUM" property="allSum"/>
+            <result column="TRANSFERS_ID" property="transfersId"/>
+        </collection>
     </resultMap>
     <select id="allTransfers" resultMap="TransfersMapper">
         select * from TRANSFERS ts
             left join DRUG_DEPORT dd on ts.TRANSFERS_DEPORT=dd.DEPORT_ID
             left join PHARMACY pm on ts.TRANSFERS_PHARMACY=pm.PHARMACY_ID
             left join GO_BANK gb on ts.TRANSFERS_GO=gb.GO_ID
+            left join ALLOCATING ac on ts.TRANSFERS_ID=ac.TRANSFERS_ID
     </select>
 </mapper>
