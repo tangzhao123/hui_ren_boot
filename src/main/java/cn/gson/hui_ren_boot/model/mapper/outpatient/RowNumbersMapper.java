@@ -14,4 +14,7 @@ public interface RowNumbersMapper {
 
     //查询排号
     public List<RowNumbers> allNumber(@Param("medicalId") int medicalId,@Param("staffId") int staffId,@Param("rankId") int rankId);
+
+    //过号，根据挂号单修改id为最后一位
+    public void editRow(String bookingNo);
 }

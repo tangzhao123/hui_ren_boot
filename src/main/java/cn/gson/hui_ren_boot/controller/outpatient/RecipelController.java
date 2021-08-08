@@ -95,8 +95,15 @@ public class RecipelController {
     }
 
     //查询排号
-    @RequestMapping("all-number")
+    @RequestMapping("/all-number")
     public List<RowNumbers> allNumber(int medicalId,int staffId,int rankId){
         return recipelService.allNumber(medicalId, staffId,rankId);
+    }
+
+    //过号，根据挂号单修改id为最后一位
+    @RequestMapping("/edit-row")
+    public void editRow(String bookingNo){
+        System.out.println(bookingNo);
+        recipelService.editRow(bookingNo);
     }
 }

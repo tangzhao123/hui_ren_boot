@@ -63,11 +63,17 @@
                           left join booking_form bf on r.booking_no = bf.booking_no
                           left join outpatient_register o on bf.outpatient_id = o.outpatient_id
                           left join staff s on bf.staff_id = s.staff_id
-        where bf.medical_id = #{medicalId} and to_char(bf.booking_order,'yyyy-MM-dd') = to_char(CURRENT_TIMESTAMP,'yyyy-MM-dd')
+        where bf.medical_id = #{medicalId}
+          and to_char(bf.booking_order,'yyyy-MM-dd') = to_char(CURRENT_TIMESTAMP,'yyyy-MM-dd')
+          and bf.booking_state = 0
         <if test="rankId ==6">
             and bf.staff_id = #{staffId}
         </if>
-            and bf.bookingState == 0
+        order by r.row_id
     </select>
 
+    <!--过号，修改id为最后一位-->
+    <update id="editRow">
+        update row_numbers set row_id = seq_hr.nextval where booking_no = #{bookingNo}
+    </update>
 </mapper>

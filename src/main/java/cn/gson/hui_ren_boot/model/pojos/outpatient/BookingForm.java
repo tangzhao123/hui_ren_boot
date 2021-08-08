@@ -5,7 +5,6 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "BOOKING_FORM", schema = "HUIREN", catalog = "")
