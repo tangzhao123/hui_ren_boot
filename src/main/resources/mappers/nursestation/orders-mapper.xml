@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.nursestation.OrdersMapper">
+    <resultMap id="allRecord" type="cn.gson.hui_ren_boot.model.pojos.hospital.Record">
+        <id property="recordId" column="RECORD_ID"></id>
+        <result column="RECORD_SERIAL" property="recordSerial"/>
+        <result column="SICKBED_MARK" property="sickbedMark"/>
+        <result column="RECORD_NAME" property="recordName"/>
+        <result column="RECORD_DATE" property="recordDate"/>
+        <association property="register" javaType="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+            <id column="REGISTER_SERICA" property="registerSerica"/>
+            <result column="REGISTER_ID" property="registerId"/>
+            <result column="REGISTER_DATE" property="registerDate"/>
+            <result column="REGISTER_NAME" property="registerName"/>
+            <result column="REGISTER_SEX" property="registerSex"/>
+            <result column="REGISTER_SITE" property="registerSite"/>
+            <result column="REGISTER_CARD" property="registerCard"/>
+            <result column="REGISTER_PRINT" property="registerPrint"/>
+            <result column="REGISTER_AGE" property="registerAge"/>
+            <result column="REGISTER_HOME" property="registerHome"/>
+            <result column="REGISTER_ADDRESS" property="registerAddress"/>
+            <result column="REGISTER_PHONE" property="registerPhone"/>
+            <result column="REGISTER_RELATION" property="registerRelation"/>
+            <result column="REGISTER_CONTACT" property="registerContact"/>
+            <result column="REGISTER_CALL" property="registerCall"/>
+            <result column="REGISTER_RECORD" property="registerRecord"/>
+            <result column="REGISTER_CLINIC" property="registerClinic"/>
+            <!--        科室-->
+            <association property="medical" javaType="Medical">
+                <id column="MEDICAL_ID" property="medicalId"/>
+                <result column="MEDICAL_NAME" property="medicalName"/>
+            </association>
+<!--            员工-->
+            <association property="staff" javaType="Staff" >
+                <id column="STAFF_ID" property="staffId"/>
+                <result column="STAFF_NAME" property="staffName"/>
+            </association>
+        </association>
+    </resultMap>
+<!--    查询病人-->
+    <select id="allBing" resultMap="allRecord">
+        SELECT * FROM RECORD c LEFT JOIN REGISTER r ON r.register_id = c.register_id
+                 LEFT JOIN STAFF s ON r.staff_id = s.staff_id LEFT JOIN MEDICAL m ON r.medical_id = m.medical_id
+    </select>
+
+<!--    查医嘱-->
+    <select id="selectAdvice" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Advice">
+        SELECT * FROM ADVICE WHERE advice_cost = 1 AND register_id = #{registerId,jdbcType=VARCHAR}
+    </select>
+
+<!--    查医嘱详情-->
+    <select id="selectDetails" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+        SELECT * FROM DETAILS where DARALIS_DSTATE = 0 AND ADVICE_ID = #{adviceId,jdbcType=VARCHAR}
+    </select>
+
+<!--    新增执行记录-->
+    <insert id="insertOrders">
+        INSERT INTO ORDERS VALUES(seq_huiren.nextval,#{ordersUser},current_timestamp ,#{orderDetails},#{ordersId})
+    </insert>
+
+<!--    修改医嘱详情状态-->
+    <update id="updateOrder">
+        UPDATE DETAILS SET DARALIS_DSTATE = 2 WHERE DARALIS_MARK = #{daralisMark}
+    </update>
+</mapper>

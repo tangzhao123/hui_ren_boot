@@ -28,7 +28,7 @@
     </select>
     <!-- 新增体检项目 -->
     <insert id="addComboitem">
-        insert into comboitem values(seq_huiren.nextval,#{itemName},#{itemOffice},#{itemMoney},#{itemType})
+        insert into comboitem values(seq_huiren.nextval,#{itemName},#{itemOffice},#{itemMoney},#{itemType},#{itemUnit})
     </insert>
     <!-- 修改体检项目 -->
     <update id="updateComboitem">

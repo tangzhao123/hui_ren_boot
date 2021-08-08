@@ -18,6 +18,33 @@ public class Record {//床位使用表
     private Long recordState;//占用情况
     private Long recordDays;//住院天数
     private String registerId;//住院号
+    private Register register;//病人信息
+
+    public Record() {
+    }
+
+    public Record(long recordId, String recordSerial, String sickbedMark, String recordName, Date recordDate, Date recordLeave, Long recordState, Long recordDays, String registerId, Register register) {
+        this.recordId = recordId;
+        this.recordSerial = recordSerial;
+        this.sickbedMark = sickbedMark;
+        this.recordName = recordName;
+        this.recordDate = recordDate;
+        this.recordLeave = recordLeave;
+        this.recordState = recordState;
+        this.recordDays = recordDays;
+        this.registerId = registerId;
+        this.register = register;
+    }
+
+    @OneToOne
+    public Register getRegister() {
+        return register;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
+    }
+
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
     @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)

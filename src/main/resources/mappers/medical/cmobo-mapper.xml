@@ -2,16 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.CmoboMapper">
-    <resultMap id="selCmobo" type="Cmobo">
+    <resultMap id="selCmobo" type="cn.gson.hui_ren_boot.model.pojos.medical.Cmobo">
         <id property="comboId" column="COMBO_ID"></id>
         <result property="comboName" column="COMBO_NAME"></result>
         <result property="comboMoney" column="COMBO_MONEY"></result>
+        <result property="comboSerial" column="COMBO_SERIAL"></result>
+<!--        项目映射-->
+        <collection property="comboitems" javaType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+            <id property="itemId" column="ITEM_ID"/>
+            <result property="itemName" column="ITEM_NAME"/>
+            <result property="itemOffice" column="ITEM_OFFICE"/>
+            <result property="itemMoney" column="ITEM_MONEY"/>
+            <result property="itemType" column="ITEM_TYPE"/>
+            <result property="itemUnit" column="ITEM_UNIT"/>
+        </collection>
     </resultMap>
 
+<!--    查询套餐里的项目-->
+    <select id="selectAll" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        SELECT b.* FROM COMBOITEM b LEFT JOIN COMBOMIDDLE o ON  o.ITEM_ID = b.ITEM_ID
+                                    LEFT JOIN CMOBO c ON c.COMBO_SERIAL = o.COMBO_SERIAL WHERE c.COMBO_SERIAL = #{comboSerial,jdbcType=VARCHAR}
+    </select>
 
+<!--新增体检套餐-->
+    <insert id="addCmobo">
+        INSERT INTO CMOBO VALUES(seq_huiren.nextval,#{comboName},#{comboMoney},#{comboSerial})
+    </insert>
+
+<!--    新增中间表，体检套餐与体检项目-->
+    <insert id="addMiddle">
+        INSERT INTO COMBOMIDDLE VALUES(#{comboSerial},#{itemId})
+    </insert>
 
 <!--    查询体检套餐-->
     <select id="seeCmobo" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Cmobo">
         select * from cmobo
+    </select>
+
+<!--    查询体检项目-->
+    <select id="allComboitem" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        select * from comboitem
     </select>
 </mapper>
