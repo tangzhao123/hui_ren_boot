@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.StockOutMapper">
+
+    <!-- 批量新增出库详单 -->
+    <insert id="addStockOut">
+        insert into stockout
+        select seq_huiren.nextval,stockout_product,stockout_go,stockout_amount from
+        <foreach collection="storageData" item="s" index="i" separator=" " open="(" close=")">
+            <if test="i != storageData.size()-1">
+                select #{s.stockoutProduct} as stockout_product ,#{stockoutGo} as stockout_go,#{s.stockoutAmount}  as stockout_amount from dual
+                union
+            </if>
+            <if test=" i == storageData.size()-1">
+                select #{s.stockoutProduct} as stockout_product ,#{stockoutGo} as stockout_go,#{s.stockoutAmount}  as stockout_amount from dual
+            </if>
+        </foreach>
+    </insert>
+</mapper>

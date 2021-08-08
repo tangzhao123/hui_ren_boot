@@ -20,7 +20,7 @@
         select * from allocating al
         left join drug_info dr on al.all_drug = dr.drug_id
         left join drug_type ty on dr.type_id = ty.type_id
-        left join drug_consumable dc on al.all_drug = dc.material_id
+        left join drug_consumable dc on al.all_drug = dc.material_serial
         where transfers_id = #{transfersId}
     </select>
 </mapper>

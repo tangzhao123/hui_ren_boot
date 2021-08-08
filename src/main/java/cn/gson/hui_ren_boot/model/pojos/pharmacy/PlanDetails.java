@@ -10,7 +10,7 @@ public class PlanDetails {
 
     private long planId;
     private String planSerial;
-    private Long purchasePrice;
+    private double purchasePrice;
     private String drugId;
     private Long supplierId;
     private Long planNum;
@@ -44,11 +44,11 @@ public class PlanDetails {
 
     @Basic
     @Column(name = "PURCHASE_PRICE")
-    public Long getPurchasePrice() {
+    public double getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(Long purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 

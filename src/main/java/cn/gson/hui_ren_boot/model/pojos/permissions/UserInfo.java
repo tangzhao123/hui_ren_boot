@@ -74,6 +74,7 @@ public class UserInfo {
         this.staffId = staffId;
     }
 
+    @Transient
     public Long getMedicalId() {
         return medicalId;
     }
@@ -82,6 +83,7 @@ public class UserInfo {
         this.medicalId = medicalId;
     }
 
+    @Transient
     public Long getRankId() {
         return rankId;
     }
@@ -103,6 +105,7 @@ public class UserInfo {
         return Objects.hash(userId, userName, userPossword, staffId);
     }
 
+    @Transient
     public String getStaffName() {
         return staffName;
     }
@@ -114,6 +117,7 @@ public class UserInfo {
     public UserInfo() {
     }
 
+    @Transient
     public String getMedicalName() {
         return medicalName;
     }

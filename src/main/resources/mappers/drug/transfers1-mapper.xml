@@ -34,4 +34,10 @@
         left join drug_deport dr on tr.transfers_deport = dr.deport_id
         where transfers_go is null
     </select>
+
+
+    <!-- 新增调拨申请的出库时间出库单号出库仓库 -->
+    <update id="updateTransfers">
+        update transfers set transfers_date = #{transfersDate},transfers_deport = #{transfersDeport},transfers_go = #{transfersGo}
+    </update>
 </mapper>

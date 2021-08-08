@@ -3,6 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DrugStockMapper">
 
+    <!-- 库存的映射 -->
+    <resultMap id="drugStockMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStock">
+        <id property="stockId" column="stock_id"/>
+        <result property="stockSurplus" column="stock_surplus"/>
+        <result property="stockNumber" column="stock_number"/>
+        <result property="stockDate" column="stock_date"/>
+        <result property="stockBatch" column="stock_batch"/>
+        <result property="stockIndate" column="stock_indate"/>
+        <result property="drugId" column="drug_id"/>
+    </resultMap>
+
+    <!--  根据药品编号查询药品库存 -->
+    <select id="findAllStock" resultMap="drugStockMap">
+        select * from drug_stock where drug_id = #{drugId} order by stock_indate,stock_surplus
+    </select>
+
     <!-- 新增库存表 -->
     <insert id="addDrugStock">
             insert  into drug_stock
@@ -19,4 +35,9 @@
                 </if>
             </foreach>
     </insert>
+
+    <!-- 修改库存数量根据保质期去扣 -->
+    <update id="updateDrugStock">
+        update drug_stock set stock_surplus = stock_surplus-#{stockSurplus} where stock_batch = #{stockBatch}
+    </update>
 </mapper>

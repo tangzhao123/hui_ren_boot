@@ -1,21 +1,24 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "GO_BANK", schema = "HUIREN")
 public class GoBank {
+
     private Long goId;
     private String goNum;
-    private Time goDate;
-    private Long goWay;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Timestamp goDate;
     private Long goTouching;
-    private Long goHandleu;
-    private String goType;
     private Long goWarehouse;
-
+    private String goBatch;
+    private List<Stockout> storageData;//出库详单集合
 
     @Id
     @Column(name = "GO_ID")
@@ -39,23 +42,15 @@ public class GoBank {
 
     @Basic
     @Column(name = "GO_DATE")
-    public Time getGoDate() {
+    public Timestamp getGoDate() {
         return goDate;
     }
 
-    public void setGoDate(Time goDate) {
+    public void setGoDate(Timestamp goDate) {
         this.goDate = goDate;
     }
 
-    @Basic
-    @Column(name = "GO_WAY")
-    public Long getGoWay() {
-        return goWay;
-    }
 
-    public void setGoWay(Long goWay) {
-        this.goWay = goWay;
-    }
 
     @Basic
     @Column(name = "GO_TOUCHING")
@@ -67,24 +62,14 @@ public class GoBank {
         this.goTouching = goTouching;
     }
 
-    @Basic
-    @Column(name = "GO_HANDLEU")
-    public Long getGoHandleu() {
-        return goHandleu;
+
+    @OneToMany
+    public List<Stockout> getStorageData() {
+        return storageData;
     }
 
-    public void setGoHandleu(Long goHandleu) {
-        this.goHandleu = goHandleu;
-    }
-
-    @Basic
-    @Column(name = "GO_TYPE")
-    public String getGoType() {
-        return goType;
-    }
-
-    public void setGoType(String goType) {
-        this.goType = goType;
+    public void setStorageData(List<Stockout> storageData) {
+        this.storageData = storageData;
     }
 
     @Basic
@@ -97,16 +82,39 @@ public class GoBank {
         this.goWarehouse = goWarehouse;
     }
 
+    @Basic
+    @Column(name = "GO_BATCH")
+    public String getGoBatch() {
+        return goBatch;
+    }
+
+    public void setGoBatch(String goBatch) {
+        this.goBatch = goBatch;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GoBank goBank = (GoBank) o;
-        return Objects.equals(goId, goBank.goId) && Objects.equals(goNum, goBank.goNum) && Objects.equals(goDate, goBank.goDate) && Objects.equals(goWay, goBank.goWay) && Objects.equals(goTouching, goBank.goTouching) && Objects.equals(goHandleu, goBank.goHandleu) && Objects.equals(goType, goBank.goType) && Objects.equals(goWarehouse, goBank.goWarehouse);
+        return Objects.equals(goId, goBank.goId) && Objects.equals(goNum, goBank.goNum) && Objects.equals(goDate, goBank.goDate) && Objects.equals(goTouching, goBank.goTouching) && Objects.equals(goWarehouse, goBank.goWarehouse);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(goId, goNum, goDate, goWay, goTouching, goHandleu, goType, goWarehouse);
+        return Objects.hash(goId, goNum, goDate, goTouching, goWarehouse);
+    }
+
+    @Override
+    public String toString() {
+        return "GoBank{" +
+                "goId=" + goId +
+                ", goNum='" + goNum + '\'' +
+                ", goDate=" + goDate +
+                ", goTouching=" + goTouching +
+                ", goWarehouse=" + goWarehouse +
+                ", goBatch='" + goBatch + '\'' +
+                ", storageData=" + storageData +
+                '}';
     }
 }

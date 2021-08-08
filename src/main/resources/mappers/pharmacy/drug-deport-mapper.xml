@@ -15,4 +15,14 @@
     <select id="finAllDeport" resultMap="deportMap">
         select * from drug_deport
     </select>
+
+    <!-- 修改仓库总库存数量 -->
+    <update id="updateDeport">
+        update drug_deport set deport_stock = deport_stock+#{deportStock} where deport_id = #{deportId}
+    </update>
+
+    <!-- 修改仓库总库存数量 -->
+    <update id="updateDeports">
+        update drug_deport set deport_stock = deport_stock-#{deportStock} where deport_id = #{deportId}
+    </update>
 </mapper>
