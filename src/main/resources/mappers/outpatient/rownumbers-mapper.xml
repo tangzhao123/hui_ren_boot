@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.RowNumbersMapper">
+    <resultMap id="rowMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.RowNumbers">
+        <id column="ROW_ID" property="rowId"/>
+        <association property="bookingForm" javaType="BookingForm">
+            <id column="BOOKING_ID" property="bookingId"/>
+            <result column="BOOKING_NO" property="bookingNo"/>
+            <result column="BOOKING_DATE" property="bookingDate"/>
+            <result column="BOOKING_TYPE" property="bookingType"/>
+            <result column="TREATMENT_NO" property="treatmentNo"/>
+            <result column="BOOKING_FEE" property="bookingFee"/>
+            <result column="BOOKING_OTHER" property="bookingOther"/>
+            <result column="BOOKING_ORDER" property="bookingOrder"/>
+            <result column="BOOKING_RETURN" property="bookingReturn"/>
+            <result column="BOOKING_STATE" property="bookingState"/>
+            <result property="medicalId" column="medical_id"/>
+            <result column="STAFF_ID" property="staffId"/>
+            <association property="outpatient" javaType="OutpatientRegister">
+                <id column="OUTPATIENT_ID" property="outpatientId"/>
+                <result column="OUTPATIENT_NAME" property="outpatientName"/>
+                <result column="OUTPATIENT_SEX" property="outpatientSex"/>
+                <result column="OUTPATIENT_BIRTH" property="outpatientBirth"/>
+                <result column="OUTPATIENT_AGE" property="outpatientAge"/>
+                <result column="OUTPATIENT_MARRY" property="outpatientMarry"/>
+                <result column="OUTPATIENT_VOCATION" property="outpatientVocation"/>
+                <result column="OUTPATIENT_NATIVE" property="outpatientNative"/>
+                <result column="OUTPATIENT_NATION" property="outpatientNation"/>
+                <result column="OUTPATIENT_CARD" property="outpatientCard"/>
+                <result column="OUTPATIENT_WORK" property="outpatientWork"/>
+                <result column="OUTPATIENT_PHONE" property="outpatientPhone"/>
+                <result column="OUTPATIENT_ADDRESS" property="outpatientAddress"/>
+                <result column="OUTPATIENT_WEIGHT" property="outpatientWeight"/>
+                <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
+            </association>
+<!--            <association property="officeId" javaType="Medical">-->
+<!--                <id property="medicalId" column="medical_id"/>-->
+<!--                <result property="medicalName" column="medical_name"/>-->
+<!--                <result property="medicalSublevel" column="medical_sublevel"/>-->
+<!--            </association>-->
+<!--            <association property="outdoctorId" javaType="Staff">-->
+<!--                <id column="STAFF_ID" property="staffId"/>-->
+<!--                <result column="STAFF_NAME" property="staffName"/>-->
+<!--                <result column="STAFF_PHONE" property="staffPhone"/>-->
+<!--                <result column="SECTION_ID" property="sectionId"/>-->
+<!--                <result column="MEDICAL_ID" property="medicalId"/>-->
+<!--                <result column="RANK_ID" property="rankId"/>-->
+<!--                <result column="STAFF_STATE" property="staffState"/>-->
+<!--                <result column="STAFF_CARD" property="staffCard"/>-->
+<!--            </association>-->
+        </association>
+    </resultMap>
+
+    <!--新增排号-->
+    <insert id="addNumber">
+        insert into row_numbers values (seq_hr.nextval,#{bookingNo})
+    </insert>
+
+    <!--查询排号-->
+    <select id="allNumber" resultMap="rowMap">
+        select * from row_numbers r
+                          left join booking_form bf on r.booking_no = bf.booking_no
+                          left join outpatient_register o on bf.outpatient_id = o.outpatient_id
+                          left join staff s on bf.staff_id = s.staff_id
+        where bf.medical_id = #{medicalId}
+          and to_char(bf.booking_order,'yyyy-MM-dd') = to_char(CURRENT_TIMESTAMP,'yyyy-MM-dd')
+          and bf.booking_state = 0
+        <if test="rankId ==6">
+            and bf.staff_id = #{staffId}
+        </if>
+        order by r.row_id
+    </select>
+
+    <!--过号，修改id为最后一位-->
+    <update id="editRow">
+        update row_numbers set row_id = seq_hr.nextval where booking_no = #{bookingNo}
+    </update>
+</mapper>
