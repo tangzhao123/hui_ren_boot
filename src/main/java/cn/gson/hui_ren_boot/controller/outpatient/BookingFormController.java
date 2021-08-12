@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.controller.outpatient;
 
 import cn.gson.hui_ren_boot.model.pojos.outpatient.BookingForm;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.RegisterType;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.Withdrawal;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
@@ -21,6 +22,18 @@ import java.util.Map;
 public class BookingFormController {
     @Autowired
     BookingFormService bookingFormService;
+
+    //查询挂号类型
+    @RequestMapping("/sel-type")
+    public List<RegisterType> selType(){
+        return bookingFormService.selType();
+    }
+
+    //查询挂号费，根据挂号类型
+    @RequestMapping("/sel-money")
+    public double selMoney(String typeName){
+        return bookingFormService.selMoney(typeName);
+    }
 
     //查询挂号时的科室
     @RequestMapping("/booking-medical")

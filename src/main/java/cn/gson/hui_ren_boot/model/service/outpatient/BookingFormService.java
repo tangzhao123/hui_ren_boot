@@ -1,11 +1,9 @@
 package cn.gson.hui_ren_boot.model.service.outpatient;
 
-import cn.gson.hui_ren_boot.model.mapper.outpatient.BookingFormMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.OutRegisterMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.RowNumbersMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.WithdrawalMapper;
+import cn.gson.hui_ren_boot.model.mapper.outpatient.*;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.BookingForm;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.RegisterType;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.Withdrawal;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
@@ -32,6 +30,19 @@ public class BookingFormService {
 
     @Autowired
     RowNumbersMapper rowNumbersMapper;
+
+    @Autowired
+    RegisterTypeMapper registerTypeMapper;
+
+    //查询挂号类型
+    public List<RegisterType> selType(){
+        return registerTypeMapper.selType();
+    }
+
+    //查询挂号费，根据挂号类型
+    public double selMoney(String typeName){
+        return registerTypeMapper.selMoney(typeName);
+    }
 
     //查询挂号时的科室
     public List<Medical> allMedicals(){
