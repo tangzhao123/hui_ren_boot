@@ -108,4 +108,12 @@
         </if>
     </select>
 
+    <!--收费，处方单查询-->
+    <select id="allList" resultMap="listMap">
+        select * from prescription_list pl
+        left join outpatient_register o on pl.outpatient_id = o.outpatient_id
+        left join staff s on pl.staff_id = s.staff_id
+        left JOIN medical me on pl.medical_id = me.medical_id
+        where pl.RECORD_NO = #{recordNo}
+    </select>
 </mapper>

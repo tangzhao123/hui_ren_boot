@@ -19,4 +19,7 @@ public interface PrescriptionListMapper {
 
     //查询门诊西药处方单
     public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList);
+
+    //收费，查询处方单
+    public List<PrescriptionList> allList(String recordNo);
 }

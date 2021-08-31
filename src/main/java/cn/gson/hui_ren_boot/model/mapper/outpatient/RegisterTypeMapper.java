@@ -11,5 +11,5 @@ public interface RegisterTypeMapper {
     public List<RegisterType> selType();
 
     //查询挂号费，根据挂号类型
-    public double selMoney(String typeName);
+    public double selMoney(Long typeNumber);
 }

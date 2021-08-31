@@ -31,8 +31,8 @@ public class BookingFormController {
 
     //查询挂号费，根据挂号类型
     @RequestMapping("/sel-money")
-    public double selMoney(String typeName){
-        return bookingFormService.selMoney(typeName);
+    public double selMoney(Long typeNumber){
+        return bookingFormService.selMoney(typeNumber);
     }
 
     //查询挂号时的科室

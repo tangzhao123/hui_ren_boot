@@ -40,8 +40,8 @@ public class BookingFormService {
     }
 
     //查询挂号费，根据挂号类型
-    public double selMoney(String typeName){
-        return registerTypeMapper.selMoney(typeName);
+    public double selMoney(Long typeNumber){
+        return registerTypeMapper.selMoney(typeNumber);
     }
 
     //查询挂号时的科室

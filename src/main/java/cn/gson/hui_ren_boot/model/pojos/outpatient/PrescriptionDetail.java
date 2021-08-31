@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStandard;
 
 import javax.persistence.*;
@@ -19,7 +20,17 @@ public class PrescriptionDetail {
     private Long inject;
     private Long carryOut;
     private double subtotal;
+    private DrugInfo drug;
     private DrugStandard standards;
+
+    @OneToOne
+    public DrugInfo getDrug() {
+        return drug;
+    }
+
+    public void setDrug(DrugInfo drug) {
+        this.drug = drug;
+    }
 
     @OneToOne
     public DrugStandard getStandards() {
