@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -16,6 +17,7 @@ public class PrescriptionList {
     private String prescriptionNo;
     private String recordNo;
     private Long prescriptionType;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date prescriptionDate;
     private String prescriptionDiagnosis;
     private String outpatientId;

@@ -16,6 +16,16 @@
         <result column="INJECT" property="inject"/>
         <result column="CARRY_OUT" property="carryOut"/>
         <result column="SUBTOTAL" property="subtotal"/>
+        <association property="drug" javaType="DrugInfo">
+            <id column="DRUG_SERIAL" property="drugSerial"/>
+            <result column="DRUG_ID" property="drugId"/><!--药品编码-->
+            <result column="DRUG_NAME" property="drugName"/><!--药品名称-->
+            <result column="DRUG_SELLING" property="drugSelling"/><!--中售价-->
+            <association property="types" javaType="DrugType">
+                <id column="TYPE_ID" property="typeId"/>
+                <result column="TYPE_NAME" property="typeName"/>
+            </association>
+        </association>
         <association property="standards" javaType="DrugStandard">
             <id column="STANDARD_ID" property="standardId"/>
             <result column="STANDARD_NAME" property="standardName"/>
@@ -65,6 +75,7 @@
     <select id="selNo" resultMap="detailMap">
         select * from prescription_detail pd
                           left join prescription_list pl on pd.prescription_no = pl.prescription_no
+                          left join drug_info di on pd.drug_name = di.drug_name
         where pd.prescription_no = #{prescriptionNo}
     </select>
 </mapper>

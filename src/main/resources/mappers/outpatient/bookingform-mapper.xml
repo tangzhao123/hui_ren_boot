@@ -78,7 +78,10 @@
                           inner join section se on s.section_id = se.section_id
                           inner join medical me on s.medical_id = me.medical_id
                           inner join arrange ar on s.staff_id = ar.staff_id
-        where me.medical_id = #{medicalId} and se.section_id = 1 and #{bookingOrder} between to_char(ar.arrange_start,'yyyy-mm-dd')and to_char(ar.arrange_end,'yyyy-mm-dd')
+        where me.medical_id = #{medicalId}
+          and se.section_id = 1 and #{bookingOrder} between to_char(ar.arrange_start,'yyyy-mm-dd')
+              and to_char(ar.arrange_end,'yyyy-mm-dd')
+          and s.rank_id = 6
     </select>
 
     <!--新增挂号单-->

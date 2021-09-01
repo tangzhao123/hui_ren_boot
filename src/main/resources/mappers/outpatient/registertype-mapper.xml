@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.RegisterTypeMapper">
+    <resultMap id="typeMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.RegisterType">
+        <id column="TYPE_NUMBER" property="typeNumber"/>
+        <result column="TYPE_NAME" property="typeName"/>
+        <result column="TYPE_MONEY" property="typeMoney"/>
+    </resultMap>
+    <!--查询挂号类型-->
+    <select id="selType" resultMap="typeMap">
+        select * from register_type
+    </select>
+
+    <!--查询挂号费，根据挂号类型-->
+    <select id="selMoney"  resultType="double">
+        select type_money from register_type where TYPE_NUMBER = #{typeNumber}
+    </select>
+</mapper>
