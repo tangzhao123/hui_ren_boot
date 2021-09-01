@@ -1,0 +1,137 @@
+package cn.gson.hui_ren_boot.model.pojos.hospital;
+
+import javax.persistence.*;
+import java.sql.Time;
+import java.util.Objects;
+
+@Entity
+public class Surgery {
+
+    private long surgeryId;//序号主键
+    private String surgeryDoctor;//医生编号
+    private String surgeryName;//手术名称
+    private Time surgerysStart;//开始时间
+    private Time surgeryFinish;//结束时间
+    private String registerId;//住院号
+    private String surgeryUser;//操作员
+    private Long surgeryCost;//手术费
+    private String surgeryOper;//手术编号
+    private String surgeryLogist;//麻醉师
+
+
+
+    @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
+    @Column(name = "SURGERY_ID")
+    public long getSurgeryId() {
+        return surgeryId;
+    }
+
+    public void setSurgeryId(long surgeryId) {
+        this.surgeryId = surgeryId;
+    }
+
+    @Basic
+    @Column(name = "SURGERY_DOCTOR")
+    public String getSurgeryDoctor() {
+        return surgeryDoctor;
+    }
+
+    public void setSurgeryDoctor(String surgeryDoctor) {
+        this.surgeryDoctor = surgeryDoctor;
+    }
+
+    @Basic
+    @Column(name = "SURGERY_NAME")
+    public String getSurgeryName() {
+        return surgeryName;
+    }
+
+    public void setSurgeryName(String surgeryName) {
+        this.surgeryName = surgeryName;
+    }
+
+    @Basic
+    @Column(name = "SURGERYS_START")
+    public Time getSurgerysStart() {
+        return surgerysStart;
+    }
+
+    public void setSurgerysStart(Time surgerysStart) {
+        this.surgerysStart = surgerysStart;
+    }
+
+    @Basic
+    @Column(name = "SURGERY_FINISH")
+    public Time getSurgeryFinish() {
+        return surgeryFinish;
+    }
+
+    public void setSurgeryFinish(Time surgeryFinish) {
+        this.surgeryFinish = surgeryFinish;
+    }
+
+    @Basic
+    @Column(name = "REGISTER_ID")
+    public String getRegisterId() {
+        return registerId;
+    }
+
+    public void setRegisterId(String registerId) {
+        this.registerId = registerId;
+    }
+
+    @Basic
+    @Column(name = "SURGERY_USER")
+    public String getSurgeryUser() {
+        return surgeryUser;
+    }
+
+    public void setSurgeryUser(String surgeryUser) {
+        this.surgeryUser = surgeryUser;
+    }
+
+    @Basic
+    @Column(name = "SURGERY_COST")
+    public Long getSurgeryCost() {
+        return surgeryCost;
+    }
+
+    public void setSurgeryCost(Long surgeryCost) {
+        this.surgeryCost = surgeryCost;
+    }
+
+    @Basic
+    @Column(name = "SURGERY_OPER")
+    public String getSurgeryOper() {
+        return surgeryOper;
+    }
+
+    public void setSurgeryOper(String surgeryOper) {
+        this.surgeryOper = surgeryOper;
+    }
+
+    @Basic
+    @Column(name = "SURGERY_LOGIST")
+    public String getSurgeryLogist() {
+        return surgeryLogist;
+    }
+
+    public void setSurgeryLogist(String surgeryLogist) {
+        this.surgeryLogist = surgeryLogist;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Surgery surgery = (Surgery) o;
+        return surgeryId == surgery.surgeryId && Objects.equals(surgeryDoctor, surgery.surgeryDoctor) && Objects.equals(surgeryName, surgery.surgeryName) && Objects.equals(surgerysStart, surgery.surgerysStart) && Objects.equals(surgeryFinish, surgery.surgeryFinish) && Objects.equals(registerId, surgery.registerId) && Objects.equals(surgeryUser, surgery.surgeryUser) && Objects.equals(surgeryCost, surgery.surgeryCost) && Objects.equals(surgeryOper, surgery.surgeryOper) && Objects.equals(surgeryLogist, surgery.surgeryLogist);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surgeryId, surgeryDoctor, surgeryName, surgerysStart, surgeryFinish, registerId, surgeryUser, surgeryCost, surgeryOper, surgeryLogist);
+    }
+}

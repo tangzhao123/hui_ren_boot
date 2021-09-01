@@ -1,0 +1,13 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.InformMapper">
+    <insert id="addInform" >-- 新增
+        insert   into inform values(seq_huiren.nextval,#{informPatients},current_timestamp,#{informWhy},#{informDoctor},#{registerId},0)
+    </insert>
+    <select id="selectInform" resultType="Inform">-- 查
+        select*from inform where register_id= #{registerId}
+    </select>
+    <delete id="deleteInform">-- 删除
+        delete from inform where  inform_id= #{informId}
+    </delete>
+</mapper>
