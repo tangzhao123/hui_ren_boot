@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.OperationMapper">
+    <!--查询手术室表只要没在手术中的-->
+    <select id="allOperation" resultType="Additional">
+        select *from additional
+    </select>
+    <!--查询员工表-->
+    <select id="allStaff" resultType="Staff">
+        select *from staff where rank_id=8 and medical_id=#{medicalId}
+    </select>
+    <select id="allStaff2" resultType="Staff">
+        select *from staff where rank_id=7
+    </select>
+<!--    <select id="allMedicals" resultType="Medical">-->
+<!--&#45;&#45;             select*from medical where medical_name=#{medicalName}-->
+<!--     </select>-->
+    <insert id="addSurgeryfor">
+        insert into surgeryfor values(seq_huiren.nextval,#{registerName},#{registerId},#{registerClinic},current_timestamp,0,#{additionalName},#{additionalMoney},#{additionalLevel},#{additionalBlade},#{additionaAnesthesia})
+    </insert>
+    <select id="allSurgeryfor" resultType="Surgeryfor">
+        select*from surgeryfor where register_id=#{registerId}
+    </select>
+    <delete id="deleteSurgeryfor">
+        delete from surgeryfor where surgeryfor_id=#{surgeryforId}
+    </delete>
+</mapper>
