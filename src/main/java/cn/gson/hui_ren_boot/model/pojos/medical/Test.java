@@ -18,28 +18,8 @@ public class Test {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="Asia/Shanghai")
     private Date testTime;
     private Long testMoney;
-    private Cmobo cmobo;//体检套餐的实体类
-    private Cmobo cmobos;
-    @OneToOne
-    public Cmobo getCmobos() {
-        return cmobos;
-    }
+    private Long testState;
 
-    public void setCmobos(Cmobo cmobos) {
-        this.cmobos = cmobos;
-    }
-
-
-
-    @ManyToOne
-    @JoinColumn(name = "TEST_COMBO" , referencedColumnName = "COMBO_ID")
-    public Cmobo getCmobo() {
-        return cmobo;
-    }
-
-    public void setCmobo(Cmobo cmobo) {
-        this.cmobo = cmobo;
-    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -83,15 +63,6 @@ public class Test {
         this.testPhone = testPhone;
     }
 
-    /*@Basic
-    @Column(name = "TEST_COMBO")
-    public Long getTestCombo() {
-        return testCombo;
-    }
-
-    public void setTestCombo(Long testCombo) {
-        this.testCombo = testCombo;
-    }*/
 
     @Basic
     @Column(name = "TEST_GENRE")
@@ -125,17 +96,27 @@ public class Test {
         this.testMoney = testMoney;
     }
 
+    @Basic
+    @Column(name = "TEST_STATE")
+    public Long getTestState() {
+        return testState;
+    }
+
+    public void setTestState(Long testState) {
+        this.testState = testState;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Test test = (Test) o;
-        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(cmobo, test.cmobo) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney);
+        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney) && Objects.equals(testState, test.testState);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(testId, testName, testSex, testPhone, cmobo, testGenre, testTime, testMoney);
+        return Objects.hash(testId, testName, testSex, testPhone, testGenre, testTime, testMoney, testState);
     }
 
     @Override
@@ -148,8 +129,7 @@ public class Test {
                 ", testGenre='" + testGenre + '\'' +
                 ", testTime=" + testTime +
                 ", testMoney=" + testMoney +
-                ", cmobo=" + cmobo +
-                ", cmobos=" + cmobos +
+                ", testState="+testState +
                 '}';
     }
 }

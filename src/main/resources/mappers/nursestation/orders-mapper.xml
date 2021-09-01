@@ -63,4 +63,43 @@
     <update id="updateOrder">
         UPDATE DETAILS SET DARALIS_DSTATE = 2 WHERE DARALIS_MARK = #{daralisMark}
     </update>
+
+    <resultMap id="selectDetails" type="cn.gson.hui_ren_boot.model.pojos.hospital.Advice">
+        <id column="advice_serial" property="adviceSerial"/>
+        <result column="advice_id" property="adviceId"/>
+        <result column="advice_start" property="adviceStart"/>
+        <result column="advice_sickbed" property="adviceSickbed"/>
+        <result column="staff_name" property="staffName"/>
+        <result column="advice_cost" property="adviceCost"/>
+        <result column="advice_type" property="adviceType"/>
+        <result column="advice_end" property="adviceEnd"/>
+        <result column="advice_chinese" property="adviceChinese"/>
+        <result column="advice_doctors" property="adviceDoctors"/>
+        <result column="register_name" property="registerName"/>
+        <result column="register_id" property="registerId"/>
+<!--        医嘱详情-->
+        <collection property="details" javaType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+            <id column="details_serial" property="detailsSerial"/>
+            <result column="drug_name" property="drugName"/>
+            <result column="details_drip" property="detailsDrip"/>
+            <result column="details_way" property="detailsWay"/>
+            <result column="datails_dosage" property="datailsDosage"/>
+            <result column="daralis_usage" property="daralisUsage"/>
+            <result column="daralis_time" property="daralisTime"/>
+            <result column="daralis_cost" property="daralisCost"/>
+            <result column="daralis_dstate" property="daralisDstate"/>
+            <result column="daralis_start" property="daralisStart"/>
+            <result column="daralis_price" property="daralisPrice"/>
+            <result column="daralis_number" property="daralisNumber"/>
+            <result column="drug_big" property="drugBig"/>
+            <result column="standard_name" property="standardName"/>
+            <result column="standard_use" property="standardUse"/>
+            <result column="daralis_mark" property="daralisMark"/>
+            <result column="register_id" property="registerId"/>
+        </collection>
+    </resultMap>
+<!--   连表查询医嘱详情-->
+    <select id="selAll" resultMap="selectDetails">
+        SELECT * FROM DETAILS d LEFT JOIN ADVICE a ON d.ADVICE_ID = a.ADVICE_ID WHERE a.advice_cost = 1 AND a.REGISTER_ID = #{registerId}
+    </select>
 </mapper>

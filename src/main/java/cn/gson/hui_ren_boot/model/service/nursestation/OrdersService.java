@@ -15,6 +15,11 @@ public class OrdersService {
     @Autowired
     OrdersMapper ordersMapper;
 
+    //查询医嘱详情（连表）
+    public List<Details> selAll(String registerId){
+        return ordersMapper.selAll(registerId);
+    }
+
     //新增执行记录
     public void insertOrders(Orders orders){
         ordersMapper.insertOrders(orders);
