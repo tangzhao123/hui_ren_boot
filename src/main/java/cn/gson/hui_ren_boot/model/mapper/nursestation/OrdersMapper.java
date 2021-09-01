@@ -11,6 +11,9 @@ import java.util.List;
 @Mapper
 public interface OrdersMapper {
 
+    //查询医嘱详情（连表）
+    public List<Details> selAll(String registerId);
+
     //新增执行记录
     public void insertOrders(Orders orders);
 

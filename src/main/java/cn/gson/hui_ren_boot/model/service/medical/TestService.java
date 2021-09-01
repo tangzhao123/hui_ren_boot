@@ -1,8 +1,10 @@
 package cn.gson.hui_ren_boot.model.service.medical;
 
 import cn.gson.hui_ren_boot.model.dao.medical.TestDao;
+import cn.gson.hui_ren_boot.model.dao.medical.TestmiddleDao;
 import cn.gson.hui_ren_boot.model.mapper.medical.TestMapper;
 import cn.gson.hui_ren_boot.model.pojos.medical.Test;
+import cn.gson.hui_ren_boot.model.pojos.medical.Testmiddle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,19 @@ public class TestService {
 
     @Autowired
     TestDao testDao;//体检预约Dao
+
+    @Autowired
+    TestmiddleDao testmiddleDao;//中间表的dao成
+
+    //新增体检中间表
+    public void addMiddle(Testmiddle testmiddle){
+        testMapper.addMiddle(testmiddle);
+    }
+
+    //新增
+    public void insertMiddle(Testmiddle testmiddle){
+        testmiddleDao.save(testmiddle);
+    }
 
     //删除
     public void delTest(Long id){

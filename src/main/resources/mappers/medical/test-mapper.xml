@@ -10,16 +10,10 @@
         <result property="testGenre" column="TEST_GENRE"></result>
         <result property="testTime" column="TEST_TIME"></result>
         <result property="testMoney" column="TEST_MONEY"></result>
-        <association property="cmobo" javaType="cn.gson.hui_ren_boot.model.pojos.medical.Cmobo">
-            <id property="comboId" column="COMBO_ID"></id>
-            <result property="comboName" column="COMBO_NAME"></result>
-            <result property="comboMoney" column="COMBO_MONEY"></result>
-            <result property="comboSerial" column="COMBO_SERIAL"></result>
-        </association>
     </resultMap>
 
-    <select id="selectCmobo" resultMap="select">
-        select * from test t left JOIN cmobo c on c.combo_id = t.test_combo
+    <select id="selectCmobo" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Test">
+        select * from test
         <where>
             <if test="testName != null and testName != ''">
                 or TEST_NAME = '%${testName}%'
@@ -29,7 +23,10 @@
 
 <!--    新增-->
     <insert id="insertTest" >
-        insert into test value (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},#{testCombo},
-            #{testGenre},#{testTime},10)
+        insert into test values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},#{testGenre},#{testTime},#{testMoney},#{testState})
+    </insert>
+
+    <insert id="addMiddle">
+        insert into testmiddle values (#{testId},#{itemId})
     </insert>
 </mapper>
