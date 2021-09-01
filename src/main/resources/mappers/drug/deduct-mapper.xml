@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DeductMapper">
+
+    <!-- 库存扣除记录的映射 -->
+    <resultMap id="deductMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Deduct">
+        <id property="deductId" column="deduct_id"/>
+        <result property="drugId" column="drug_id"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="deductSum" column="deduct_sum"/>
+        <result property="goNum" column="go_num"/>
+    </resultMap>
+
+    <!-- 新增库存扣除记录 -->
+    <insert id="addDeduct">
+        insert into deduct values (seq_huiren.nextval,#{drugId},#{drugName},#{deductSum},#{goNum})
+    </insert>
+
+    <!-- 根据出库单号查询库存扣除记录 -->
+    <select id="findAllDeduct" resultMap="deductMap">
+        select * from deduct where go_num = #{goNum}
+    </select>
+</mapper>

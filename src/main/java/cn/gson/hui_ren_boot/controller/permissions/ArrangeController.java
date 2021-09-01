@@ -9,13 +9,16 @@ import cn.gson.hui_ren_boot.model.service.permissions.CategoryService;
 import cn.gson.hui_ren_boot.model.service.permissions.MedicalService;
 import cn.gson.hui_ren_boot.model.service.permissions.StaffService;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -53,9 +56,19 @@ public class ArrangeController {
 
     //新增排班
     @RequestMapping("add-arrange")
-    public String addArrange(@RequestBody Arrange arrange){
+    public String addArrange(@RequestBody Map<String,Object> datas){
+        //员工编号
+        List<Integer> staffId = (List<Integer>) datas.get("staffIds");
+        //排班实体类
+        String str = JSON.toJSONString(datas.get("arrange"));
+        Arrange arrange = JSON.parseObject(str,Arrange.class);
+        //新增排班
+        List<Arrange> list = new ArrayList<>();
+        for (int i = 0; i < staffId.size(); i++) {
+            list.add(new Arrange(staffId.get(i).longValue(),arrange.getCategoryId(),arrange.getArrangeStart(),arrange.getArrangeEnd()));
+        }
         try {
-            arrangeService.addArrange(arrange);
+            arrangeService.addArrange(list);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();

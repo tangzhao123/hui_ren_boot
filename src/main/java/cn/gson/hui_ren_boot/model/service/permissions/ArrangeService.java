@@ -28,8 +28,12 @@ public class ArrangeService {
     }
 
     //新增排班
-    public void addArrange(Arrange arrange){
-        arrangeMapper.addArrange(arrange);
+    public void addArrange(List<Arrange> list){
+        for (Arrange arrange : list) {
+            System.out.println(arrange);
+            arrangeMapper.addArrange(arrange);
+        }
+
     }
 
     //删除排班

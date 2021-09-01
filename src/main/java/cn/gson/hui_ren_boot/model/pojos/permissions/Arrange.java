@@ -150,6 +150,15 @@ public class Arrange {
         this.color = color;
     }
 
+    public Arrange(Long staffId, Long categoryId, Timestamp arrangeStart, Timestamp arrangeEnd) {
+        this.staffId = staffId;
+        this.categoryId = categoryId;
+        this.arrangeStart = arrangeStart;
+        this.arrangeEnd = arrangeEnd;
+    }
+
+    public Arrange() {
+    }
 
     @Override
     public boolean equals(Object o) {

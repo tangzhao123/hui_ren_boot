@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PharmacyDetailMapper">
+
+    <!-- 修改药房库存数量 -->
+    <update id="updatePharmacyDetail">
+        update pharmacy_detail set detail_inventory = detail_inventory+#{count} where detail_drug = #{drugId}
+    </update>
+</mapper>

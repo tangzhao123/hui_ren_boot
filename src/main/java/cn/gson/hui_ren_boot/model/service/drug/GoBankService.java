@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.service.drug;
 
 import cn.gson.hui_ren_boot.model.mapper.drug.*;
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.Deduct;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStock;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.GoBank;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.Stockout;
@@ -29,6 +30,11 @@ public class GoBankService {
     @Autowired
     Transfers1Mapper transfers1Mapper;
 
+    @Autowired
+    PharmacyDetailMapper pharmacyDetailMapper;
+
+    @Autowired
+    DeductService deductService;
 
     //新增出库单跟出库详单
     public void addGoBank(GoBank goBank, List<Stockout> storageData ){
@@ -46,6 +52,14 @@ public class GoBankService {
                         drugStockMapper.updateDrugStock(xuqiu,kc.getStockBatch());
                         //根据仓库编号减去仓库的总库存
                         drugDeportMapper.updateDeports(xuqiu.intValue(),goBank.getGoWarehouse());
+                        //新增库存扣除记录表
+                        Deduct deduct  = new Deduct(s.getStockoutProduct(),kc.getStockBatch(),xuqiu,goBank.getGoNum());
+                        if(deduct.getDeductSum()>0){
+                            deductService.addDeduct(deduct);
+                        }
+                        //根据药品编号修改药房的库存
+                        pharmacyDetailMapper.updatePharmacyDetail(xuqiu,s.getStockoutProduct());
+
                         xuqiu = kc.getStockSurplus()-xuqiu;
                         break;
                     }else{
@@ -53,11 +67,19 @@ public class GoBankService {
                         drugStockMapper.updateDrugStock(kc.getStockSurplus(),kc.getStockBatch());
                         //根据仓库编号减去仓库的总库存
                         drugDeportMapper.updateDeports(kc.getStockSurplus().intValue(),goBank.getGoWarehouse());
+                        //新增库存扣除记录表
+                        Deduct deduct  = new Deduct(s.getStockoutProduct(),kc.getStockBatch(),kc.getStockSurplus(),goBank.getGoNum());
+                        if(deduct.getDeductSum()>0){
+                            deductService.addDeduct(deduct);
+                        }
+                        //根据药品编号修改药房的库存
+                        pharmacyDetailMapper.updatePharmacyDetail(kc.getStockSurplus(),s.getStockoutProduct());
                         xuqiu = xuqiu-kc.getStockSurplus();
                     }
                 }
             }
         }
+
     }
 
 
