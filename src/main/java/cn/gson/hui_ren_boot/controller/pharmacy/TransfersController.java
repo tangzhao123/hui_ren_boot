@@ -17,10 +17,9 @@ public class TransfersController {
     TransfersService transfersService;
    //分页
     @RequestMapping("/transfers")
-    public Object allTransfers(Integer pageNo,Integer size,String transfers){
-        Transfers transferse= JSONObject.toJavaObject(JSON.parseObject(transfers),Transfers.class);
+    public List<Transfers> allTransfers(Transfers transfers){
 
-        return transfersService.allTransfersByPage(pageNo,size,transferse);
+        return transfersService.allTransfersByPage(transfers);
 
     }
 

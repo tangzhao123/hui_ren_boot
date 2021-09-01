@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional
 public class TransfersService {
     @Autowired
     TransfersMapper transfersMapper;
-    public Object allTransfersByPage(Integer pageNo, Integer size,Transfers transfers){
+    public List<Transfers> allTransfersByPage(Transfers transfers){
         return transfersMapper.allTransfers(transfers);
     }
 }
