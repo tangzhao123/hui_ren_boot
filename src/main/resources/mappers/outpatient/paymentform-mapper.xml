@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--缴费表-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentFormMapper">
+    <insert id="addPayment">
+        insert into payment_form values (seq_huiren.nextval,#{paymentNo},#{recordNo},#{paymentMoney},current_timestamp)
+    </insert>
+</mapper>

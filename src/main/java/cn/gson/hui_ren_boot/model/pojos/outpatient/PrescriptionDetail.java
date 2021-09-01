@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "PRESCRIPTION_DETAIL", schema = "HUIREN", catalog = "")
 public class PrescriptionDetail {
+    private String detailNo;
     private String recipelNo;
     private String prescriptionNo;
     private String drugName;
@@ -161,21 +162,32 @@ public class PrescriptionDetail {
         this.subtotal = subtotal;
     }
 
+    @Transient
+    public String getDetailNo() {
+        return detailNo;
+    }
+
+    public void setDetailNo(String detailNo) {
+        this.detailNo = detailNo;
+    }
+
     @Override
     public String toString() {
         return "PrescriptionDetail{" +
-                "recipelNo='" + recipelNo + '\'' +
+                "detailNo='" + detailNo + '\'' +
+                ", recipelNo='" + recipelNo + '\'' +
                 ", prescriptionNo='" + prescriptionNo + '\'' +
                 ", drugName='" + drugName + '\'' +
                 ", dose=" + dose +
                 ", drugRoute='" + drugRoute + '\'' +
                 ", drugUse='" + drugUse + '\'' +
-                ", drugNext=" + drugNext +
+                ", drugNext='" + drugNext + '\'' +
                 ", aggregate=" + aggregate +
                 ", drugBig='" + drugBig + '\'' +
                 ", inject=" + inject +
                 ", carryOut=" + carryOut +
                 ", subtotal=" + subtotal +
+                ", drug=" + drug +
                 ", standards=" + standards +
                 '}';
     }

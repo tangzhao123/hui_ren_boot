@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--缴费详情表-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentDetaiMapper">
+    <insert id="addPaymentDetail">
+        insert into payment_detai
+        select seq_huiren.nextval,DETAIL_NO,PAYMENT_NO,ENTRY_NAME,PAYMENT_NUMBER,AMOUNT,PAYMENT_PRICE from
+        <foreach collection="prescriptionDetails" item="p" index="i" separator=" " open="(" close=")">
+            <if test="i != prescriptionDetails.size()-1">
+                select #{p.detailNo} as DETAIL_NO,#{paymentNo} as PAYMENT_NO,#{p.drugName} as ENTRY_NAME,
+                       #{p.aggregate} as PAYMENT_NUMBER,#{p.subtotal} as AMOUNT,#{p.drug.drugSelling} as PAYMENT_PRICE
+                from dual union
+            </if>
+            <if test="i == prescriptionDetails.size()-1">
+                select #{p.detailNo} as DETAIL_NO,#{paymentNo} as PAYMENT_NO,#{p.drugName} as ENTRY_NAME,
+                #{p.aggregate} as PAYMENT_NUMBER,#{p.subtotal} as AMOUNT,#{p.drug.drugSelling} as PAYMENT_PRICE
+                from dual
+            </if>
+        </foreach>
+    </insert>
+</mapper>
