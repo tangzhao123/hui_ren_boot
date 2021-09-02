@@ -1,9 +1,11 @@
 package cn.gson.hui_ren_boot.model.service.outpatient;
 
+import cn.gson.hui_ren_boot.model.mapper.outpatient.ComboitemsMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionDetailMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionListMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.RowNumbersMapper;
 import cn.gson.hui_ren_boot.model.mapper.pharmacy.DruginfoMapper;
+import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.RowNumbers;
@@ -28,6 +30,8 @@ public class RecipelService {
     DruginfoMapper druginfoMapper;
     @Autowired
     RowNumbersMapper rowNumbersMapper;
+    @Autowired
+    ComboitemsMapper comboitemMapper;
 
     //查询药品
     public List<DrugInfo> allDrug(DrugInfo drugInfo){
@@ -64,5 +68,10 @@ public class RecipelService {
     //过号，根据挂号单修改id为最后一位
     public void editRow(String bookingNo){
         rowNumbersMapper.editRow(bookingNo);
+    }
+
+    //查询检验项目
+    public List<Comboitem> allCom(String itemName){
+        return comboitemMapper.allCom(itemName);
     }
 }

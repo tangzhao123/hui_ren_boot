@@ -1,10 +1,10 @@
 package cn.gson.hui_ren_boot.controller.outpatient;
 
+import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.RowNumbers;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
-import cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails;
 import cn.gson.hui_ren_boot.model.service.outpatient.RecipelService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -103,7 +103,12 @@ public class RecipelController {
     //过号，根据挂号单修改id为最后一位
     @RequestMapping("/edit-row")
     public void editRow(String bookingNo){
-        System.out.println(bookingNo);
         recipelService.editRow(bookingNo);
+    }
+
+    //查询检验项目
+    @RequestMapping("/all-com")
+    public List<Comboitem> allCom(String itemName){
+        return recipelService.allCom(itemName);
     }
 }
