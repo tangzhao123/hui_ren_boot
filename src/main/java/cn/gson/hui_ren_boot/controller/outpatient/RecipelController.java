@@ -4,6 +4,7 @@ import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.RowNumbers;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.TestItems;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import cn.gson.hui_ren_boot.model.service.outpatient.RecipelService;
 import com.alibaba.fastjson.JSON;
@@ -110,5 +111,18 @@ public class RecipelController {
     @RequestMapping("/all-com")
     public List<Comboitem> allCom(String itemName){
         return recipelService.allCom(itemName);
+    }
+
+    //开检验项目和新增检验项目详单
+    @RequestMapping("/add-items")
+    public String addItems(@RequestBody TestItems testItems){
+        try{
+            System.out.println(testItems);
+            recipelService.addItems(testItems, testItems.getComboitems());
+            return "ok";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 }

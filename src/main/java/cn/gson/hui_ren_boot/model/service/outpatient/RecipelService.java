@@ -1,14 +1,9 @@
 package cn.gson.hui_ren_boot.model.service.outpatient;
 
-import cn.gson.hui_ren_boot.model.mapper.outpatient.ComboitemsMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionDetailMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionListMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.RowNumbersMapper;
+import cn.gson.hui_ren_boot.model.mapper.outpatient.*;
 import cn.gson.hui_ren_boot.model.mapper.pharmacy.DruginfoMapper;
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.RowNumbers;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.*;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +27,10 @@ public class RecipelService {
     RowNumbersMapper rowNumbersMapper;
     @Autowired
     ComboitemsMapper comboitemMapper;
+    @Autowired
+    TeatItemsMapper teatItemsMapper;
+    @Autowired
+    TestDetailMapper testDetailMapper;
 
     //查询药品
     public List<DrugInfo> allDrug(DrugInfo drugInfo){
@@ -73,5 +72,11 @@ public class RecipelService {
     //查询检验项目
     public List<Comboitem> allCom(String itemName){
         return comboitemMapper.allCom(itemName);
+    }
+
+    //开检验项目和新增检验项目详单
+    public void addItems(TestItems testItems, List<Comboitem> comboitems){
+        teatItemsMapper.addItem(testItems);
+        testDetailMapper.addItemDetail(comboitems,testItems.getTestNumber());
     }
 }

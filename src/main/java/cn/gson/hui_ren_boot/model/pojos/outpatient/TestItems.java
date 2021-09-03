@@ -1,23 +1,22 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
+import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "TEST_ITEMS", schema = "HUIREN", catalog = "")
 public class TestItems {
     private long testId;
     private String testNumber;
-    private String recordId;
+    private String recordsNo;
     private double testSumtotal;
     private Staff outdoctor;
     private Medical medical;
-    private List<TestDetail> testDetails;
+    private List<Comboitem> comboitems;
 
     @OneToOne
     public Staff getOutdoctor() {
@@ -38,12 +37,12 @@ public class TestItems {
     }
 
     @OneToMany
-    public List<TestDetail> getTestDetails() {
-        return testDetails;
+    public List<Comboitem> getComboitems() {
+        return comboitems;
     }
 
-    public void setTestDetails(List<TestDetail> testDetails) {
-        this.testDetails = testDetails;
+    public void setComboitems(List<Comboitem> comboitems) {
+        this.comboitems = comboitems;
     }
 
     @Id
@@ -59,13 +58,13 @@ public class TestItems {
     }
 
     @Basic
-    @Column(name = "RECORD_ID")
-    public String getRecordId() {
-        return recordId;
+    @Column(name = "RECORDS_NO")
+    public String getRecordsNo() {
+        return recordsNo;
     }
 
-    public void setRecordId(String recordId) {
-        this.recordId = recordId;
+    public void setRecordsNo(String recordsNo) {
+        this.recordsNo = recordsNo;
     }
 
     @Basic
@@ -88,4 +87,16 @@ public class TestItems {
         this.testSumtotal = testSumtotal;
     }
 
+    @Override
+    public String toString() {
+        return "TestItems{" +
+                "testId=" + testId +
+                ", testNumber='" + testNumber + '\'' +
+                ", recordsNo='" + recordsNo + '\'' +
+                ", testSumtotal=" + testSumtotal +
+                ", outdoctor=" + outdoctor +
+                ", medical=" + medical +
+                ", comboitems=" + comboitems +
+                '}';
+    }
 }

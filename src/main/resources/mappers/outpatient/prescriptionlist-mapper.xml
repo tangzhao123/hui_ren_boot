@@ -71,10 +71,10 @@
 
     <!--新增门诊西药处方单-->
     <insert id="addList" >
-        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,RECORDS_NO,PRESCRIPTION_TYPE,
                                       PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
                                       STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY)
-                                      values (seq_huiren.nextval,#{prescriptionNo},
+                                      values (seq_huiren.nextval,#{prescriptionNo},#{recordsNo},
                                               #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
                                               #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
                                               #{doctorAdvice},#{sumMoney})
@@ -82,10 +82,10 @@
 
     <!--新增门诊中药处方单-->
     <insert id="addChineseList" >
-        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,RECORDS_NO,PRESCRIPTION_TYPE,
                                       PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
                                       STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY,DOSIS,USAGE)
-        values (seq_huiren.nextval,#{prescriptionNo},
+        values (seq_huiren.nextval,#{prescriptionNo},#{recordsNo},
                 #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
                 #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
                 #{doctorAdvice},#{sumMoney},#{dosis},#{usage})

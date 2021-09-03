@@ -5,6 +5,15 @@
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TestDetailMapper">
     <!--新增检验项目详表-->
     <insert id="addItemDetail">
-
+        insert into test_detail
+        select seq_huiren.nextval,TEST_NUMBER,ITEM_NAME,ITEM_MONEY from
+        <foreach collection="comboitems" item="c" index="i" separator=" " open="(" close=")">
+            <if test="i != comboitems.size()-1">
+                select #{testNumber} as TEST_NUMBER,#{c.itemName} as ITEM_NAME,#{c.itemMoney} as ITEM_MONEY from dual union
+            </if>
+            <if test="i == comboitems.size()-1">
+                select #{testNumber} as TEST_NUMBER,#{c.itemName} as ITEM_NAME,#{c.itemMoney} as ITEM_MONEY from dual
+            </if>
+        </foreach>
     </insert>
 </mapper>

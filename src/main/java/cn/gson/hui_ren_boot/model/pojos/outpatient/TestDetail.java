@@ -8,11 +8,8 @@ import java.util.Objects;
 public class TestDetail {
     private long checkId;
     private String testNumber;
-    private String testName;
-    private String testContent;
-    private Long testCount;
-    private String testUnit;
-    private double testSubtotal;
+    private String itemName;
+    private double itemMoney;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -37,52 +34,32 @@ public class TestDetail {
     }
 
     @Basic
-    @Column(name = "TEST_NAME")
-    public String getTestName() {
-        return testName;
+    @Column(name = "ITEM_NAME")
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setTestName(String testName) {
-        this.testName = testName;
-    }
-
-    @Basic
-    @Column(name = "TEST_CONTENT")
-    public String getTestContent() {
-        return testContent;
-    }
-
-    public void setTestContent(String testContent) {
-        this.testContent = testContent;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     @Basic
-    @Column(name = "TEST_COUNT")
-    public Long getTestCount() {
-        return testCount;
+    @Column(name = "ITEM_MONEY")
+    public double getItemMoney() {
+        return itemMoney;
     }
 
-    public void setTestCount(Long testCount) {
-        this.testCount = testCount;
+    public void setItemMoney(double itemMoney) {
+        this.itemMoney = itemMoney;
     }
 
-    @Basic
-    @Column(name = "TEST_UNIT")
-    public String getTestUnit() {
-        return testUnit;
-    }
-
-    public void setTestUnit(String testUnit) {
-        this.testUnit = testUnit;
-    }
-
-    @Basic
-    @Column(name = "TEST_SUBTOTAL")
-    public double getTestSubtotal() {
-        return testSubtotal;
-    }
-
-    public void setTestSubtotal(double testSubtotal) {
-        this.testSubtotal = testSubtotal;
+    @Override
+    public String toString() {
+        return "TestDetail{" +
+                "checkId=" + checkId +
+                ", testNumber='" + testNumber + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", itemMoney=" + itemMoney +
+                '}';
     }
 }
