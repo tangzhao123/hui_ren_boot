@@ -21,6 +21,7 @@ public class PrescriptionDetail {
     private Long inject;
     private Long carryOut;
     private double subtotal;
+    private Long typeId;
     private DrugInfo drug;
     private DrugStandard standards;
 
@@ -161,6 +162,13 @@ public class PrescriptionDetail {
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
+    public Long getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
 
     @Transient
     public String getDetailNo() {
@@ -170,6 +178,8 @@ public class PrescriptionDetail {
     public void setDetailNo(String detailNo) {
         this.detailNo = detailNo;
     }
+
+
 
     @Override
     public String toString() {

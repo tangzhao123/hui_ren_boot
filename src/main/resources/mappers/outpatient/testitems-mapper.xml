@@ -5,6 +5,7 @@
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TeatItemsMapper">
     <!--开检验项目-->
     <insert id="addItem">
-        insert into test_items values (seq_huiren.nextval,#{testNumber},#{recordsNo},#{testSumtotal})
+        insert into test_items values (seq_huiren.nextval,#{testNumber},#{recordsNo},#{testSumtotal},#{outdoctor.staffId},
+                                       #{medical.medicalId},#{outpatient.outpatientId})
     </insert>
 </mapper>

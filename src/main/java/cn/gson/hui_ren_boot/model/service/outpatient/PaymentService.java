@@ -24,8 +24,8 @@ public class PaymentService {
     PaymentDetaiMapper paymentDetaiMapper;
 
     //收费，查询处方单
-    public List<PrescriptionList> allList(String recordNo){
-        return listMapper.allList(recordNo);
+    public List<PrescriptionList> allList(String recordsNo){
+        return listMapper.allList(recordsNo);
     }
 
     //根据处方号查询详单

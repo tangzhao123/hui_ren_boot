@@ -21,5 +21,5 @@ public interface PrescriptionListMapper {
     public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList);
 
     //收费，查询处方单
-    public List<PrescriptionList> allList(String recordNo);
+    public List<PrescriptionList> allList(String recordsNo);
 }

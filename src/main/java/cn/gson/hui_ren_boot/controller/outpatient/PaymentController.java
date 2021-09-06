@@ -36,8 +36,8 @@ public class PaymentController {
     }
 
     @RequestMapping("/all-list")
-    public List<PrescriptionList> allList(String recordNo){
-        return paymentService.allList(recordNo);
+    public List<PrescriptionList> allList(String recordsNo){
+        return paymentService.allList(recordsNo);
     }
 
     @RequestMapping("/sel-list")

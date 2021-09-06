@@ -16,6 +16,7 @@ public class TestItems {
     private double testSumtotal;
     private Staff outdoctor;
     private Medical medical;
+    private OutpatientRegister outpatient;
     private List<Comboitem> comboitems;
 
     @OneToOne
@@ -34,6 +35,15 @@ public class TestItems {
 
     public void setMedical(Medical medical) {
         this.medical = medical;
+    }
+
+    @OneToOne
+    public OutpatientRegister getOutpatient() {
+        return outpatient;
+    }
+
+    public void setOutpatient(OutpatientRegister outpatient) {
+        this.outpatient = outpatient;
     }
 
     @OneToMany
