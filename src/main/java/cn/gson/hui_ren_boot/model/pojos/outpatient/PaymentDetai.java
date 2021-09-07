@@ -13,9 +13,9 @@ public class PaymentDetai {
     private String detailNo;
     private String paymentNo;
     private String entryName;
-    private Long paymentNumber;
     private double amount;
     private double paymentPrice;
+    private String prescriptionNo;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -60,16 +60,6 @@ public class PaymentDetai {
     }
 
     @Basic
-    @Column(name = "PAYMENT_NUMBER")
-    public Long getPaymentNumber() {
-        return paymentNumber;
-    }
-
-    public void setPaymentNumber(Long paymentNumber) {
-        this.paymentNumber = paymentNumber;
-    }
-
-    @Basic
     @Column(name = "AMOUNT")
     public double getAmount() {
         return amount;
@@ -89,16 +79,14 @@ public class PaymentDetai {
         this.paymentPrice = paymentPrice;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PaymentDetai that = (PaymentDetai) o;
-        return detailId == that.detailId && Objects.equals(detailNo, that.detailNo) && Objects.equals(paymentNo, that.paymentNo) && Objects.equals(entryName, that.entryName) && Objects.equals(paymentNumber, that.paymentNumber) && Objects.equals(amount, that.amount) && Objects.equals(paymentPrice, that.paymentPrice);
+    @Basic
+    @Column(name = "PRESCRIPTION_NO")
+    public String getPrescriptionNo() {
+        return prescriptionNo;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(detailId, detailNo, paymentNo, entryName, paymentNumber, amount, paymentPrice);
+    public void setPrescriptionNo(String prescriptionNo) {
+        this.prescriptionNo = prescriptionNo;
     }
+
 }

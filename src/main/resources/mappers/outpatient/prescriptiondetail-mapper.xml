@@ -75,13 +75,13 @@
     <!--根据处方号查询处方详单-->
     <select id="selNo" resultMap="detailMap">
         select * from
-            (select PRESCRIPTION_NO,di.DRUG_ID,pd.DRUG_NAME,STANDARD_NAME,pd.DRUG_BIG,AGGREGATE,di.DRUG_SELLING,SUBTOTAL,dt.TYPE_ID
+            (select PRESCRIPTION_NO,di.DRUG_ID,pd.DRUG_NAME,STANDARD_NAME,pd.DRUG_BIG,AGGREGATE,DOSE,di.DRUG_SELLING,SUBTOTAL,dt.TYPE_ID
              from prescription_detail pd
                       left join drug_info di on pd.drug_name = di.drug_name
                       left join drug_type dt on di.type_id = dt.type_id
              union all
              select TEST_NUMBER as PRESCRIPTION_NO,cm.ITEM_NUMBER as DRUG_ID,td.ITEM_NAME as DRUG_NAME,null as STANDARD_NAME,
-                    null as DRUG_BIG,null as AGGREGATE,td.ITEM_MONEY as DRUG_SELLING,td.ITEM_MONEY as SUBTOTAL,null as TYPE_ID
+                    null as DRUG_BIG,ITEM_COUNT as AGGREGATE,null as DOSE,td.ITEM_MONEY as DRUG_SELLING,td.ITEM_MONEY as SUBTOTAL,null as TYPE_ID
              from test_detail td
                       left join comboitem cm on td.item_name = cm.item_name
             )detail

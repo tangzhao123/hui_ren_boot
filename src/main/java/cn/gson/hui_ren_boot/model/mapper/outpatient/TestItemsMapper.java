@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
  * 开检验项目
  */
 @Mapper
-public interface TeatItemsMapper {
+public interface TestItemsMapper {
     public void addItem(TestItems testItems);
 }

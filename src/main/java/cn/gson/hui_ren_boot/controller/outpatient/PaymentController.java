@@ -60,4 +60,20 @@ public class PaymentController {
             return "fail";
         }
     }
+
+    @RequestMapping("/add-payments")
+    public String addPayments(@RequestBody PaymentForm payments){
+        try{
+            System.out.println(payments);
+            List<PrescriptionDetail> list = payments.getPrescriptionDetails();
+            for (PrescriptionDetail p : list) {
+                p.setDetailNo(getOrderIdByTime());
+            }
+            paymentService.addPayment(payments,payments.getPrescriptionDetails());
+            return "ok";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

@@ -5,16 +5,18 @@
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentDetaiMapper">
     <insert id="addPaymentDetail">
         insert into payment_detai
-        select seq_huiren.nextval,DETAIL_NO,PAYMENT_NO,ENTRY_NAME,PAYMENT_NUMBER,AMOUNT,PAYMENT_PRICE from
+        select seq_huiren.nextval,DETAIL_NO,PAYMENT_NO,ENTRY_NAME,AMOUNT,PAYMENT_PRICE,PRESCRIPTION_NO from
         <foreach collection="prescriptionDetails" item="p" index="i" separator=" " open="(" close=")">
             <if test="i != prescriptionDetails.size()-1">
                 select #{p.detailNo} as DETAIL_NO,#{paymentNo} as PAYMENT_NO,#{p.drugName} as ENTRY_NAME,
-                       #{p.aggregate} as PAYMENT_NUMBER,#{p.subtotal} as AMOUNT,#{p.drug.drugSelling} as PAYMENT_PRICE
+                      #{p.subtotal} as AMOUNT,#{p.drug.drugSelling} as PAYMENT_PRICE,
+                       #{p.prescriptionNo} as PRESCRIPTION_NO
                 from dual union
             </if>
             <if test="i == prescriptionDetails.size()-1">
                 select #{p.detailNo} as DETAIL_NO,#{paymentNo} as PAYMENT_NO,#{p.drugName} as ENTRY_NAME,
-                #{p.aggregate} as PAYMENT_NUMBER,#{p.subtotal} as AMOUNT,#{p.drug.drugSelling} as PAYMENT_PRICE
+                #{p.subtotal} as AMOUNT,#{p.drug.drugSelling} as PAYMENT_PRICE,
+                #{p.prescriptionNo} as PRESCRIPTION_NO
                 from dual
             </if>
         </foreach>

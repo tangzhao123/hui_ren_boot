@@ -112,14 +112,14 @@
     <select id="allList" resultMap="listMap">
         select * from
             (select PRESCRIPTION_ID,PRESCRIPTION_NO,RECORDS_NO,PRESCRIPTION_TYPE,PRESCRIPTION_DATE,
-                    PRESCRIPTION_DIAGNOSIS,SUM_MONEY,OUTPATIENT_NAME,OUTPATIENT_SEX,OUTPATIENT_AGE,MEDICAL_NAME,STAFF_NAME
+                    PRESCRIPTION_DIAGNOSIS,SUM_MONEY,DOSIS,OUTPATIENT_NAME,OUTPATIENT_SEX,OUTPATIENT_AGE,MEDICAL_NAME,STAFF_NAME
             from prescription_list pl
                 left join outpatient_register oue on PL.OUTPATIENT_ID = oue.OUTPATIENT_ID
                 left join medical me on pl.medical_id = me.medical_id
                 left join staff st on pl.staff_id = st.staff_id
              union all
              select TEST_ID as PRESCRIPTION_ID,TEST_NUMBER as PRESCRIPTION_NO,RECORDS_NO,null as PRESCRIPTION_TYPE,
-                    null as PRESCRIPTION_DATE,null as PRESCRIPTION_DIAGNOSIS,TEST_SUMTOTAL as SUM_MONEY,OUTPATIENT_NAME,
+                    ITEMS_DATE as PRESCRIPTION_DATE,null as PRESCRIPTION_DIAGNOSIS,TEST_SUMTOTAL as SUM_MONEY,null as DOSIS,OUTPATIENT_NAME,
                     OUTPATIENT_SEX,OUTPATIENT_AGE,MEDICAL_NAME,STAFF_NAME
             from TEST_ITEMS ts
                 left join outpatient_register oue on ts.OUTPATIENT_ID = oue.OUTPATIENT_ID

@@ -28,7 +28,7 @@ public class RecipelService {
     @Autowired
     ComboitemsMapper comboitemMapper;
     @Autowired
-    TeatItemsMapper teatItemsMapper;
+    TestItemsMapper teatItemsMapper;
     @Autowired
     TestDetailMapper testDetailMapper;
 

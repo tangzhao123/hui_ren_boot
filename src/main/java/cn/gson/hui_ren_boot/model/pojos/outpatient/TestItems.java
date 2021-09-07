@@ -5,6 +5,7 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,6 +15,7 @@ public class TestItems {
     private String testNumber;
     private String recordsNo;
     private double testSumtotal;
+    private Date itemsDate;
     private Staff outdoctor;
     private Medical medical;
     private OutpatientRegister outpatient;
@@ -97,6 +99,16 @@ public class TestItems {
         this.testSumtotal = testSumtotal;
     }
 
+    @Basic
+    @Column(name = "ITEMS_DATE")
+    public Date getItemsDate() {
+        return itemsDate;
+    }
+
+    public void setItemsDate(Date itemsDate) {
+        this.itemsDate = itemsDate;
+    }
+
     @Override
     public String toString() {
         return "TestItems{" +
@@ -104,8 +116,10 @@ public class TestItems {
                 ", testNumber='" + testNumber + '\'' +
                 ", recordsNo='" + recordsNo + '\'' +
                 ", testSumtotal=" + testSumtotal +
+                ", itemsDate=" + itemsDate +
                 ", outdoctor=" + outdoctor +
                 ", medical=" + medical +
+                ", outpatient=" + outpatient +
                 ", comboitems=" + comboitems +
                 '}';
     }
