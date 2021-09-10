@@ -9,5 +9,5 @@ import java.util.List;
 public interface AllocatingMapper {
 
     //根据调拨单号查询详单
-    public List<Allocating> findAllAllocating(String transfersId);
+    List<Allocating> findAllAllocating(String transfersId);
 }

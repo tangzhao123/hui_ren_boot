@@ -64,7 +64,6 @@ public class DrugInfo {
         this.stocks = stocks;
     }
 
-
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
     @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)

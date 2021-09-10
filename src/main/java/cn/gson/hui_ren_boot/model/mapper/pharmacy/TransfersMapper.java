@@ -9,5 +9,7 @@ import java.util.List;
 public interface TransfersMapper {
     //查询调拨申请表
     public List<Transfers> allTransfers(Transfers transfers);
+    //新增调拨申请
+    public void addTransfers(Transfers drugTransfers);
 
 }

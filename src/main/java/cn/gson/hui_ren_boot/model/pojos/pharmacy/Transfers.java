@@ -20,9 +20,9 @@ public class Transfers {
     private String transfersOrder;//调拨单号
     private String transfersGo;//出库单号
     private Staff staff;//审核人外键
-    private UserInfo users;//执行人外键,审核人外键
-    private DrugDeport deports;//仓库外键
-    private Pharmacy pharmacys;//调拨药房外键
+    private String users;//执行人外键,审核人外键
+    private String transfersDeport;//仓库外键
+    private String transfersPharmacy;//调拨药房外键
     private GoBank banks;//出库单号外键
     private List<Allocating> allocatings;//详情外键
 
@@ -35,32 +35,33 @@ public class Transfers {
         this.allocatings = allocatings;
     }
 
-    @OneToOne
-    public UserInfo getUsers() {
+
+    public String getUsers() {
         return users;
     }
 
-    public void setUsers(UserInfo users) {
+    public void setUsers(String users) {
         this.users = users;
     }
 
-
-    @OneToOne
-    public DrugDeport getDeports() {
-        return deports;
+    @Basic
+    @Column(name = "TRANSFERS_DEPORT")
+    public String getTransfersDeport() {
+        return transfersDeport;
     }
 
-    public void setDeports(DrugDeport deports) {
-        this.deports = deports;
+    public void setTransfersDeport(String transfersDeport) {
+        this.transfersDeport = transfersDeport;
     }
 
-    @OneToOne
-    public Pharmacy getPharmacys() {
-        return pharmacys;
+    @Basic
+    @Column(name = "TRANSFERS_PHARMACY")
+    public String getTransfersPharmacy() {
+        return transfersPharmacy;
     }
 
-    public void setPharmacys(Pharmacy pharmacys) {
-        this.pharmacys = pharmacys;
+    public void setTransfersPharmacy(String transfersPharmacy) {
+        this.transfersPharmacy = transfersPharmacy;
     }
 
     @OneToOne
@@ -82,6 +83,8 @@ public class Transfers {
     }
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "TRANSFERS_ID")
     public Long getTransfersId() {
         return transfersId;
@@ -144,5 +147,22 @@ public class Transfers {
     @Override
     public int hashCode() {
         return Objects.hash(transfersId, transfersDate, transfersTime, transfersOrder);
+    }
+
+    @Override
+    public String toString() {
+        return "Transfers{" +
+                "transfersId=" + transfersId +
+                ", transfersDate=" + transfersDate +
+                ", transfersTime=" + transfersTime +
+                ", transfersOrder='" + transfersOrder + '\'' +
+                ", transfersGo='" + transfersGo + '\'' +
+                ", staff=" + staff +
+                ", users='" + users + '\'' +
+                ", transfersDeport='" + transfersDeport + '\'' +
+                ", transfersPharmacy='" + transfersPharmacy + '\'' +
+                ", banks=" + banks +
+                ", allocatings=" + allocatings +
+                '}';
     }
 }
