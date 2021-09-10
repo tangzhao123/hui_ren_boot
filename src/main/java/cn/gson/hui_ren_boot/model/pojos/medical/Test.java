@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -21,6 +22,15 @@ public class Test {
     private Long testState;
     private String testAccount;
 
+    private List<Comboitem> inspector;
+    @OneToMany
+    public List<Comboitem> getInspector() {
+        return inspector;
+    }
+
+    public void setInspector(List<Comboitem> inspector) {
+        this.inspector = inspector;
+    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -140,8 +150,9 @@ public class Test {
                 ", testGenre='" + testGenre + '\'' +
                 ", testTime=" + testTime +
                 ", testMoney=" + testMoney +
-                ", testState="+testState +
-                ", testAccount="+testAccount +
+                ", testState=" + testState +
+                ", testAccount='" + testAccount + '\'' +
+                ", inspector=" + inspector +
                 '}';
     }
 }

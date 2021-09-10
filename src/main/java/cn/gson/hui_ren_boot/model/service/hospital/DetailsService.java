@@ -17,8 +17,8 @@ public class DetailsService {
     public List<Details> allDetails(Details jk){//查询
         return detailsMapper.allDetails(jk);
     }
-    public Object seletDetailsByPage(Integer pageNo,Integer size,Details inputboxs){
-      return   detailsMapper.seletDetails(inputboxs);
+    public List<Details> seletDetails(Details Detailw){
+      return   detailsMapper.seletDetails(Detailw);
     }
     public  List<Details>queryDeta(String adviceId){//
         return  detailsMapper.queryDeta(adviceId);

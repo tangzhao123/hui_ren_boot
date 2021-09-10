@@ -11,7 +11,6 @@ public class Details {
     private long detailsSerial;//序号
     private String drugName;//药品名
     private String detailsDrip;//滴速
-
     private String datailsDosage;//临床用量
     private String daralisUsage;//用法
     private String daralisTime;//每天次数
@@ -21,7 +20,8 @@ public class Details {
     private Date daralisStart;//开始时间
     private Long daralisPrice;//单价
     private Long daralisNumber;//药品数量
-
+    private String drugBig;//规格名
+    private String standardName;//单位
     private String standardUse;//剂型
     private String daralisMark;//医嘱详情号
     private String registerId;//住院号
@@ -182,15 +182,7 @@ public class Details {
         this.daralisNumber = daralisNumber;
     }
 
-//    @Basic
-//    @Column(name = "DRUG_BIG")
-//    public String getDrugBig() {
-//        return drugBig;
-//    }
-//
-//    public void setDrugBig(String drugBig) {
-//        this.drugBig = drugBig;
-//    }
+
 
 
 
@@ -214,7 +206,7 @@ public class Details {
 
     @Override
     public int hashCode() {
-        return Objects.hash(detailsSerial, drugName, detailsDrip, datailsDosage, daralisUsage, daralisTime, adviceId, daralisDstate, daralisDisable, daralisStart, daralisPrice, daralisNumber, standardUse,daralisMark);
+        return Objects.hash(detailsSerial, drugName, detailsDrip, datailsDosage, daralisUsage, daralisTime, adviceId, daralisDstate, daralisDisable, daralisStart, daralisPrice, daralisNumber,standardUse,daralisMark);
     }
 
     @Override

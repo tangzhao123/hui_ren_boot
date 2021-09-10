@@ -12,7 +12,7 @@ public class Blockup {
     private Timestamp blockupDate;//时间
     private String staffName;//医生名
     private String registerId;//住院号
-    private String blockupWhy;//住院原因
+    private String blockupWhy;//停医原因
     private String adviceId;//医嘱号
 
     @Id

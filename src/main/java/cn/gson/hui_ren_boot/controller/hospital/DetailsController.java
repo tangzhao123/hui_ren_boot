@@ -19,10 +19,8 @@ public class DetailsController {//医嘱详情
     @Autowired
     DetailsService detailsService;
     @RequestMapping("/seletdetails")
-    public Object  seletDetails(Integer pageNo,Integer size,String shu){//医嘱详情管理
-        Details inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Details.class);
-
-        return detailsService.seletDetailsByPage(pageNo,size,inputboxs);
+    public List<Details>  seletDetails(@RequestBody Details detailws){//医嘱详情管理
+        return detailsService.seletDetails(detailws);
     }
 
 

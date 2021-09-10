@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Surgery {
 
     private long surgeryId;//序号主键
-    private String surgeryDoctor;//医生编号
+    private String surgeryDoctor;//医生姓名
     private String surgeryName;//手术名称
     private Time surgerysStart;//开始时间
     private Time surgeryFinish;//结束时间

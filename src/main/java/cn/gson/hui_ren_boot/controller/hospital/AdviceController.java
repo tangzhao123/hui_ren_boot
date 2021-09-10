@@ -49,9 +49,9 @@ public class AdviceController {
           adviceService.addAdvices(advice,detail);
 
             return "ok";
-        }catch(Exception e){
-            return "fail";
-        }
+       }catch(Exception e){
+           return "fail";
+       }
     }
     @RequestMapping("/seletAdvicvt")//医嘱管理
     public Object  seletAdvicvt(Integer pageNo, Integer size,String shu){

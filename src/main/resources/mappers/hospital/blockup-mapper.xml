@@ -9,20 +9,22 @@
         <result column="test_phone" property="testPhone"/>
         <result column="test_time" property="testTime"/>
         <result column="test_money" property="testMoney"/>
-        <association property="cmobos" javaType="Cmobo">
-            <result column="combo_name" property="comboName"/>
-        </association>
+
     </resultMap>
     <insert id="addBlockup">
         insert into blockup values (seq_huiren.nextval,#{detailsMark},#{blockupDate},#{staffName},#{registerId},#{blockupWhy},#{adviceId})
     </insert>
-    <insert id="addTest">
-        insert into test(test_id,test_name,test_sex,test_phone,test_time,test_money,test_combo) values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},current_timestamp,#{testMoney},#{cmobos.comboId})
+    <insert id="addTest">-- 添加体检表
+        insert into test(test_id,test_name,test_sex,test_phone,test_time,test_money,test_state,test_account) values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},current_timestamp,#{testMoney},0,#{testAccount})
     </insert>
-    <select id="selText" resultMap="even">
-        select*from test km left join cmobo l on km.test_combo=l.combo_id where test_phone=#{testPhone}  order by test_time desc
-    </select>
+    <insert id="addTestmiddle">-- 添加体检中间表
+        insert into testmiddle values (#{testAccount},#{itemId})
+    </insert>
+    <select id="selText" resultType="Test">-->
+        select*from test  where test_phone=#{testPhone}  order by test_time desc
+   </select>
     <select id="allResults" resultType="Combinspection">
         select *from  combinspection where inspection_phone=#{inspectionPhone}
     </select>
+
 </mapper>

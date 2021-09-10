@@ -49,7 +49,7 @@ public class TestController {
                 System.out.println("项目"+c.getItemId());
                 testmiddle.setTestAccount(t.getTestAccount());
                 testmiddle.setItemId(c.getItemId());
-                 testService.addMiddle(testmiddle);
+                testService.addMiddle(testmiddle);
             }
         }
 
@@ -69,7 +69,7 @@ public class TestController {
                 }
             }
         }
-
+        //testService.addMiddle(testmiddle1);
 
 //        if (test.getTestId() == 0){
 //            testService.insertTest(test);

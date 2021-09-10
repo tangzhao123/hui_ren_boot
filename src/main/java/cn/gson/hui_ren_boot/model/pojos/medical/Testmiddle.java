@@ -7,7 +7,6 @@ import java.util.Objects;
 public class Testmiddle {
     private String testAccount;
     private Long itemId;
-
     @Id
     @Column(name = "TEST_ACCOUNT")
     public String getTestAccount() {
