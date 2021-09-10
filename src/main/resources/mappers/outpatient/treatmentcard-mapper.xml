@@ -47,9 +47,6 @@
 
     <!--挂号页面的卡号查询，只显示未锁定的，根据身份证号查询-->
     <select id="selLock" resultMap="cardMapper">
-        select * from TREATMENT_CARD where TREATMENT_LOCK = 0
-        <if test="treatmentCard !=null and '' != treatmentCard">
-            and TREATMENT_CARD = #{treatmentCard}
-        </if>
+        select * from TREATMENT_CARD where TREATMENT_LOCK = 0 and TREATMENT_CARD = #{treatmentCard}
     </select>
 </mapper>

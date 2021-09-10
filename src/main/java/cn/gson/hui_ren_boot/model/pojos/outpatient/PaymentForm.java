@@ -15,7 +15,7 @@ import java.util.Objects;
 public class PaymentForm {
     private long paymentId;
     private String paymentNo;
-    private String recordNo;
+    private String recordsNo;
     private double paymentMoney;
     private Time paymentTime;
     private List<PrescriptionDetail> prescriptionDetails;
@@ -52,13 +52,13 @@ public class PaymentForm {
     }
 
     @Basic
-    @Column(name = "RECORD_NO")
-    public String getRecordNo() {
-        return recordNo;
+    @Column(name = "RECORDS_NO")
+    public String getRecordsNo() {
+        return recordsNo;
     }
 
-    public void setRecordNo(String recordNo) {
-        this.recordNo = recordNo;
+    public void setRecordsNo(String recordsNo) {
+        this.recordsNo = recordsNo;
     }
 
     @Basic
@@ -82,24 +82,11 @@ public class PaymentForm {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PaymentForm that = (PaymentForm) o;
-        return paymentId == that.paymentId && Objects.equals(paymentNo, that.paymentNo) && Objects.equals(recordNo, that.recordNo) && Objects.equals(paymentMoney, that.paymentMoney) && Objects.equals(paymentTime, that.paymentTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(paymentId, paymentNo, recordNo, paymentMoney, paymentTime);
-    }
-
-    @Override
     public String toString() {
         return "PaymentForm{" +
                 "paymentId=" + paymentId +
                 ", paymentNo='" + paymentNo + '\'' +
-                ", recordNo='" + recordNo + '\'' +
+                ", recordsNo='" + recordsNo + '\'' +
                 ", paymentMoney=" + paymentMoney +
                 ", paymentTime=" + paymentTime +
                 ", prescriptionDetails=" + prescriptionDetails +

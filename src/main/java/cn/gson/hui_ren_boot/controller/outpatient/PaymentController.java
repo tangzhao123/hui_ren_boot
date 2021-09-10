@@ -36,8 +36,8 @@ public class PaymentController {
     }
 
     @RequestMapping("/all-list")
-    public List<PrescriptionList> allList(String recordNo){
-        return paymentService.allList(recordNo);
+    public List<PrescriptionList> allList(String recordsNo){
+        return paymentService.allList(recordsNo);
     }
 
     @RequestMapping("/sel-list")
@@ -54,6 +54,22 @@ public class PaymentController {
                 p.setDetailNo(getOrderIdByTime());
             }
             paymentService.addPayment(payment,payment.getPrescriptionDetails());
+            return "ok";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @RequestMapping("/add-payments")
+    public String addPayments(@RequestBody PaymentForm payments){
+        try{
+            System.out.println(payments);
+            List<PrescriptionDetail> list = payments.getPrescriptionDetails();
+            for (PrescriptionDetail p : list) {
+                p.setDetailNo(getOrderIdByTime());
+            }
+            paymentService.addPayment(payments,payments.getPrescriptionDetails());
             return "ok";
         } catch (Exception e){
             e.printStackTrace();

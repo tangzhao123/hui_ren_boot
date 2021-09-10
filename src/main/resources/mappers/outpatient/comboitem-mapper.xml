@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--检验项目-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.ComboitemsMapper">
+    <resultMap id="comMap" type="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        <id property="itemId" column="ITEM_ID"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="itemOffice" column="ITEM_OFFICE"/>
+        <result property="itemMoney" column="ITEM_MONEY"/>
+        <result property="itemType" column="ITEM_TYPE"/>
+        <result property="itemUnit" column="ITEM_UNIT"/>
+    </resultMap>
+
+    <!--查询检验项目-->
+    <select id="allCom" resultMap="comMap">
+        select * from comboitem
+        <where>
+            <if test="itemName != null and '' != itemName">
+                or item_name like '%${itemName}%'
+            </if>
+        </where>
+    </select>
+</mapper>

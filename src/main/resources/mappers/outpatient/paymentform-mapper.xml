@@ -4,6 +4,6 @@
 <!--缴费表-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentFormMapper">
     <insert id="addPayment">
-        insert into payment_form values (seq_huiren.nextval,#{paymentNo},#{recordNo},#{paymentMoney},current_timestamp)
+        insert into payment_form values (seq_huiren.nextval,#{paymentNo},#{recordsNo},#{paymentMoney},current_timestamp)
     </insert>
 </mapper>

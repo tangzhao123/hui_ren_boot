@@ -15,7 +15,7 @@ import java.util.Objects;
 public class PrescriptionList {
     private long prescriptionId;
     private String prescriptionNo;
-    private String recordNo;
+    private String recordsNo;
     private Long prescriptionType;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date prescriptionDate;
@@ -102,13 +102,13 @@ public class PrescriptionList {
     }
 
     @Basic
-    @Column(name = "RECORD_NO")
-    public String getRecordNo() {
-        return recordNo;
+    @Column(name = "RECORDS_NO")
+    public String getRecordsNo() {
+        return recordsNo;
     }
 
-    public void setRecordNo(String recordNo) {
-        this.recordNo = recordNo;
+    public void setRecordsNo(String recordsNo) {
+        this.recordsNo = recordsNo;
     }
 
     @Basic
@@ -222,24 +222,11 @@ public class PrescriptionList {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PrescriptionList that = (PrescriptionList) o;
-        return prescriptionId == that.prescriptionId && Objects.equals(prescriptionNo, that.prescriptionNo) && Objects.equals(recordNo, that.recordNo) && Objects.equals(prescriptionType, that.prescriptionType) && Objects.equals(prescriptionDate, that.prescriptionDate) && Objects.equals(prescriptionDiagnosis, that.prescriptionDiagnosis) && Objects.equals(outpatientId, that.outpatientId) && Objects.equals(staffId, that.staffId) && Objects.equals(medicalId, that.medicalId) && Objects.equals(doctorAdvice, that.doctorAdvice) && Objects.equals(sumMoney, that.sumMoney);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(prescriptionId, prescriptionNo, recordNo, prescriptionType, prescriptionDate, prescriptionDiagnosis, outpatientId, staffId, medicalId, doctorAdvice, sumMoney);
-    }
-
-    @Override
     public String toString() {
         return "PrescriptionList{" +
                 "prescriptionId=" + prescriptionId +
                 ", prescriptionNo='" + prescriptionNo + '\'' +
-                ", recordNo='" + recordNo + '\'' +
+                ", recordsNo='" + recordsNo + '\'' +
                 ", prescriptionType=" + prescriptionType +
                 ", prescriptionDate=" + prescriptionDate +
                 ", prescriptionDiagnosis='" + prescriptionDiagnosis + '\'' +

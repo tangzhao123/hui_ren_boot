@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--开检验项目详表-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TestDetailMapper">
+    <!--新增检验项目详表-->
+    <insert id="addItemDetail">
+        insert into test_detail
+        select seq_huiren.nextval,TEST_NUMBER,ITEM_NAME,ITEM_MONEY,ITEM_COUNT from
+        <foreach collection="comboitems" item="c" index="i" separator=" " open="(" close=")">
+            <if test="i != comboitems.size()-1">
+                select #{testNumber} as TEST_NUMBER,#{c.itemName} as ITEM_NAME,#{c.itemMoney} as ITEM_MONEY,
+                       1 as  ITEM_COUNT
+                from dual union
+            </if>
+            <if test="i == comboitems.size()-1">
+                select #{testNumber} as TEST_NUMBER,#{c.itemName} as ITEM_NAME,#{c.itemMoney} as ITEM_MONEY,
+                1 as  ITEM_COUNT
+                from dual
+            </if>
+        </foreach>
+    </insert>
+</mapper>

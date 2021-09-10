@@ -6,7 +6,7 @@
     <resultMap id="listMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList">
         <id column="PRESCRIPTION_ID" property="prescriptionId"/>
         <result column="PRESCRIPTION_NO" property="prescriptionNo"/>
-        <result column="RECORD_NO" property="recordNo"/>
+        <result column="RECORDS_NO" property="recordsNo"/>
         <result column="PRESCRIPTION_TYPE" property="prescriptionType"/>
         <result column="PRESCRIPTION_DATE" property="prescriptionDate"/>
         <result column="PRESCRIPTION_DIAGNOSIS" property="prescriptionDiagnosis"/>
@@ -71,10 +71,10 @@
 
     <!--新增门诊西药处方单-->
     <insert id="addList" >
-        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,RECORDS_NO,PRESCRIPTION_TYPE,
                                       PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
                                       STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY)
-                                      values (seq_huiren.nextval,#{prescriptionNo},
+                                      values (seq_huiren.nextval,#{prescriptionNo},#{recordsNo},
                                               #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
                                               #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
                                               #{doctorAdvice},#{sumMoney})
@@ -82,10 +82,10 @@
 
     <!--新增门诊中药处方单-->
     <insert id="addChineseList" >
-        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,PRESCRIPTION_TYPE,
+        insert into PRESCRIPTION_LIST(PRESCRIPTION_ID,PRESCRIPTION_NO,RECORDS_NO,PRESCRIPTION_TYPE,
                                       PRESCRIPTION_DATE,PRESCRIPTION_DIAGNOSIS,OUTPATIENT_ID,
                                       STAFF_ID,MEDICAL_ID,DOCTOR_ADVICE,SUM_MONEY,DOSIS,USAGE)
-        values (seq_huiren.nextval,#{prescriptionNo},
+        values (seq_huiren.nextval,#{prescriptionNo},#{recordsNo},
                 #{prescriptionType},current_timestamp ,#{prescriptionDiagnosis},
                 #{outpatient.outpatientId},#{outdoctor.staffId},#{medical.medicalId},
                 #{doctorAdvice},#{sumMoney},#{dosis},#{usage})
@@ -110,10 +110,21 @@
 
     <!--收费，处方单查询-->
     <select id="allList" resultMap="listMap">
-        select * from prescription_list pl
-        left join outpatient_register o on pl.outpatient_id = o.outpatient_id
-        left join staff s on pl.staff_id = s.staff_id
-        left JOIN medical me on pl.medical_id = me.medical_id
-        where pl.RECORD_NO = #{recordNo}
+        select * from
+            (select PRESCRIPTION_ID,PRESCRIPTION_NO,RECORDS_NO,PRESCRIPTION_TYPE,PRESCRIPTION_DATE,
+                    PRESCRIPTION_DIAGNOSIS,SUM_MONEY,DOSIS,OUTPATIENT_NAME,OUTPATIENT_SEX,OUTPATIENT_AGE,MEDICAL_NAME,STAFF_NAME
+            from prescription_list pl
+                left join outpatient_register oue on PL.OUTPATIENT_ID = oue.OUTPATIENT_ID
+                left join medical me on pl.medical_id = me.medical_id
+                left join staff st on pl.staff_id = st.staff_id
+             union all
+             select TEST_ID as PRESCRIPTION_ID,TEST_NUMBER as PRESCRIPTION_NO,RECORDS_NO,null as PRESCRIPTION_TYPE,
+                    ITEMS_DATE as PRESCRIPTION_DATE,null as PRESCRIPTION_DIAGNOSIS,TEST_SUMTOTAL as SUM_MONEY,null as DOSIS,OUTPATIENT_NAME,
+                    OUTPATIENT_SEX,OUTPATIENT_AGE,MEDICAL_NAME,STAFF_NAME
+            from TEST_ITEMS ts
+                left join outpatient_register oue on ts.OUTPATIENT_ID = oue.OUTPATIENT_ID
+                left join medical me on ts.medical_id = me.medical_id                                                                                                                                                                                                                                                          left join staff st on ts.staff_id = st.staff_id
+            )emp
+        where emp.RECORDS_NO = #{recordsNo}
     </select>
 </mapper>
