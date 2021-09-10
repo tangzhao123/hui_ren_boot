@@ -5,17 +5,17 @@ import java.util.Objects;
 
 @Entity
 public class Testmiddle {
-    private Long testId;
+    private String testAccount;
     private Long itemId;
 
     @Id
-    @Column(name = "TEST_ID")
-    public Long getTestId() {
-        return testId;
+    @Column(name = "TEST_ACCOUNT")
+    public String getTestAccount() {
+        return testAccount;
     }
 
-    public void setTestId(Long testId) {
-        this.testId = testId;
+    public void setTestAccount(String testAccount) {
+        this.testAccount = testAccount;
     }
 
     @Basic
@@ -33,11 +33,11 @@ public class Testmiddle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Testmiddle that = (Testmiddle) o;
-        return testId == that.testId && Objects.equals(itemId, that.itemId);
+        return testAccount == that.testAccount && Objects.equals(itemId, that.itemId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(testId, itemId);
+        return Objects.hash(testAccount, itemId);
     }
 }

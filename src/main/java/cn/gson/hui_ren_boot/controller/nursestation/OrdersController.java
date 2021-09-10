@@ -21,10 +21,11 @@ public class OrdersController {
     @Autowired
     OrdersService ordersService;
 
-    @GetMapping("/details-all")
-    public List<Details> selAll(String registerId){
-        System.out.println("著员工好"+registerId);
 
+    //医嘱表连接详表
+    @GetMapping("/details-all")
+    public List<Advice> selAll(String registerId){
+        System.out.println("医嘱号："+registerId);
         return ordersService.selAll(registerId);
     }
 
@@ -60,6 +61,7 @@ public class OrdersController {
     //查询医嘱
     @GetMapping("/advice-select")
     public List<Advice> selectAdvice(String registerId){
+        System.out.println("医嘱："+ordersService.selectAdvice(registerId));
         return ordersService.selectAdvice(registerId);
     }
 

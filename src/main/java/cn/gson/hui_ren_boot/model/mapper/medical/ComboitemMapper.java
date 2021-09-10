@@ -16,4 +16,7 @@ public interface ComboitemMapper {
 
     //修改体检项目
     public void updateComboitem(Comboitem comboitem);
+
+    //查询项目的价格
+    public List<Comboitem> selecitem(Long itemId);
 }

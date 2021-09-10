@@ -23,7 +23,7 @@
 
 <!--    新增-->
     <insert id="insertTest" >
-        insert into test values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},#{testGenre},#{testTime},#{testMoney},#{testState})
+        insert into test values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},#{testGenre},#{testTime},#{testMoney},#{testState},#{testAccount})
     </insert>
 
     <insert id="addMiddle">

@@ -18,6 +18,11 @@ public class ComboitemService {
     @Autowired
     ComboitemDao comboitemDao;//体检道层
 
+    //查询项目
+    public List<Comboitem> selecitem(Long itemId){
+        return com.selecitem(itemId);
+    }
+
     //查询体检项目
     public Object selectAllByPage(int pageNo,int size,Comboitem comboitem){
         return com.selectAll(comboitem);

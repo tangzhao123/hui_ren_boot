@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.controller.medical;
 
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.service.medical.ComboitemService;
+import cn.gson.hui_ren_boot.utils.MyUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +33,13 @@ public class ComboitemController {
     @RequestMapping("/comboitem-add")
     public String addComboitem(@RequestBody Comboitem comboitem){
 //        System.out.println(comboitem.getItemId());
+        Comboitem c = comboitem;
+        String number = MyUtil.genrateNo("XM");
+        c.setItemNumber(number);
         if (comboitem.getItemId() == 0){
-            comboitemService.addComboitem(comboitem); //新增体检项目
+            comboitemService.addComboitem(c); //新增体检项目
         }else {
-            comboitemService.updateComboitem(comboitem);//修改体检项目
+            comboitemService.updateComboitem(c);//修改体检项目
         }
         return "ok";
     }

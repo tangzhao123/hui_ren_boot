@@ -11,7 +11,7 @@ public class Details {
     private long detailsSerial;//序号
     private String drugName;//药品名
     private String detailsDrip;//滴速
-    private String detailsWay;//途径
+
     private String datailsDosage;//临床用量
     private String daralisUsage;//用法
     private String daralisTime;//每天次数
@@ -21,11 +21,11 @@ public class Details {
     private Date daralisStart;//开始时间
     private Long daralisPrice;//单价
     private Long daralisNumber;//药品数量
-    private String drugBig;//规格名
-    private String standardName;//单位
+
     private String standardUse;//剂型
     private String daralisMark;//医嘱详情号
     private String registerId;//住院号
+    private double detailsMoney;//金额
 
 
     @Id
@@ -57,6 +57,15 @@ public class Details {
     public void setRegisterId(String registerId) {
         this.registerId = registerId;
     }
+    @Basic
+    @Column(name = "DETAILS_MONEY")
+    public double getDetailsMoney() {
+        return detailsMoney;
+    }
+
+    public void setDetailsMoney(double detailsMoney) {
+        this.detailsMoney = detailsMoney;
+    }
 
     @Basic
     @Column(name = "DRUG_NAME")
@@ -78,15 +87,6 @@ public class Details {
         this.detailsDrip = detailsDrip;
     }
 
-    @Basic
-    @Column(name = "DETAILS_WAY")
-    public String getDetailsWay() {
-        return detailsWay;
-    }
-
-    public void setDetailsWay(String detailsWay) {
-        this.detailsWay = detailsWay;
-    }
 
     @Basic
     @Column(name = "DATAILS_DOSAGE")
@@ -182,25 +182,17 @@ public class Details {
         this.daralisNumber = daralisNumber;
     }
 
-    @Basic
-    @Column(name = "DRUG_BIG")
-    public String getDrugBig() {
-        return drugBig;
-    }
+//    @Basic
+//    @Column(name = "DRUG_BIG")
+//    public String getDrugBig() {
+//        return drugBig;
+//    }
+//
+//    public void setDrugBig(String drugBig) {
+//        this.drugBig = drugBig;
+//    }
 
-    public void setDrugBig(String drugBig) {
-        this.drugBig = drugBig;
-    }
 
-    @Basic
-    @Column(name = "STANDARD_NAME")
-    public String getStandardName() {
-        return standardName;
-    }
-
-    public void setStandardName(String standardName) {
-        this.standardName = standardName;
-    }
 
     @Basic
     @Column(name = "STANDARD_USE")
@@ -217,12 +209,12 @@ public class Details {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Details details = (Details) o;
-        return detailsSerial == details.detailsSerial && Objects.equals(drugName, details.drugName) && Objects.equals(detailsDrip, details.detailsDrip) && Objects.equals(detailsWay, details.detailsWay) && Objects.equals(daralisUsage, details.daralisUsage) && Objects.equals(daralisTime, details.daralisTime) && Objects.equals(adviceId, details.adviceId) && Objects.equals(daralisDstate, details.daralisDstate) && Objects.equals(daralisDisable, details.daralisDisable) && Objects.equals(daralisStart, details.daralisStart) && Objects.equals(daralisPrice, details.daralisPrice) && Objects.equals(daralisNumber, details.daralisNumber) && Objects.equals(drugBig, details.drugBig) && Objects.equals(standardName, details.standardName) && Objects.equals(standardUse, details.standardUse)&& Objects.equals(daralisMark, details.daralisMark);
+        return detailsSerial == details.detailsSerial && Objects.equals(drugName, details.drugName) && Objects.equals(detailsDrip, details.detailsDrip)  && Objects.equals(daralisUsage, details.daralisUsage) && Objects.equals(daralisTime, details.daralisTime) && Objects.equals(adviceId, details.adviceId) && Objects.equals(daralisDstate, details.daralisDstate) && Objects.equals(daralisDisable, details.daralisDisable) && Objects.equals(daralisStart, details.daralisStart) && Objects.equals(daralisPrice, details.daralisPrice) && Objects.equals(daralisNumber, details.daralisNumber) && Objects.equals(standardUse, details.standardUse)&& Objects.equals(daralisMark, details.daralisMark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(detailsSerial, drugName, detailsDrip, detailsWay, datailsDosage, daralisUsage, daralisTime, adviceId, daralisDstate, daralisDisable, daralisStart, daralisPrice, daralisNumber, drugBig, standardName, standardUse,daralisMark);
+        return Objects.hash(detailsSerial, drugName, detailsDrip, datailsDosage, daralisUsage, daralisTime, adviceId, daralisDstate, daralisDisable, daralisStart, daralisPrice, daralisNumber, standardUse,daralisMark);
     }
 
     @Override
@@ -231,7 +223,6 @@ public class Details {
                 "detailsSerial=" + detailsSerial +
                 ", drugName='" + drugName + '\'' +
                 ", detailsDrip='" + detailsDrip + '\'' +
-                ", detailsWay='" + detailsWay + '\'' +
                 ", datailsDosage='" + datailsDosage + '\'' +
                 ", daralisUsage='" + daralisUsage + '\'' +
                 ", daralisTime='" + daralisTime + '\'' +
@@ -241,10 +232,9 @@ public class Details {
                 ", daralisStart=" + daralisStart +
                 ", daralisPrice=" + daralisPrice +
                 ", daralisNumber=" + daralisNumber +
-                ", drugBig='" + drugBig + '\'' +
-                ", standardName='" + standardName + '\'' +
                 ", standardUse='" + standardUse + '\'' +
                 ", daralisMark='" + daralisMark + '\'' +
+                ", registerId='" + registerId + '\'' +
                 '}';
     }
 }
