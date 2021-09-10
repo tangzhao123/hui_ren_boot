@@ -38,6 +38,6 @@
 
     <!-- 新增调拨申请的出库时间出库单号出库仓库 -->
     <update id="updateTransfers">
-        update transfers set transfers_date = #{transfersDate},transfers_deport = #{transfersDeport},transfers_go = #{transfersGo}
+        update transfers set transfers_date = #{transfersDate},transfers_deport = #{transfersDeport},transfers_go = #{transfersGo} where transfers_id=#{transfersId}
     </update>
 </mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DisposeApplyMapper">
+
+    <!-- 销毁申请单的映射 -->
+    <resultMap id="disposeApplyMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DisposeApply">
+        <id property="applyId" column="apply_id"/>
+        <result property="applyNum" column="apply_num"/>
+        <result property="applyBatch" column="apply_batch"/>
+        <result property="applyDate" column="apply_date"/>
+        <result property="applyOpinion" column="apply_opinion"/>
+        <result property="applyPeople" column="apply_people"/>
+        <result property="applyTime" column="apply_time"/>
+        <result property="applyApproval" column="apply_approval"/>
+        <result property="applyGo" column="apply_go"/>
+        <result property="staffName" column="staff_name"/>
+        <result property="staffNames" column="staff_name"/>
+    </resultMap>
+
+    <!-- 新增销毁计划单 -->
+    <insert id="addDisposeApply">
+        insert into dispose_apply values (seq_huiren.nextval,#{applyNum},#{applyBatch},#{applyDate},#{applyOpinion},#{applyPeople},null,null,null)
+    </insert>
+
+    <!-- 查询所有未审批的销毁申请 -->
+    <select id="findAllDisposeApply" resultMap="disposeApplyMap">
+        select * from dispose_apply di
+        left join staff st on st.staff_id = di.apply_people where apply_approval is  null
+    </select>
+
+    <!-- 通过销毁申请审批 -->
+    <update id="updateDisposeApply">
+        update dispose_apply set apply_approval = #{applyApproval} where apply_num = #{applyNum}
+    </update>
+
+    <!-- 查询所有已经通过审批的销毁单 -->
+    <select id="allDisposeApply" resultMap="disposeApplyMap">
+        select  * from dispose_apply da
+        inner join staff sf  on da.apply_people = sf.staff_id
+        inner join staff st on da.apply_approval = st.staff_id
+        where apply_approval is not null and apply_go is null
+    </select>
+
+    <!-- 新增出库单号跟出库时间 -->
+    <update id="updateApply">
+        update dispose_apply set apply_time = #{applyTime} ,apply_go = #{applyGo} where apply_num = #{applyNum}
+    </update>
+</mapper>

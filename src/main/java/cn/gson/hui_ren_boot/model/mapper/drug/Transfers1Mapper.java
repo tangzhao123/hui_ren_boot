@@ -14,5 +14,5 @@ public interface Transfers1Mapper {
     public List<Transfers> findAllTransfers();
 
     //新增调拨申请的出库时间出库单号出库仓库
-    public void updateTransfers(@Param("transfersDate")Date transfersDate,@Param("transfersDeport") Long transfersDeport,@Param("transfersGo") String transfersGo);
+    public void updateTransfers(@Param("transfersDate")Date transfersDate,@Param("transfersDeport") Long transfersDeport,@Param("transfersGo") String transfersGo,@Param("transfersId") String transfersId);
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +20,10 @@ public class DrugStock {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date stockIndate;
     private Long drugId;
-
+    private String drugName;
+    private String drugBig;
+    private String drugSelling;
+    private String purchasePrice;
 
     @Id
     @Column(name = "STOCK_ID")
@@ -94,6 +98,42 @@ public class DrugStock {
         this.drugId = drugId;
     }
 
+    @Transient
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    @Transient
+    public String getDrugBig() {
+        return drugBig;
+    }
+
+    public void setDrugBig(String drugBig) {
+        this.drugBig = drugBig;
+    }
+
+    @Transient
+    public String getDrugSelling() {
+        return drugSelling;
+    }
+
+    public void setDrugSelling(String drugSelling) {
+        this.drugSelling = drugSelling;
+    }
+
+    @Transient
+    public String getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(String purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,6 +157,7 @@ public class DrugStock {
                 ", stockBatch='" + stockBatch + '\'' +
                 ", stockIndate=" + stockIndate +
                 ", drugId=" + drugId +
+                ", drugName='" + drugName + '\'' +
                 '}';
     }
 }

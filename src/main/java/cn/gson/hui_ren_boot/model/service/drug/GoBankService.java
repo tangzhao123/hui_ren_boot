@@ -36,11 +36,20 @@ public class GoBankService {
     @Autowired
     DeductService deductService;
 
+    @Autowired
+    DisposeApplyService disposeApplyService;
+
     //新增出库单跟出库详单
     public void addGoBank(GoBank goBank, List<Stockout> storageData ){
+        System.out.println(goBank);
         goBankMapper.addGoBank(goBank);//新增出库单
         stockOutMapper.addStockOut(storageData,goBank.getGoNum());//新增出库详单
-        transfers1Mapper.updateTransfers(goBank.getGoDate(),goBank.getGoWarehouse(),goBank.getGoNum());//新增调拨单的出库时间，出库仓库，出库单号
+        if(goBank.getTransfersId()!=null){
+            transfers1Mapper.updateTransfers(goBank.getGoDate(),goBank.getGoWarehouse(),goBank.getGoNum(),goBank.getTransfersId());//新增调拨单的出库时间，出库仓库，出库单号
+        }
+        if(goBank.getApplyNum()!=null){
+            disposeApplyService.updateApply(goBank.getGoDate(),goBank.getGoNum(),goBank.getApplyNum());////新增销毁单的出库单号跟出库时间
+        }
         List<Stockout> stockouts = goBank.getStorageData();//出库详情的集合
         for (Stockout s : stockouts) {
             List<DrugStock> drugStocks = drugStockMapper.findAllStock(s.getStockoutProduct());//根据药品编号查询剩余库存
@@ -55,11 +64,13 @@ public class GoBankService {
                         //新增库存扣除记录表
                         Deduct deduct  = new Deduct(s.getStockoutProduct(),kc.getStockBatch(),xuqiu,goBank.getGoNum());
                         if(deduct.getDeductSum()>0){
-                            deductService.addDeduct(deduct);
+                           deductService.addDeduct(deduct);
                         }
-                        //根据药品编号修改药房的库存
-                        pharmacyDetailMapper.updatePharmacyDetail(xuqiu,s.getStockoutProduct());
+                        if(!goBank.getGoNum().substring(0,4).equals("XHCK")){
 
+                            //根据药品编号修改药房的库存
+                            pharmacyDetailMapper.updatePharmacyDetail(xuqiu,s.getStockoutProduct());
+                        }
                         xuqiu = kc.getStockSurplus()-xuqiu;
                         break;
                     }else{
@@ -70,10 +81,15 @@ public class GoBankService {
                         //新增库存扣除记录表
                         Deduct deduct  = new Deduct(s.getStockoutProduct(),kc.getStockBatch(),kc.getStockSurplus(),goBank.getGoNum());
                         if(deduct.getDeductSum()>0){
-                            deductService.addDeduct(deduct);
+                           deductService.addDeduct(deduct);
                         }
-                        //根据药品编号修改药房的库存
-                        pharmacyDetailMapper.updatePharmacyDetail(kc.getStockSurplus(),s.getStockoutProduct());
+                        if(!goBank.getGoNum().substring(0,4).equals("XHCK")){
+                           if(kc.getStockSurplus()>0){
+
+                               //根据药品编号修改药房的库存
+                               pharmacyDetailMapper.updatePharmacyDetail(xuqiu,s.getStockoutProduct());
+                           }
+                        }
                         xuqiu = xuqiu-kc.getStockSurplus();
                     }
                 }

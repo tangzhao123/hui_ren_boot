@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DestructionMapper">
+    
+    <!-- 销毁申请详情的映射 -->
+    <resultMap id="destructionMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Destruction">
+        <id property="deSerial" column="de_serial"/>
+        <result property="deId" column="de_id"/>
+        <result property="deDrug" column="de_drug"/>
+        <result property="deSum" column="de_sum"/>
+        <result property="applyId" column="apply_id"/>
+        <result property="deBatch" column="de_batch"/>
+        <result property="drugName" column="drug_name"/>
+    </resultMap>
+    
+    <!-- 新增销毁申请详情 -->
+    <insert id="addDestruction">
+            insert into destruction
+            select seq_huiren.nextval,de_id,de_drug,de_sum,apply_id,de_batch from
+            <foreach collection="disposeApplyData" item="d" index="i" separator=" " open="(" close=")">
+                <if test="i != disposeApplyData.size()-1">
+                    select #{d.deId} as de_id,#{d.deDrug} as de_drug,#{d.deSum} as de_sum,#{applyId} as apply_id,#{d.deBatch} as de_batch from dual
+                    union
+                </if>
+                <if test=" i == disposeApplyData.size()-1">
+                    select #{d.deId} as de_id,#{d.deDrug} as de_drug,#{d.deSum} as de_sum,#{applyId} as apply_id,#{d.deBatch} as de_batch from dual
+                </if>
+            </foreach>
+    </insert>
+
+    <!-- 查询所有的销毁申请详情药品批号 -->
+    <select id="findAllDestruction" resultType="String">
+        select de_batch as deBatch from destruction
+    </select>
+
+    <!-- 根据销毁申请单号查询详单 -->
+    <select id="allDestruction" resultMap="destructionMap">
+        select * from destruction de
+        left join drug_info dr on dr.drug_id = de.de_drug
+        where apply_id = #{applyId}
+    </select>
+</mapper>

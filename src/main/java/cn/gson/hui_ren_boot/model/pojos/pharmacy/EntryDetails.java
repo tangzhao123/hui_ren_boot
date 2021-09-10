@@ -12,7 +12,7 @@ public class EntryDetails {
 
     private long detailsId;
     private String detailsDrug;
-    private Long detailsEntry;
+    private String detailsEntry;
     private String detailBatch;
     private Long detailNumber;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
@@ -43,11 +43,11 @@ public class EntryDetails {
 
     @Basic
     @Column(name = "DETAILS_ENTRY")
-    public Long getDetailsEntry() {
+    public String getDetailsEntry() {
         return detailsEntry;
     }
 
-    public void setDetailsEntry(Long detailsEntry) {
+    public void setDetailsEntry(String detailsEntry) {
         this.detailsEntry = detailsEntry;
     }
 

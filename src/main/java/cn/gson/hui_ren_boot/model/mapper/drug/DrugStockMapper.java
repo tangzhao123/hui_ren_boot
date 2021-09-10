@@ -17,4 +17,10 @@ public interface DrugStockMapper {
 
     //根据药品编号查询药品库存
     public List<DrugStock> findAllStock(Long drugId);
+
+    //查询临期库存药品
+    public List<DrugStock> findAllPeriod(List<String> stockBatch);
+
+    //根据药品类别查询库存
+    public List<DrugStock> allDrugStock(Long typeId);
 }

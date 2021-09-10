@@ -29,11 +29,12 @@ public class PurchaseOrderController {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
         String newDate=sdf.format(new Date());
         String result="";
+        String str = "CGDD";
         Random random=new Random();
         for(int i=0;i<3;i++){
             result+=random.nextInt(10);
         }
-        return newDate+result;
+        return str+newDate+result;
     }
 
     //新增采购订单跟订单详情

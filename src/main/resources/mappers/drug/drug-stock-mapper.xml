@@ -14,6 +14,33 @@
         <result property="drugId" column="drug_id"/>
     </resultMap>
 
+    <!-- 临期药品的查询映射 -->
+    <resultMap id="drugStockPeriodMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStock">
+        <id property="stockId" column="stock_id"/>
+        <result property="stockSurplus" column="stock_surplus"/>
+        <result property="stockNumber" column="stock_number"/>
+        <result property="stockDate" column="stock_date"/>
+        <result property="stockBatch" column="stock_batch"/>
+        <result property="stockIndate" column="stock_indate"/>
+        <result property="drugId" column="drug_id"/>
+        <result property="drugName" column="drug_name"/>
+    </resultMap>
+
+    <!-- 盘点查询的映射 -->
+    <resultMap id="drugStockInventory" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStock">
+        <id property="stockId" column="stock_id"/>
+        <result property="stockSurplus" column="stock_surplus"/>
+        <result property="stockNumber" column="stock_number"/>
+        <result property="stockDate" column="stock_date"/>
+        <result property="stockBatch" column="stock_batch"/>
+        <result property="stockIndate" column="stock_indate"/>
+        <result property="drugId" column="drug_id"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="drugBig" column="drug_big"/>
+        <result property="drugSelling" column="drug_selling"/>
+        <result property="purchasePrice" column="purchase_price"/>
+    </resultMap>
+
     <!--  根据药品编号查询药品库存 -->
     <select id="findAllStock" resultMap="drugStockMap">
         select * from drug_stock where drug_id = #{drugId} order by stock_indate,stock_surplus
@@ -40,4 +67,26 @@
     <update id="updateDrugStock">
         update drug_stock set stock_surplus = stock_surplus-#{stockSurplus} where stock_batch = #{stockBatch}
     </update>
+    
+    <!-- 查询临期的库存药品 -->
+    <select id="findAllPeriod" resultMap="drugStockPeriodMap">
+        select * from drug_stock ds
+        left join drug_info dr on ds.drug_id = dr.drug_id
+        where
+        to_date(to_char(stock_indate,'yyyy-mm-dd'),'yyyy-mm-dd')-to_date(to_char(stock_date,'yyyy-mm-dd'),'yyyy-mm-dd')
+        &lt;=30 and ds.stock_surplus > 0
+        <if test="stockBatch.size()>0 ">
+            and ds.stock_batch not in
+            <foreach collection="stockBatch" item="d" index="i" separator="," open="(" close=")">
+                #{d}
+            </foreach>
+        </if>
+    </select>
+
+    <!-- 根据药品类别库存盘点 -->
+    <select id="allDrugStock" resultMap="drugStockInventory">
+        select * from drug_stock dst
+        inner join drug_info di on dst.drug_id = di.drug_id
+        where di.type_id = #{typeId} and dst.stock_surplus >0
+    </select>
 </mapper>

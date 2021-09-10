@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DrugCheckMapper">
+
+    <!-- 盘点查询的映射 -->
+    <resultMap id="drugCheckMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugCheck">
+        <id property="checkId" column="check_id"/>
+        <result property="checkNo" column="check_no"/>
+        <result property="checkPeople" column="staff_name"/>
+        <result property="checkAuditor" column="staff_name"/>
+        <result property="checkType" column="check_type"/>
+        <result property="checkKnum" column="check_knum"/>
+        <result property="checkWarehouse" column="check_warehouse"/>
+        <result property="checkNote" column="check_note"/>
+        <result property="checkDate" column="check_date"/>
+
+    </resultMap>
+
+    <!-- 新增盘点表 -->
+    <insert id="addDrugCheck">
+        insert into drug_check values (seq_huiren.nextval,#{checkNo},#{checkPeople},null,#{checkType},#{checkKnum},#{checkWarehouse},#{checkNote},#{checkDate},null)
+    </insert>
+
+    <!-- 查询未审批的盘点单 -->
+    <select id="findAllDrugCheck" resultMap="drugCheckMap">
+        select * from drug_check c
+        left join staff s on s.staff_id = c.check_people
+        where c.check_auditor is null
+    </select>
+
+    <!-- 审批盘点单 -->
+    <update id="updateDrugCheck">
+        update drug_check set check_auditor = #{checkAuditor} where check_no = #{checkNo}
+    </update>
+
+    <!-- 查询已审批的盘点单 -->
+    <select id="allDrugCheck" resultMap="drugCheckMap">
+        select * from drug_check c
+        left join staff s on s.staff_id = c.check_people
+        inner join staff s on s.staff_id = c.check_auditor
+        where c.check_auditor is not null and c.check_go is  null
+    </select>
+
+    <!-- 新增销毁申请单号 -->
+    <update id="updateCheckGo">
+        update drug_check set check_go = #{checkGo} where check_no = #{checkNo}
+    </update>
+</mapper>

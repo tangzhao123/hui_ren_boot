@@ -18,6 +18,8 @@ public class GoBank {
     private Long goTouching;
     private Long goWarehouse;
     private String goBatch;
+    private String applyNum; //销毁单号
+    private String transfersId;//调拨单号
     private List<Stockout> storageData;//出库详单集合
 
     @Id
@@ -90,6 +92,24 @@ public class GoBank {
 
     public void setGoBatch(String goBatch) {
         this.goBatch = goBatch;
+    }
+
+    @Transient
+    public String getApplyNum() {
+        return applyNum;
+    }
+
+    @Transient
+    public void setApplyNum(String applyNum) {
+        this.applyNum = applyNum;
+    }
+
+    public String getTransfersId() {
+        return transfersId;
+    }
+
+    public void setTransfersId(String transfersId) {
+        this.transfersId = transfersId;
     }
 
     @Override

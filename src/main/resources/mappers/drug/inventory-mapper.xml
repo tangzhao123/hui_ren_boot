@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.InventoryMapper">
+
+    <!-- 盘点详单的映射 -->
+    <resultMap id="inventoryMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Inventory">
+        <id property="inventoryId" column="inventory_id"/>
+        <result property="inventoryDrug" column="inventory_drug"/>
+        <result property="inventoryNum" column="inventory_num"/>
+        <result property="inventoryKnum" column="inventory_knum"/>
+        <result property="inventorySum" column="inventory_sum"/>
+        <result property="inventoryMargun" column="inventory_margun"/>
+        <result property="inventoryRetail" column="inventory_retail"/>
+        <result property="inventoryCheck" column="inventory_check"/>
+        <result property="inventoryBatch" column="inventory_batch"/>
+        <result property="drugName" column="drug_name"/>
+    </resultMap>
+
+    <!-- 批量新增盘点详情表 -->
+    <insert id="addInventory">
+            insert into inventory
+            select seq_huiren.nextval,inventory_drug,inventory_num,inventory_knum,inventory_sum,inventory_margun,inventory_retail,inventory_check,inventory_batch from
+            <foreach collection="inventoryData" item="d" index="i" separator=" " open="(" close=")">
+                <if test=" i != inventoryData.size()-1">
+                    select #{d.inventoryDrug} as inventory_drug,#{d.inventoryNum} as inventory_num,#{d.inventoryKnum} as inventory_knum,#{d.inventorySum} as inventory_sum,
+                    #{d.inventoryMargun} as inventory_margun,#{d.inventoryRetail} as inventory_retail,#{inventoryCheck} as inventory_check,#{d.inventoryBatch} as inventory_batch
+                    from dual
+                    union
+                </if>
+                <if test=" i == inventoryData.size()-1">
+                    select #{d.inventoryDrug} as inventory_drug,#{d.inventoryNum} as inventory_num,#{d.inventoryKnum} as inventory_knum,#{d.inventorySum} as inventory_sum,
+                    #{d.inventoryMargun} as inventory_margun,#{d.inventoryRetail} as inventory_retail,#{inventoryCheck} as inventory_check,#{d.inventoryBatch} as inventory_batch
+                    from dual
+                </if>
+            </foreach>
+
+    </insert>
+
+    <!-- 根据盘点单号查询详单 -->
+    <select id="findAllInventory" resultMap="inventoryMap">
+        select * from inventory i
+        inner join drug_info dr on i.inventory_drug = dr.drug_id
+        where inventory_check = #{inventoryCheck}
+    </select>
+</mapper>
