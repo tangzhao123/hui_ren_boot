@@ -26,13 +26,7 @@
     </select>
 <!--    医嘱详情管理-->
     <select id="seletDetails" resultType="Details">
-        select *from details
-        <where>
-            <if test="registerId != null and '' != registerId">
-                register_id=#{registerId}
-            </if>
-        </where>
-
+        select *from details where register_id = #{registerId}
     </select>
 <!--    主表停嘱-->
     <update id="upDetails">
@@ -65,12 +59,12 @@
         <foreach collection="detail" item="p" index="i" separator="">
             <if test="i!=detail.size()-1">
                 into details
-                        (details_serial,drug_name,details_drip,details_way,datails_dosage,daralis_usage,daralis_time,advice_id,daralis_dstate,daralis_disable,daralis_start,daralis_price,daralis_number,standard_name,drug_big,standard_use,daralis_mark,register_id)
-                values(#{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.detailsWay},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},#{p.standardName},#{p.drugBig},#{p.standardUse},#{p.daralisMark},#{p.registerId})
+                        (details_serial,drug_name,details_drip,datails_dosage,daralis_usage,daralis_time,advice_id,daralis_dstate,daralis_disable,daralis_start,daralis_price,daralis_number,standard_use,daralis_mark,register_id,details_money)
+                values(#{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},#{p.standardUse},#{p.daralisMark},#{p.registerId},#{p.detailsMoney})
             </if>
             <if test="i==detail.size()-1">
-                select #{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.detailsWay},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},
-                        #{p.standardName},#{p.drugBig},#{p.standardUse},#{p.daralisMark},#{p.registerId} from dual
+                select #{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},
+               #{p.standardUse},#{p.daralisMark},#{p.registerId},#{p.detailsMoney} from dual
             </if>
         </foreach>
     </insert>

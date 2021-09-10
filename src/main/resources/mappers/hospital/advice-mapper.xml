@@ -15,6 +15,7 @@
         <result column="advice_chinese" property="adviceChinese"/>
         <result column="advice_doctors" property="adviceDoctors"/>
         <result column="register_name" property="registerName"/>
+        <result column="advice_chindose" property="adviceChindose"/>
     </resultMap>
     <resultMap id="vateAdvice" type="cn.gson.hui_ren_boot.model.pojos.hospital.Advice">
         <id column="advice_serial" property="adviceSerial"/>
@@ -38,7 +39,6 @@
         <id column="details_serial" property="detailsSerial"/>
         <result column="drug_name" property="drugName"/>
         <result column="details_drip" property="detailsDrip"/>
-        <result column="details_way" property="detailsWay"/>
         <result column="datails_dosage" property="datailsDosage"/>
         <result column="daralis_usage" property="daralisUsage"/>
         <result column="daralis_Time" property="daralisTime"/>
@@ -47,10 +47,10 @@
         <result column="daralis_start" property="daralisStart"/>
         <result column="daralis_price" property="daralisPrice"/>
         <result column="daralis_number" property="daralisNumber"/>
-        <result column="drug_big" property="drugBig"/>
         <result column="standard_name" property="standardName"/>
         <result column="standard_use" property="standardUse"/>
         <result column="daralis_mark" property="daralisMark"/>
+        <result column="details_money" property="detailsMoney"/>
     </resultMap>
     <select id="allDispensing" resultMap="allAdvicve">
         select * from ADVICE  ai left join register hg on ai.register_id=hg.register_id left join staff km on km.staff_id=ai.staff_id

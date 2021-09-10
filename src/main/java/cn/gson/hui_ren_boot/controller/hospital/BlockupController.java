@@ -9,6 +9,7 @@ import cn.gson.hui_ren_boot.model.pojos.medical.Test;
 import cn.gson.hui_ren_boot.model.service.hospital.AdviceService;
 import cn.gson.hui_ren_boot.model.service.hospital.BlockupService;
 import cn.gson.hui_ren_boot.model.service.hospital.DetailsService;
+import cn.gson.hui_ren_boot.utils.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,13 +70,16 @@ public class BlockupController {
         }
     }
     @RequestMapping("/addtest")
-    private String addTests(@RequestBody Test test){
-          try{
+    private String addTests(@RequestBody Test test){//新增体检单和中间表
+//          try{
+
+        System.out.println(test);
+        System.out.println(test.getInspector());
               blockupService.addTest(test);
               return "ok";
-          }catch(Exception e){
-            return "fail";
-        }
+//          }catch(Exception e){
+//            return "fail";
+//        }
 
 
     }

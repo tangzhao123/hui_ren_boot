@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.ChangeMapper">
+    <insert id="addChange">--新增
+        insert into change values (seq_huiren.nextval,#{changeName},#{registerId},#{changeReason},#{changeDoctor},0,current_timestamp,#{medicalName})
+    </insert>
+    <select id="allChange" resultType="change">--查询
+            select *from change where change_state=0
+    </select>
+    <delete id="deChange">--删除
+        delete from change where change_id=#{changeId}
+    </delete>
+</mapper>

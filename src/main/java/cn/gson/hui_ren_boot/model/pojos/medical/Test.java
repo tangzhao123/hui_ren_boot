@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -19,7 +20,16 @@ public class Test {
     private Date testTime;
     private Long testMoney;
     private Long testState;
+    private String testAccount;
+    private List<Comboitem> inspector;
+    @OneToMany
+    public List<Comboitem> getInspector() {
+        return inspector;
+    }
 
+    public void setInspector(List<Comboitem> inspector) {
+        this.inspector = inspector;
+    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -106,17 +116,27 @@ public class Test {
         this.testState = testState;
     }
 
+    @Basic
+    @Column(name = "TEST_ACCOUNT")
+    public String getTestAccount() {
+        return testAccount;
+    }
+
+    public void setTestAccount(String testAccount) {
+        this.testAccount = testAccount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Test test = (Test) o;
-        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney) && Objects.equals(testState, test.testState);
+        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney) && Objects.equals(testState, test.testState) && Objects.equals(testAccount, test.testAccount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(testId, testName, testSex, testPhone, testGenre, testTime, testMoney, testState);
+        return Objects.hash(testId, testName, testSex, testPhone, testGenre, testTime, testMoney, testState, testAccount);
     }
 
     @Override
@@ -129,7 +149,9 @@ public class Test {
                 ", testGenre='" + testGenre + '\'' +
                 ", testTime=" + testTime +
                 ", testMoney=" + testMoney +
-                ", testState="+testState +
+                ", testState=" + testState +
+                ", testAccount='" + testAccount + '\'' +
+                ", inspector=" + inspector +
                 '}';
     }
 }

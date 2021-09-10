@@ -86,4 +86,16 @@ public class Comboitem {
     public int hashCode() {
         return Objects.hash(itemId, itemName, itemOffice, itemMoney, itemType);
     }
+
+    @Override
+    public String toString() {
+        return "Comboitem{" +
+                "itemId=" + itemId +
+                ", itemName='" + itemName + '\'' +
+                ", itemOffice='" + itemOffice + '\'' +
+                ", itemMoney=" + itemMoney +
+                ", itemType='" + itemType + '\'' +
+                ", itemUnit='" + itemUnit + '\'' +
+                '}';
+    }
 }
