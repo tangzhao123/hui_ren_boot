@@ -28,7 +28,7 @@
     </select>
     <!-- 新增体检项目 -->
     <insert id="addComboitem">
-        insert into comboitem values(seq_huiren.nextval,#{itemName},#{itemOffice},#{itemMoney},#{itemType},#{itemUnit})
+        insert into comboitem values(seq_huiren.nextval,#{itemName},#{itemOffice},#{itemMoney},#{itemType},#{itemUnit},#{itemNumber})
     </insert>
     <!-- 修改体检项目 -->
     <update id="updateComboitem">
@@ -39,4 +39,8 @@
 <!--    <delete id="delComboitem">-->
 <!--        delete from comboitem where ITEM_ID = #{itemId} -->
 <!--    </delete>-->
+
+    <select id="selecitem" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        select * from comboitem where item_id = #{itemId}
+    </select>
 </mapper>

@@ -16,7 +16,7 @@ public class OrdersService {
     OrdersMapper ordersMapper;
 
     //查询医嘱详情（连表）
-    public List<Details> selAll(String registerId){
+    public List<Advice> selAll(String registerId){
         return ordersMapper.selAll(registerId);
     }
 

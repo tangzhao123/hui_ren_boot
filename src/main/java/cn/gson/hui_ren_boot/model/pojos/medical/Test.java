@@ -19,6 +19,7 @@ public class Test {
     private Date testTime;
     private Long testMoney;
     private Long testState;
+    private String testAccount;
 
 
     @Id
@@ -106,17 +107,27 @@ public class Test {
         this.testState = testState;
     }
 
+    @Basic
+    @Column(name = "TEST_ACCOUNT")
+    public String getTestAccount() {
+        return testAccount;
+    }
+
+    public void setTestAccount(String testAccount) {
+        this.testAccount = testAccount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Test test = (Test) o;
-        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney) && Objects.equals(testState, test.testState);
+        return testId == test.testId && Objects.equals(testName, test.testName) && Objects.equals(testSex, test.testSex) && Objects.equals(testPhone, test.testPhone) && Objects.equals(testGenre, test.testGenre) && Objects.equals(testTime, test.testTime) && Objects.equals(testMoney, test.testMoney) && Objects.equals(testState, test.testState) && Objects.equals(testAccount, test.testAccount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(testId, testName, testSex, testPhone, testGenre, testTime, testMoney, testState);
+        return Objects.hash(testId, testName, testSex, testPhone, testGenre, testTime, testMoney, testState, testAccount);
     }
 
     @Override
@@ -130,6 +141,7 @@ public class Test {
                 ", testTime=" + testTime +
                 ", testMoney=" + testMoney +
                 ", testState="+testState +
+                ", testAccount="+testAccount +
                 '}';
     }
 }

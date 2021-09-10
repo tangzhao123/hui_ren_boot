@@ -7,6 +7,7 @@ import cn.gson.hui_ren_boot.model.pojos.medical.Testmiddle;
 import cn.gson.hui_ren_boot.model.service.medical.CmoboSerivice;
 import cn.gson.hui_ren_boot.model.service.medical.ComboitemService;
 import cn.gson.hui_ren_boot.model.service.medical.TestService;
+import cn.gson.hui_ren_boot.utils.MyUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,38 +33,43 @@ public class TestController {
         System.out.println("==============open===========");
         ObjectMapper mapper = new ObjectMapper();
         Test t = mapper.convertValue(map.get("test"),Test.class);//体检人表
+        String account = MyUtil.genrateNo("TJ");
+        t.setTestAccount(account);
         if (t.getTestId() == 0){
             testService.addTest(t);
         }
         System.out.println("体检人信息"+t);
        // testService.insertTest(t);
         System.out.println("======="+t.getTestId());
-
         Testmiddle testmiddle = new Testmiddle();//体检中间表
-        List<Object> list = (List<Object>) map.get("middle");
-        for (Object i: list) {
-            Comboitem c = mapper.convertValue(i,Comboitem.class);//选择的项目
-            System.out.println("项目"+c.getItemId());
-            testmiddle.setTestId(t.getTestId());
-            testmiddle.setItemId(c.getItemId());
-            testService.addMiddle(testmiddle);
-        }
-
-
-        Testmiddle testmiddle1 = new Testmiddle();
-        testmiddle1.setItemId(t.getTestId());
-        List<Object> list1 = (List<Object>) map.get("tao");
-        for (Object o : list1) {
-            Cmobo m = mapper.convertValue(o,Cmobo.class);
-            System.out.println("套餐："+m.getComboId());
-            System.out.println("套餐信息："+m);
-            List<Comboitem> comboitems = cmoboSerivice.selectAll(m.getComboSerial());
-            for(Comboitem c : comboitems){
-                System.out.println("套餐项目"+c.getItemId());
-                testmiddle1.setItemId(c.getItemId());
+        List<Object> list = (List<Object>) map.get("middle");//选择的单个项目
+        if (list != null){
+            for (Object i: list) {
+                Comboitem c = mapper.convertValue(i,Comboitem.class);//选择的项目
+                System.out.println("项目"+c.getItemId());
+                testmiddle.setTestAccount(t.getTestAccount());
+                testmiddle.setItemId(c.getItemId());
+                 testService.addMiddle(testmiddle);
             }
         }
-        //testService.addMiddle(testmiddle1);
+
+        Testmiddle testmiddle1 = new Testmiddle();//套餐的
+        List<Object> list1 = (List<Object>) map.get("tao");//选择的套餐
+        if (list1 != null){
+            for (Object o : list1) {
+                Cmobo m = mapper.convertValue(o,Cmobo.class);//转化成套餐的类
+                System.out.println("套餐："+m.getComboId());
+                System.out.println("套餐信息："+m);
+                List<Comboitem> comboitems = cmoboSerivice.selectAll(m.getComboSerial());//查询套餐包含的项目
+                for(Comboitem c : comboitems){
+                    testmiddle1.setItemId(t.getTestId());
+                    System.out.println("套餐项目"+c.getItemId());
+                    testmiddle1.setItemId(c.getItemId());
+                    testService.addMiddle(testmiddle1);
+                }
+            }
+        }
+
 
 //        if (test.getTestId() == 0){
 //            testService.insertTest(test);

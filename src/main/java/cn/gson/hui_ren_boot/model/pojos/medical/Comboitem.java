@@ -11,6 +11,7 @@ public class Comboitem {
     private Long itemMoney;
     private String itemType;
     private String itemUnit;
+    private String itemNumber;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -74,16 +75,26 @@ public class Comboitem {
         this.itemType = itemType;
     }
 
+    @Basic
+    @Column(name = "ITEM_NUMBER")
+    public String getItemNumber() {
+        return itemNumber;
+    }
+
+    public void setItemNumber(String itemNumber) {
+        this.itemNumber = itemNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comboitem comboitem = (Comboitem) o;
-        return itemId == comboitem.itemId && Objects.equals(itemName, comboitem.itemName) && Objects.equals(itemOffice, comboitem.itemOffice) && Objects.equals(itemMoney, comboitem.itemMoney) && Objects.equals(itemType, comboitem.itemType);
+        return itemId == comboitem.itemId && Objects.equals(itemName, comboitem.itemName) && Objects.equals(itemOffice, comboitem.itemOffice) && Objects.equals(itemMoney, comboitem.itemMoney) && Objects.equals(itemType, comboitem.itemType) && Objects.equals(itemNumber, comboitem.itemNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemId, itemName, itemOffice, itemMoney, itemType);
+        return Objects.hash(itemId, itemName, itemOffice, itemMoney, itemType, itemNumber);
     }
 }
