@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.AllocatingsMapper">
+<insert id="AddAllocating">
+    insert into ALLOCATING(ALL_SERIAL,All_ID,All_DRUG,ALL_SUM,TRANSFERS_ID)
+    values(seq_huiren.nextval,#{allId},#{allDrug},#{allSum},#{transfersId})
+</insert>
+</mapper>

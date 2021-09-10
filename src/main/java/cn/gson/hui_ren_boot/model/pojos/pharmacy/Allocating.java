@@ -6,11 +6,11 @@ import java.util.Objects;
 @Entity
 public class Allocating {
 
-    private int allSerial;
-    private String allId;
-    private Integer allDrug;
-    private Long allSum;
-    private Long transfersId;
+    private int allSerial;//序号
+    private String allId;//详单号
+    private Integer allDrug;//药品编号
+    private Long allSum;//数量
+    private String transfersId;//调拨单号
     private String drugName; //药品名称
     private String typeName; //药品类别
     private String materialName;//耗材名称
@@ -57,11 +57,11 @@ public class Allocating {
 
     @Basic
     @Column(name = "TRANSFERS_ID")
-    public Long getTransfersId() {
+    public String getTransfersId() {
         return transfersId;
     }
 
-    public void setTransfersId(Long transfersId) {
+    public void setTransfersId(String transfersId) {
         this.transfersId = transfersId;
     }
 

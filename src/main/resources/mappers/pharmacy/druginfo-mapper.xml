@@ -48,7 +48,7 @@
         left join DRUG_TYPE dt on di.TYPE_ID=dt.TYPE_ID
         left join DRUG_SUPPLIER ds on di.SUPPLIER_ID=ds.SUPPLIER_ID
         left join DRUG_STANDARD dd on di.SURPLUS_ID=dd.STANDARD_ID
-        left join DRUG_STOCK dk on di.DRUG_ID=dk.DRUG_ID
+        left join DRUG_STOCK dk on di.STOCK_ID=dk.STOCK_ID
       <where>
           <if test="drugId != null and '' !=drugId">
               or di.DRUG_ID like '%${drugId}%'
@@ -72,6 +72,7 @@
     <update id="allState">
         update DRUG_INFO set DRUG_STATE=#{drugState} where DRUG_ID=#{drugId}
     </update>
+    <!--新增-->
     <insert id="addDrug">
         insert into DRUG_INFO(DRUG_SERIAL,DRUG_ID,DRUG_NAME,DRUG_USE,DRUG_DOSAGE,SURPLUS_ID,TYPE_ID,DRUG_SMALL,DRUG_BIG,SUPPLIER_ID,DRUG_SELLING,PURCHASE_PRICE)
         values (seq_huiren.nextval,#{drugId},#{drugName},#{drugUse},#{drugDosage},#{standards.standardId},#{types.typeId},
