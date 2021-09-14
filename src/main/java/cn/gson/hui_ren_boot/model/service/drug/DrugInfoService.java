@@ -19,4 +19,9 @@ public class DrugInfoService {
     public Object allDrugInfoByPage(Integer pageNo,Integer size,DrugInfo drugInfo){
         return drugInfoMapper.allDrugInfo(drugInfo);
     }
+
+    //查询处方跟医嘱的药品
+    public Object findAllDrugInfoByPage(Integer pageNo,Integer size,DrugInfo drugInfo){
+        return drugInfoMapper.findAllDrugInfo(drugInfo);
+    }
 }

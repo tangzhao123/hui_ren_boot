@@ -3,6 +3,63 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DrugMapper">
 
+    <!-- 处方医嘱药品的映射 -->
+    <resultMap id="drugInfoMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+        <id property="drugSerial" column="drug_serial"/>
+        <result property="drugId" column="drug_id"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="drugUse" column="drug_use"/>
+        <result property="drugDosage" column="drug_dosage"/>
+        <result property="drugTack" column="drug_tack"/>
+        <result property="drugRemark" column="drug_remark"/>
+        <result property="drugSelling" column="drug_selling"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="drugNext" column="drug_next"/>
+        <result property="drugBig" column="drug_big"/>
+        <result property="drugSmall" column="drug_small"/>
+        <result property="smallSelling" column="small_selling"/>
+        <result property="smallPrice" column="small_price"/>
+        <result property="drugState" column="drug_state"/>
+        <result property="drugLife" column="drug_life"/>
+
+        <!-- 药品类别实体类映射 -->
+        <association property="types" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugType">
+            <id property="typeId" column="type_id"/>
+            <result property="typeName" column="type_name"/>
+            <result property="typeSon" column="typeSon"/>
+            <result property="typeRank" column="type_rank"/>
+        </association>
+
+        <!-- 供应商实体类映射 -->
+        <association property="suppliers" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugSupplier">
+            <id property="supplierId" column="supplier_id"/>
+            <result property="supplierName" column="supplier_name"/>
+            <result property="supplierAddress" column="supplier_address"/>
+            <result property="supplierPhone" column="supplier_phone"/>
+        </association>
+
+        <!-- 药品规格实体类映射 -->
+        <association property="standards" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStandard">
+            <id column="STANDARD_ID" property="standardId"/>
+            <result column="STANDARD_NAME" property="standardName"/>
+            <result column="STANDARD_NUM" property="standardNum"/>
+            <result column="STANDARD_DOSAGE" property="standardDosage"/>
+            <result column="STANDARD_USE" property="standardUse"/>
+        </association>
+        
+        <!-- 库存实体类的映射 -->
+        <association property="stocks" javaType="DrugStock">
+            <id column="STOCK_ID" property="stockId"/>
+            <result column="STOCK_SURPLUS" property="stockSurplus"/>
+            <result column="STOCK_NUMBER" property="stockNumber"/>
+            <result column="STOCK_INDATE" property="stockIndate"/>
+            <result column="STOCK_DATE" property="stockDate"/>
+            <result column="STOCK_BATCH" property="stockBatch"/>
+            <result column="DRUG_ID" property="drugId"/>
+        </association>
+    </resultMap>
+
+    <!-- 药品的映射 -->
     <resultMap id="drugMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
         <id property="drugSerial" column="drug_serial"/>
         <result property="drugId" column="drug_id"/>
@@ -65,5 +122,37 @@
              and dr.drug_name like '%${drugName}%'
             </if>
         </where>
+    </select>
+    
+    <!-- 处方医嘱查询药品 -->
+    <select id="findAllDrugInfo" resultMap="drugInfoMap">
+        select max(di.drug_id) as drug_id, max(di.drug_name) as drug_name,max(dt.type_name) as type_name ,
+               max(di.drug_use) as drug_use,max(di.drug_dosage) as drug_dosage,max(di.drug_tack) as drug_tack,
+               max(di.drug_remark) as drug_remark,max(di.drug_selling) as drug_selling,max(di.purchase_price) as purchase_price,
+               max(ds.supplier_name) as supplier_name,max(di.drug_next) as drug_next,max(di.drug_big) as drug_big,
+               max(di.drug_small) as drug_small,max(dd.standard_name) as standard_name,max(di.small_selling) as small_selling,
+               max(di.small_price) as small_price, max(di.drug_state) as drug_state,max(di.drug_life) as drug_life,
+               sum(dk.stock_surplus) as STOCK_SURPLUS from DRUG_INFO di
+               left join DRUG_TYPE dt on di.TYPE_ID=dt.TYPE_ID
+               left join DRUG_SUPPLIER ds on di.SUPPLIER_ID=ds.SUPPLIER_ID
+               left join DRUG_STANDARD dd on di.SURPLUS_ID=dd.STANDARD_ID
+               left join DRUG_STOCK dk on di.DRUG_ID=dk.DRUG_ID
+        <where>
+            <if test="drugId != null and '' !=drugId">
+                and di.DRUG_ID like '%${drugId}%'
+            </if>
+            <if test="drugName != null and '' !=drugName">
+                and di.DRUG_NAME like '%${drugName}%'
+            </if>
+            <if test="types != null">
+                <if test="types.typeId != null and '' !=types.typeId">
+                    and di.type_id =#{types.typeId}
+                </if>
+            </if>
+           <if test="drugState == 1">
+               and di.drug_state = 1
+           </if>
+        </where>
+        GROUP BY dk.drug_id
     </select>
 </mapper>

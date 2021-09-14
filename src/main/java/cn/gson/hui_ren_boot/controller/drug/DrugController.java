@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
 
 @RestController
@@ -25,5 +26,13 @@ public class DrugController {
         System.out.println(drugInfo);
         DrugInfo drugInfos = JSONObject.toJavaObject(JSON.parseObject(drugInfo), DrugInfo.class);
         return drugInfoService.allDrugInfoByPage(pageNo, size, drugInfos);
+    }
+
+    //查询处方跟医嘱的药品
+    @RequestMapping("drugInfo-list")
+    public Object findAllDrugInfo(Integer pageNo,Integer size,DrugInfo drugInfo){
+        drugInfo.setDrugState(1L);
+        //drugInfo.setDrugName("999感冒药");
+        return drugInfoService.findAllDrugInfoByPage(pageNo, size, drugInfo);
     }
 }

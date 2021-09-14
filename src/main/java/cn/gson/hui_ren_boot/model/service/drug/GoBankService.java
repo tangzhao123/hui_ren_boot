@@ -45,7 +45,7 @@ public class GoBankService {
         goBankMapper.addGoBank(goBank);//新增出库单
         stockOutMapper.addStockOut(storageData,goBank.getGoNum());//新增出库详单
         if(goBank.getTransfersId()!=null){
-            transfers1Mapper.updateTransfers(goBank.getGoDate(),goBank.getGoWarehouse(),goBank.getGoNum(),goBank.getTransfersId());//新增调拨单的出库时间，出库仓库，出库单号
+            transfers1Mapper.updateTransfers(goBank.getGoDate(),goBank.getGoNum(),goBank.getTransfersId());//新增调拨单的出库时间，出库仓库，出库单号
         }
         if(goBank.getApplyNum()!=null){
             disposeApplyService.updateApply(goBank.getGoDate(),goBank.getGoNum(),goBank.getApplyNum());////新增销毁单的出库单号跟出库时间

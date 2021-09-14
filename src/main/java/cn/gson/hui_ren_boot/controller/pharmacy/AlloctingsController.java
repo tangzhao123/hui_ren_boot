@@ -14,11 +14,11 @@ public class AlloctingsController {
 
     @RequestMapping("allocating")
     public String addAllocating(Allocating allocating){
-        try{
+//        try{
             allocatingService.AddAllocating(allocating);
             return "ok";
-        }catch (Exception e){
-            return "fail";
-        }
+//        }catch (Exception e){
+//            return "fail";
+//        }
     }
 }
