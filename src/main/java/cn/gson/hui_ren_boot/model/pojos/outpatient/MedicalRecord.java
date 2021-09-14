@@ -13,9 +13,7 @@ import java.util.Date;
 @Table(name = "MEDICAL_RECORD", schema = "HUIREN", catalog = "")
 public class MedicalRecord {
     private String recordNo;
-    private String outpatientId;
     private String recordsNo;
-    private Long staffId;
     private String recordSymptom;
     private String recordResult;
     private String recordPlan;
@@ -26,7 +24,6 @@ public class MedicalRecord {
     private String recordAssistant;
     private String outpatientAllergic;
     private Date onset;
-    private Long medicalId;
     private String infoNo;
     private String treatmentNo;
     private OutpatientRegister outpatient;
@@ -81,16 +78,6 @@ public class MedicalRecord {
     }
 
     @Basic
-    @Column(name = "OUTPATIENT_ID")
-    public String getOutpatientId() {
-        return outpatientId;
-    }
-
-    public void setOutpatientId(String outpatientId) {
-        this.outpatientId = outpatientId;
-    }
-
-    @Basic
     @Column(name = "RECORDS_NO")
     public String getRecordsNo() {
         return recordsNo;
@@ -98,16 +85,6 @@ public class MedicalRecord {
 
     public void setRecordsNo(String recordsNo) {
         this.recordsNo = recordsNo;
-    }
-
-    @Basic
-    @Column(name = "STAFF_ID")
-    public Long getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Long staffId) {
-        this.staffId = staffId;
     }
 
     @Basic
@@ -208,16 +185,6 @@ public class MedicalRecord {
 
     public void setOnset(Date onset) {
         this.onset = onset;
-    }
-
-    @Basic
-    @Column(name = "MEDICAL_ID")
-    public Long getMedicalId() {
-        return medicalId;
-    }
-
-    public void setMedicalId(Long medicalId) {
-        this.medicalId = medicalId;
     }
 
     public String getInfoNo() {

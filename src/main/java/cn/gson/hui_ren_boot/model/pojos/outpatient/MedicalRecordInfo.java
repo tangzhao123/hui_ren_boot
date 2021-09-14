@@ -15,9 +15,6 @@ public class MedicalRecordInfo {
     private long recordsId;
     private String recordsNo;
     private String treatmentNo;
-    private String staffName;
-    private Long staffId;
-    private Long medicalId;
     private String diagnosticRecord;
     private Date recordTime;
     private Staff outdoctor;
@@ -71,36 +68,6 @@ public class MedicalRecordInfo {
 
     public void setTreatmentNo(String treatmentNo) {
         this.treatmentNo = treatmentNo;
-    }
-
-    @Basic
-    @Column(name = "STAFF_NAME")
-    public String getStaffName() {
-        return staffName;
-    }
-
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
-    }
-
-    @Basic
-    @Column(name = "STAFF_ID")
-    public Long getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Long staffId) {
-        this.staffId = staffId;
-    }
-
-    @Basic
-    @Column(name = "MEDICAL_ID")
-    public Long getMedicalId() {
-        return medicalId;
-    }
-
-    public void setMedicalId(Long medicalId) {
-        this.medicalId = medicalId;
     }
 
     @Basic

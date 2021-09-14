@@ -5,7 +5,7 @@
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.MedicalRecordMapper">
     <!--新增门诊病历-->
     <insert id="addRecord">
-        insert into MEDICAL_RECORD values (#{recordNo},#{outpatient.outpatientId},#{recordsId},#{outdoctor.staffId},
+        insert into MEDICAL_RECORD values (#{recordNo},#{outpatient.outpatientId},#{recordsNo},#{outdoctor.staffId},
                                            #{recordSymptom},#{recordResult},#{recordPlan},#{recordHpi},#{recordPh},
                                            #{recordFamily},#{checkUps},#{recordAssistant},#{outpatientAllergic},#{onset},#{medical.medicalId})
     </insert>
