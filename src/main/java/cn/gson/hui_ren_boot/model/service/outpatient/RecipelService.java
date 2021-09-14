@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.service.outpatient;
 
+import cn.gson.hui_ren_boot.model.mapper.drug.DrugMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.*;
 import cn.gson.hui_ren_boot.model.mapper.pharmacy.DruginfoMapper;
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
@@ -31,10 +32,13 @@ public class RecipelService {
     TestItemsMapper teatItemsMapper;
     @Autowired
     TestDetailMapper testDetailMapper;
+    @Autowired
+    DrugMapper drugMapper;
 
     //查询药品
     public List<DrugInfo> allDrug(DrugInfo drugInfo){
-        return druginfoMapper.allDrug(drugInfo);
+        drugInfo.setDrugState(1L);
+        return drugMapper.findAllDrugInfo(drugInfo);
     }
 
     //新增门诊西药处方单和处方详单
