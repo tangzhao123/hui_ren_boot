@@ -6,8 +6,8 @@
     <!--新增就诊记录-->
     <insert id="addInfo">
         insert into MEDICAL_RECORD_INFO(RECORDS_ID,RECORDS_NO,TREATMENT_NO,
-                                        STAFF_NAME,STAFF_ID,RECORD_TIME)
-        values (seq_huiren.nextval,#{recordsNo},#{treatmentNo}, #{outdoctor.staffName},
-          #{outdoctor.staffName},#{medical.medicalId},current_timestamp )
+                                        STAFF_NAME,STAFF_ID,MEDICAL_ID,RECORD_TIME)
+        values(seq_huiren.nextval,#{recordsNo},#{treatmentNo},#{outdoctor.staffName},
+               #{outdoctor.staffId},#{medical.medicalId},current_timestamp)
     </insert>
 </mapper>

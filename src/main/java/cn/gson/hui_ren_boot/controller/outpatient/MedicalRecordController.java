@@ -17,11 +17,21 @@ public class MedicalRecordController {
     @Autowired
     MedicalRecordService recordService;
 
-    public void addRecord(@RequestBody MedicalRecord medicalRecord){
-        MedicalRecordInfo recordInfo = new MedicalRecordInfo();
-        recordInfo.setRecordsNo(medicalRecord.getInfoNo());
-        recordInfo.setTreatmentNo(medicalRecord.getTreatmentNo());
-        recordInfo.setOutdoctor(medicalRecord.getOutdoctor());
-        recordService.addRecord(recordInfo,medicalRecord);
+    //新增门诊病历，同时新增就诊记录
+    @RequestMapping("/add-record")
+    public String addRecord(@RequestBody MedicalRecord medicalRecord){
+        try{
+            MedicalRecordInfo recordInfo = new MedicalRecordInfo();
+            recordInfo.setRecordsNo(medicalRecord.getRecordsNo());
+            recordInfo.setTreatmentNo(medicalRecord.getTreatmentNo());
+            recordInfo.setOutdoctor(medicalRecord.getOutdoctor());
+            recordInfo.setMedical(medicalRecord.getMedical());
+            recordService.addRecord(recordInfo,medicalRecord);
+            return "ok";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+
     }
 }
