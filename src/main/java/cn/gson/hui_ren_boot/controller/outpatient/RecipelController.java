@@ -101,6 +101,13 @@ public class RecipelController {
         return recipelService.allNumber(medicalId, staffId,rankId);
     }
 
+    //接诊，删除当前接诊的排号
+    @RequestMapping("/del-row")
+    public void delRow(String bookingNo){
+        System.out.println(bookingNo);
+        recipelService.delRow(bookingNo);
+    }
+
     //过号，根据挂号单修改id为最后一位
     @RequestMapping("/edit-row")
     public void editRow(String bookingNo){

@@ -34,21 +34,6 @@
                 <result column="OUTPATIENT_WEIGHT" property="outpatientWeight"/>
                 <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
             </association>
-<!--            <association property="officeId" javaType="Medical">-->
-<!--                <id property="medicalId" column="medical_id"/>-->
-<!--                <result property="medicalName" column="medical_name"/>-->
-<!--                <result property="medicalSublevel" column="medical_sublevel"/>-->
-<!--            </association>-->
-<!--            <association property="outdoctorId" javaType="Staff">-->
-<!--                <id column="STAFF_ID" property="staffId"/>-->
-<!--                <result column="STAFF_NAME" property="staffName"/>-->
-<!--                <result column="STAFF_PHONE" property="staffPhone"/>-->
-<!--                <result column="SECTION_ID" property="sectionId"/>-->
-<!--                <result column="MEDICAL_ID" property="medicalId"/>-->
-<!--                <result column="RANK_ID" property="rankId"/>-->
-<!--                <result column="STAFF_STATE" property="staffState"/>-->
-<!--                <result column="STAFF_CARD" property="staffCard"/>-->
-<!--            </association>-->
         </association>
     </resultMap>
 
@@ -76,4 +61,9 @@
     <update id="editRow">
         update row_numbers set row_id = seq_hr.nextval where booking_no = #{bookingNo}
     </update>
+
+    <!--接诊，删除接诊的排号-->
+    <delete id="delRow">
+        delete from row_numbers where booking_no = #{bookingNo}
+    </delete>
 </mapper>

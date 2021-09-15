@@ -54,7 +54,7 @@ public class BookingFormService {
         return bookingFormMapper.outStaff(medicalId,bookingOrder);
     }
 
-    //新增挂号单，同时新增患者表
+    //新增挂号单，同时新增患者表,同时新增排号表
     public void addOutBooking(OutpatientRegister outPatient, BookingForm bookingForm){
         OutpatientRegister register = outRegisterMapper.selRegister(outPatient.getOutpatientCard());
         if(register == null){

@@ -19,6 +19,16 @@ public class MedicalRecordInfo {
     private Date recordTime;
     private Staff outdoctor;
     private Medical medical;
+    private OutpatientRegister outpatient;
+
+    @OneToOne
+    public OutpatientRegister getOutpatient() {
+        return outpatient;
+    }
+
+    public void setOutpatient(OutpatientRegister outpatient) {
+        this.outpatient = outpatient;
+    }
 
     @OneToOne
     public Staff getOutdoctor() {
