@@ -91,21 +91,34 @@
                 #{bookingType},#{treatmentNo},#{bookingFee},#{bookingOther},#{bookingOrder},#{bookingReturn},0)
     </insert>
 
-    <!--查询挂号单-->
+    <!--查询当天未退号挂号单-->
     <select id="allBooking" resultMap="formMap">
         select * from booking_form b
                           left JOIN outpatient_register o on b.outpatient_id = o.outpatient_id
                           left JOIN staff s on b.staff_id = s.staff_id
                           left JOIN medical me on b.medical_id = me.medical_id
+        where to_char(b.BOOKING_DATE,'yyyy-mm-dd') = to_char(current_timestamp ,'yyyy-mm-dd')
+          and b.BOOKING_STATE != 3
     </select>
 
-    <!--查询未诊的挂号单-->
+    <!--查询当天退号挂号单-->
+    <select id="backBooking" resultMap="formMap">
+        select * from booking_form b
+                          left JOIN outpatient_register o on b.outpatient_id = o.outpatient_id
+                          left JOIN staff s on b.staff_id = s.staff_id
+                          left JOIN medical me on b.medical_id = me.medical_id
+        where to_char(b.BOOKING_DATE,'yyyy-mm-dd') = to_char(current_timestamp ,'yyyy-mm-dd')
+          and b.BOOKING_STATE = 3
+    </select>
+
+    <!--退号，查询当天未诊的挂号单-->
     <select id="selBooking" resultMap="formMap">
         select * from booking_form b
         left JOIN outpatient_register o on b.outpatient_id = o.outpatient_id
         left JOIN staff s on b.staff_id = s.staff_id
         left JOIN medical me on b.medical_id = me.medical_id
-        where b.BOOKING_STATE = 0
+        where to_char(b.BOOKING_DATE,'yyyy-mm-dd') = to_char(current_timestamp ,'yyyy-mm-dd')
+          and b.BOOKING_STATE = 0
         <if test="bookingNo != null and '' != bookingNo">
            and b.BOOKING_NO like '%${bookingNo}%'
         </if>

@@ -57,13 +57,19 @@ public class BookingFormController {
         bookingFormService.addOutBooking(bookingForm.getOutpatient(),bookingForm);
     }
 
-    //分页查询挂号单
+    //分页查询当天未退号挂号单
     @RequestMapping("/all-booking")
     public Object allBooking(Integer pageNo,Integer size){
         return bookingFormService.allBookingByPage(pageNo, size);
     }
 
-    //分页查询未诊挂号单
+    //分页查询当天退号挂号单
+    @RequestMapping("/back-booking")
+    public Object selBack(Integer pageNo,Integer size){
+        return bookingFormService.selBackByPage(pageNo, size);
+    }
+
+    //退号，分页查询当天未诊挂号单
     @RequestMapping("/sel-booking")
     public Object selBooking(Integer pageNo,Integer size,String bookingNo){
         return bookingFormService.selBookingByPage(pageNo, size,bookingNo);

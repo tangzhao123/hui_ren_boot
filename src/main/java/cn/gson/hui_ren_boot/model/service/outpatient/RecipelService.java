@@ -53,16 +53,6 @@ public class RecipelService {
         detailMapper.addChineseDetail(details, prescriptionList.getPrescriptionNo());
     }
 
-    //查询门诊西药处方单
-    public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList){
-        return listMapper.allRecipel(prescriptionList);
-    }
-
-    //根据处方号查询处方详单
-    public List<PrescriptionDetail> selNo(String prescriptionNo){
-        return detailMapper.selNo(prescriptionNo);
-    }
-
     //查询排号
     public List<RowNumbers> allNumber(int medicalId,int staffId,int rankId){
         return rowNumbersMapper.allNumber(medicalId, staffId,rankId);
