@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PaymentFormsMapper">
+
+    <!-- 查询药品每个月的销售金额 -->
+    <select id="allPaymentForm" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.PaymentFormVo">
+        select extract (month from payment_time)||'月' as paymentTime ,sum(payment_money) as paymentMoney from payment_form group by extract (month from payment_time)
+    </select>
+</mapper>

@@ -89,4 +89,16 @@ public class PaymentDetai {
         this.prescriptionNo = prescriptionNo;
     }
 
+    @Override
+    public String toString() {
+        return "PaymentDetai{" +
+                "detailId=" + detailId +
+                ", detailNo='" + detailNo + '\'' +
+                ", paymentNo='" + paymentNo + '\'' +
+                ", entryName='" + entryName + '\'' +
+                ", amount=" + amount +
+                ", paymentPrice=" + paymentPrice +
+                ", prescriptionNo='" + prescriptionNo + '\'' +
+                '}';
+    }
 }

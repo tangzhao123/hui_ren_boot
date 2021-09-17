@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.DoseMapper">
+
+    <!-- 新增发药详情表 -->
+    <insert id="addDose">
+        insert into dose values (seq_huiren.nextval,#{doseDrug},#{doseSum},#{doseReason},current_timestamp,#{doseSend})
+    </insert>
+</mapper>
