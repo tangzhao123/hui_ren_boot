@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface InformMapper {
     public void addInform(Inform inform);//新增
-    public List<Inform>selectInform(Inform inform);//查询
+    public List<Inform>selectInform(Inform inform);//住院医生站查询
     public void deleteInform(Inform inform);//删除
+    public List<Inform>allInform();//结算页面查询出院通知
+
 }

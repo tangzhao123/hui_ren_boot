@@ -21,11 +21,13 @@ public class DrugInfo {
     private double smallSelling;//小单位售价
     private double smallPrice;//小单位进价
     private Long drugState;//状态
+    private Long drugRecipe;//处方非处方药
     private Integer drugLife;//保质期
     private DrugType types;//药品类别
     private DrugSupplier suppliers;//供应商
     private DrugStandard standards;//规格
     private DrugStock stocks;//库存
+
 
     //类别
     @OneToOne
@@ -74,6 +76,15 @@ public class DrugInfo {
 
     public void setDrugSerial(Long drugSerial) {
         this.drugSerial = drugSerial;
+    }
+    @Basic
+    @Column(name = "DRUG_RECIPE")
+    public Long getDrugRecipe() {
+        return drugRecipe;
+    }
+
+    public void setDrugRecipe(Long drugRecipe) {
+        this.drugRecipe = drugRecipe;
     }
 
     @Basic
@@ -233,12 +244,12 @@ public class DrugInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DrugInfo drugInfo = (DrugInfo) o;
-        return Objects.equals(drugSerial, drugInfo.drugSerial) && Objects.equals(drugId, drugInfo.drugId) && Objects.equals(drugName, drugInfo.drugName) && Objects.equals(drugUse, drugInfo.drugUse) && Objects.equals(drugDosage, drugInfo.drugDosage) && Objects.equals(drugTack, drugInfo.drugTack) && Objects.equals(drugRemark, drugInfo.drugRemark) && Objects.equals(drugSelling, drugInfo.drugSelling) && Objects.equals(purchasePrice, drugInfo.purchasePrice) && Objects.equals(drugNext, drugInfo.drugNext) && Objects.equals(drugBig, drugInfo.drugBig) && Objects.equals(drugSmall, drugInfo.drugSmall) && Objects.equals(smallSelling, drugInfo.smallSelling) && Objects.equals(smallPrice, drugInfo.smallPrice) && Objects.equals(drugState, drugInfo.drugState);
+        return Objects.equals(drugSerial, drugInfo.drugSerial) && Objects.equals(drugId, drugInfo.drugId) && Objects.equals(drugName, drugInfo.drugName) && Objects.equals(drugUse, drugInfo.drugUse) && Objects.equals(drugDosage, drugInfo.drugDosage) && Objects.equals(drugTack, drugInfo.drugTack) && Objects.equals(drugRemark, drugInfo.drugRemark) && Objects.equals(drugSelling, drugInfo.drugSelling) && Objects.equals(purchasePrice, drugInfo.purchasePrice) && Objects.equals(drugNext, drugInfo.drugNext) && Objects.equals(drugBig, drugInfo.drugBig) && Objects.equals(drugSmall, drugInfo.drugSmall) && Objects.equals(smallSelling, drugInfo.smallSelling) && Objects.equals(smallPrice, drugInfo.smallPrice) && Objects.equals(drugState, drugInfo.drugState) && Objects.equals(drugRecipe, drugInfo.drugRecipe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(drugSerial, drugId, drugName, drugUse, drugDosage, drugTack, drugRemark, drugSelling, purchasePrice, drugNext, drugBig, drugSmall, smallSelling, smallPrice,drugState);
+        return Objects.hash(drugSerial, drugId, drugName, drugUse, drugDosage, drugTack, drugRemark, drugSelling, purchasePrice, drugNext, drugBig, drugSmall, smallSelling, smallPrice,drugState,drugRecipe);
     }
 
     @Override
@@ -264,6 +275,7 @@ public class DrugInfo {
                 ", suppliers=" + suppliers +
                 ", standards=" + standards +
                 ", stocks=" + stocks +
+                ", drugRecipe=" + drugRecipe +
                 '}';
     }
 }

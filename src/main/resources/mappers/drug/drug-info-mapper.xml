@@ -21,7 +21,7 @@
         <result property="smallPrice" column="small_price"/>
         <result property="drugState" column="drug_state"/>
         <result property="drugLife" column="drug_life"/>
-
+        <result property="drugRecipe" column="drug_recipe"/>
         <!-- 药品类别实体类映射 -->
         <association property="types" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugType">
             <id property="typeId" column="type_id"/>
@@ -131,7 +131,7 @@
                max(di.drug_remark) as drug_remark,max(di.drug_selling) as drug_selling,max(di.purchase_price) as purchase_price,
                max(ds.supplier_name) as supplier_name,max(di.drug_next) as drug_next,max(di.drug_big) as drug_big,
                max(di.drug_small) as drug_small,max(dd.standard_name) as standard_name,max(di.small_selling) as small_selling,
-               max(di.small_price) as small_price, max(di.drug_state) as drug_state,max(di.drug_life) as drug_life,
+               max(di.small_price) as small_price, max(di.drug_state) as drug_state,max(di.drug_recipe) as drug_recipe,max(di.drug_life) as drug_life,
                sum(dk.stock_surplus) as STOCK_SURPLUS from DRUG_INFO di
                left join DRUG_TYPE dt on di.TYPE_ID=dt.TYPE_ID
                left join DRUG_SUPPLIER ds on di.SUPPLIER_ID=ds.SUPPLIER_ID

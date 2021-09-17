@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Inform {
+public class Inform {//出院申请
 
     private long informId;//主键
     private String informPatients;//患者名

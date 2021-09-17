@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Ward {
+public class Ward {//病房表
 
-    private long wardId;
-    private String wardMark;
-    private Long medicalId;
-    private String staffId;
-    private Long wardSite;
-    private String wardBeds;
-    private Long wardHave;
-    private Long wardCost;
-    private Long wardNursing;
+    private long wardId;//主键
+    private String wardMark;//病床号
+    private Long medicalId;//科室id
+    private String staffId;//负责的护士
+    private Long wardSite;//床位数
+    private String wardBeds;//地址
+    private Long wardHave;//已使用床位数
+    private Long wardCost;//床位费
+    private Long wardNursing;//护理费
 
 
 
