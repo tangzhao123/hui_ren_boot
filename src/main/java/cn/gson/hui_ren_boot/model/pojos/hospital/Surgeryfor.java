@@ -15,7 +15,7 @@ public class Surgeryfor {
     private Date surgeryforDate;//申请时间
     private Long surgeryforState;//申请状态
     private String additionalName;//手术名
-    private String additionalMoney;//手术费
+    private Long additionalMoney;//手术费
     private String additionalLevel;//手术级别
     private String additionalBlade;//切口
     private String additionaAnesthesia;//麻醉方式
@@ -93,11 +93,11 @@ public class Surgeryfor {
 
     @Basic
     @Column(name = "ADDITIONAL_MONEY")
-    public String getAdditionalMoney() {
+    public Long getAdditionalMoney() {
         return additionalMoney;
     }
 
-    public void setAdditionalMoney(String additionalMoney) {
+    public void setAdditionalMoney(Long additionalMoney) {
         this.additionalMoney = additionalMoney;
     }
 

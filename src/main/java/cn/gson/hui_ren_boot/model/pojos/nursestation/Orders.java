@@ -8,9 +8,9 @@ import java.util.Objects;
 @Entity
 public class Orders {
     private long ordersSerial;//执行序号
-    private Long ordersUser;//执行护士
+    private String ordersUser;//执行护士
     private Date orderWay;//执行时间
-    private Long orderDetails;//医嘱详情
+    private String orderDetails;//医嘱详情
     private String ordersId;//医嘱执行号
 
     @Id
@@ -27,11 +27,11 @@ public class Orders {
 
     @Basic
     @Column(name = "ORDERS_USER")
-    public Long getOrdersUser() {
+    public String getOrdersUser() {
         return ordersUser;
     }
 
-    public void setOrdersUser(Long ordersUser) {
+    public void setOrdersUser(String ordersUser) {
         this.ordersUser = ordersUser;
     }
 
@@ -47,11 +47,11 @@ public class Orders {
 
     @Basic
     @Column(name = "ORDER_DETAILS")
-    public Long getOrderDetails() {
+    public String getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(Long orderDetails) {
+    public void setOrderDetails(String orderDetails) {
         this.orderDetails = orderDetails;
     }
 

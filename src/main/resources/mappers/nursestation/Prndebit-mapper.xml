@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.nursestation.PrndebitMapper">
+    
+<!--    //新增执行医嘱扣费记录-->
+    <insert id="addPrndebit">
+        insert into prndebit values(seq_huiren.nextval,#{prndebitSum},#{prndebitUser},#{registerId},current_timestamp,#{adviceId},#{registerName})
+    </insert>
+
+<!--    查询诊疗卡的余额-->
+    <select id="selectCard" resultType="cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard">
+        select * from treatment_card where treatment_no = #{treatmentNo,jdbcType=VARCHAR}
+    </select>
+
+<!--    执行医嘱进行扣费，扣除诊疗卡的余额-->
+    <update id="updateCard">
+        update treatment_card set treatment_balance = #{treatmentBalance} where treatment_no = #{treatmentNo,jdbcType=VARCHAR}
+    </update>
+</mapper>

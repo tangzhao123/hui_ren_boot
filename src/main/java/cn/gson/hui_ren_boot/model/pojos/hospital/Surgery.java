@@ -17,6 +17,7 @@ public class Surgery {
     private Long surgeryCost;//手术费
     private String surgeryOper;//手术编号
     private String surgeryLogist;//麻醉师
+    private String surgeryResult;//手术结果
 
 
 
@@ -122,16 +123,26 @@ public class Surgery {
         this.surgeryLogist = surgeryLogist;
     }
 
+    @Basic
+    @Column(name = "SURGERY_RESULT")
+    public String getSurgeryResult() {
+        return surgeryResult;
+    }
+
+    public void setSurgeryResult(String surgeryResult) {
+        this.surgeryResult = surgeryResult;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Surgery surgery = (Surgery) o;
-        return surgeryId == surgery.surgeryId && Objects.equals(surgeryDoctor, surgery.surgeryDoctor) && Objects.equals(surgeryName, surgery.surgeryName) && Objects.equals(surgerysStart, surgery.surgerysStart) && Objects.equals(surgeryFinish, surgery.surgeryFinish) && Objects.equals(registerId, surgery.registerId) && Objects.equals(surgeryUser, surgery.surgeryUser) && Objects.equals(surgeryCost, surgery.surgeryCost) && Objects.equals(surgeryOper, surgery.surgeryOper) && Objects.equals(surgeryLogist, surgery.surgeryLogist);
+        return surgeryId == surgery.surgeryId && Objects.equals(surgeryDoctor, surgery.surgeryDoctor) && Objects.equals(surgeryName, surgery.surgeryName) && Objects.equals(surgerysStart, surgery.surgerysStart) && Objects.equals(surgeryFinish, surgery.surgeryFinish) && Objects.equals(registerId, surgery.registerId) && Objects.equals(surgeryUser, surgery.surgeryUser) && Objects.equals(surgeryCost, surgery.surgeryCost) && Objects.equals(surgeryOper, surgery.surgeryOper) && Objects.equals(surgeryLogist, surgery.surgeryLogist) && Objects.equals(surgeryResult, surgery.surgeryResult);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surgeryId, surgeryDoctor, surgeryName, surgerysStart, surgeryFinish, registerId, surgeryUser, surgeryCost, surgeryOper, surgeryLogist);
+        return Objects.hash(surgeryId, surgeryDoctor, surgeryName, surgerysStart, surgeryFinish, registerId, surgeryUser, surgeryCost, surgeryOper, surgeryLogist, surgeryResult);
     }
 }
