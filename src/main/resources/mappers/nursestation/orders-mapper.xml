@@ -100,7 +100,7 @@
 
     </resultMap>
 <!--   连表查询医嘱详情-->
-    <select id="selAll" resultMap="selectDetails">
+    <select id="selAll" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
         select d.* from details d left join advice a on d.advice_id = a.advice_id where a.ADVICE_COST = 1 and d.REGISTER_ID = #{registerId,jdbcType=VARCHAR}
     </select>
 </mapper>

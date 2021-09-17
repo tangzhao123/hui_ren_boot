@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.SurgeryforMapper">
+<!--    手术项目-->
+<!--    查询手术项目，没有安排手术室的,状态为0的-->
+    <select id="selectFor" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor">
+        SELECT * FROM SURGERYFOR WHERE SURGERYFOR_STATE = 0
+    </select>
+<!--    查询手术室，0为未使用的，按照科室-->
+    <select id="selectOperation" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Operation">
+        SELECT * FROM OPERATION
+        <where>
+            OPERATION_SITE = 0
+            <if test="medicalName != ''">
+                and MEDICAL_NAME = #{medicalName}
+            </if>
+        </where>
+    </select>
+
+<!--    新增手术室使用记录-->
+    <insert id="addApply">
+        INSERT INTO applyrecord VALUES (seq_huiren.nextval,#{operationId},#{additionalName},#{registerName},#{registerId},current_timestamp,#{additionalMoney},0,#{regisiterClinic} )
+    </insert>
+
+<!--    修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）-->
+    <update id="updateOperation">
+        UPDATE OPERATION SET OPERATION_SITE = 1 WHERE OPERATION_ID = #{operationId}
+    </update>
+
+<!--    修改病人手术状态为1，已安排手术室，根据住院号进行修改-->
+    <update id="updateFor">
+        UPDATE SURGERYFOR SET SURGERYFOR_STATE = 1 WHERE REGISTER_ID = #{registerId}
+    </update>
+
+<!--    查询已经安排了手术室的手术项目,手术室为0的为没有被执行的-->
+    <select id="selectRecord" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord">
+        SELECT * FROM APPLYRECORD WHERE APPLY_STATE = 0
+    </select>
+</mapper>
