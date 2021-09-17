@@ -54,7 +54,7 @@ public class BookingFormService {
         return bookingFormMapper.outStaff(medicalId,bookingOrder);
     }
 
-    //新增挂号单，同时新增患者表
+    //新增挂号单，同时新增患者表,同时新增排号表
     public void addOutBooking(OutpatientRegister outPatient, BookingForm bookingForm){
         OutpatientRegister register = outRegisterMapper.selRegister(outPatient.getOutpatientCard());
         if(register == null){
@@ -68,12 +68,17 @@ public class BookingFormService {
         rowNumbersMapper.addNumber(bookingForm.getBookingNo());
     }
 
-    //分页查询挂号单
+    //分页查询当天未退号挂号单
     public Object allBookingByPage(Integer pageNo,Integer size){
         return bookingFormMapper.allBooking();
     }
 
-    //分页查询未诊的挂号单
+    //分页查询当天退号挂号单
+    public Object selBackByPage(Integer pageNo,Integer size){
+        return withdrawalMapper.selBack();
+    }
+
+    //退号，分页查询当天未诊的挂号单
     public Object selBookingByPage(Integer pageNo,Integer size,String bookingNo){
         return bookingFormMapper.selBooking(bookingNo);
     }

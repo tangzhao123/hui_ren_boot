@@ -17,9 +17,6 @@ public interface PrescriptionListMapper {
     //新增门诊中药处方单
     public void addChineseList(PrescriptionList prescriptionList);
 
-    //查询门诊西药处方单
-    public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList);
-
     //收费，查询处方单
     public List<PrescriptionList> allList(String recordsNo);
 }

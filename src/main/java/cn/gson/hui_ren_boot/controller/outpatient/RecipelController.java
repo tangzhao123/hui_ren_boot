@@ -82,23 +82,17 @@ public class RecipelController {
         }
     }
 
-    //查询门诊西药处方单
-    @RequestMapping("/all-recipel")
-    public List<PrescriptionList> allRecipel(@RequestBody PrescriptionList prescriptionList){
-        return recipelService.allRecipel(prescriptionList);
-    }
-
-    //根据处方号查询处方详单
-    @RequestMapping("/sel-no")
-    public List<PrescriptionDetail> selNo(String prescriptionNo){
-        System.out.println(prescriptionNo);
-        return recipelService.selNo(prescriptionNo);
-    }
-
     //查询排号
     @RequestMapping("/all-number")
     public List<RowNumbers> allNumber(int medicalId,int staffId,int rankId){
         return recipelService.allNumber(medicalId, staffId,rankId);
+    }
+
+    //接诊，删除当前接诊的排号
+    @RequestMapping("/del-row")
+    public void delRow(String bookingNo){
+        System.out.println(bookingNo);
+        recipelService.delRow(bookingNo);
     }
 
     //过号，根据挂号单修改id为最后一位

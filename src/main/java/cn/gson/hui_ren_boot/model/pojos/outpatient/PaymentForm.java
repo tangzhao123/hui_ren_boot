@@ -4,6 +4,7 @@ import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ public class PaymentForm {
     private String paymentNo;
     private String recordsNo;
     private double paymentMoney;
-    private Time paymentTime;
+    private Date paymentTime;
+    private long staffId;
     private List<PrescriptionDetail> prescriptionDetails;
 
     @OneToMany
@@ -73,12 +75,22 @@ public class PaymentForm {
 
     @Basic
     @Column(name = "PAYMENT_TIME")
-    public Time getPaymentTime() {
+    public Date getPaymentTime() {
         return paymentTime;
     }
 
-    public void setPaymentTime(Time paymentTime) {
+    public void setPaymentTime(Date paymentTime) {
         this.paymentTime = paymentTime;
+    }
+
+    @Basic
+    @Column(name = "STAFF_ID")
+    public long getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(long staffId) {
+        this.staffId = staffId;
     }
 
     @Override
@@ -89,6 +101,7 @@ public class PaymentForm {
                 ", recordsNo='" + recordsNo + '\'' +
                 ", paymentMoney=" + paymentMoney +
                 ", paymentTime=" + paymentTime +
+                ", staffId=" + staffId +
                 ", prescriptionDetails=" + prescriptionDetails +
                 '}';
     }

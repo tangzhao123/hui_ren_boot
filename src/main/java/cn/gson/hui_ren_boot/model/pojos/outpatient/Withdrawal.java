@@ -10,6 +10,16 @@ public class Withdrawal {
     private String bookingNo;
     private Date withdrawalDate;
     private String cause;
+    private OutpatientRegister outpatient;
+
+    @OneToOne
+    public OutpatientRegister getOutpatient() {
+        return outpatient;
+    }
+
+    public void setOutpatient(OutpatientRegister outpatient) {
+        this.outpatient = outpatient;
+    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)

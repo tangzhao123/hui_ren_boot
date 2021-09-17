@@ -17,4 +17,7 @@ public interface RowNumbersMapper {
 
     //过号，根据挂号单修改id为最后一位
     public void editRow(String bookingNo);
+
+    //接诊，删除当前接诊的排号
+    public void delRow(String bookingNo);
 }

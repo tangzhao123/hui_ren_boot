@@ -3,8 +3,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--退号-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.WithdrawalMapper">
+    <resultMap id="backMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.Withdrawal">
+        <id column="WITHDRAWAL_ID" property="withdrawalId"/>
+        <result column="BOOKING_NO" property="bookingNo"/>
+        <result column="WITHDRAWAL_DATE" property="withdrawalDate"/>
+        <result column="CAUSE" property="cause"/>
+        <association property="outpatient" javaType="OutpatientRegister">
+            <id column="OUTPATIENT_ID" property="outpatientId"/>
+            <result column="OUTPATIENT_NAME" property="outpatientName"/>
+            <result column="OUTPATIENT_SEX" property="outpatientSex"/>
+            <result column="OUTPATIENT_BIRTH" property="outpatientBirth"/>
+            <result column="OUTPATIENT_AGE" property="outpatientAge"/>
+            <result column="OUTPATIENT_MARRY" property="outpatientMarry"/>
+            <result column="OUTPATIENT_VOCATION" property="outpatientVocation"/>
+            <result column="OUTPATIENT_NATIVE" property="outpatientNative"/>
+            <result column="OUTPATIENT_NATION" property="outpatientNation"/>
+            <result column="OUTPATIENT_CARD" property="outpatientCard"/>
+            <result column="OUTPATIENT_WORK" property="outpatientWork"/>
+            <result column="OUTPATIENT_PHONE" property="outpatientPhone"/>
+            <result column="OUTPATIENT_ADDRESS" property="outpatientAddress"/>
+            <result column="OUTPATIENT_WEIGHT" property="outpatientWeight"/>
+            <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
+        </association>
+    </resultMap>
+
     <!--新增退号-->
     <insert id="addDrawal">
         insert into WITHDRAWAL values (seq_huiren.nextval,#{bookingNo},current_timestamp ,#{cause})
     </insert>
+
+    <select id="selBack" resultMap="backMap">
+        select * from WITHDRAWAL wi
+            left join BOOKING_FORM bf on wi.BOOKING_NO = bf.BOOKING_NO
+            left join outpatient_register pr on bf.OUTPATIENT_ID = pr.OUTPATIENT_ID
+        where to_char(wi.WITHDRAWAL_DATE,'yyyy-mm-dd') = to_char(current_timestamp ,'yyyy-mm-dd')
+    </select>
 </mapper>
