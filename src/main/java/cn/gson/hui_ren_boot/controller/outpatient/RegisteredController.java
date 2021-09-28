@@ -18,8 +18,8 @@ public class RegisteredController {
     RegisteredService registeredService;
 
     @RequestMapping("/sel-lock")
-    public Object selLock(Integer pageNo,Integer size,String treatmentCard){
+    public Object selLock(String treatmentCard){
         System.out.println(treatmentCard);
-        return registeredService.selLockByPage(pageNo, size,treatmentCard);
+        return registeredService.selLock(treatmentCard);
     }
 }

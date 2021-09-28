@@ -6,4 +6,9 @@
     <insert id="addLoss">
         insert into TREATMENT_LOSS values (seq_huiren.nextval,#{treatmentNo},current_timestamp )
     </insert>
+
+    <!--解锁，删除挂失记录-->
+    <delete id="delLoss">
+        delete from TREATMENT_LOSS where TREATMENT_NO = #{treatmentNo}
+    </delete>
 </mapper>

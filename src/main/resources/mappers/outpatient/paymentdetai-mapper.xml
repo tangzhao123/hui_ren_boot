@@ -3,6 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--缴费详情表-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentDetaiMapper">
+    <resultMap id="detaiMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PaymentDetai">
+        <id column="DETAIL_ID" property="detailId"/>
+        <result column="DETAIL_NO" property="detailNo"/>
+        <result column="PAYMENT_NO" property="paymentNo"/>
+        <result column="ENTRY_NAME" property="entryName"/>
+        <result column="AMOUNT" property="amount"/>
+        <result column="PAYMENT_PRICE" property="paymentPrice"/>
+        <result column="PRESCRIPTION_NO" property="prescriptionNo"/>
+    </resultMap>
+
     <insert id="addPaymentDetail">
         insert into payment_detai
         select seq_huiren.nextval,DETAIL_NO,PAYMENT_NO,ENTRY_NAME,AMOUNT,PAYMENT_PRICE,PRESCRIPTION_NO from
@@ -21,4 +31,5 @@
             </if>
         </foreach>
     </insert>
+
 </mapper>

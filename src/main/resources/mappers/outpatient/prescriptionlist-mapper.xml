@@ -108,6 +108,7 @@
                 left join outpatient_register oue on ts.OUTPATIENT_ID = oue.OUTPATIENT_ID
                 left join medical me on ts.medical_id = me.medical_id                                                                                                                                                                                                                                                          left join staff st on ts.staff_id = st.staff_id
             )emp
-        where emp.RECORDS_NO = #{recordsNo}
+        where emp.RECORDS_NO = #{recordsNo} and emp.PRESCRIPTION_NO not in (select PRESCRIPTION_NO from PAYMENT_DETAI)
     </select>
+
 </mapper>

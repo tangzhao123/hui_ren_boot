@@ -9,4 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TreatmentLossMapper {
     //新增诊疗卡挂失
     public void addLoss(String treatmentNo);
+
+    //解锁，删除挂失记录
+    public void delLoss(String treatmentNo);
 }
