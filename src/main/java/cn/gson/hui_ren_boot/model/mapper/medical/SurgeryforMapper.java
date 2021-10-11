@@ -4,11 +4,22 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Operation;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface SurgeryforMapper {
+
+    //修改手术室的位置和所属科室
+    public void xiugaiOperation(@Param("operationAddress") String address,@Param("medicalName") String name,@Param("operationId") String id);
+
+    //查询手术室
+    public List<Operation> selOperation(Operation oper);
+
+    //新增手术室
+    public void insertOpeart(Operation operation);
+
 //    查询状态为0的手术项目，为没有安排手术室的
     public List<Surgeryfor> selectFor();
 

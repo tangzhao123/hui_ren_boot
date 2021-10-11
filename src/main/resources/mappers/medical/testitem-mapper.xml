@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.TestItemMapper">
+    <resultMap id="selAll" type="cn.gson.hui_ren_boot.model.pojos.outpatient.TestItems">
+        <id property="testId" column="TEST_ID"></id>
+        <result property="testNumber" column="TEST_NUMBER"></result>
+        <result property="recordsNo" column="RECORDS_NO"></result>
+        <result property="testSumtotal" column="TEST_SUMTOTAL"></result>
+        <result property="itemsDate" column="ITEMS_DATE"></result>
+        <association property="outdoctor" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+            <id property="staffId" column="STAFF_ID"></id>
+            <result property="staffName" column="STAFF_NAME"></result>
+        </association>
+        <association property="medical" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.Medical">
+            <id property="medicalId" column="MEDICAL_ID"></id>
+            <result property="medicalName" column="MEDICAL_NAME"></result>
+        </association>
+        <association property="outpatient" javaType="cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister">
+            <id property="outpatientId" column="OUTPATIENT_ID"></id>
+            <result property="outpatientName" column="OUTPATIENT_NAME"></result>
+        </association>
+        <collection property="comboitems" javaType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+            <id property="itemId" column="ITEM_ID"></id>
+            <result property="itemName" column="ITEM_NAME"></result>
+            <result property="itemOffice" column="ITEM_OFFICE"></result>
+            <result property="itemMoney" column="ITEM_MONEY"></result>
+        </collection>
+    </resultMap>
+<!--    查询要检验的（门诊）-->
+    <select id="selitem" resultMap="selAll">
+        SELECT * FROM TEST_ITEMS ti LEFT JOIN STAFF st ON ti.STAFF_ID = st.STAFF_ID LEFT JOIN MEDICAL me ON ti.MEDICAL_ID = me.MEDICAL_ID
+        LEFT JOIN OUTPATIENT_REGISTER re ON ti.OUTPATIENT_ID = re.OUTPATIENT_ID
+            <where>
+                <if test="testNumber != null and testNumber != ''">
+                   or TEST_NUMBER like '%${testNumber}%'
+                </if>
+                <if test="recordsNo != null and recordsNo != ''">
+                   or RECORDS_NO like '%${recordsNo}%'
+                </if>
+            </where>
+    </select>
+</mapper>

@@ -13,6 +13,8 @@ public class Sickbed {//病床信息表
 
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "SICKBED_SERIAL")
     public long getSickbedSerial() {
         return sickbedSerial;
@@ -66,5 +68,15 @@ public class Sickbed {//病床信息表
     @Override
     public int hashCode() {
         return Objects.hash(sickbedSerial, wardMark, sickbedMark, sickbedState);
+    }
+
+    @Override
+    public String toString() {
+        return "Sickbed{" +
+                "sickbedSerial=" + sickbedSerial +
+                ", wardMark='" + wardMark + '\'' +
+                ", sickbedMark='" + sickbedMark + '\'' +
+                ", sickbedState=" + sickbedState +
+                '}';
     }
 }

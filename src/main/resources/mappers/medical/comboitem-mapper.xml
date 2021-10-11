@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.ComboitemMapper">
+
+    <select id="ssss" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        select * from comboitem
+    </select>
+
+
     <!-- 体检项目结果集映射-->
     <resultMap id="seeAll" type="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
         <id property="itemId" column="ITEM_ID"/>
@@ -23,6 +29,9 @@
             </if>
             <if test="itemType != null and itemType != ''">
                 or ITEM_TYPE like '%${itemType}%'
+            </if>
+            <if test="itemNumber != null and itemNumber != ''">
+                or ITEM_NUMBER = #{itemNumber}
             </if>
         </where>
     </select>

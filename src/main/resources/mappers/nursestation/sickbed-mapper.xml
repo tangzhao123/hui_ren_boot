@@ -2,6 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.nursestation.SickbedMapper">
+
+<!--    查询病床-->
+    <select id="selectbed" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Sickbed">
+        SELECT * FROM SICKBED WHERE WARD_MARK = #{wardMark,jdbcType=VARCHAR}
+    </select>
+
+<!--    新增病床-->
+    <insert id="insertbed">
+        INSERT INTO SICKBED VALUES(seq_huiren.nextval,#{wardMark},#{sickbedMark},0)
+    </insert>
+
+    <resultMap id="wardEntity" type="cn.gson.hui_ren_boot.model.pojos.nursestation.WardEntity">
+        <id property="wardId" column="WARD_ID"/>
+        <result property="wardMark" column="WARD_MARK"/>
+        <!--            <result property="medicalId" column="MEDICAL_ID"/>-->
+        <result property="staffId" column="STAFF_ID"/>
+        <result property="wardSite" column="WARD_SITE"/>
+        <result property="wardBeds" column="WARD_BEDS"/>
+        <result property="wardHave" column="WARD_HAVE"/>
+        <result property="wardCost" column="WARD_COST"/>
+        <result property="wardNursing" column="WARD_NURSING"/>
+        <association property="medical" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.Medical">
+            <id property="medicalId" column="MEDICAL_ID"/>
+            <result property="medicalName" column="MEDICAL_NAME"/>
+            <result property="medicalSublevel" column="MEDICAL_SUBLEVEL"/>
+        </association>
+    </resultMap>
+<!--    查询病房-->
+    <select id="selectWard" resultMap="wardEntity">
+        SELECT * FROM WARD w LEFT JOIN MEDICAL me ON w.MEDICAL_ID = me.MEDICAL_ID LEFT JOIN SICKBED s ON w.WARD_MARK = s.WARD_MARK
+        <where>
+                <if test="wardMark != null and wardMark != ''">
+                    or w.WARD_MARK like '%${wardMark}%'
+                </if>
+                <if test="staffId != null and staffId != ''">
+                    or w.STAFF_ID like '%${staffId}%'
+                </if>
+            </where>
+    </select>
+
+<!--    新增病房-->
+    <insert id="addWard">
+        INSERT INTO WARD VALUES(seq_huiren.nextval,#{wardMark},#{medicalId},#{staffId},#{wardSite},#{wardBeds},#{wardHave},#{wardCost},#{wardNursing})
+    </insert>
+
+<!--    修改病房-->
+    <update id="updateWard">
+        UPDATE WARD SET MEDICAL_ID = #{medicalId}, STAFF_ID = #{staffId}, WARD_SITE = #{wardSite}, WARD_COST = #{wardCost}, WARD_NURSING = #{wardNursing} WHERE WARD_MARK = #{wardMark}
+    </update>
+
+<!--    查询不同科室的护士-->
+    <select id="staffHu" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+        SELECT * FROM STAFF WHERE RANK_ID = 2 AND MEDICAL_ID = #{medicalId,jdbcType=DECIMAL}
+    </select>
+
     <resultMap id="selSick" type="cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity">
         <id property="sickbedSerial" column="SICKBED_SERIAL"/>
         <result property="sickbedMark" column="SICKBED_MARK"/>
@@ -23,11 +78,12 @@
             </association>
         </association>
     </resultMap>
-<!--    查询病床、科室、病房 -->
+<!--    查询病床(科室、病房) -->
     <select id="bingchuang" resultMap="selSick">
         select * from sickbed s LEFT JOIN ward w on s.WARD_MARK = w.WARD_MARK
             LEFT JOIN MEDICAL m on w.MEDICAL_ID = m.MEDICAL_ID
         <where>
+            s.SICKBED_STATE = 0
             <if test="medicalId != 0 ">
                 or w.MEDICAL_ID = #{medicalId}
             </if>
@@ -59,6 +115,23 @@
 <!--    查询病床使用记录表-->
     <select id="selectRecord" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Record">
         SELECT * FROM RECORD
+            <where>
+                    <if test="recordSerial != null and recordSerial != ''">
+                        or RECORD_SERIAL = #{recordSerial}
+                    </if>
+                    <if test="sickbedMark != null and sickbedMark != ''">
+                        or SICKBED_MARK = #{sickbedMark}
+                    </if>
+                    <if test="recordName != null and recordName != ''">
+                        or RECORD_NAME = #{recordName}
+                    </if>
+                    <if test="registerId != null and registerId != ''">
+                        or REGISTER_ID = #{registerId}
+                    </if>
+<!--                    <if test="recordDate != null and recordDate != ''">-->
+<!--                        or RECORD_DATE = #{recordDate}-->
+<!--                    </if>-->
+            </where>
     </select>
 
     <resultMap id="allRegisMapper" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">

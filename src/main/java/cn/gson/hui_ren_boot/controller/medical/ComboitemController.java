@@ -18,6 +18,13 @@ public class ComboitemController {
     @Autowired
     ComboitemService comboitemService;
 
+
+    @GetMapping("/ssss")
+    public List<Comboitem> ss(){
+        System.out.println("项目咯哦咯："+comboitemService.ssss());
+        return comboitemService.ssss();
+    }
+
     //查询所有体检项目
     @GetMapping("/comboitem-list")
     public Object selectAll(int pageNo, int size, String addComboitem){

@@ -14,7 +14,7 @@ public interface CmoboMapper {
     public List<Comboitem> selectAll(String comboSerial);
 
     //查询体检套餐
-    public List<Cmobo> seeCmobo();
+    public List<Cmobo> seeCmobo(Cmobo cmobo);
 
     //体检项目
     public List<Comboitem> allComboitem();

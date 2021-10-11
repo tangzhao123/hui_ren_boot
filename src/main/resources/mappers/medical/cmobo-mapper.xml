@@ -37,6 +37,14 @@
 <!--    查询体检套餐-->
     <select id="seeCmobo" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Cmobo">
         select * from cmobo
+            <where>
+                <if test="comboName != null and comboName != ''">
+                    or COMBO_NAME like '%${comboName}%'
+                </if>
+                <if test="comboSerial != null and comboSerial != ''">
+                    or COMBO_SERIAL like '%${comboSerial}%'
+                </if>
+            </where>
     </select>
 
 <!--    查询体检项目-->

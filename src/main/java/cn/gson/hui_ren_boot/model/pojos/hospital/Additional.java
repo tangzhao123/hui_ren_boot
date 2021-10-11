@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Additional {
     private Long additionalId;//主键
     private String additionalName;//手术名称
-    private Long additionalMoney;//金额
+    private Double additionalMoney;//金额
     private String additionalLevel;//手术级别
     private String additionalBlade;//切口
     private String medicalName;//科室名
@@ -39,11 +39,11 @@ public class Additional {
 
     @Basic
     @Column(name = "ADDITIONAL_MONEY")
-    public Long getAdditionalMoney() {
+    public Double getAdditionalMoney() {
         return additionalMoney;
     }
 
-    public void setAdditionalMoney(Long additionalMoney) {
+    public void setAdditionalMoney(Double additionalMoney) {
         this.additionalMoney = additionalMoney;
     }
 
@@ -100,5 +100,16 @@ public class Additional {
         return Objects.hash(additionalId, additionalName, additionalMoney, additionalLevel, additionalBlade, medicalName, additionaAnesthesia);
     }
 
-
+    @Override
+    public String toString() {
+        return "Additional{" +
+                "additionalId=" + additionalId +
+                ", additionalName='" + additionalName + '\'' +
+                ", additionalMoney=" + additionalMoney +
+                ", additionalLevel='" + additionalLevel + '\'' +
+                ", additionalBlade='" + additionalBlade + '\'' +
+                ", medicalName='" + medicalName + '\'' +
+                ", additionaAnesthesia=" + additionaAnesthesia +
+                '}';
+    }
 }

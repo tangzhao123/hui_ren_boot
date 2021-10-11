@@ -6,6 +6,7 @@ import cn.gson.hui_ren_boot.model.pojos.medical.Combomiddle;
 import cn.gson.hui_ren_boot.model.service.medical.CmoboSerivice;
 import cn.gson.hui_ren_boot.model.service.medical.ComboitemService;
 import cn.gson.hui_ren_boot.utils.MyUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,9 +68,10 @@ public class CmoboController {
 
     //查询体检套餐
     @GetMapping("/cmobo-select")
-    public List<Cmobo> seeCmobo(){
-//        System.out.println("套餐===="+cmoboSerivice.seeCmobo());
-        return cmoboSerivice.seeCmobo();
+    public Object seeCmobo(String cmoboss){
+        Cmobo c = JSONObject.parseObject(cmoboss,Cmobo.class);
+        System.out.println("套餐===="+cmoboSerivice.seeCmoboByPage(c));
+        return cmoboSerivice.seeCmoboByPage(c);
     }
 
     //查询体检项目

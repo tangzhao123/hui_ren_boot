@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 public class Applyrecord {
-    private Long applyId;//记录id
+    private Long applyId;//记录2id
     private String operationId;//手术室id
     private String additionalName;//手术名称
     private String registerName;//患者姓名

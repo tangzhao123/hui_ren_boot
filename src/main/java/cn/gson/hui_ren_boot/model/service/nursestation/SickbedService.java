@@ -1,9 +1,15 @@
 package cn.gson.hui_ren_boot.model.service.nursestation;
 
+import cn.gson.hui_ren_boot.model.dao.medical.WardDao;
 import cn.gson.hui_ren_boot.model.mapper.nursestation.SickbedMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Sickbed;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Ward;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity;
+import cn.gson.hui_ren_boot.model.pojos.nursestation.WardEntity;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +22,38 @@ public class SickbedService {
     @Autowired
     SickbedMapper sickbedMapper;//病床mapper
 
+    //查询病床
+    public List<Sickbed> selectbed(String wardMark){
+        return sickbedMapper.selectbed(wardMark);
+    }
+
+    //新增病床
+    public void insertbed(Sickbed sickbed){
+        sickbedMapper.insertbed(sickbed);
+    }
+
+
+    //修改病房
+    public void updateWard(Ward ward){
+        sickbedMapper.updateWard(ward);
+    }
+
+    //根据不同条件查询病房
+    public Object selectWardByPage(int pageNo,int size,WardEntity wardEntity){
+        return sickbedMapper.selectWard(wardEntity);
+    }
+
+
+    //新增病房
+    public void addWard(Ward ward) {
+        sickbedMapper.addWard(ward);
+    }
+
+    //查询不同科室的护士
+    public List<Staff> staffHu(Long medicalId){
+        return sickbedMapper.staffHu(medicalId);
+    }
+
     //修改病床记录表
     public void updateRecord(Record record){
         sickbedMapper.updateRecord(record);
@@ -27,8 +65,8 @@ public class SickbedService {
     }
 
     //查询病床使用记录
-    public List<Record> selectRecord(){
-        return sickbedMapper.selectRecord();
+    public Object selectRecordByPage(int pageNo,int size,Record record){
+        return sickbedMapper.selectRecord(record);
     }
 
     //修改病人资料，添加床位

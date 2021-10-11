@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.AdditionalMapper">
+<!--    新增手术项目-->
+    <insert id="additional">
+        INSERT INTO ADDITIONAL VALUES(seq_huiren.nextval,#{additionalName},#{additionalMoney},#{additionalLevel},#{additionalBlade},#{medicalName},#{additionaAnesthesia})
+    </insert>
+
+<!--    修改手术项目-->
+    <update id="updateitional">
+        UPDATE ADDITIONAL SET ADDITIONAL_NAME = #{additionalName}, ADDITIONAL_MONEY = #{additionalMoney},  ADDITIONAL_LEVEL = #{additionalLevel}, ADDITIONAL_BLADE = #{additionalBlade},
+	MEDICAL_NAME = #{medicalName}, ADDITIONA_ANESTHESIA = #{additionaAnesthesia} WHERE ADDITIONAL_ID = #{additionalId}
+
+    </update>
+
+<!--    查询手术项目-->
+    <select id="selectitonal" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Additional">
+        SELECT * FROM ADDITIONAL
+            <where>
+                <if test="additionalName != null and additionalName != ''">
+                    ADDITIONAL_NAME LIKE '%${additionalName}%'
+                </if>
+            </where>
+    </select>
+</mapper>

@@ -18,6 +18,15 @@
             <if test="testName != null and testName != ''">
                 or TEST_NAME = '%${testName}%'
             </if>
+            <if test="testPhone != null and testPhone != ''">
+                or  TEST_PHONE = '%${testPhone}%'
+            </if>
+            <if test="testGenre != null and testGenre != ''">
+                or TEST_GENRE = '%${testGenre}%'
+            </if>
+            <if test="testAccount != null and testAccount != ''">
+                or TEST_ACCOUNT = '%${testAccount}%'
+            </if>
         </where>
     </select>
 

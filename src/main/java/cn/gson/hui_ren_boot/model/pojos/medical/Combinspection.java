@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.medical;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -14,7 +15,7 @@ public class Combinspection {
     private String comboName;//套餐名
     private String inspectionUnit;//单位值
     private String inspectionPhone;//电话
-
+    private Timestamp inspectionDate;//时间
 
 
     @Id
@@ -99,16 +100,26 @@ public class Combinspection {
         this.inspectionPhone = inspectionPhone;
     }
 
+    @Basic
+    @Column(name = "INSPECTION_DATE")
+    public Timestamp getInspectionDate() {
+        return inspectionDate;
+    }
+
+    public void setInspectionDate(Timestamp inspectionDate) {
+        this.inspectionDate = inspectionDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Combinspection that = (Combinspection) o;
-        return inspectionId == that.inspectionId && Objects.equals(inspectionName, that.inspectionName) && Objects.equals(inspectionContent, that.inspectionContent) && Objects.equals(itemName, that.itemName) && Objects.equals(testId, that.testId) && Objects.equals(comboName, that.comboName) && Objects.equals(inspectionUnit, that.inspectionUnit) && Objects.equals(inspectionPhone, that.inspectionPhone);
+        return inspectionId == that.inspectionId && Objects.equals(inspectionName, that.inspectionName) && Objects.equals(inspectionContent, that.inspectionContent) && Objects.equals(itemName, that.itemName) && Objects.equals(testId, that.testId) && Objects.equals(comboName, that.comboName) && Objects.equals(inspectionUnit, that.inspectionUnit) && Objects.equals(inspectionPhone, that.inspectionPhone) && Objects.equals(inspectionDate, that.inspectionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(inspectionId, inspectionName, inspectionContent, itemName, testId, comboName, inspectionUnit, inspectionPhone);
+        return Objects.hash(inspectionId, inspectionName, inspectionContent, itemName, testId, comboName, inspectionUnit, inspectionPhone, inspectionDate);
     }
 }

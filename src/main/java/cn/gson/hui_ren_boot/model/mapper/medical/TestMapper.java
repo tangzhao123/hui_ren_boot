@@ -13,7 +13,7 @@ public interface TestMapper {
     public void insertTest(Test test);
 
     //查询体检套餐（表格内）
-    public List<Test> selectCmobo(String testName);
+    public List<Test> selectCmobo(Test test);
 
     //新增体检中间表
     public void addMiddle(Testmiddle testmiddle);

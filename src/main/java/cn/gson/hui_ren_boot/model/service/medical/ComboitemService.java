@@ -18,6 +18,10 @@ public class ComboitemService {
     @Autowired
     ComboitemDao comboitemDao;//体检道层
 
+    public List<Comboitem> ssss(){
+        return com.ssss();
+    }
+
     //查询项目
     public List<Comboitem> selecitem(Long itemId){
         return com.selecitem(itemId);
