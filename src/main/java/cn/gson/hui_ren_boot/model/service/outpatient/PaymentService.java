@@ -41,4 +41,8 @@ public class PaymentService {
         paymentDetaiMapper.addPaymentDetail(prescriptionDetails, paymentForm.getPaymentNo());
     }
 
+    //查询缴费记录
+    public Object selPaymentByPage(Integer pageNo,Integer size){
+        return paymentFormMapper.selPayment();
+    }
 }

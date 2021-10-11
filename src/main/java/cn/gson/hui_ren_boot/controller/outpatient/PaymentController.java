@@ -76,4 +76,10 @@ public class PaymentController {
             return "fail";
         }
     }
+
+    //查询缴费记录
+    @RequestMapping("/sel-payment")
+    public Object selPayment(Integer pageNo,Integer size){
+        return paymentService.selPaymentByPage(pageNo, size);
+    }
 }

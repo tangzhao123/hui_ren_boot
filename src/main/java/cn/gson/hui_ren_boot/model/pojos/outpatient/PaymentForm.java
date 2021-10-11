@@ -20,6 +20,9 @@ public class PaymentForm {
     private double paymentMoney;
     private Date paymentTime;
     private long staffId;
+    private long paymentType;
+    private double paymentSum;
+    private double paymentSmall;
     private List<PrescriptionDetail> prescriptionDetails;
 
     @OneToMany
@@ -93,6 +96,36 @@ public class PaymentForm {
         this.staffId = staffId;
     }
 
+    @Basic
+    @Column(name = "PAYMENT_TYPE")
+    public long getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(long paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    @Basic
+    @Column(name = "PAYMENT_SUM")
+    public double getPaymentSum() {
+        return paymentSum;
+    }
+
+    public void setPaymentSum(double paymentSum) {
+        this.paymentSum = paymentSum;
+    }
+
+    @Basic
+    @Column(name = "PAYMENT_SMALL")
+    public double getPaymentSmall() {
+        return paymentSmall;
+    }
+
+    public void setPaymentSmall(double paymentSmall) {
+        this.paymentSmall = paymentSmall;
+    }
+
     @Override
     public String toString() {
         return "PaymentForm{" +
@@ -102,6 +135,9 @@ public class PaymentForm {
                 ", paymentMoney=" + paymentMoney +
                 ", paymentTime=" + paymentTime +
                 ", staffId=" + staffId +
+                ", paymentType=" + paymentType +
+                ", paymentSum=" + paymentSum +
+                ", paymentSmall=" + paymentSmall +
                 ", prescriptionDetails=" + prescriptionDetails +
                 '}';
     }
