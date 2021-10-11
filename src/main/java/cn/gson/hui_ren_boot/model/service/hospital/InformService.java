@@ -22,4 +22,7 @@ public class InformService {
     public void deleteInform(Inform inform){//删除
         informMapper.deleteInform(inform);
     }
+    public List<Inform> allInform(){
+        return  informMapper.allInform();
+    }
 }

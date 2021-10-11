@@ -22,10 +22,13 @@ public interface BookingFormMapper {
     //新增挂号单
     public void addBooking(BookingForm bookingForm);
 
-    //查询挂号单
+    //查询当天未退号挂号单
     public List<BookingForm> allBooking();
 
-    //查询未诊的挂号单
+    //查询当天退号挂号单
+    public List<BookingForm> backBooking();
+
+    //退号，查询当天未诊的挂号单
     public List<BookingForm> selBooking(String bookingNo);
 
     //修改挂号单为退号状态

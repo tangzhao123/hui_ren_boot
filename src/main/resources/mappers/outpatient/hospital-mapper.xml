@@ -1,0 +1,8 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.HospitalMapper">
+    <!--新增住院申请-->
+    <insert id="addHospital">
+        insert into hospital values(seq_huiren.nextval,#{hospitalCause},#{hospitalName},current_timestamp,#{hospitalSite},#{hospitalCard},#{hospitalDoctor},#{hospitalMedical},0,#{hospitalClinic})
+    </insert>
+</mapper>

@@ -9,10 +9,12 @@ import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class PaymentService {
     @Autowired
     PrescriptionListMapper listMapper;

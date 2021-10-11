@@ -3,6 +3,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--就诊记录-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.MedicalRecordInfoMapper">
+    <resultMap id="infoMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.MedicalRecordInfo">
+        <id column="RECORDS_ID" property="recordsId"/>
+        <result column="RECORDS_NO" property="recordsNo"/>
+        <result column="TREATMENT_NO" property="treatmentNo"/>
+        <result column="DIAGNOSTIC_RECORD" property="diagnosticRecord"/>
+        <result column="RECORD_TIME" property="recordTime"/>
+        <association property="outpatient" javaType="OutpatientRegister">
+            <id column="OUTPATIENT_ID" property="outpatientId"/>
+            <result column="OUTPATIENT_NAME" property="outpatientName"/>
+            <result column="OUTPATIENT_SEX" property="outpatientSex"/>
+            <result column="OUTPATIENT_BIRTH" property="outpatientBirth"/>
+            <result column="OUTPATIENT_AGE" property="outpatientAge"/>
+            <result column="OUTPATIENT_MARRY" property="outpatientMarry"/>
+            <result column="OUTPATIENT_VOCATION" property="outpatientVocation"/>
+            <result column="OUTPATIENT_NATIVE" property="outpatientNative"/>
+            <result column="OUTPATIENT_NATION" property="outpatientNation"/>
+            <result column="OUTPATIENT_CARD" property="outpatientCard"/>
+            <result column="OUTPATIENT_WORK" property="outpatientWork"/>
+            <result column="OUTPATIENT_PHONE" property="outpatientPhone"/>
+            <result column="OUTPATIENT_ADDRESS" property="outpatientAddress"/>
+            <result column="OUTPATIENT_WEIGHT" property="outpatientWeight"/>
+            <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
+        </association>
+    </resultMap>
     <!--新增就诊记录-->
     <insert id="addInfo">
         insert into MEDICAL_RECORD_INFO(RECORDS_ID,RECORDS_NO,TREATMENT_NO,
@@ -10,4 +34,13 @@
         values(seq_huiren.nextval,#{recordsNo},#{treatmentNo},#{outdoctor.staffName},
                #{outdoctor.staffId},#{medical.medicalId},current_timestamp)
     </insert>
+
+    <!--查询当天的就诊记录-->
+    <select id="selInfo" resultMap="infoMap">
+        select * from MEDICAL_RECORD_INFO mi
+        left join BOOKING_FORM bf on mi.TREATMENT_NO = bf.TREATMENT_NO
+        left join OUTPATIENT_REGISTER pr on bf.OUTPATIENT_ID = pr.OUTPATIENT_ID
+        where to_char(mi.RECORD_TIME,'yyyy-mm-dd') = to_char(current_timestamp ,'yyyy-mm-dd')
+              and mi.medical_id = #{medicalId} and mi.STAFF_ID = #{staffId}
+    </select>
 </mapper>

@@ -42,4 +42,8 @@ public class InformController {
 
 
     }
+    @RequestMapping("allImforms")
+    public  List allInform(){
+        return informService.allInform();
+    }
 }

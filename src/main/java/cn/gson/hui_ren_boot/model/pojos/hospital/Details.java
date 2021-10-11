@@ -20,13 +20,13 @@ public class Details {
     private Date daralisStart;//开始时间
     private Long daralisPrice;//单价
     private Long daralisNumber;//药品数量
-    private String drugBig;//规格名
-    private String standardName;//单位
+
     private String standardUse;//剂型
     private String daralisMark;//医嘱详情号
     private String registerId;//住院号
     private double detailsMoney;//金额
-
+    private Long drugRecipe;//处方非处方药
+    private String standardName;//规格
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -39,6 +39,25 @@ public class Details {
     public void setDetailsSerial(long detailsSerial) {
         this.detailsSerial = detailsSerial;
     }
+    @Basic
+    @Column(name = "DRUG_RECIPE")
+    public Long getDrugRecipe() {
+        return drugRecipe;
+    }
+    @Basic
+    @Column(name = "STANDARD_NAME")
+    public String getStandardName() {
+        return standardName;
+    }
+
+    public void setStandardName(String standardName) {
+        this.standardName = standardName;
+    }
+
+    public void setDrugRecipe(Long drugRecipe) {
+        this.drugRecipe = drugRecipe;
+    }
+
     @Basic
     @Column(name = "DARALIS_MARK")
     public String getDaralisMark() {

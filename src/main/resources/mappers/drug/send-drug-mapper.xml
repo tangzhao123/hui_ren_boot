@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.SendDrugMapper">
+
+    <!-- 处方单的映射 -->
+    <resultMap id="listMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList">
+        <id column="PRESCRIPTION_ID" property="prescriptionId"/>
+        <result column="PRESCRIPTION_NO" property="prescriptionNo"/>
+        <result column="RECORDS_NO" property="recordsNo"/>
+        <result column="PRESCRIPTION_TYPE" property="prescriptionType"/>
+        <result column="PRESCRIPTION_DATE" property="prescriptionDate"/>
+        <result column="PRESCRIPTION_DIAGNOSIS" property="prescriptionDiagnosis"/>
+        <result column="DOCTOR_ADVICE" property="doctorAdvice"/>
+        <result column="SUM_MONEY" property="sumMoney"/>
+        <result column="DOSIS" property="dosis"/>
+        <result column="USAGE" property="usage"/>
+        <result column="STATE" property="state"/>
+        <association property="outpatient" javaType="OutpatientRegister">
+            <id column="OUTPATIENT_ID" property="outpatientId"/>
+            <result column="OUTPATIENT_NAME" property="outpatientName"/>
+            <result column="OUTPATIENT_SEX" property="outpatientSex"/>
+            <result column="OUTPATIENT_BIRTH" property="outpatientBirth"/>
+            <result column="OUTPATIENT_AGE" property="outpatientAge"/>
+            <result column="OUTPATIENT_MARRY" property="outpatientMarry"/>
+            <result column="OUTPATIENT_VOCATION" property="outpatientVocation"/>
+            <result column="OUTPATIENT_NATIVE" property="outpatientNative"/>
+            <result column="OUTPATIENT_NATION" property="outpatientNation"/>
+            <result column="OUTPATIENT_CARD" property="outpatientCard"/>
+            <result column="OUTPATIENT_WORK" property="outpatientWork"/>
+            <result column="OUTPATIENT_PHONE" property="outpatientPhone"/>
+            <result column="OUTPATIENT_ADDRESS" property="outpatientAddress"/>
+            <result column="OUTPATIENT_WEIGHT" property="outpatientWeight"/>
+            <result column="OUTPATIENT_BLOOD" property="outpatientBlood"/>
+        </association>
+        <association property="medical" javaType="Medical">
+            <id property="medicalId" column="medical_id"/>
+            <result property="medicalName" column="medical_name"/>
+            <result property="medicalSublevel" column="medical_sublevel"/>
+        </association>
+        <association property="outdoctor" javaType="Staff">
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
+            <result column="STAFF_PHONE" property="staffPhone"/>
+            <result column="SECTION_ID" property="sectionId"/>
+            <result column="MEDICAL_ID" property="medicalId"/>
+            <result column="RANK_ID" property="rankId"/>
+            <result column="STAFF_STATE" property="staffState"/>
+            <result column="STAFF_CARD" property="staffCard"/>
+        </association>
+        <collection property="details" ofType="PrescriptionDetail">
+            <id column="RECIPEL_NO" property="recipelNo"/>
+            <result column="DRUG_NAME" property="drugName"/>
+            <result column="DOSE" property="dose"/>
+            <result column="DRUG_ROUTE" property="drugRoute"/>
+            <result column="DRUG_USE" property="drugUse"/>
+            <result column="DRUG_NEXT" property="drugNext"/>
+            <result column="AGGREGATE" property="aggregate"/>
+            <result column="DRUG_BIG" property="drugBig"/>
+            <result column="INJECT" property="inject"/>
+            <result column="CARRY_OUT" property="carryOut"/>
+            <result column="SUBTOTAL" property="subtotal"/>
+            <association property="standards" javaType="DrugStandard">
+                <id column="STANDARD_ID" property="standardId"/>
+                <result column="STANDARD_NAME" property="standardName"/>
+                <result column="STANDARD_NUM" property="standardNum"/>
+                <result column="STANDARD_DOSAGE" property="standardDosage"/>
+                <result column="STANDARD_USE" property="standardUse"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <!-- 处方详单的映射 -->
+    <resultMap id="detailMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail">
+        <id column="RECIPEL_NO" property="recipelNo"/>
+        <result column="PRESCRIPTION_NO" property="prescriptionNo"/>
+        <result column="DRUG_NAME" property="drugName"/>
+        <result column="DOSE" property="dose"/>
+        <result column="DRUG_ROUTE" property="drugRoute"/>
+        <result column="DRUG_USE" property="drugUse"/>
+        <result column="DRUG_NEXT" property="drugNext"/>
+        <result column="AGGREGATE" property="aggregate"/>
+        <result column="DRUG_BIG" property="drugBig"/>
+        <result column="INJECT" property="inject"/>
+        <result column="CARRY_OUT" property="carryOut"/>
+        <result column="SUBTOTAL" property="subtotal"/>
+        <result column="type_id" property="typeId"/>
+        <association property="drug" javaType="DrugInfo">
+            <id column="DRUG_SERIAL" property="drugSerial"/>
+            <result column="DRUG_ID" property="drugId"/><!--药品编码-->
+            <result column="DRUG_NAME" property="drugName"/><!--药品名称-->
+            <result column="DRUG_SELLING" property="drugSelling"/><!--中售价-->
+            <association property="types" javaType="DrugType">
+                <id column="TYPE_ID" property="typeId"/>
+                <result column="TYPE_NAME" property="typeName"/>
+            </association>
+        </association>
+        <association property="standards" javaType="DrugStandard">
+            <id column="STANDARD_ID" property="standardId"/>
+            <result column="STANDARD_NAME" property="standardName"/>
+            <result column="STANDARD_NUM" property="standardNum"/>
+            <result column="STANDARD_DOSAGE" property="standardDosage"/>
+            <result column="STANDARD_USE" property="standardUse"/>
+        </association>
+    </resultMap>
+
+    <!-- 缴费详情记录的映射 -->
+    <resultMap id="paymentDetailMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PaymentDetai">
+        <id property="detailId" column="detail_id"/>
+        <result property="detailNo" column="detail_no"/>
+        <result property="paymentNo" column="payment_no"/>
+        <result property="entryName" column="entry_name"/>
+        <result property="amount" column="amount"/>
+        <result property="paymentPrice" column="payment_price"/>
+        <result property="prescriptionNo" column="prescription_no"/>
+    </resultMap>
+
+    <!-- 缴费记录的映射 -->
+    <resultMap id="paymentFormMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PaymentForm">
+        <id property="paymentId" column="payment_id"/>
+        <result property="paymentNo" column="payment_no"/>
+        <result property="recordNo" column="record_no"/>
+        <result property="paymentMoney" column="payment_money"/>
+        <result property="paymentTime" column="payment_time"/>
+    </resultMap>
+    
+    <!-- 发药单的映射 -->
+    <resultMap id="sendDrugMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.SendDrug">
+        <id property="sendId" column="send_id"/>
+        <result property="sendNum" column="send_num"/>
+        <result property="sendDate" column="send_date"/>
+        <result property="sendDrug" column="send_drug"/>
+        <result property="sendPrice" column="send_price"/>
+        <result property="sendPeople" column="send_people"/>
+        <result property="prescriptionNo" column="prescription_no"/>
+    </resultMap>
+    
+    <!-- 发药详单的查询 -->
+    <resultMap id="doseMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Dose">
+        <id property="doseId" column="dose_id"/>
+        <result property="doseDrug" column="dose_drug"/>
+        <result property="doseSum" column="dose_sum"/>
+        <result property="doseReason" column="dose_reason"/>
+        <result property="doseDate" column="dose_date"/>
+        <result property="doseSend" column="dose_send"/>
+    </resultMap>
+
+    <!-- 根据处方单号查询处方单 -->
+    <select id="findAllPrescriptionList" resultMap="listMap">
+        select * from prescription_list pl
+        left join outpatient_register og on pl.outpatient_id = og.outpatient_id
+        where
+        <if test="prescriptionNo.size()>0 ">
+             prescription_no in
+            <foreach collection="prescriptionNo" item="d" index="i" separator="," open="(" close=")">
+                #{d}
+            </foreach>
+        </if>
+    </select>
+    
+    <!-- 根据处方单号查询处方详单 -->
+    <select id="findAllPrescriptionDetail" resultMap="detailMap">
+        select * from prescription_detail pd
+        left join drug_info dr on pd.drug_name = dr.drug_name
+        where prescription_no = #{prescriptionNo}
+    </select>
+
+    <!-- 根据处方单号查询处方详单 -->
+    <select id="findPrescriptionDetail" resultMap="detailMap">
+        select * from prescription_detail pd
+        left join drug_info dr on pd.drug_name = dr.drug_name
+        where
+        <if test="prescriptionNo.size()>0 ">
+            prescription_no in
+            <foreach collection="prescriptionNo" item="d" index="i" separator="," open="(" close=")">
+                #{d}
+            </foreach>
+        </if>
+    </select>
+    
+    <!-- 查询所有的缴费记录表 -->
+    <select id="findAllPaymentForm" resultMap="paymentFormMap">
+        select * from payment_form where records_no = #{recordNo}
+    </select>
+
+    <!-- 根据缴费记录单号查询缴费详单 -->
+    <select id="findAllPaymentDetail" resultMap="paymentDetailMap">
+        select * from payment_detai where payment_no = #{paymentNo}
+    </select>
+
+    <!-- 查询处方单有没有发药记录 -->
+    <select id="findAllSendDrug" resultMap="sendDrugMap">
+        select * from send_drug where prescription_no = #{prescriptionNo}
+    </select>
+
+    <!-- 新增发药记录 -->
+    <insert id="addSendDrug">
+        insert into send_drug values (seq_huiren.nextval,#{sendNum},current_timestamp,#{sendDrug},#{sendPrice},#{sendPeople},#{prescriptionNo})
+    </insert>
+    
+    <!-- 根据处方单号扣除药房药品库存数量 -->
+    <update id="updatePharmacyDetail">
+        update pharmacy_detail set detail_inventory = detail_inventory-#{doseSum} where detail_drug = #{drugId}
+    </update>
+</mapper>

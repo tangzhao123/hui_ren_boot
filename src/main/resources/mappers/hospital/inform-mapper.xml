@@ -10,4 +10,7 @@
     <delete id="deleteInform">-- 删除
         delete from inform where  inform_id= #{informId}
     </delete>
+    <select id="allInform" resultType="Inform">-- 查
+    select*from inform where inform_state=0
+    </select>
 </mapper>

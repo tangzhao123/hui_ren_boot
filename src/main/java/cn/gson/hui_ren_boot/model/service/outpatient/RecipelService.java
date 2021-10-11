@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.service.outpatient;
 
+import cn.gson.hui_ren_boot.model.mapper.drug.DrugMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.*;
 import cn.gson.hui_ren_boot.model.mapper.pharmacy.DruginfoMapper;
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
@@ -31,10 +32,13 @@ public class RecipelService {
     TestItemsMapper teatItemsMapper;
     @Autowired
     TestDetailMapper testDetailMapper;
+    @Autowired
+    DrugMapper drugMapper;
 
     //查询药品
     public List<DrugInfo> allDrug(DrugInfo drugInfo){
-        return druginfoMapper.allDrug(drugInfo);
+        drugInfo.setDrugState(1L);
+        return drugMapper.findAllDrugInfo(drugInfo);
     }
 
     //新增门诊西药处方单和处方详单
@@ -49,19 +53,14 @@ public class RecipelService {
         detailMapper.addChineseDetail(details, prescriptionList.getPrescriptionNo());
     }
 
-    //查询门诊西药处方单
-    public List<PrescriptionList> allRecipel(PrescriptionList prescriptionList){
-        return listMapper.allRecipel(prescriptionList);
-    }
-
-    //根据处方号查询处方详单
-    public List<PrescriptionDetail> selNo(String prescriptionNo){
-        return detailMapper.selNo(prescriptionNo);
-    }
-
     //查询排号
     public List<RowNumbers> allNumber(int medicalId,int staffId,int rankId){
         return rowNumbersMapper.allNumber(medicalId, staffId,rankId);
+    }
+
+    //接诊，删除当前接诊的排号
+    public void delRow(String bookingNo){
+        rowNumbersMapper.delRow(bookingNo);
     }
 
     //过号，根据挂号单修改id为最后一位
