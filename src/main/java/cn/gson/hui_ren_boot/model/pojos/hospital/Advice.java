@@ -1,5 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -11,11 +13,13 @@ public class Advice{
     private long adviceSerial;//序号
     private String adviceId;//医嘱号
     private String registerId;//住院号
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date adviceStart;//开始时间
     private String adviceSickbed;//床位号
     private String staffName;//医生姓名
     private Long adviceCost;//医嘱类型
     private Long adviceType;//费用
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date adviceEnd;//停用时间
     private String adviceChinese;//中药用法
     private String adviceDoctors;//处方忌讳

@@ -1,8 +1,10 @@
 package cn.gson.hui_ren_boot.model.service.permissions;
 
 
+import cn.gson.hui_ren_boot.model.mapper.permissions.DepartureMapper;
 import cn.gson.hui_ren_boot.model.mapper.permissions.StaffMapper;
 import cn.gson.hui_ren_boot.model.mapper.permissions.UserMapper;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Departure;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class StaffService {
     StaffMapper staffMapper;
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    DepartureMapper departureMapper;
 
     //查询所有员工
     public Object allStaffByPage(Integer  pageNo,Integer size,String search){
@@ -40,8 +45,9 @@ public class StaffService {
     }
 
     //员工离职
-    public void departure(Long staffId){
-        staffMapper.departure(staffId);
+    public void departure(Departure departure){
+        departureMapper.addDeparture(departure);
+        staffMapper.departure(departure.getStaffId());
     }
 
     //批量员工离职

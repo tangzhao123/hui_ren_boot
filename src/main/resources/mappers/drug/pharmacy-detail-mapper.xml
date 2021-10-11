@@ -3,8 +3,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PharmacyDetailMapper">
 
+    <!-- 药房药品库存信息映射 -->
+    <resultMap id="pharmacyDetailMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.PharmacyDetail">
+        <id property="detailId" column="detail_id"/>
+        <result property="detailSerial" column="detail_serial"/>
+        <result property="detailDrug" column="detail_drug"/>
+        <result property="detailInventory" column="detail_inventory"/>
+        <result property="detailBatch" column="detail_batch"/>
+        <result property="detailDate" column="detail_date"/>
+    </resultMap>
+
     <!-- 修改药房库存数量 -->
     <update id="updatePharmacyDetail">
-        update pharmacy_detail set detail_inventory = detail_inventory+#{count} where detail_drug = #{drugId}
+        update pharmacy_detail set detail_inventory = detail_inventory+#{count} where detail_batch = #{detailBatch}
     </update>
+
+
+    <!-- 新增药房详情表 -->
+    <insert id="addPharmacyDetail">
+            insert into pharmacy_detail values (seq_huiren.nextval,#{detailSerial},#{detailDrug},#{detailInventory},#{detailBatch},#{detailDate})
+    </insert>
+
+    <!-- 查询药房药品库存详情 -->
+    <select id="findAllPharmacyDetail" resultMap="pharmacyDetailMap">
+        select * from pharmacy_detail where detail_drug = #{drugId} order by detail_date
+    </select>
+
+    <!-- 查询药房药品库存详情 -->
+    <select id="findPharmacyDetail" resultMap="pharmacyDetailMap">
+        select * from pharmacy_detail where detail_batch = #{detailBatch} order by detail_inventory
+    </select>
 </mapper>

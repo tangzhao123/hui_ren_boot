@@ -14,23 +14,26 @@
         <result property="inventoryRetail" column="inventory_retail"/>
         <result property="inventoryCheck" column="inventory_check"/>
         <result property="inventoryBatch" column="inventory_batch"/>
+        <result property="inventoryNote" column="inventory_note"/>
         <result property="drugName" column="drug_name"/>
     </resultMap>
 
     <!-- 批量新增盘点详情表 -->
     <insert id="addInventory">
             insert into inventory
-            select seq_huiren.nextval,inventory_drug,inventory_num,inventory_knum,inventory_sum,inventory_margun,inventory_retail,inventory_check,inventory_batch from
+            select seq_huiren.nextval,inventory_drug,inventory_num,inventory_knum,inventory_sum,inventory_margun,inventory_retail,inventory_check,inventory_batch,inventory_note from
             <foreach collection="inventoryData" item="d" index="i" separator=" " open="(" close=")">
                 <if test=" i != inventoryData.size()-1">
                     select #{d.inventoryDrug} as inventory_drug,#{d.inventoryNum} as inventory_num,#{d.inventoryKnum} as inventory_knum,#{d.inventorySum} as inventory_sum,
-                    #{d.inventoryMargun} as inventory_margun,#{d.inventoryRetail} as inventory_retail,#{inventoryCheck} as inventory_check,#{d.inventoryBatch} as inventory_batch
+                    #{d.inventoryMargun} as inventory_margun,#{d.inventoryRetail} as inventory_retail,#{inventoryCheck} as inventory_check,#{d.inventoryBatch} as inventory_batch,
+                    #{d.inventoryNote,jdbcType=VARCHAR} as inventory_note
                     from dual
                     union
                 </if>
                 <if test=" i == inventoryData.size()-1">
                     select #{d.inventoryDrug} as inventory_drug,#{d.inventoryNum} as inventory_num,#{d.inventoryKnum} as inventory_knum,#{d.inventorySum} as inventory_sum,
-                    #{d.inventoryMargun} as inventory_margun,#{d.inventoryRetail} as inventory_retail,#{inventoryCheck} as inventory_check,#{d.inventoryBatch} as inventory_batch
+                    #{d.inventoryMargun} as inventory_margun,#{d.inventoryRetail} as inventory_retail,#{inventoryCheck} as inventory_check,#{d.inventoryBatch} as inventory_batch,
+                    #{d.inventoryNote,jdbcType=VARCHAR} as inventory_note
                     from dual
                 </if>
             </foreach>

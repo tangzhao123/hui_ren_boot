@@ -5,6 +5,35 @@
 
     <!-- 查询药品每个月的销售金额 -->
     <select id="allPaymentForm" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.PaymentFormVo">
-        select extract (month from payment_time)||'月' as paymentTime ,sum(payment_money) as paymentMoney from payment_form group by extract (month from payment_time)
+        select extract (month from payment_time)||'月' as paymentTime ,sum(payment_money) as paymentMoney from payment_form group by extract (month from payment_time) order by extract (month from payment_time)
     </select>
+
+
+    <!-- 查询药品上月销售额 -->
+    <select id="allPayment" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.PaymentFormVo">
+        select extract (month from payment_time)||'月' as paymentTime ,sum(payment_money) as paymentMoney from payment_form
+        where payment_time &lt; trunc(sysdate,'month')-1
+        group by extract (month from payment_time) order by extract (month from payment_time)
+    </select>
+
+<!--    &lt;!&ndash; 查询用户数量 &ndash;&gt;-->
+<!--    <select id="allStaffSum" resultType="_int">-->
+<!--        select count(*) as staffSum from staff-->
+<!--    </select>-->
+<!--    &lt;!&ndash; 查询药品数量 &ndash;&gt;-->
+<!--    <select id="allStockSurplus" resultType="_int">-->
+<!--        select sum(stock_surplus) as stockSurplus from drug_stock group by stock_surplus-->
+<!--    </select>-->
+<!--    &lt;!&ndash; 查询收费总金额 &ndash;&gt;-->
+<!--    <select id="allPaymentMoneys" resultType="double">-->
+<!--        select sum(payment_money) as paymentMoneys from payment_form-->
+<!--    </select>-->
+<!--    &lt;!&ndash; 查询出库数量 &ndash;&gt;-->
+<!--    <select id="allStockoutAmount" resultType="_int">-->
+<!--        select sum(stockout_amount) as stockoutAmount from stockout-->
+<!--    </select>-->
+<!--    &lt;!&ndash; 查询入库数量 &ndash;&gt;-->
+<!--    <select id="allDetailNumber" resultType="_int">-->
+<!--        select sum(detail_number) as detailNumber from entry_details-->
+<!--    </select>-->
 </mapper>

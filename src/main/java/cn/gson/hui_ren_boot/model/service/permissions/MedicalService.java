@@ -23,6 +23,11 @@ public class MedicalService {
         return  medicalMapper.allMedical();
     }
 
+    //查询父级科室
+    public List<Medical> allMedicals(){
+        return  medicalMapper.allMedicals();
+    }
+
     //根据名称查询编号
     public int byMedicalId(String medicalName){
         return medicalMapper.byMedicalId(medicalName);

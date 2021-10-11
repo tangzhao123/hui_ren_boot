@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.ScatteredMapper">
+
+    <resultMap id="scatteredMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Scattered">
+        <id property="scId" column="sc_id"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="scNumber" column="sc_number"/>
+        <result property="drugBatch" column="drug_batch"/>
+        <result property="drugDate" column="drug_date"/>
+    </resultMap>
+
+    <!-- 新增药品拆零记录 -->
+    <insert id="addScattered">
+        insert into scattered values (seq_huiren.nextval,#{drugName},#{scNumber},#{drugBatch},#{drugDate} )
+    </insert>
+
+    <!-- 查询药品拆零记录表 -->
+    <select id="allScattered" resultMap="scatteredMap">
+        select * from scattered
+    </select>
+
+    <!-- 根据生产批号修改数量 -->
+    <update id="scNumber">
+        update scattered set sc_number = sc_number-#{scNumber} where drug_batch = #{drugBatch}
+    </update>
+
+    <!-- 根据生产批号修改数量 -->
+    <update id="scNumbers">
+        update scattered set sc_number = sc_number+#{scNumber} where drug_batch = #{drugBatch}
+    </update>
+</mapper>

@@ -11,7 +11,12 @@
 
     <!-- 查询所有的科室 -->
     <select id="allMedical" resultMap="medicalMap">
-        select * from medical where medical_sublevel != 0
+        select * from medical where medical_sublevel != 0  and medical_name !='0'
+    </select>
+
+    <!-- 查询父级科室 -->
+    <select id="allMedicals" resultMap="medicalMap">
+        select * from medical where medical_sublevel = 0
     </select>
 
     <!-- 根据名称查询编号 -->
@@ -24,9 +29,11 @@
     <select id="byName" resultMap="medicalMap">
         select * from medical
         <where>
+            1=1
             <if test="medicalName != null and medicalName != ''">
                 medical_name like'%${medicalName}%'
             </if>
+            and medical_name !='0'
         </where>
         order by medical_id desc
     </select>

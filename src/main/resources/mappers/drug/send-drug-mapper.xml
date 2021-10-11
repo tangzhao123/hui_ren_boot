@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.SendDrugMapper">
 
+    <!-- 门诊发药 -->
     <!-- 处方单的映射 -->
     <resultMap id="listMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList">
         <id column="PRESCRIPTION_ID" property="prescriptionId"/>
@@ -123,7 +124,7 @@
         <result property="paymentMoney" column="payment_money"/>
         <result property="paymentTime" column="payment_time"/>
     </resultMap>
-    
+
     <!-- 发药单的映射 -->
     <resultMap id="sendDrugMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.SendDrug">
         <id property="sendId" column="send_id"/>
@@ -134,8 +135,8 @@
         <result property="sendPeople" column="send_people"/>
         <result property="prescriptionNo" column="prescription_no"/>
     </resultMap>
-    
-    <!-- 发药详单的查询 -->
+
+    <!-- 发药详单的映射 -->
     <resultMap id="doseMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Dose">
         <id property="doseId" column="dose_id"/>
         <result property="doseDrug" column="dose_drug"/>
@@ -145,23 +146,97 @@
         <result property="doseSend" column="dose_send"/>
     </resultMap>
 
+    <!-- 住院发药 -->
+    <resultMap id="ordersMap" type="cn.gson.hui_ren_boot.model.pojos.nursestation.Orders">
+        <id column="orders_serial" property="ordersSerial"/>
+        <result column="orders_user" property="ordersUser"/>
+        <result column="order_way" property="orderWay"/>
+        <result column="order_details" property="orderDetails"/>
+        <result column="orders_id" property="ordersId"/>
+        <association property="advice" javaType="cn.gson.hui_ren_boot.model.pojos.hospital.Advice">
+            <id column="advice_serial" property="adviceSerial"/>
+            <result column="advice_id" property="adviceId"/>
+            <result column="advice_start" property="adviceStart"/>
+            <result column="advice_sickbed" property="adviceSickbed"/>
+            <result column="staff_name" property="staffName"/>
+            <result column="advice_cost" property="adviceCost"/>
+            <result column="advice_type" property="adviceType"/>
+            <result column="advice_end" property="adviceEnd"/>
+            <result column="advice_chinese" property="adviceChinese"/>
+            <result column="advice_doctors" property="adviceDoctors"/>
+            <result column="register_name" property="registerName"/>
+            <result column="register_id" property="registerId"/>
+            <result column="advice_chindose" property="adviceChindose"/>
+        </association>
+
+        <association property="details" javaType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+            <id column="details_serial" property="detailsSerial"/>
+            <result column="details_drip" property="detailsDrip"/>
+            <result column="details_way" property="detailsWay"/>
+            <result column="datails_dosage" property="datailsDosage"/>
+            <result column="daralis_usage" property="daralisUsage"/>
+            <result column="daralis_time" property="daralisTime"/>
+            <result column="daralis_cost" property="daralisCost"/>
+            <result column="daralis_dstate" property="daralisDstate"/>
+            <result column="daralis_start" property="daralisStart"/>
+            <result column="daralis_price" property="daralisPrice"/>
+        </association>
+
+        <association property="record" javaType="cn.gson.hui_ren_boot.model.pojos.hospital.Record">
+            <id property="recordId" column="RECORD_ID"></id>
+            <result column="RECORD_SERIAL" property="recordSerial"/>
+            <result column="SICKBED_MARK" property="sickbedMark"/>
+            <result column="RECORD_NAME" property="recordName"/>
+            <result column="RECORD_DATE" property="recordDate"/>
+        </association>
+    </resultMap>
+
+    <!-- 医嘱详情的映射 -->
+    <resultMap id="allDetailsMap" type="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+        <id column="details_serial" property="detailsSerial"/>
+        <result column="drug_name" property="drugName"/>
+        <result column="details_drip" property="detailsDrip"/>
+        <result column="datails_dosage" property="datailsDosage"/>
+        <result column="daralis_usage" property="daralisUsage"/>
+        <result column="daralis_time" property="daralisTime"/>
+        <result column="daralis_dstate" property="daralisDstate"/>
+        <result column="daralis_disable" property="daralisDisable"/>
+        <result column="daralis_start" property="daralisStart"/>
+        <result column="daralis_price" property="daralisPrice"/>
+        <result column="daralis_number" property="daralisNumber"/>
+        <result column="standard_use" property="standardUse"/>
+        <result column="daralis_mark" property="daralisMark"/>
+        <result column="register_id" property="registerId"/>
+        <result column="details_money" property="detailsMoney"/>
+        <result column="drug_recipe" property="drugRecipe"/>
+        <result column="standard_name" property="standardName"/>
+    </resultMap>
+
+    <!-- 药品规格映射 -->
+    <resultMap id="drugMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfoVo">
+        <id column="drug_name" property="drugName"/>
+        <result column="standard_name" property="standardName"/>
+    </resultMap>
+
+    <!-- 门诊发药 -->
     <!-- 根据处方单号查询处方单 -->
     <select id="findAllPrescriptionList" resultMap="listMap">
         select * from prescription_list pl
         left join outpatient_register og on pl.outpatient_id = og.outpatient_id
         where
         <if test="prescriptionNo.size()>0 ">
-             prescription_no in
+            prescription_no in
             <foreach collection="prescriptionNo" item="d" index="i" separator="," open="(" close=")">
                 #{d}
             </foreach>
         </if>
     </select>
-    
+
     <!-- 根据处方单号查询处方详单 -->
     <select id="findAllPrescriptionDetail" resultMap="detailMap">
-        select * from prescription_detail pd
-        left join drug_info dr on pd.drug_name = dr.drug_name
+        select *
+        from prescription_detail pd
+                 left join drug_info dr on pd.drug_name = dr.drug_name
         where prescription_no = #{prescriptionNo}
     </select>
 
@@ -177,29 +252,94 @@
             </foreach>
         </if>
     </select>
-    
+
     <!-- 查询所有的缴费记录表 -->
     <select id="findAllPaymentForm" resultMap="paymentFormMap">
-        select * from payment_form where records_no = #{recordNo}
+        select *
+        from payment_form
+        where records_no = #{recordNo}
     </select>
 
     <!-- 根据缴费记录单号查询缴费详单 -->
     <select id="findAllPaymentDetail" resultMap="paymentDetailMap">
-        select * from payment_detai where payment_no = #{paymentNo}
+        select * from payment_detai
+        where
+        <if test="paymentNo.size()>0 ">
+            payment_no in
+            <foreach collection="paymentNo" item="d" index="i" separator="," open="(" close=")">
+                #{d}
+            </foreach>
+        </if>
     </select>
 
     <!-- 查询处方单有没有发药记录 -->
     <select id="findAllSendDrug" resultMap="sendDrugMap">
-        select * from send_drug where prescription_no = #{prescriptionNo}
+        select *
+        from send_drug
+        where prescription_no = #{prescriptionNo}
     </select>
 
     <!-- 新增发药记录 -->
     <insert id="addSendDrug">
-        insert into send_drug values (seq_huiren.nextval,#{sendNum},current_timestamp,#{sendDrug},#{sendPrice},#{sendPeople},#{prescriptionNo})
+        insert into send_drug
+        values (seq_huiren.nextval, #{sendNum}, current_timestamp, #{sendDrug}, #{sendPrice}, #{sendPeople},
+                #{prescriptionNo})
     </insert>
-    
-    <!-- 根据处方单号扣除药房药品库存数量 -->
+
+    <!-- 根据药品批号扣除药房药品库存数量 -->
     <update id="updatePharmacyDetail">
-        update pharmacy_detail set detail_inventory = detail_inventory-#{doseSum} where detail_drug = #{drugId}
+        update pharmacy_detail
+        set detail_inventory = detail_inventory - #{doseSum}
+        where detail_batch = #{detailBatch}
     </update>
+
+
+    <!-- 住院发药 -->
+    <select id="findAllOrders" resultMap="ordersMap">
+        select * from orders ors
+        left join details de on ors.order_details = de.daralis_mark
+        left join advice ad on ad.register_id = de.register_id
+        left join record rec on ad.register_id = rec.register_id
+        <where>
+            1=1
+            <if test="date !=null and date !='' and date1 != null and date1 != ''">
+                and (to_char(ors.order_way,'yyyy-mm-dd') between #{date} and #{date1} )
+            </if>
+            <if test="medicalId != null and medicalId !=''">
+                and ad.medical_id = #{medicalId}
+            </if>
+            and ad.advice_id not in (select prescription_no from send_drug)
+        </where>
+    </select>
+
+    <!-- 根据住院号查询已经执行的医嘱 -->
+    <select id="allDetails" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+        select *
+        from details
+        where REGISTER_ID = #{registerId}
+          and daralis_mark in (select order_details from orders)
+    </select>
+
+    <!-- 根据医嘱号查询医嘱详情 -->
+    <select id="findAllDetails" resultMap="allDetailsMap">
+        select de.drug_name,sum(DARALIS_NUMBER) as daralis_number,de.daralis_price,dn.drug_id,ds.standard_name,max(de.advice_id) as advice_id from details de
+        left join drug_info dn on de.drug_name = dn.drug_name
+        left join drug_standard ds on dn.surplus_id = ds.standard_id
+        where
+        <if test="adviceId.size()>0 ">
+            advice_id in
+            <foreach collection="adviceId" item="d" index="i" separator="," open="(" close=")">
+                #{d}
+            </foreach>
+        </if>
+        group  by de.drug_name, de.daralis_price,dn.drug_id,ds.standard_name
+    </select>
+
+
+    <!-- 查询所有药品规格 -->
+    <select id="allDrug" resultMap="drugMap">
+        select dn.drug_name, ds.standard_name
+        from drug_info dn
+                 left join drug_standard ds on dn.surplus_id = ds.standard_id
+    </select>
 </mapper>

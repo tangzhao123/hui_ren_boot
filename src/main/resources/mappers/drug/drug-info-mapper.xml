@@ -155,4 +155,15 @@
         </where>
         GROUP BY dk.drug_id
     </select>
+
+    <select id="findDrugById" resultMap="drugInfoMap">
+        select * from drug_info
+        where
+        <if test="drugName.size()>0 ">
+             drug_name in
+            <foreach collection="drugName" item="d" index="i" separator="," open="(" close=")">
+                #{d}
+            </foreach>
+        </if>
+    </select>
 </mapper>

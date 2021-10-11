@@ -15,6 +15,7 @@ public class Inventory {
     private double inventoryRetail;//零售差额
     private String inventoryCheck;//盘点号
     private String inventoryBatch;//药品批号
+    private String inventoryNote;//药品盘点备注
     private String drugName;
 
 
@@ -109,6 +110,16 @@ public class Inventory {
         this.inventoryBatch = inventoryBatch;
     }
 
+    @Basic
+    @Column(name = "INVENTORY_NOTE")
+    public String getInventoryNote() {
+        return inventoryNote;
+    }
+
+    public void setInventoryNote(String inventoryNote) {
+        this.inventoryNote = inventoryNote;
+    }
+
     @Transient
     public String getDrugName() {
         return drugName;
@@ -143,6 +154,8 @@ public class Inventory {
                 ", inventoryRetail=" + inventoryRetail +
                 ", inventoryCheck='" + inventoryCheck + '\'' +
                 ", inventoryBatch='" + inventoryBatch + '\'' +
+                ", inventoryNote='" + inventoryNote + '\'' +
+                ", drugName='" + drugName + '\'' +
                 '}';
     }
 }

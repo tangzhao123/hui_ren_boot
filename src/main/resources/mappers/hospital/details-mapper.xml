@@ -64,7 +64,7 @@
             </if>
             <if test="i==detail.size()-1">
                 select #{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},
-               #{p.standardUse},#{p.daralisMark},#{p.registerId},#{p.detailsMoney},#{p.drugRecipe},#{p.standardName}? from dual
+               #{p.standardUse},#{p.daralisMark},#{p.registerId},#{p.detailsMoney},#{p.drugRecipe},#{p.standardName} from dual
             </if>
         </foreach>
     </insert>

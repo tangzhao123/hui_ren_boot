@@ -21,6 +21,7 @@ public class DrugCheckController {
     //新增盘点单跟盘点详单
     @RequestMapping("add-drug-check")
     public String addDrugCheck(@RequestBody DrugCheck drugCheck){
+
         try {
             if(drugCheck.getCheckKnum()>=0){
                 drugCheck.setCheckType(0L);

@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.controller.permissions;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.Departure;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Roleinfo;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
@@ -139,9 +140,9 @@ public class StaffController {
 
     //员工离职
     @RequestMapping("departure")
-    public String departure(Long staffId){
+    public String departure(@RequestBody Departure departure){
         try {
-            staffService.departure(staffId);
+            staffService.departure(departure);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();

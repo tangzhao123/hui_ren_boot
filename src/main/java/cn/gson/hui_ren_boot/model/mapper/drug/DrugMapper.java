@@ -14,4 +14,7 @@ public interface DrugMapper {
 
     //查询处方跟医嘱的药品
     public List<DrugInfo> findAllDrugInfo(DrugInfo drugInfo);
+
+    //根据药品名称查询编号
+    public List<DrugInfo> findDrugById(List<String> drugName);
 }

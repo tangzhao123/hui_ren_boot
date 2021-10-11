@@ -22,6 +22,12 @@ public class MedicalController {
         return medicalService.allMedical();
     }
 
+    //查询所有的科室列表
+    @GetMapping("medicals-list")
+    public List<Medical> allMedicals(){
+        return medicalService.allMedicals();
+    }
+
     //分页查询所有的科室加模糊查询
     @GetMapping("medical")
     public Object byName(Integer pageNo, Integer size, String medicalName){

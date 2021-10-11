@@ -27,6 +27,7 @@ public class Details {
     private double detailsMoney;//金额
     private Long drugRecipe;//处方非处方药
     private String standardName;//规格
+    private String drugId;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -56,6 +57,14 @@ public class Details {
 
     public void setDrugRecipe(Long drugRecipe) {
         this.drugRecipe = drugRecipe;
+    }
+
+    public String getDrugId() {
+        return drugId;
+    }
+
+    public void setDrugId(String drugId) {
+        this.drugId = drugId;
     }
 
     @Basic
