@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.mapper.hospital;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Blockup;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.medical.Combinspection;
 import cn.gson.hui_ren_boot.model.pojos.medical.Test;
 import cn.gson.hui_ren_boot.model.pojos.medical.Testmiddle;
@@ -15,4 +16,5 @@ public interface BlockupMapper {
     public List<Test>selText(Test test);
     public void addTestmiddle(Testmiddle testmiddle);
     public List<Combinspection>allResults(Combinspection combinspection);
+    public Register akkRegister(String registerPhone);//查询
 }

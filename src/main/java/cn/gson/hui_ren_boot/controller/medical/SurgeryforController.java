@@ -4,8 +4,6 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Operation;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
 import cn.gson.hui_ren_boot.model.service.medical.SurgeryforService;
-import cn.gson.hui_ren_boot.utils.MyUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,49 +20,10 @@ public class SurgeryforController {
     @Autowired
     SurgeryforService surgeryforService;
 
-    //修改手术室位置和所属科室
-//    @RequestMapping("/update-operation")
-//    public String updateOperation(@RequestBody Map<String,Object> map){
-//        ObjectMapper mapper = new ObjectMapper();
-//        Operation operation = mapper.convertValue(map.get("operations"),Operation.class);
-//        System.out.println(operation);
-//        String id = (String) map.get("operationId");
-//        System.out.println("手术室编号："+id);
-//        return "ok";
-//    }
-
-    //查询手术室
-    @GetMapping("/sel-operation")
-    public Object selOperation(int pageNo,int size,String oper){
-        Operation operation = JSONObject.parseObject(oper,Operation.class);//装换实体类
-//        System.out.println("手术室："+surgeryforService.selOperation());
-        return surgeryforService.selOperationByPage(pageNo,size,operation);
-    }
-
-    //新增手术室,修改手术室
-    @RequestMapping("/insert-operation")
-    public String insertOperaton(@RequestBody Operation operation){
-//        System.out.println("====================open================");
-        Operation o = operation;
-
-        if(operation.getOperationId() == ""){
-            String operationId = MyUtil.genrateNo("SS");//手术室编号
-            o.setOperationId(operationId);
-            surgeryforService.insertOpeart(o);
-        }else {
-            System.out.println("修改后的值"+o);
-            surgeryforService.xiugaiOperation(o.getOperationAddress(),o.getMedicalName(),o.getOperationId());
-        }
-
-
-
-        return "ok";
-    }
-
     //查询已安排的手术室
     @GetMapping("/select-record")
     public List<Applyrecord> selectAll(){
-//        System.out.println("安排记录："+surgeryforService.selectRecord());
+        System.out.println("安排记录："+surgeryforService.selectRecord());
         return surgeryforService.selectRecord();
     }
 
@@ -80,17 +39,17 @@ public class SurgeryforController {
 //        System.out.println("手术室的使用状态手术室的名称："+operation.getMedicalName());
 
         Applyrecord applyrecord = new Applyrecord();//手术室安排
-        applyrecord.setOperationId(operation.getOperationId());//手术室id
+//        applyrecord.setOperationId(operation.getOperationId());//手术室id
         applyrecord.setAdditionalName(surgeryfor.getAdditionalName());//手术项目名称
         applyrecord.setRegisterName(surgeryfor.getRegisterName());//患者姓名
         applyrecord.setRegisterId(surgeryfor.getRegisterId());//住院号
         applyrecord.setAdditionalMoney(surgeryfor.getAdditionalMoney());//手术费用
-        applyrecord.setRegisiterClinic(surgeryfor.getRegisterClinic());//诊疗卡
-//        surgeryforService.addApply(applyrecord);//新增手术室使用记录
-//
-//        surgeryforService.updateFor(surgeryfor.getRegisterId());//修改病人手术项目，改为已安排手术室
-//
-//        surgeryforService.updateOperation(operation.getOperationId());//修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）
+//        applyrecord.setRegisiterClinic(surgeryfor.getRegisterClinic());//诊疗卡
+        surgeryforService.addApply(applyrecord);//新增手术室使用记录
+
+        surgeryforService.updateFor(surgeryfor.getRegisterId());//修改病人手术项目，改为已安排手术室
+
+        surgeryforService.updateOperation(operation.getOperationId());//修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）
 
         return "ok";
     }

@@ -2,6 +2,8 @@ package cn.gson.hui_ren_boot.model.pojos.medical;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity

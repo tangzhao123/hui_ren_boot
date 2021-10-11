@@ -1,13 +1,20 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
+import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
+import cn.gson.hui_ren_boot.model.pojos.medical.Combinspection;
+import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
+import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 public class Register {
@@ -16,6 +23,7 @@ public class Register {
     private Date registerDate;//入院时间3
     private String registerName;//姓名4
     private int registerSex;//性别5
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date registerSite;//出生日期6
     private int registerCard;//婚否7
     private String registerPrint;//职业8
@@ -32,10 +40,17 @@ public class Register {
     private int staffId;//主治医生
     private String registerClinic;//就诊卡号17
     private String  sickbedMark;//病床号
+    private Long registerState;//住院状态
     private Medical medical;//科室
     private Staff staff;//员工
     private Sickbed sickbed;//病床
     private TreatmentCard treatment;//就诊卡
+    private Inform inform;//出院申请
+    private List<Hospitalcare> hospitalcare;//床位扣费记录表
+    private List<Prndebit>  prndebit;// 医嘱扣费记录表
+    private List<InspectDebit> inspectDebit;//检验扣费
+    private List<Applyrecord>applyrecord;//手术扣费
+
     public Register() {
     }
 
@@ -57,6 +72,54 @@ public class Register {
         this.medicalId = medicalId;
         this.registerRecord = registerRecord;
         this.registerClinic = registerClinic;
+    }
+    @OneToMany//床位扣费
+    public List<Hospitalcare> getHospitalcare() {
+        return hospitalcare;
+    }
+
+    public void setHospitalcare(List<Hospitalcare> hospitalcare) {
+        this.hospitalcare = hospitalcare;
+    }
+    @OneToMany//医嘱扣费记录表
+    public List<Prndebit> getPrndebit() {
+        return prndebit;
+    }
+
+    public void setPrndebit(List<Prndebit> prndebit) {
+        this.prndebit = prndebit;
+    }
+    @OneToMany//检验扣费
+    public List<InspectDebit> getInspectDebit() {
+        return inspectDebit;
+    }
+
+    public void setInspectDebit(List<InspectDebit> inspectDebit) {
+        this.inspectDebit = inspectDebit;
+    }
+
+
+
+
+
+
+    @OneToMany//手术扣费
+    public List<Applyrecord> getApplyrecord() {
+        return applyrecord;
+    }
+
+    public void setApplyrecord(List<Applyrecord> applyrecord) {
+        this.applyrecord = applyrecord;
+    }
+
+
+    @OneToOne //出院申请表
+    public Inform getInform() {
+        return inform;
+    }
+
+    public void setInform(Inform inform) {
+        this.inform = inform;
     }
 
     //科室关系
@@ -103,6 +166,15 @@ public class Register {
 
     public void setRegisterSerica(int registerSerica) {
         this.registerSerica = registerSerica;
+    }
+    @Basic
+    @Column(name = "REGISTER_STATE")
+    public Long getRegisterState() {
+        return registerState;
+    }
+
+    public void setRegisterState(Long registerState) {
+        this.registerState = registerState;
     }
 
     @Basic
@@ -348,6 +420,13 @@ public class Register {
                 ", medical=" + medical +
                 ", staff=" + staff +
                 ", sickbed=" + sickbed +
+                ", treatment=" + treatment +
+                ", inform=" + inform +
+                ", hospitalcare=" + hospitalcare +
+                ", prndebit=" + prndebit +
+
+                ", applyrecord=" + applyrecord +
+
                 '}';
     }
 }

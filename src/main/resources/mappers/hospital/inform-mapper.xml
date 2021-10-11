@@ -13,4 +13,8 @@
     <select id="allInform" resultType="Inform">-- 查
     select*from inform where inform_state=0
     </select>
+    <update id="upInform">
+        update inform set inform_state=1 where register_id= #{registerId}
+    </update>
+
 </mapper>

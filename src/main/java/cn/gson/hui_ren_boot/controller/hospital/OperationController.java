@@ -18,7 +18,7 @@ import java.util.List;
 public class OperationController {
     @Autowired
     OperationService operationService;
-    @RequestMapping("/attOpera")
+    @RequestMapping("/attOpera")//查询手术项目表
     private List<Additional> attOperation(){
         return operationService.allOperation();
     }

@@ -2,19 +2,18 @@ package cn.gson.hui_ren_boot.model.pojos.medical;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class Applyrecord {
     private Long applyId;//记录2id
-    private String operationId;//手术室id
     private String additionalName;//手术名称
     private String registerName;//患者姓名
     private String registerId;//住院号
-    private Timestamp applyTime;//使用时间
-    private Long additionalMoney;//手术费用
-    private Long applyState;//状态
-    private String regisiterClinic;//诊疗卡号
+    private Date applyTime;//扣费时间
+    private Double additionalMoney;//手术费用
+
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -28,15 +27,7 @@ public class Applyrecord {
         this.applyId = applyId;
     }
 
-    @Basic
-    @Column(name = "OPERATION_ID")
-    public String getOperationId() {
-        return operationId;
-    }
 
-    public void setOperationId(String operationId) {
-        this.operationId = operationId;
-    }
 
     @Basic
     @Column(name = "ADDITIONAL_NAME")
@@ -70,69 +61,52 @@ public class Applyrecord {
 
     @Basic
     @Column(name = "APPLY_TIME")
-    public Timestamp getApplyTime() {
+    public Date getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(Timestamp applyTime) {
+    public void setApplyTime(Date applyTime) {
         this.applyTime = applyTime;
     }
 
     @Basic
     @Column(name = "ADDITIONAL_MONEY")
-    public Long getAdditionalMoney() {
+    public Double getAdditionalMoney() {
         return additionalMoney;
     }
 
-    public void setAdditionalMoney(Long additionalMoney) {
+    public void setAdditionalMoney(Double additionalMoney) {
         this.additionalMoney = additionalMoney;
     }
 
-    @Basic
-    @Column(name = "APPLY_STATE")
-    public Long getApplyState() {
-        return applyState;
-    }
 
-    public void setApplyState(Long applyState) {
-        this.applyState = applyState;
-    }
 
-    @Basic
-    @Column(name = "REGISITER_CLINIC")
-    public String getRegisiterClinic() {
-        return regisiterClinic;
-    }
 
-    public void setRegisiterClinic(String regisiterClinic) {
-        this.regisiterClinic = regisiterClinic;
-    }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Applyrecord that = (Applyrecord) o;
-        return Objects.equals(applyId, that.applyId) && Objects.equals(operationId, that.operationId) && Objects.equals(additionalName, that.additionalName) && Objects.equals(registerName, that.registerName) && Objects.equals(registerId, that.registerId) && Objects.equals(applyTime, that.applyTime) && Objects.equals(additionalMoney, that.additionalMoney) && Objects.equals(applyState, that.applyState) && Objects.equals(regisiterClinic, that.regisiterClinic);
+        return Objects.equals(applyId, that.applyId)  && Objects.equals(additionalName, that.additionalName) && Objects.equals(registerName, that.registerName) && Objects.equals(registerId, that.registerId) && Objects.equals(applyTime, that.applyTime) && Objects.equals(additionalMoney, that.additionalMoney) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applyId, operationId, additionalName, registerName, registerId, applyTime, additionalMoney, applyState, regisiterClinic);
+        return Objects.hash(applyId, additionalName, registerName, registerId, applyTime, additionalMoney);
     }
 
     @Override
     public String toString() {
         return "Applyrecord{" +
                 "applyId=" + applyId +
-                ", operationId='" + operationId + '\'' +
                 ", additionalName='" + additionalName + '\'' +
                 ", registerName='" + registerName + '\'' +
                 ", registerId='" + registerId + '\'' +
                 ", applyTime=" + applyTime +
                 ", additionalMoney=" + additionalMoney +
-                ", applyState=" + applyState +
-                ", regisiterClinic='" + regisiterClinic + '\'' +
                 '}';
     }
 }

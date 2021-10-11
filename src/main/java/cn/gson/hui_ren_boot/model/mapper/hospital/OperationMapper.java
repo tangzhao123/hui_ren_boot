@@ -11,11 +11,11 @@ import java.util.List;
 
 @Mapper
 public interface OperationMapper {
-    public List<Additional> allOperation();
+    public List<Additional> allOperation();//查询搜书项目
     public List<Staff>allStaff(Staff staffu);
     public List<Staff>allStaff2();
     public Medical allMedicals(Medical staffu);
-    public void addSurgeryfor(Surgeryfor surgeryfor);
-    public List<Surgeryfor> allSurgeryfor(Surgeryfor surgeryfor);
-    public void deleteSurgeryfor(Surgeryfor surgeryfor);
+    public void addSurgeryfor(Surgeryfor surgeryfor);//添加手术申请表
+    public List<Surgeryfor> allSurgeryfor(Surgeryfor surgeryfor);//查询手术申请
+    public void deleteSurgeryfor(Surgeryfor surgeryfor);//删除手术申请
 }

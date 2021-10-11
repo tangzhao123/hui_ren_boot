@@ -25,6 +25,8 @@ public class Advice{
     private String adviceDoctors;//处方忌讳
     private String registerName;//患者姓名
     private Long  adviceChindose;//中药数量
+    private Long  adviceState;//主表状态
+    private Long  medicalId;//科室编号
     private List<Details> details;//医嘱详情
 
 
@@ -60,7 +62,6 @@ public class Advice{
 
 
 
-
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
     @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
@@ -81,7 +82,24 @@ public class Advice{
     public void setAdviceChindose(Long adviceChindose) {
         this.adviceChindose = adviceChindose;
     }
+    @Basic
+    @Column(name = "ADVICE_STATE")
+    public Long getAdviceState() {
+        return adviceState;
+    }
 
+    public void setAdviceState(Long adviceState) {
+        this.adviceState = adviceState;
+    }
+    @Basic
+    @Column(name = "MEDICAL_ID")
+    public Long getMedicalId() {
+        return medicalId;
+    }
+
+    public void setMedicalId(Long mecicalId) {
+        this.medicalId = mecicalId;
+    }
     @Basic
     @Column(name = "REGISTER_NAME")
     public String getRegisterName() {
@@ -197,12 +215,12 @@ public class Advice{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Advice advice = (Advice) o;
-        return adviceSerial == advice.adviceSerial && Objects.equals(adviceId, advice.adviceId) && Objects.equals(registerId, advice.registerId) && Objects.equals(adviceStart, advice.adviceStart) && Objects.equals(adviceSickbed, advice.adviceSickbed) && Objects.equals(staffName, advice.staffName) && Objects.equals(adviceCost, advice.adviceCost) && Objects.equals(adviceType, advice.adviceType) && Objects.equals(adviceEnd, advice.adviceEnd) && Objects.equals(adviceChinese, advice.adviceChinese) && Objects.equals(adviceDoctors, advice.adviceDoctors)&& Objects.equals(registerName, advice.registerName) && Objects.equals(adviceChindose, advice.adviceChindose);
+        return adviceSerial == advice.adviceSerial && Objects.equals(adviceId, advice.adviceId) && Objects.equals(registerId, advice.registerId) && Objects.equals(adviceStart, advice.adviceStart) && Objects.equals(adviceSickbed, advice.adviceSickbed) && Objects.equals(staffName, advice.staffName) && Objects.equals(adviceCost, advice.adviceCost) && Objects.equals(adviceType, advice.adviceType) && Objects.equals(adviceEnd, advice.adviceEnd) && Objects.equals(adviceChinese, advice.adviceChinese) && Objects.equals(adviceDoctors, advice.adviceDoctors)&& Objects.equals(registerName, advice.registerName) && Objects.equals(adviceChindose, advice.adviceChindose)&& Objects.equals(adviceState, advice.adviceState)&& Objects.equals(medicalId, advice.medicalId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(adviceSerial, adviceId, registerId, adviceStart, adviceSickbed, staffName, adviceCost, adviceType, adviceEnd, adviceChinese,registerName, adviceDoctors,adviceChindose);
+        return Objects.hash(adviceSerial, adviceId, registerId, adviceStart, adviceSickbed, staffName, adviceCost, adviceType, adviceEnd, adviceChinese,registerName, adviceDoctors,adviceChindose,adviceState,medicalId);
     }
 
     @Override
