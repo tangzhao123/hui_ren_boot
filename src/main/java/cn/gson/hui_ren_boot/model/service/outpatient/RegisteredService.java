@@ -14,7 +14,7 @@ public class RegisteredService {
     @Autowired
     TreatmentCardMapper treatmentCardMapper;
 
-    public Object selLockByPage(Integer pageNo,Integer size,String treatmentCard){
+    public Object selLock(String treatmentCard){
         return treatmentCardMapper.selLock(treatmentCard);
     }
 }

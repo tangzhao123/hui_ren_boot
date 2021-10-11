@@ -3,8 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--诊疗卡充值记录-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TreatmentRechargeMapper">
+    <resultMap id="rechargeMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge">
+        <id column="RECHARGE_ID" property="rechargeId"/>
+        <result column="TREATMENT_NO" property="treatmentNo"/>
+        <result column="RECHARGE_TIME" property="rechargeTime"/>
+        <result column="RECHARGE_MONEY" property="rechargeMoney"/>
+        <result column="RECHARGE_TYPE" property="rechargeType"/>
+    </resultMap>
+
     <!--新增诊疗卡充值记录-->
     <insert id="addCharge">
-        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney})
+        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney}，#{rechargeType})
     </insert>
+
+    <!--查询账单-->
+    <select id="selRecharge" resultMap="rechargeMap">
+        select * from TREATMENT_RECHARGE where TREATMENT_NO = #{treatmentNo}
+    </select>
 </mapper>

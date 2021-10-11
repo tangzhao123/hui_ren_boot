@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.controller.outpatient;
 
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
 import cn.gson.hui_ren_boot.model.service.outpatient.TreatmentCardService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -46,5 +47,17 @@ public class TreatmentCardController {
     @RequestMapping("/del-card")
     public void delCard(@RequestBody String treatmentNo){
         treatmentCardService.delCard(treatmentNo.substring(0,treatmentNo.length()-1));
+    }
+
+    //挂失，根据卡号修改卡的状态
+    @RequestMapping("/unlock-card")
+    public void unlock(@RequestBody String treatmentNo){
+        treatmentCardService.unlock(treatmentNo.substring(0,treatmentNo.length()-1));
+    }
+
+    //查询账单
+    @RequestMapping("/sel-recharge")
+    public List<TreatmentRecharge> selRecharge(String treatmentNo){
+        return treatmentCardService.selRecharge(treatmentNo);
     }
 }

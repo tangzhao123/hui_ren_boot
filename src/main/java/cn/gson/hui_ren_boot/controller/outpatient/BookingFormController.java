@@ -71,8 +71,8 @@ public class BookingFormController {
 
     //退号，分页查询当天未诊挂号单
     @RequestMapping("/sel-booking")
-    public Object selBooking(Integer pageNo,Integer size,String bookingNo){
-        return bookingFormService.selBookingByPage(pageNo, size,bookingNo);
+    public Object selBooking(String bookingNo,String outpatientName,String outpatientCard){
+        return bookingFormService.selBooking(bookingNo,outpatientName,outpatientCard);
     }
 
     //退号，修改挂号单的状态，同时新增一条退号单

@@ -1,5 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.outpatient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -9,8 +11,10 @@ import java.util.Objects;
 public class TreatmentRecharge {
     private long rechargeId;
     private String treatmentNo;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date rechargeTime;
-    private long rechargeMoney;
+    private double rechargeMoney;
+    private String rechargeType;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -46,35 +50,31 @@ public class TreatmentRecharge {
 
     @Basic
     @Column(name = "RECHARGE_MONEY")
-    public long getRechargeMoney() {
+    public double getRechargeMoney() {
         return rechargeMoney;
     }
 
-    public void setRechargeMoney(long rechargeMoney) {
+    public void setRechargeMoney(double rechargeMoney) {
         this.rechargeMoney = rechargeMoney;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TreatmentRecharge that = (TreatmentRecharge) o;
-        return rechargeId == that.rechargeId && rechargeMoney == that.rechargeMoney && Objects.equals(treatmentNo, that.treatmentNo) && Objects.equals(rechargeTime, that.rechargeTime);
+    @Basic
+    @Column(name = "RECHARGE_TYPE")
+    public String getRechargeType() {
+        return rechargeType;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(rechargeId, treatmentNo, rechargeTime, rechargeMoney);
+    public void setRechargeType(String rechargeType) {
+        this.rechargeType = rechargeType;
     }
 
     public TreatmentRecharge() {
     }
 
-    public TreatmentRecharge(long rechargeId, String treatmentNo, Date rechargeTime, long rechargeMoney) {
-        this.rechargeId = rechargeId;
+    public TreatmentRecharge(String treatmentNo, long rechargeMoney, String rechargeType) {
         this.treatmentNo = treatmentNo;
-        this.rechargeTime = rechargeTime;
         this.rechargeMoney = rechargeMoney;
+        this.rechargeType = rechargeType;
     }
 
     public TreatmentRecharge(String treatmentNo, long rechargeMoney) {

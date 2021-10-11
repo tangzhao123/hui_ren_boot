@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * 诊疗卡
  */
@@ -37,7 +39,7 @@ public class TreatmentCardService {
     //充值，根据卡号修改余额，同时新增诊疗卡充值记录
     public void editBalance(TreatmentCard treatmentCard){
         treatmentCardMapper.editBalance(treatmentCard);
-        TreatmentRecharge recharge = new TreatmentRecharge(treatmentCard.getTreatmentNo(), treatmentCard.getMoney());
+        TreatmentRecharge recharge = new TreatmentRecharge(treatmentCard.getTreatmentNo(), treatmentCard.getMoney(),"充值");
         treatmentRechargeMapper.addCharge(recharge);
     }
 
@@ -45,5 +47,16 @@ public class TreatmentCardService {
     public void delCard(String treatmentNo){
         treatmentCardMapper.delCard(treatmentNo);
         treatmentLossMapper.addLoss(treatmentNo);
+    }
+
+    //解锁，根据卡号修改卡的状态,同时新增诊疗卡挂失表
+    public void unlock(String treatmentNo){
+        treatmentCardMapper.unlock(treatmentNo);
+        treatmentLossMapper.delLoss(treatmentNo);
+    }
+
+    //查询账单
+    public List<TreatmentRecharge> selRecharge(String treatmentNo){
+        return treatmentRechargeMapper.selRecharge(treatmentNo);
     }
 }

@@ -119,9 +119,9 @@
         left JOIN medical me on b.medical_id = me.medical_id
         where to_char(b.BOOKING_DATE,'yyyy-mm-dd') = to_char(current_timestamp ,'yyyy-mm-dd')
           and b.BOOKING_STATE = 0
-        <if test="bookingNo != null and '' != bookingNo">
-           and b.BOOKING_NO like '%${bookingNo}%'
-        </if>
+          and b.BOOKING_NO = #{bookingNo}
+          or o.OUTPATIENT_NAME = #{outpatientName}
+          or o.OUTPATIENT_CARD = #{outpatientCard}
     </select>
 
     <!--修改挂号单为退号状态-->

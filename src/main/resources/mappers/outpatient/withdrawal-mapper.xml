@@ -32,6 +32,7 @@
         insert into WITHDRAWAL values (seq_huiren.nextval,#{bookingNo},current_timestamp ,#{cause})
     </insert>
 
+    <!--查询当天退号-->
     <select id="selBack" resultMap="backMap">
         select * from WITHDRAWAL wi
             left join BOOKING_FORM bf on wi.BOOKING_NO = bf.BOOKING_NO

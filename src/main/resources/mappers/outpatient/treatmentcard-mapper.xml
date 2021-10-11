@@ -45,6 +45,11 @@
         update TREATMENT_CARD set TREATMENT_LOCK=1 where TREATMENT_NO=#{treatmentNo}
     </update>
 
+    <!--解锁，根据卡号修改卡的状态-->
+    <update id="unlock">
+        update TREATMENT_CARD set TREATMENT_LOCK=0 where TREATMENT_NO=#{treatmentNo}
+    </update>
+
     <!--挂号页面的卡号查询，只显示未锁定的，根据身份证号查询-->
     <select id="selLock" resultMap="cardMapper">
         select * from TREATMENT_CARD where TREATMENT_LOCK = 0 and TREATMENT_CARD = #{treatmentCard}

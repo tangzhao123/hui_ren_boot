@@ -29,7 +29,7 @@ public interface BookingFormMapper {
     public List<BookingForm> backBooking();
 
     //退号，查询当天未诊的挂号单
-    public List<BookingForm> selBooking(String bookingNo);
+    public List<BookingForm> selBooking(@Param("bookingNo") String bookingNo,@Param("outpatientName") String outpatientName,@Param("outpatientCard") String outpatientCard);
 
     //修改挂号单为退号状态
     public void editState(String bookingNo);
