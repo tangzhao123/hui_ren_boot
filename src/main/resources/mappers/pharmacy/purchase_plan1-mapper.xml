@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.PurchasePlanMapper">
+    <resultMap id="PurchasePlanMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchasePlan">
+        <id column="PURCHASE_SERIAL" property="purchaseSerial"/>
+        <result column="PURCHASE_ID" property="purchaseId"/>
+        <result column="OPERATOR" property="operator"/>
+        <result column="STAFF_NAME" property="staffName"/>
+        <result column="PURCHASE_AMOUNT" property="purchaseAmount"/>
+        <result column="PURCHASE_DATE" property="purchaseDate"/>
+        <result column="PURCHASE_STATE" property="purchaseState"/>
+        <collection property="planDetails" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails">
+            <id column="PLAN_ID" property="planId"/>
+            <result column="PLAN_SERIAL" property="planSerial"/>
+            <result column="PLAN_PRICE" property="purchasePrice"/>
+            <result column="PLAN_NUM" property="planNum"/>
+            <result column="PURCHASE_ID" property="purchaseId"/>
+            <association property="drugInfo" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+                <id column="DRUG_SERIAL" property="drugSerial"/>
+                <result column="DRUG_ID" property="drugId"/>
+                <result column="DRUG_NAME" property="drugName"/>
+            </association>
+            <association property="suppliers" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugSupplier">
+                <id column="SUPPLIER_ID" property="supplierId"/>
+                <result column="SUPPLIER_NAME" property="supplierName"/>
+            </association>
+        </collection>
+
+
+    </resultMap>
+    <select id="allPlan" resultMap="PurchasePlanMapper">
+        select * from PURCHASE_PLAN PU
+        left join PLAN_DETAILS PS on PU.PURCHASE_SERIAL=PS.PURCHASE_ID
+        left join DRUG_INFO DI on DI.DRUG_SERIAL=PS.DRUG_ID
+        left join DRUG_SUPPLIER DS on DS.SUPPLIER_ID=PS.SUPPLIER_ID
+    </select>
+</mapper>

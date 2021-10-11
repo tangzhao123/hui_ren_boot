@@ -74,15 +74,6 @@ public class PurchasePlan {
         this.purchaseDate = purchaseDate;
     }
 
-    @Basic
-    @Column(name = "PURCHASE_STATE")
-    public Long getPurchaseState() {
-        return purchaseState;
-    }
-
-    public void setPurchaseState(Long purchaseState) {
-        this.purchaseState = purchaseState;
-    }
 
     @Basic
     @Column(name = "REVIEWER_ID")

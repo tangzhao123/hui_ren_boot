@@ -19,11 +19,11 @@ public class TransfersService {
     TransfersMapper transfersMapper;
     @Autowired
     AllocatingsMapper allocatingsMapper;
-    public List<Transfers> allTransfersByPage(Transfers transfers){
+    public Object allTransfersByPage(Integer pageNo, Integer size,Transfers transfers){
         return transfersMapper.allTransfers(transfers);
     }
-    public void addTransfers(Transfers drugTransfers){
 
+    public void addTransfers(Transfers drugTransfers){
         transfersMapper.addTransfers(drugTransfers);//新增主表
         List<Allocating>allocatings=drugTransfers.getAllocatings();//接受前台来的集合放入
         for (Allocating k:allocatings) {

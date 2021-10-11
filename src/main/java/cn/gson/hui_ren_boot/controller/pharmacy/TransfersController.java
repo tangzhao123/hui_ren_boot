@@ -18,22 +18,20 @@ public class TransfersController {
     TransfersService transfersService;
    //分页
     @RequestMapping("/transfers")
-    public List<Transfers> allTransfers(Transfers transfers){
-
-        return transfersService.allTransfersByPage(transfers);
-
+    public Object allTransfers(Integer pageNo, Integer size,Transfers transfers){
+        return transfersService.allTransfersByPage(pageNo,size,transfers);
     }
     @RequestMapping("/addTransfers")
     public String addTransfers(@RequestBody Transfers drugTransfers){
-      //try{
+      try{
            transfersService.addTransfers(drugTransfers);
         System.out.println("zy");
         System.out.println(drugTransfers);
             return "ok";
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return "fail";
-//        }
+      }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 
 }

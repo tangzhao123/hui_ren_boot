@@ -27,4 +27,9 @@ public class DrugService {
     public void addDrug(DrugInfo drugInfo){
         drugMapper.addDrug(drugInfo);
     }
+
+    //修改药品字段
+    public void upMange(DrugInfo drugInfo){
+        drugMapper.upMange(drugInfo);
+    }
 }

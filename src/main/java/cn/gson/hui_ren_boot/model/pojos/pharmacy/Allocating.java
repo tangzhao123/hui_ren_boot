@@ -14,6 +14,16 @@ public class Allocating {
     private String drugName; //药品名称
     private String typeName; //药品类别
     private String materialName;//耗材名称
+    private DrugInfo drugInfos;
+
+    @OneToOne
+    public DrugInfo getDrugInfos() {
+        return drugInfos;
+    }
+
+    public void setDrugInfos(DrugInfo drugInfos) {
+        this.drugInfos = drugInfos;
+    }
 
     @Id
     @Column(name = "ALL_SERIAL")

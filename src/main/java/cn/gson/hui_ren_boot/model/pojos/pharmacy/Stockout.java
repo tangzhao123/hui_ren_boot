@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +11,16 @@ public class Stockout {
     private Long stockoutProduct;
     private String stockoutGo;
     private Long stockoutAmount;
+    private DrugInfo drugInfos;
 
+    @OneToOne
+    public DrugInfo getDrugInfos() {
+        return drugInfos;
+    }
+
+    public void setDrugInfos(DrugInfo drugInfos) {
+        this.drugInfos = drugInfos;
+    }
 
     @Id
     @Column(name = "STOCKOUT_ID")

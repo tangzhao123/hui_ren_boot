@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
@@ -21,6 +22,37 @@ public class GoBank {
     private String applyNum; //销毁单号
     private String transfersId;//调拨单号
     private List<Stockout> storageData;//出库详单集合
+    private UserInfo userInfos;
+    private DrugDeport deports;
+    private List<Stockout> stockouts;
+
+
+    @OneToOne
+    public DrugDeport getDeports() {
+        return deports;
+    }
+
+    public void setDeports(DrugDeport deports) {
+        this.deports = deports;
+    }
+
+    @OneToMany
+    public List<Stockout> getStockouts() {
+        return stockouts;
+    }
+
+    public void setStockouts(List<Stockout> stockouts) {
+        this.stockouts = stockouts;
+    }
+
+    @OneToOne
+    public UserInfo getUserInfos() {
+        return userInfos;
+    }
+
+    public void setUserInfos(UserInfo userInfos) {
+        this.userInfos = userInfos;
+    }
 
     @Id
     @Column(name = "GO_ID")

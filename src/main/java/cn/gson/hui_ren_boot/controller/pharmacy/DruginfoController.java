@@ -26,27 +26,30 @@ public class DruginfoController {
     //新增
    @RequestMapping("/adddrug")
    public String addDrug(@RequestBody DrugInfo drugInfo){
-        try{
-            System.out.println(drugInfo);
+       System.out.println(drugInfo.getDrugId());
+        if(drugInfo.getDrugSerial()==null){//新增
+            System.out.println(11111);
             drugService.addDrug(drugInfo);
             return "ok";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "fail";
+        }else {//修改
+            System.out.println(22222);
+            drugService.upMange(drugInfo);
+            return "ok2";
         }
     }
     //修改药品状态
     @RequestMapping("/upstate")
     public String allState(@RequestBody  DrugInfo drugInfow){
-//        try{
+        try{
 
             drugInfow.setDrugState(1L);
             drugService.allState(drugInfow);
             return "ok";
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return "fail";
-//        }
+        }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
 
     }
+
 }

@@ -25,6 +25,34 @@ public class Transfers {
     private String transfersPharmacy;//调拨药房外键
     private GoBank banks;//出库单号外键
     private List<Allocating> allocatings;//详情外键
+    private Pharmacy pharmacys;
+    private DrugDeport deports;
+    private UserInfo userInfos;
+
+    @OneToOne
+    public Pharmacy getPharmacys() {
+        return pharmacys;
+    }
+
+    public void setPharmacys(Pharmacy pharmacys) {
+        this.pharmacys = pharmacys;
+    }
+    @OneToOne
+    public DrugDeport getDeports() {
+        return deports;
+    }
+
+    public void setDeports(DrugDeport deports) {
+        this.deports = deports;
+    }
+    @OneToOne
+    public UserInfo getUserInfos() {
+        return userInfos;
+    }
+
+    public void setUserInfos(UserInfo userInfos) {
+        this.userInfos = userInfos;
+    }
 
     @OneToMany
     public List<Allocating> getAllocatings() {
