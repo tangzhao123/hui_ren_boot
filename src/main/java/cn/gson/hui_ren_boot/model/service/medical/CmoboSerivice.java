@@ -31,8 +31,8 @@ public class CmoboSerivice {
     }
 
     //查询体检套餐
-    public List<Cmobo> seeCmobo(){
-        return cmoboMapper.seeCmobo();
+    public Object seeCmoboByPage(Cmobo cmobo){
+        return cmoboMapper.seeCmobo(cmobo);
     };
 
     //查询体检项目

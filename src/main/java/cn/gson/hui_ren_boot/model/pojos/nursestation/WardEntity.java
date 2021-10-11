@@ -1,8 +1,10 @@
 package cn.gson.hui_ren_boot.model.pojos.nursestation;
 
+import cn.gson.hui_ren_boot.model.pojos.hospital.Sickbed;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,13 +13,23 @@ public class WardEntity {
     private long wardId;
     private String wardMark;
 //    private Long medicalId;
-    private Long staffId;
+    private String staffId;
     private Long wardSite;
     private String wardBeds;
     private Long wardHave;
-    private Long wardCost;
-    private Long wardNursing;
+    private Double wardCost;
+    private Double wardNursing;
     private Medical medical;
+    private List<SickbedEntity> sickbeds;
+
+    @OneToMany
+    public List<SickbedEntity> getSickbeds() {
+        return sickbeds;
+    }
+
+    public void setSickbeds(List<SickbedEntity> sickbeds) {
+        this.sickbeds = sickbeds;
+    }
 
     @ManyToOne
     @JoinColumn(name = "MEDICAL_ID" , referencedColumnName = "MEDICAL_ID")
@@ -61,11 +73,11 @@ public class WardEntity {
 
     @Basic
     @Column(name = "STAFF_ID")
-    public Long getStaffId() {
+    public String getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(Long staffId) {
+    public void setStaffId(String staffId) {
         this.staffId = staffId;
     }
 
@@ -101,21 +113,21 @@ public class WardEntity {
 
     @Basic
     @Column(name = "WARD_COST")
-    public Long getWardCost() {
+    public Double getWardCost() {
         return wardCost;
     }
 
-    public void setWardCost(Long wardCost) {
+    public void setWardCost(Double wardCost) {
         this.wardCost = wardCost;
     }
 
     @Basic
     @Column(name = "WARD_NURSING")
-    public Long getWardNursing() {
+    public Double getWardNursing() {
         return wardNursing;
     }
 
-    public void setWardNursing(Long wardNursing) {
+    public void setWardNursing(Double wardNursing) {
         this.wardNursing = wardNursing;
     }
 
@@ -130,5 +142,20 @@ public class WardEntity {
     @Override
     public int hashCode() {
         return Objects.hash(wardId, wardMark, medical, staffId, wardSite, wardBeds, wardHave, wardCost, wardNursing);
+    }
+
+    @Override
+    public String toString() {
+        return "WardEntity{" +
+                "wardId=" + wardId +
+                ", wardMark='" + wardMark + '\'' +
+                ", staffId='" + staffId + '\'' +
+                ", wardSite=" + wardSite +
+                ", wardBeds='" + wardBeds + '\'' +
+                ", wardHave=" + wardHave +
+                ", wardCost=" + wardCost +
+                ", wardNursing=" + wardNursing +
+                ", medical=" + medical +
+                '}';
     }
 }

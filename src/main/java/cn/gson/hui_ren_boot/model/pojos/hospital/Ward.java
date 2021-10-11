@@ -7,18 +7,20 @@ import java.util.Objects;
 public class Ward {//病房表
 
     private long wardId;//主键
-    private String wardMark;//病床号
+    private String wardMark;//病房号
     private Long medicalId;//科室id
     private String staffId;//负责的护士
     private Long wardSite;//床位数
     private String wardBeds;//地址
     private Long wardHave;//已使用床位数
-    private Long wardCost;//床位费
-    private Long wardNursing;//护理费
+    private Double wardCost;//床位费
+    private Double wardNursing;//护理费
 
 
 
     @Id
+    @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
+    @GeneratedValue(generator = "seq",strategy = GenerationType.SEQUENCE)
     @Column(name = "WARD_ID")
     public long getWardId() {
         return wardId;
@@ -90,21 +92,21 @@ public class Ward {//病房表
 
     @Basic
     @Column(name = "WARD_COST")
-    public Long getWardCost() {
+    public Double getWardCost() {
         return wardCost;
     }
 
-    public void setWardCost(Long wardCost) {
+    public void setWardCost(Double wardCost) {
         this.wardCost = wardCost;
     }
 
     @Basic
     @Column(name = "WARD_NURSING")
-    public Long getWardNursing() {
+    public Double getWardNursing() {
         return wardNursing;
     }
 
-    public void setWardNursing(Long wardNursing) {
+    public void setWardNursing(Double wardNursing) {
         this.wardNursing = wardNursing;
     }
 
@@ -119,5 +121,20 @@ public class Ward {//病房表
     @Override
     public int hashCode() {
         return Objects.hash(wardId, wardMark, medicalId, staffId, wardSite, wardBeds, wardHave, wardCost, wardNursing);
+    }
+
+    @Override
+    public String toString() {
+        return "Ward{" +
+                "wardId=" + wardId +
+                ", wardMark='" + wardMark + '\'' +
+                ", medicalId=" + medicalId +
+                ", staffId='" + staffId + '\'' +
+                ", wardSite=" + wardSite +
+                ", wardBeds='" + wardBeds + '\'' +
+                ", wardHave=" + wardHave +
+                ", wardCost=" + wardCost +
+                ", wardNursing=" + wardNursing +
+                '}';
     }
 }

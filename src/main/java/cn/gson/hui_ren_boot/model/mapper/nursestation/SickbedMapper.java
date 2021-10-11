@@ -2,13 +2,37 @@ package cn.gson.hui_ren_boot.model.mapper.nursestation;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Sickbed;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Ward;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity;
+import cn.gson.hui_ren_boot.model.pojos.nursestation.WardEntity;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface SickbedMapper{
+
+    //查询病床
+    public List<Sickbed> selectbed(@Param("wardMark") String wardMark);
+
+    //新增病床
+    public void insertbed(Sickbed sickbed);
+
+    //修改病房
+    public void updateWard(Ward ward);
+
+    //根据不同条件查询病房
+    public List<WardEntity> selectWard(WardEntity wardEntity);
+
+    //新增病房
+    public void addWard(Ward ward);
+
+    //查询不同科室的护士
+    public List<Staff> staffHu(@Param("medicalId") Long medicalId);
+
     //修改病床记录表
     public void updateRecord(Record record);
 
@@ -16,7 +40,7 @@ public interface SickbedMapper{
     public void updateTwo(String sickbedMark);
 
     //查询病床使用记录
-    public List<Record> selectRecord();
+    public List<Record> selectRecord(Record record);
 
     //修改病人资料，添加床位
     public void updateRegister(Register register);
@@ -28,7 +52,7 @@ public interface SickbedMapper{
     public void updateSickbed(String sickbedMark);
 
     //查询病床
-    public List<SickbedEntity> bingchuang(Long medicalIdf);
+    public List<SickbedEntity> bingchuang(Long medicalId);
 
     //查询病人资料
     public List<Register> registerSelect();

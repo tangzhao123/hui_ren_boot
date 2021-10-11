@@ -6,13 +6,31 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class SurgeryforService {
     @Autowired
     SurgeryforMapper surygeryforMapper;
+
+
+    //修改手术室的位置和所属科室
+    public void xiugaiOperation(String address,String name,String id){
+        surygeryforMapper.xiugaiOperation(address,name,id);
+    }
+
+    //查询手术室
+    public Object selOperationByPage(int pageNo,int size,Operation oper){
+        return surygeryforMapper.selOperation(oper);
+    }
+
+    //新增手术室
+    public void insertOpeart(Operation operation){
+        surygeryforMapper.insertOpeart(operation);
+    }
 
     //    查询状态为0的手术项目，为没有安排手术室的
     public List<Surgeryfor> selectFor(){

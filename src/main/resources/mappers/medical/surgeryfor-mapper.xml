@@ -37,4 +37,35 @@
     <select id="selectRecord" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord">
         SELECT * FROM APPLYRECORD WHERE APPLY_STATE = 0
     </select>
+
+<!--    新增手术室-->
+    <insert id="insertOpeart">
+        INSERT INTO OPERATION VALUES(seq_huiren.nextval,#{operationId},#{operationAddress},0,#{medicalName})
+    </insert>
+
+<!--    查询手术室-->
+    <select id="selOperation" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Operation">
+        SELECT * FROM OPERATION
+        <where>
+            <if test="operationId != null and operationId != '' ">
+                or OPERATION_ID LIKE '%${operationId}%'
+            </if>
+            <if test="operationAddress != null and operationAddress != '' ">
+                or OPERATION_ADDRESS LIKE '%${operationAddress}%'
+            </if>
+            <if test="medicalName != null and medicalName != '' ">
+                or MEDICAL_NAME LIKE '%${medicalName}%'
+            </if>
+        </where>
+    </select>
+
+<!--    修改手术室的位置和所属科室-->
+    <update id="xiugaiOperation">
+        UPDATE OPERATION set OPERATION_ADDRESS = #{operationAddress}, MEDICAL_NAME = #{medicalName} WHERE OPERATION_ID = #{operationId}
+    </update>
+
+<!--    查询医生-->
+<!--    <select id="selDoctort" resultType="">-->
+<!--        -->
+<!--    </select>-->
 </mapper>

@@ -75,4 +75,15 @@ public class Operation {
     public int hashCode() {
         return Objects.hash(operationSeriald, operationId, operationAddress, operationSite);
     }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "operationSeriald=" + operationSeriald +
+                ", operationId='" + operationId + '\'' +
+                ", operationAddress='" + operationAddress + '\'' +
+                ", operationSite=" + operationSite +
+                ", medicalName='" + medicalName + '\'' +
+                '}';
+    }
 }

@@ -45,7 +45,7 @@ public class TestService {
         testMapper.insertTest(test);
     }
 
-    public Object selectCmoboByPage(int pageNo, int size, String testName){
-        return testMapper.selectCmobo(testName);
+    public Object selectCmoboByPage(int pageNo, int size, Test test ){
+        return testMapper.selectCmobo(test);
     }
 }

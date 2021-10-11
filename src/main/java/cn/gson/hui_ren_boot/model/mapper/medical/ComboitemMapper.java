@@ -7,6 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface ComboitemMapper {
+    public List<Comboitem> ssss();
 
     //体检项目查询
     public List<Comboitem> selectAll(Comboitem comboitem);

@@ -8,6 +8,7 @@ import cn.gson.hui_ren_boot.model.service.medical.CmoboSerivice;
 import cn.gson.hui_ren_boot.model.service.medical.ComboitemService;
 import cn.gson.hui_ren_boot.model.service.medical.TestService;
 import cn.gson.hui_ren_boot.utils.MyUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,7 @@ public class TestController {
                 System.out.println("项目"+c.getItemId());
                 testmiddle.setTestAccount(t.getTestAccount());
                 testmiddle.setItemId(c.getItemId());
-                testService.addMiddle(testmiddle);
+                testService.addMiddle(testmiddle);//新增中间表
             }
         }
 
@@ -94,7 +95,8 @@ public class TestController {
 //        System.out.println("大小"+size);
 //        System.out.println("名字"+testName);
 //        System.out.println(testService.selectCmoboByPage(pageNo,size,testName));
-        return testService.selectCmoboByPage(pageNo,size,testName);
+        Test t = JSONObject.parseObject(testName,Test.class);
+        return testService.selectCmoboByPage(pageNo,size,t);
     }
 
 }
