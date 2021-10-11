@@ -19,6 +19,7 @@
         <result column="REGISTER_CALL" property="registerCall"/>
         <result column="REGISTER_RECORD" property="registerRecord"/>
         <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <result column="REGISTER_STATE" property="registerState"/>
 <!--        科室-->
         <association property="medical" javaType="Medical">
             <id column="MEDICAL_ID" property="medicalId"/>
@@ -157,12 +158,12 @@
     <insert id="addRegister">
         insert into register (register_serica,register_id,register_date,register_name,register_sex,register_site,
                 register_card,register_print,register_age,register_home,register_address,register_phone,register_relation,
-                register_contact,register_call,medical_id,register_record,register_clinic)
+                register_contact,register_call,medical_id,register_record,register_clinic,register_state)
             values(seq_huiren.nextval,#{registerId},current_timestamp,#{registerName}
                 ,#{registerSex},#{registerSite},#{registerCard},#{registerPrint},
                 #{registerAge},#{registerHome},#{registerAddress},#{registerPhone},
                 #{registerRelation},#{registerContact},#{registerCall},#{medicalId},
-                 #{registerRecord},#{registerClinic})
+                 #{registerRecord},#{registerClinic},0)
     </insert>
     <!--修改个人信息-->
     <update id="upRegister">

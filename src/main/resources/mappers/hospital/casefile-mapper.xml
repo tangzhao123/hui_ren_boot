@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.CasefileMapper">
+    <insert id="addCasefile">
+        insert  into casefile  values (seq_huiren.nextval,#{casefileId},current_timestamp,#{registerId},#{casefileName},#{casefileResults},#{casefilePlan},#{casefileHpi},#{casefilePh},#{casefileFamily},#{casefileUps},#{casefileAllergy},#{casefileUser},#{adviceId})
+    </insert>
+    <select id="selectCasefile" resultType="Casefile">
+        select*from casefile where register_id =#{registerId}
+    </select>
+
+    <select id="allCasefile" resultType="Casefile">
+        select*from casefile where advice_id =#{adviceId}
+    </select>
+</mapper>

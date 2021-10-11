@@ -16,8 +16,9 @@
 <!--    <select id="allMedicals" resultType="Medical">-->
 <!--&#45;&#45;             select*from medical where medical_name=#{medicalName}-->
 <!--     </select>-->
+<!--    新增手术申请表-->
     <insert id="addSurgeryfor">
-        insert into surgeryfor values(seq_huiren.nextval,#{registerName},#{registerId},#{registerClinic},current_timestamp,0,#{additionalName},#{additionalMoney},#{additionalLevel},#{additionalBlade},#{additionaAnesthesia})
+        insert into surgeryfor values(seq_huiren.nextval,#{registerName},#{registerId},#{registerClinic},current_timestamp,0,#{additionalName},#{additionalMoney},#{additionalLevel},#{additionalBlade},#{additionaAnesthesia},#{medicalName},#{surgeryforTime})
     </insert>
     <select id="allSurgeryfor" resultType="Surgeryfor">
         select*from surgeryfor where register_id=#{registerId}

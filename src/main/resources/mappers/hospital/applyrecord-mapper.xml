@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.ApplyrecordMapper">
+    <!--新增手术扣费记录表-->
+    <insert id="insertApp">
+        insert into applyrecord values (seq_huiren.nextval,#{additionalName},#{registerName},#{registerId},current_timestamp,#{additionalMoney})
+    </insert>
+<!--    修改诊疗卡的金额-->
+    <update id="uptApp">
+        update treatment_card set treatment_balance=treatment_balance-#{treatmentBalance} where treatment_no=#{treatmentNo}
+    </update>
+</mapper>

@@ -26,5 +26,8 @@
     <select id="allResults" resultType="Combinspection">
         select *from  combinspection where inspection_phone=#{inspectionPhone}
     </select>
-
+<!--    查询患者表-->
+    <select id="akkRegister" resultType="register">
+        select *from register where register_phone=#{registerPhone}
+    </select>
 </mapper>

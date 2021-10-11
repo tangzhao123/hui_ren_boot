@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.model.pojos.hospital;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -9,7 +10,7 @@ public class Hospitalcare {//床位护理扣费表
 
     private long hospitalcareId;//主键
     private String hospitalcareName;//患者名
-    private Time hospitalcareDate;//扣费时间
+    private Date hospitalcareDate;//扣费时间
     private String registerId;//住院号
     private Long hospitalcareMoney;//扣费总额
     private Long sickbedNursing;//护理费
@@ -55,11 +56,11 @@ public class Hospitalcare {//床位护理扣费表
 
     @Basic
     @Column(name = "HOSPITALCARE_DATE")
-    public Time getHospitalcareDate() {
+    public Date getHospitalcareDate() {
         return hospitalcareDate;
     }
 
-    public void setHospitalcareDate(Time hospitalcareDate) {
+    public void setHospitalcareDate(Date hospitalcareDate) {
         this.hospitalcareDate = hospitalcareDate;
     }
 

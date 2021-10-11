@@ -39,12 +39,12 @@ public class SurgeryforController {
 //        System.out.println("手术室的使用状态手术室的名称："+operation.getMedicalName());
 
         Applyrecord applyrecord = new Applyrecord();//手术室安排
-        applyrecord.setOperationId(operation.getOperationId());//手术室id
+//        applyrecord.setOperationId(operation.getOperationId());//手术室id
         applyrecord.setAdditionalName(surgeryfor.getAdditionalName());//手术项目名称
         applyrecord.setRegisterName(surgeryfor.getRegisterName());//患者姓名
         applyrecord.setRegisterId(surgeryfor.getRegisterId());//住院号
         applyrecord.setAdditionalMoney(surgeryfor.getAdditionalMoney());//手术费用
-        applyrecord.setRegisiterClinic(surgeryfor.getRegisterClinic());//诊疗卡
+//        applyrecord.setRegisiterClinic(surgeryfor.getRegisterClinic());//诊疗卡
         surgeryforService.addApply(applyrecord);//新增手术室使用记录
 
         surgeryforService.updateFor(surgeryfor.getRegisterId());//修改病人手术项目，改为已安排手术室

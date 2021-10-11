@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.BreakdownMapper">
+    <resultMap id="BreakMap" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_SEX" property="registerSex"/>
+        <result column="REGISTER_SITE" property="registerSite"/>
+        <result column="REGISTER_CARD" property="registerCard"/>
+        <result column="REGISTER_PRINT" property="registerPrint"/>
+        <result column="REGISTER_AGE" property="registerAge"/>
+        <result column="REGISTER_HOME" property="registerHome"/>
+        <result column="REGISTER_ADDRESS" property="registerAddress"/>
+        <result column="REGISTER_PHONE" property="registerPhone"/>
+        <result column="REGISTER_RELATION" property="registerRelation"/>
+        <result column="REGISTER_CONTACT" property="registerContact"/>
+        <result column="REGISTER_CALL" property="registerCall"/>
+        <result column="REGISTER_RECORD" property="registerRecord"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <!--护理 床位-->
+        <collection property="hospitalcare" ofType="cn.gson.hui_ren_boot.model.pojos.hospital.Hospitalcare" >
+            <id column="hospitalcare_Id" property="hospitalcareId"/>
+            <result column="sickbed_nursing" property="sickbedNursing"/>
+            <result column="sickbed_cost" property="sickbedCost"/>
+            <result column="hospitalcare_date" property="hospitalcareDate"/>
+        </collection>
+        <!--医嘱-->
+        <collection property="prndebit" ofType="cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit" >
+            <id column="prndebit_d" property="prndebitId"/>
+            <result column="prndebit_sum" property="prndebitSum"/>
+            <result column="prndebit_date" property="prndebitDate"/>
+        </collection>
+        <!--检验-->
+        <collection property="inspectDebit" ofType="cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit" >
+            <id column="debit_id" property="debitId"/>
+            <result column="debit_Money" property="debitMoney"/>
+        </collection>
+
+        <!--手术-->
+        <collection property="applyrecord" ofType="cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord">
+            <id column="apply_Id" property="applyId"/>
+            <result column="apply_time" property="applyTime"/>
+            <result column="additional_money" property="additionalMoney"/>
+        </collection>
+    </resultMap>
+
+
+    <resultMap id="inPu" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_SEX" property="registerSex"/>
+        <result column="REGISTER_SITE" property="registerSite"/>
+        <result column="REGISTER_CARD" property="registerCard"/>
+        <result column="REGISTER_PRINT" property="registerPrint"/>
+        <result column="REGISTER_AGE" property="registerAge"/>
+        <result column="REGISTER_HOME" property="registerHome"/>
+        <result column="REGISTER_ADDRESS" property="registerAddress"/>
+        <result column="REGISTER_PHONE" property="registerPhone"/>
+        <result column="REGISTER_RELATION" property="registerRelation"/>
+        <result column="REGISTER_CONTACT" property="registerContact"/>
+        <result column="REGISTER_CALL" property="registerCall"/>
+        <result column="REGISTER_RECORD" property="registerRecord"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <!--        诊疗卡-->
+        <association property="treatment">
+            <result column="TREATMENT_BALANCE" property="treatmentBalance"/>
+        </association>
+        <!--        科室-->
+        <association property="medical" javaType="Medical">
+            <id column="MEDICAL_ID" property="medicalId"/>
+            <result column="MEDICAL_NAME" property="medicalName"/>
+        </association>
+<!--        医生-->
+        <association property="staff" javaType="Staff" >
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
+        </association>
+    </resultMap>
+    <resultMap id="Prndt" type="cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit">
+        <id column="prndebit_Id" property="prndebitId"/>
+        <result column="prndebit_sum" property="prndebitSum"/>
+        <result column="prndebit_user" property="prndebitUser"/>
+        <result column="register_id" property="registerId"/>
+        <result column="prndebit_date" property="prndebitDate"/>
+        <result column="advice_id" property="adviceId"/>
+        <result column="register_name" property="registerName"/>
+        <collection property="details" ofType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
+            <id column="details_serial" property="detailsSerial"/>
+            <result column="drug_name" property="drugName"/>
+            <result column="details_drip" property="detailsDrip"/>
+            <result column="daralis_usage" property="daralisUsage"/>
+            <result column="daralis_Time" property="daralisTime"/>
+            <result column="daralis_dstate" property="daralisDstate"/>
+            <result column="daralis_price" property="daralisPrice"/>
+            <result column="daralis_number" property="daralisNumber"/>
+            <result column="standard_name" property="standardName"/>
+            <result column="standard_use" property="standardUse"/>
+            <result column="daralis_mark" property="daralisMark"/>
+            <result column="details_money" property="detailsMoney"/>
+            <result column="drug_recipe" property="drugRecipe"/>
+        </collection>
+
+    </resultMap>
+    <resultMap id="inspec" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_SEX" property="registerSex"/>
+        <result column="REGISTER_SITE" property="registerSite"/>
+        <result column="REGISTER_CARD" property="registerCard"/>
+        <result column="REGISTER_PRINT" property="registerPrint"/>
+        <result column="REGISTER_AGE" property="registerAge"/>
+        <result column="REGISTER_HOME" property="registerHome"/>
+        <result column="REGISTER_ADDRESS" property="registerAddress"/>
+        <result column="REGISTER_PHONE" property="registerPhone"/>
+        <result column="REGISTER_RELATION" property="registerRelation"/>
+        <result column="REGISTER_CONTACT" property="registerContact"/>
+        <result column="REGISTER_CALL" property="registerCall"/>
+        <result column="REGISTER_RECORD" property="registerRecord"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <collection property="inspectDebit" ofType="cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit" >
+            <id column="debit_id" property="debitId"/>
+            <result column="debit_date" property="debitDate"/>
+            <result column="debit_project" property="debitProject"/>
+            <result column="debit_money" property="debitMoney"/>
+            <result column="test_phone" property="testPhone"/>
+        </collection>
+    </resultMap>
+    <select id="selectBreak" resultMap="BreakMap">
+        select*from register kl left join hospitalcare kh on kl.register_id=kh.register_id left join prndebit kn on kl.register_id=kn.register_id left join inspect_debit ko on ko.test_phone=kl.register_phone left join applyrecord cod on cod.register_id=kl.register_id where kl.register_id=#{registerId}
+    </select>
+<!--    患者信息-->
+    <select id="allPar" resultMap="inPu">
+        select *from register kl left join  treatment_card ca on kl.register_clinic=ca.treatment_no left join   medical ca on ca.medical_id=kl.medical_id left join staff kj on kl.staff_id=kj.staff_id
+        <where>
+            <if  test="registerPhone != null and '' != registerPhone">
+                or kl.REGISTER_PHONE like '%${registerPhone}%'
+            </if>
+            <if test="registerClinic != null and '' != registerClinic">
+                or kl.REGISTER_CLINIC like '%${registerClinic}%'
+            </if>
+            <if test="registerId != null and '' != registerId">
+                or kl.register_id like '%${registerId}%'
+            </if>
+        </where>
+    </select>
+    <!--护理 床位查询-->
+    <select id="allHospitalcare" resultType="Hospitalcare">
+        select *from hospitalcare where  register_id=#{registerId}
+    </select>
+    <!--医嘱查询-->
+    <select id="allPrndebit" resultMap="Prndt">
+        select *from prndebit km    left join details  ls  on  km.register_id =ls.register_id where  km.register_id=#{registerId}
+    </select>
+    <!--检验查询-->
+    <select id="allInspectDebit" resultType="InspectDebit">
+        select *from   inspect_debit where test_phone =#{registerPhone}
+    </select>
+    <!--手术查询-->
+    <select id="allApplyrecord" resultType="Applyrecord">
+        select *from applyrecord where register_id=#{registerId}
+    </select>
+    <select id="akkRegister" resultType="Register">
+        select *from register
+        <where>
+            <if  test="registerPhone != null and '' != registerPhone">
+                or REGISTER_PHONE like '%${registerPhone}%'
+            </if>
+            <if test="registerClinic != null and '' != registerClinic">
+                or REGISTER_CLINIC like '%${registerClinic}%'
+            </if>
+            <if test="registerId != null and '' != registerId">
+            or REGISTER_ID  like '%${registerId}%'
+            </if>
+        </where>
+    </select>
+</mapper>

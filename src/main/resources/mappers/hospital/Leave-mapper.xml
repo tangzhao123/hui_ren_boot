@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.LeaveMapper">
+    <resultMap id="lbRegister" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <association property="treatment">
+            <result column="TREATMENT_BALANCE" property="treatmentBalance"></result>
+
+        </association>
+        <association property="inform">
+            <result column="INFORM_ID" property="informId"></result>
+        </association>
+    </resultMap>
+    <select id="allRegisters" resultMap="lbRegister">--连表查询
+        select *from register kl left join  treatment_card ca on kl.register_clinic=ca.treatment_no left join inform cs on cs.register_id=kl.register_id where kl.register_id=#{registerId}
+    </select>
+    <insert id="addLeave">--添加将出演登记表
+        insert  into leave(leave_serial,leave_name,leave_date,leave_state,leave_arrears,register_id )values (seq_huiren.nextval,#{leaveName},current_timestamp,#{leaveState},#{leaveArrears},#{registerId})
+    </insert>
+    <update id="upTreatmentCard">--补款退款修改金额
+        update treatment_card set treatment_balance=treatment_balance-#{treatmentBalance} where treatment_no=#{treatmentNo}
+    </update>
+
+</mapper>

@@ -15,12 +15,12 @@ public class Surgeryfor {
     private Date surgeryforDate;//申请时间
     private Long surgeryforState;//申请状态
     private String additionalName;//手术名
-    private Long additionalMoney;//手术费
+    private Double additionalMoney;//手术费
     private String additionalLevel;//手术级别
     private String additionalBlade;//切口
     private String additionaAnesthesia;//麻醉方式
-
-
+    private String medicalName;//科室名
+    private Date surgeryforTime;//手术预计时间
     @Id
     @Column(name = "SURGERYFOR_ID")
     public String getSurgeryforId() {
@@ -29,6 +29,24 @@ public class Surgeryfor {
 
     public void setSurgeryforId(String surgeryforId) {
         this.surgeryforId = surgeryforId;
+    }
+    @Basic
+    @Column(name = "MEDICAL_NAME")
+    public String getMedicalName() {
+        return medicalName;
+    }
+
+    public void setMedicalName(String medicalName) {
+        this.medicalName = medicalName;
+    }
+    @Basic
+    @Column(name = "SURGERYFOR_TIME")
+    public Date getSurgeryforTime() {
+        return surgeryforTime;
+    }
+
+    public void setSurgeryforTime(Date surgeryforTime) {
+        this.surgeryforTime = surgeryforTime;
     }
 
     @Basic
@@ -93,11 +111,11 @@ public class Surgeryfor {
 
     @Basic
     @Column(name = "ADDITIONAL_MONEY")
-    public Long getAdditionalMoney() {
+    public Double getAdditionalMoney() {
         return additionalMoney;
     }
 
-    public void setAdditionalMoney(Long additionalMoney) {
+    public void setAdditionalMoney(Double additionalMoney) {
         this.additionalMoney = additionalMoney;
     }
 

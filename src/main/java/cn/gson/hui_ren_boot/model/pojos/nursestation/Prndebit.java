@@ -1,7 +1,11 @@
 package cn.gson.hui_ren_boot.model.pojos.nursestation;
 
+import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
+
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,9 +14,18 @@ public class Prndebit {
     private Long prndebitSum;//扣费总额
     private String prndebitUser;//执行人
     private String registerId;//住院号
-    private Time prndebitDate;//扣费时间
+    private Date prndebitDate;//扣费时间
     private String adviceId;//医嘱号
     private String registerName;//患者名
+    private List<Details> details;//医嘱详情周洋加
+    @OneToMany
+    public List<Details> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<Details> details) {
+        this.details = details;
+    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -58,11 +71,11 @@ public class Prndebit {
 
     @Basic
     @Column(name = "PRNDEBIT_DATE")
-    public Time getPrndebitDate() {
+    public Date getPrndebitDate() {
         return prndebitDate;
     }
 
-    public void setPrndebitDate(Time prndebitDate) {
+    public void setPrndebitDate(Date prndebitDate) {
         this.prndebitDate = prndebitDate;
     }
 

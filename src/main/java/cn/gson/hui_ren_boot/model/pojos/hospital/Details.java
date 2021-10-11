@@ -20,7 +20,6 @@ public class Details {
     private Date daralisStart;//开始时间
     private Long daralisPrice;//单价
     private Long daralisNumber;//药品数量
-
     private String standardUse;//剂型
     private String daralisMark;//医嘱详情号
     private String registerId;//住院号
