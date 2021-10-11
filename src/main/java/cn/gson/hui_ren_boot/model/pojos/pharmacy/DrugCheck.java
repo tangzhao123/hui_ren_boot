@@ -22,6 +22,7 @@ public class DrugCheck {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Timestamp checkDate;//盘点日期
     private String checkGo;//销毁单号
+    private Long checkState;//审核状态
     private List<Inventory> inventoryData;//盘点详情集合
 
 
@@ -125,6 +126,15 @@ public class DrugCheck {
         this.checkGo = checkGo;
     }
 
+    @Basic
+    @Column(name = "CHECK_STATE")
+    public Long getCheckState() {
+        return checkState;
+    }
+
+    public void setCheckState(Long checkState) {
+        this.checkState = checkState;
+    }
 
     @OneToMany
     public List<Inventory> getInventoryData() {

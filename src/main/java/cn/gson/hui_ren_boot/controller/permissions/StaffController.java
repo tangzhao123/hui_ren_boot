@@ -38,6 +38,11 @@ public class StaffController {
         return staffService.allStaffByPage(pageNo,size,search);
     }
 
+    @GetMapping("allStaff-list")
+    public List<Staff> findAllStaff(){
+        return staffService.findAllStaff();
+    }
+
     //新增用户和员工
     @RequestMapping("add-staff")
     public String addStaff(@RequestBody Staff staff){

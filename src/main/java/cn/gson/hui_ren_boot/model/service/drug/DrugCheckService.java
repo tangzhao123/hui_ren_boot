@@ -2,8 +2,10 @@ package cn.gson.hui_ren_boot.model.service.drug;
 
 import cn.gson.hui_ren_boot.model.mapper.drug.DrugCheckMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.InventoryMapper;
+import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugCheck;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.Inventory;
+import cn.gson.hui_ren_boot.model.service.permissions.CheckInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,9 @@ public class DrugCheckService {
 
     @Autowired
     InventoryMapper inventoryMapper;
+
+    @Autowired
+    CheckInfoService checkInfoService;
 
     //新增盘点表跟盘点详情表
     public void addDrugCheck(DrugCheck drugCheck){
@@ -43,8 +48,9 @@ public class DrugCheckService {
     }
 
     //审批盘点单
-    public void updateDrugCheck(Long checkAuditor, String checkNo){
-        drugCheckMapper.updateDrugCheck(checkAuditor, checkNo);
+    public void updateDrugCheck(CheckInfo checkInfo){
+        checkInfoService.addCheckInfo(checkInfo);
+        drugCheckMapper.updateDrugCheck(checkInfo.getCheckNo());
     }
 
     //新增销毁申请单号

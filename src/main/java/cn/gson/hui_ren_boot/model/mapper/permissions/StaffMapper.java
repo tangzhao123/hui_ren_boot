@@ -14,6 +14,8 @@ public interface StaffMapper {
     //查询所有员工
     public List<Staff> allStaff(String search);
 
+    public List<Staff> findAllStaff();
+
     //新增员工
     public void addStaff(Staff staff);
 

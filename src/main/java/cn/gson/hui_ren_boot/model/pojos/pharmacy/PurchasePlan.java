@@ -19,6 +19,7 @@ public class PurchasePlan {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date purchaseDate;
     private Long purchaseState;
+    private Long reviewerId;//审核人
     private List<PlanDetails> planDetails;
 
 
@@ -83,6 +84,16 @@ public class PurchasePlan {
         this.purchaseState = purchaseState;
     }
 
+    @Basic
+    @Column(name = "REVIEWER_ID")
+    public Long getReviewerId() {
+        return reviewerId;
+    }
+
+    public void setReviewerId(Long reviewerId) {
+        this.reviewerId = reviewerId;
+    }
+
     @OneToMany
     public List<PlanDetails> getPlanDetails() {
         return planDetails;
@@ -119,8 +130,11 @@ public class PurchasePlan {
                 "purchaseSerial=" + purchaseSerial +
                 ", purchaseId='" + purchaseId + '\'' +
                 ", operator=" + operator +
+                ", staffName='" + staffName + '\'' +
                 ", purchaseAmount=" + purchaseAmount +
                 ", purchaseDate=" + purchaseDate +
+                ", purchaseState=" + purchaseState +
+                ", reviewerId=" + reviewerId +
                 ", planDetails=" + planDetails +
                 '}';
     }

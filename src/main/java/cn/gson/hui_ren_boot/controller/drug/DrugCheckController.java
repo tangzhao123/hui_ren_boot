@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.controller.drug;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugCheck;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.Inventory;
 import cn.gson.hui_ren_boot.model.service.drug.DrugCheckService;
@@ -57,9 +58,9 @@ public class DrugCheckController {
 
     //审批盘点单
     @RequestMapping("update-drugCheck")
-    public String updateDrugCheck(Long checkAuditor,  String checkNo){
+    public String updateDrugCheck(@RequestBody CheckInfo checkInfo){
         try {
-           drugCheckService.updateDrugCheck(checkAuditor, checkNo);
+           drugCheckService.updateDrugCheck(checkInfo);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();

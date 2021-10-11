@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.controller.drug;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchasePlan;
 import cn.gson.hui_ren_boot.model.service.drug.PurchaseService;
@@ -22,10 +23,10 @@ public class PlanDetailsController {
 
     //生成随机单号
     public static String getOrderIdByTime() {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
         String newDate=sdf.format(new Date());
         String result="";
-        String str = "CGJH";
+        String str = "CGJHXQ";
         Random random=new Random();
         for(int i=0;i<3;i++){
             result+=random.nextInt(10);
@@ -70,9 +71,9 @@ public class PlanDetailsController {
 
     //通过采购计划单审核
     @RequestMapping("trial")
-    public String trial(String purchaseId){
+    public String trial(@RequestBody CheckInfo checkInfo){
         try{
-           purchaseService.trial(purchaseId);
+           purchaseService.trial(checkInfo);
             return "ok";
         } catch (Exception e){
             e.printStackTrace();

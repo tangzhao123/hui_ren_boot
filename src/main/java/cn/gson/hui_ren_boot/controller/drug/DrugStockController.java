@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.controller.drug;
 
 
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.Destruction;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DisposeApply;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStock;
@@ -35,10 +36,10 @@ public class DrugStockController {
 
     //生成随机单号
     public static String getOrderIdByTime() {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
         String newDate=sdf.format(new Date());
         String result="";
-        String str = "XHSQ";
+        String str = "XHXQ";
         Random random=new Random();
         for(int i=0;i<3;i++){
             result+=random.nextInt(10);
@@ -81,9 +82,9 @@ public class DrugStockController {
 
     //审批销毁申请
     @RequestMapping("update-disposeApply")
-    public String updateDisposeApply(Long applyApproval, String applyNum){
+    public String updateDisposeApply(@RequestBody CheckInfo checkInfo){
         try {
-            disposeApplyService.updateDisposeApply(applyApproval, applyNum);
+            disposeApplyService.updateDisposeApply(checkInfo);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();

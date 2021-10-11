@@ -29,7 +29,7 @@
     </select>
     <!-- 新增采购计划单表 -->
     <insert id="addPurchase">
-        insert into  purchase_plan values (seq_huiren.nextval,#{purchaseId},#{operator},#{purchaseAmount},#{purchaseDate},0)
+        insert into  purchase_plan values (seq_huiren.nextval,#{purchaseId},#{operator},#{purchaseAmount},#{purchaseDate},0,#{reviewerId})
     </insert>
     
     <!-- 通过采购计划单审批 -->

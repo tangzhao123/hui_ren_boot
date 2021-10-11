@@ -19,7 +19,7 @@ public interface DrugCheckMapper {
     public List<DrugCheck> allDrugCheck();
 
     //审批盘点单
-    public void updateDrugCheck(@Param("checkAuditor") Long checkAuditor,@Param("checkNo") String checkNo);
+    public void updateDrugCheck(String checkNo);
 
     //新增销毁申请单号
     public void updateCheckGo(@Param("checkGo") String checkGo,@Param("checkNo") String checkNo);

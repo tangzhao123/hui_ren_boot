@@ -31,6 +31,10 @@ public class StaffService {
         return staffMapper.allStaff(search);
     }
 
+    public List<Staff> findAllStaff(){
+        return staffMapper.findAllStaff();
+    }
+
     //新增员工
     public void addStaff(UserInfo userInfo,Staff staff){
         staffMapper.addStaff(staff); //新增员工

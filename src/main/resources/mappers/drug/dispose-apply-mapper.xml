@@ -20,18 +20,18 @@
 
     <!-- 新增销毁计划单 -->
     <insert id="addDisposeApply">
-        insert into dispose_apply values (seq_huiren.nextval,#{applyNum},#{applyBatch},#{applyDate},#{applyOpinion},#{applyPeople},null,null,null)
+        insert into dispose_apply values (seq_huiren.nextval,#{applyNum},#{applyBatch},#{applyDate},#{applyOpinion},#{applyPeople},null,#{applyApproval},null,0)
     </insert>
 
     <!-- 查询所有未审批的销毁申请 -->
     <select id="findAllDisposeApply" resultMap="disposeApplyMap">
         select * from dispose_apply di
-        left join staff st on st.staff_id = di.apply_people where apply_approval is  null
+        left join staff st on st.staff_id = di.apply_people where apply_state = 0
     </select>
 
     <!-- 通过销毁申请审批 -->
     <update id="updateDisposeApply">
-        update dispose_apply set apply_approval = #{applyApproval} where apply_num = #{applyNum}
+        update dispose_apply set apply_state = 1 where apply_num = #{applyNum}
     </update>
 
     <!-- 查询所有已经通过审批的销毁单 -->
@@ -39,7 +39,7 @@
         select  * from dispose_apply da
         inner join staff sf  on da.apply_people = sf.staff_id
         inner join staff st on da.apply_approval = st.staff_id
-        where apply_approval is not null and apply_go is null
+        where da.apply_state  = 1
     </select>
 
     <!-- 新增出库单号跟出库时间 -->

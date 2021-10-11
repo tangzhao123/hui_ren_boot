@@ -27,6 +27,7 @@ public class DisposeApply {
     private String staffName;//制单人名称
     private String staffNames;//审批人名称
     private String checkNo;//盘点单号
+    private Long applyState;//审核状态
 
     @Id
     @Column(name = "APPLY_ID")
@@ -116,6 +117,16 @@ public class DisposeApply {
 
     public void setApplyGo(String applyGo) {
         this.applyGo = applyGo;
+    }
+
+    @Basic
+    @Column(name = "APPLY_STATE")
+    public Long getApplyState() {
+        return applyState;
+    }
+
+    public void setApplyState(Long applyState) {
+        this.applyState = applyState;
     }
 
     @Transient

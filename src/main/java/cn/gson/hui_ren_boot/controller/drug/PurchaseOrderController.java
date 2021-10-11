@@ -26,10 +26,10 @@ public class PurchaseOrderController {
 
     //生成随机单号
     public static String getOrderIdByTime() {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
         String newDate=sdf.format(new Date());
         String result="";
-        String str = "CGDD";
+        String str = "CGDDXQ";
         Random random=new Random();
         for(int i=0;i<3;i++){
             result+=random.nextInt(10);

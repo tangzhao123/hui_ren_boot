@@ -1,8 +1,10 @@
 package cn.gson.hui_ren_boot.model.service.drug;
 
 
+import cn.gson.hui_ren_boot.model.mapper.drug.CheckInfoMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.DestructionMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.DisposeApplyMapper;
+import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.Destruction;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DisposeApply;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class DisposeApplyService {
 
     @Autowired
     DestructionMapper destructionMapper;
+
+    @Autowired
+    CheckInfoMapper checkInfoMapper;
 
     //新增销毁申请单跟销毁申请详单
     public void addDisposeApply(DisposeApply disposeApply){
@@ -45,8 +50,9 @@ public class DisposeApplyService {
     }
 
     //审批销毁申请单
-    public void updateDisposeApply(Long applyApproval, String applyNum){
-        disposeApplyMapper.updateDisposeApply(applyApproval,applyNum);
+    public void updateDisposeApply(CheckInfo checkInfo){
+        checkInfoMapper.addCheckInfo(checkInfo);
+        disposeApplyMapper.updateDisposeApply(checkInfo.getApplyNum());
     }
 
     //查询所有已经审批的销毁申请

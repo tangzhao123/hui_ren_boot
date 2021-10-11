@@ -24,5 +24,5 @@ public interface DisposeApplyMapper {
     public void updateApply(@Param("applyTime") Date applyTime, @Param("applyGo") String applyGo, @Param("applyNum") String applyNum);
 
     //审批销毁申请单
-    public void updateDisposeApply(@Param("applyApproval") Long applyApproval,@Param("applyNum") String applyNum);
+    public void updateDisposeApply(String applyNum);
 }

@@ -14,6 +14,10 @@
         order by st.staff_id desc
     </select>
 
+    <!-- 查询所有的员工 -->
+    <select id="findAllStaff" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+        select * from staff where staff_card is null
+    </select>
     <!-- 新增员工 -->
     <insert id="addStaff">
         <selectKey keyProperty="staffId" resultType="_int" order="BEFORE">

@@ -19,19 +19,19 @@
 
     <!-- 新增盘点表 -->
     <insert id="addDrugCheck">
-        insert into drug_check values (seq_huiren.nextval,#{checkNo},#{checkPeople},null,#{checkType},#{checkKnum},#{checkWarehouse},#{checkNote},#{checkDate},null)
+        insert into drug_check values (seq_huiren.nextval,#{checkNo},#{checkPeople},#{checkAuditor},#{checkType},#{checkKnum},#{checkWarehouse},#{checkNote},#{checkDate},null,0)
     </insert>
 
     <!-- 查询未审批的盘点单 -->
     <select id="findAllDrugCheck" resultMap="drugCheckMap">
         select * from drug_check c
         left join staff s on s.staff_id = c.check_people
-        where c.check_auditor is null
+        where c.check_state = 0
     </select>
 
     <!-- 审批盘点单 -->
     <update id="updateDrugCheck">
-        update drug_check set check_auditor = #{checkAuditor} where check_no = #{checkNo}
+        update drug_check set check_state = 1 where check_no = #{checkNo}
     </update>
 
     <!-- 查询已审批的盘点单 -->
@@ -39,7 +39,7 @@
         select * from drug_check c
         left join staff s on s.staff_id = c.check_people
         inner join staff s on s.staff_id = c.check_auditor
-        where c.check_auditor is not null and c.check_go is  null
+        where c.check_state = 1
     </select>
 
     <!-- 新增销毁申请单号 -->
