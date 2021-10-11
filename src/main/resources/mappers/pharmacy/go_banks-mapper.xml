@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.GoBanksMapper">
+    <resultMap id="GoBankMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.GoBank">
+        <id column="GO_BANK" property="goId"/>
+        <result column="GO_NUM" property="goNum"/>
+        <result column="GO_DATE" property="goDate"/>
+        <result column="GO_BATCH" property="goBatch"/>
+        <association property="userInfos" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+            <id column="USER_ID" property="userId"/>
+            <result column="USER_NAME" property="userName"/>
+        </association>
+        <association property="deports" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+            <id column="DEPORT_ID" property="deportId"/>
+            <result column="DEPORT_NAME" property="deportName"/>
+        </association>
+        <collection property="stockouts" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Stockout">
+            <id column="STOCKOUT_ID" property="stockoutId"/>
+            <result column="STOCKOUT_PRODUCT" property="stockoutProduct"/>
+            <result column="STOCKOUT_GO" property="stockoutGo"/>
+            <result column="STOCKOUT_AMOUNT" property="stockoutAmount"/>
+            <association property="drugInfos" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+                <id column="DRUG_SERIAL" property="drugSerial"/>
+                <result column="DRUG_ID" property="drugId"/>
+                <result column="DRUG_NAME" property="drugName"/>
+            </association>
+        </collection>
+
+    </resultMap>
+    <select id="goBank" resultMap="GoBankMapper">
+        select * from GO_BANK gb
+            left join USER_INFO ui on gb.GO_TOUCHING = ui.USER_ID
+            left join DRUG_DEPORT dd on gb.GO_WAREHOUSE = dd.DEPORT_ID
+            left join STOCKOUT so on gb.GO_NUM = so.STOCKOUT_GO
+            left join DRUG_INFO di on so.STOCKOUT_PRODUCT=di.DRUG_SERIAL
+    </select>
+</mapper>

@@ -7,7 +7,7 @@
         <result column="TRANSFERS_DATE" property="transfersDate"/>
         <result column="TRANSFERS_TIME" property="transfersTime"/>
         <result column="TRANSFERS_ORDER" property="transfersOrder"/>
-        <association property="users" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+        <association property="userInfos" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
             <id column="USER_ID" property="userId"/>
             <result column="USER_NAME" property="userName"/>
         </association>
@@ -23,12 +23,18 @@
             <id column="GO_ID" property="goId"/>
             <result column="GO_NUM" property="goNum"/>
         </association>
+
         <collection property="allocatings" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Allocating">
             <id column="ALL_SERIAL" property="allSerial"/>
             <result column="ALL_ID" property="allId"/>
             <result column="ALL_DRUG" property="allDrug"/>
             <result column="ALL_SUM" property="allSum"/>
             <result column="TRANSFERS_ID" property="transfersId"/>
+            <association property="drugInfos" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+                <id column="DRUG_SERIAL" property="drugSerial"/>
+                <result column="DRUG_ID" property="drugId"/>
+                <result column="DRUG_NAME" property="drugName"/>
+            </association>
         </collection>
     </resultMap>
     <select id="allTransfers" resultMap="TransfersMapper">
@@ -37,6 +43,8 @@
                           left join PHARMACY pm on ts.TRANSFERS_PHARMACY=pm.PHARMACY_ID
                           left join GO_BANK gb on ts.TRANSFERS_GO=gb.GO_ID
                           left join ALLOCATING ac on ts.TRANSFERS_ID=ac.TRANSFERS_ID
+                          left join USER_INFO ui on ts.TRANSFERS_REVIEWER=ui.USER_ID
+                          left join DRUG_INFO di on ac.ALL_SERIAL=di.DRUG_SERIAL
     </select>
    <!-- 新增-->
     <insert id="addTransfers">

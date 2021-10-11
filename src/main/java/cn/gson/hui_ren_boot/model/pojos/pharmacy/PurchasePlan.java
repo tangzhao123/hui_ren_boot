@@ -18,7 +18,6 @@ public class PurchasePlan {
     private Long purchaseAmount;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date purchaseDate;
-    private Long purchaseState;
     private List<PlanDetails> planDetails;
 
 
@@ -73,15 +72,6 @@ public class PurchasePlan {
         this.purchaseDate = purchaseDate;
     }
 
-    @Basic
-    @Column(name = "PURCHASE_STATE")
-    public Long getPurchaseState() {
-        return purchaseState;
-    }
-
-    public void setPurchaseState(Long purchaseState) {
-        this.purchaseState = purchaseState;
-    }
 
     @OneToMany
     public List<PlanDetails> getPlanDetails() {

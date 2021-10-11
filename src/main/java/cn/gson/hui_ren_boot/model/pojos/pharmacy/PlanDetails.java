@@ -10,18 +10,33 @@ public class PlanDetails {
 
     private long planId;
     private String planSerial;
-    private double purchasePrice;
+    private double planPrice;
     private String drugId;
     private Long supplierId;
     private Long planNum;
     private String purchaseId;
     private DrugSupplier suppliers;
-    private List<DrugInfo> drugInfos;
     private String drugName;
     private String standardName;
     private String supplierName;
     private String typeName;
+    private DrugInfo drugInfo;
 
+    @OneToOne
+    public DrugInfo getDrugInfo() {
+        return drugInfo;
+    }
+
+    public void setDrugInfo(DrugInfo drugInfo) {
+        this.drugInfo = drugInfo;
+    }
+    @OneToOne
+    public DrugSupplier getSuppliers() {
+        return suppliers;
+    }
+    public void setSuppliers(DrugSupplier suppliers) {
+        this.suppliers = suppliers;
+    }
     @Id
     @Column(name = "PLAN_ID")
     public long getPlanId() {
@@ -43,13 +58,13 @@ public class PlanDetails {
     }
 
     @Basic
-    @Column(name = "PURCHASE_PRICE")
+    @Column(name = "PLAN_PRICE")
     public double getPurchasePrice() {
-        return purchasePrice;
+        return planPrice;
     }
 
     public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
+        this.planPrice = purchasePrice;
     }
 
     @Basic
@@ -92,24 +107,7 @@ public class PlanDetails {
         this.purchaseId = purchaseId;
     }
 
-    @OneToOne
-    public DrugSupplier getSuppliers() {
-        return suppliers;
-    }
 
-    public void setSuppliers(DrugSupplier suppliers) {
-        this.suppliers = suppliers;
-    }
-
-
-    @OneToMany
-    public List<DrugInfo> getDrugInfos() {
-        return drugInfos;
-    }
-
-    public void setDrugInfos(List<DrugInfo> drugInfos) {
-        this.drugInfos = drugInfos;
-    }
 
     public String getDrugName() {
         return drugName;
@@ -148,12 +146,12 @@ public class PlanDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlanDetails that = (PlanDetails) o;
-        return planId == that.planId && Objects.equals(planSerial, that.planSerial) && Objects.equals(purchasePrice, that.purchasePrice) && Objects.equals(drugId, that.drugId) && Objects.equals(supplierId, that.supplierId) && Objects.equals(planNum, that.planNum) && Objects.equals(purchaseId, that.purchaseId);
+        return planId == that.planId && Objects.equals(planSerial, that.planSerial) && Objects.equals(planPrice, that.planPrice) && Objects.equals(drugId, that.drugId) && Objects.equals(supplierId, that.supplierId) && Objects.equals(planNum, that.planNum) && Objects.equals(purchaseId, that.purchaseId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(planId, planSerial, purchasePrice, drugId, supplierId, planNum, purchaseId);
+        return Objects.hash(planId, planSerial, planPrice, drugId, supplierId, planNum, purchaseId);
     }
 
     @Override
@@ -161,7 +159,7 @@ public class PlanDetails {
         return "PlanDetails{" +
                 "planId=" + planId +
                 ", planSerial='" + planSerial + '\'' +
-                ", purchasePrice=" + purchasePrice +
+                ", purchasePrice=" + planPrice +
                 ", drugId='" + drugId + '\'' +
                 ", supplierId=" + supplierId +
                 ", planNum=" + planNum +

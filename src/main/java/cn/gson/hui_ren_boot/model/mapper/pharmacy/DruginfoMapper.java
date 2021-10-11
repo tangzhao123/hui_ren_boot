@@ -18,4 +18,7 @@ public interface DruginfoMapper {
     //新增药品
     public void addDrug(DrugInfo drugInfo);
 
+    //修改药品字段
+    public void upMange(DrugInfo drugInfo);
+
 }
