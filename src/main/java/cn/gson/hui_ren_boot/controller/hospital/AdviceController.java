@@ -30,7 +30,7 @@ public class AdviceController {
     @RequestMapping("/addAdvices")
     public String addAdvice(@RequestBody Advice advice){//医嘱主表新增
 
-      try{
+//      try{
 
           List<Casefile> zy= casefileService.allCasefile(advice.getAdviceId());
             double price=0;//单价
@@ -61,10 +61,10 @@ public class AdviceController {
 
 
 
-
-       }catch(Exception e){
-           return "fail";
-       }
+//
+//       }catch(Exception e){
+//           return "fail";
+//       }
     }
     @RequestMapping("/seletAdvicvt")//医嘱管理
     public Object  seletAdvicvt(Integer pageNo, Integer size,String shu){

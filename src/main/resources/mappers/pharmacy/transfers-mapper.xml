@@ -38,13 +38,7 @@
         </collection>
     </resultMap>
     <select id="allTransfers" resultMap="TransfersMapper">
-        select * from TRANSFERS ts
-                          left join DRUG_DEPORT dd on ts.TRANSFERS_DEPORT=dd.DEPORT_ID
-                          left join PHARMACY pm on ts.TRANSFERS_PHARMACY=pm.PHARMACY_ID
-                          left join GO_BANK gb on ts.TRANSFERS_GO=gb.GO_ID
-                          left join ALLOCATING ac on ts.TRANSFERS_ID=ac.TRANSFERS_ID
-                          left join USER_INFO ui on ts.TRANSFERS_REVIEWER=ui.USER_ID
-                          left join DRUG_INFO di on ac.ALL_SERIAL=di.DRUG_SERIAL
+        SELECT * FROM TRANSFERS ts   LEFT JOIN GO_BANK gb ON ts.TRANSFERS_GO = gb.GO_NUM LEFT JOIN ALLOCATING ac ON ts.TRANSFERS_ORDER = ac.TRANSFERS_ID  LEFT JOIN DRUG_INFO di ON ac.ALL_DRUG = di.DRUG_ID
     </select>
    <!-- 新增-->
     <insert id="addTransfers">
