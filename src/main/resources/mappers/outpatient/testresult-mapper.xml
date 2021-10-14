@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--检验结果表-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TestResultMapper">
+    <resultMap id="testResultMap" type="cn.gson.hui_ren_boot.model.pojos.medical.TestResult">
+        <id column="RESULT_ID" property="resultId"/>
+        <result column="RESULT_NUMBER" property="resultNumber"/>
+        <result column="RECORDS_NO" property="recordsNo"/>
+        <result column="ITEM_NAME" property="itemName"/>
+        <result column="RESULT_CHECKOUT" property="resultCheckout"/>
+        <result column="STAFF_NAME" property="staffName"/>
+        <result column="RESULT_TIME" property="resultTime"/>
+    </resultMap>
+
+    <!--门诊查询检验结果-->
+    <select id="selTestResult" resultMap="testResultMap">
+        select * from TEST_RESULT where RECORDS_NO = #{recordsNo}
+    </select>
+</mapper>

@@ -3,7 +3,9 @@ package cn.gson.hui_ren_boot.model.service.outpatient;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.HospitalMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.MedicalRecordInfoMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.MedicalRecordMapper;
+import cn.gson.hui_ren_boot.model.mapper.outpatient.TestResultMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Hospital;
+import cn.gson.hui_ren_boot.model.pojos.medical.TestResult;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.MedicalRecord;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.MedicalRecordInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class MedicalRecordService {
     MedicalRecordInfoMapper infoMapper;
     @Autowired
     HospitalMapper hospitalMapper;
+    @Autowired
+    TestResultMapper testResultMapper;
 
     //新增门诊病历
     public void addRecord(MedicalRecord record){
@@ -43,5 +47,10 @@ public class MedicalRecordService {
     //查询当天的就诊记录
     public List<MedicalRecordInfo> selInfo(int medicalId,int staffId){
         return infoMapper.selInfo(medicalId, staffId);
+    }
+
+    //门诊查询检验结果
+    public List<TestResult> selTestResult(String recordsNo){
+        return testResultMapper.selTestResult(recordsNo);
     }
 }
