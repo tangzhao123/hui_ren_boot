@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.DisposesApplyMapper">
+    <resultMap id="disposesApplyMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DisposeApply">
+        <id column="APPLY_ID" property="applyId"/>
+        <result column="APPLY_NUM" property="applyNum"/>
+        <result column="APPLY_BATCH" property="applyBatch"/>
+        <result column="APPLY_DATE" property="applyDate"/>
+        <result column="APPLY_PEOPLE" property="applyPeople"/>
+        <result column="APPLY_TIME" property="applyTime"/>
+        <result column="APPLY_APPROVAL" property="applyApproval"/>
+        <association property="userInfos" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+            <id column="USER_ID" property="userId"/>
+            <result column="USER_NAME" property="userName"/>
+        </association>
+        <association property="deports" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+            <id column="DEPORT_ID" property="deportId"/>
+            <result column="DEPORT_NAME" property="deportName"/>
+        </association>
+        <collection property="disposeApplyData" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Destruction">
+            <id column="DE_SERIAL" property="deSerial"/>
+            <result column="DE_ID" property="deId"/>
+            <result column="DE_DRUG" property="deDrug"/>
+            <result column="DE_SUM" property="deSum"/>
+            <result column="APPLY_ID" property="applyId"/>
+            <result column="DE_BATCH" property="deBatch"/>
+            <association property="drugInfos" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+                <id column="DRUG_SERIAL" property="drugSerial"/>
+                <result column="DRUG_ID" property="drugId"/>
+                <result column="DRUG_NAME" property="drugName"/>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="dispose" resultMap="disposesApplyMapper">
+        select * from  DISPOSE_APPLY da
+                           left join DESTRUCTION dc on da.APPLY_ID=dc.DE_ID
+                           left join DRUG_INFO di on dc.DE_DRUG=di.DRUG_SERIAL
+                           left join USER_INFO ui on da.APPLY_PEOPLE=ui.USER_ID
+                           left join DRUG_DEPORT dd on da.APPLY_GO=dd.DEPORT_ID
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.SendDrugsMapper">
+    <resultMap id="sendDrugMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.SendDrug">
+        <id column="SEND_ID" property="sendId"/>
+        <result column="SEND_NUM" property="sendNum"/>
+        <result column="SEND_DATE" property="sendDate"/>
+        <result column="SEND_DRUG" property="sendDrug"/>
+        <result column="SEND_PRICE" property="sendPrice"/>
+        <result column="SEND_PEOPLE" property="sendPeople"/>
+        <association property="pharmacys" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Pharmacy">
+            <id column="PHARMACY_ID" property="pharmacyId"/>
+            <result column="PHARMACY_NAME" property="pharmacyName"/>
+        </association>
+        <association property="userInfos" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+            <id column="USER_ID" property="userId"/>
+            <result column="USER_NAME" property="userName"/>
+        </association>
+        <collection property="doses" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Dose">
+            <id column="DOSE_ID" property="doseId"/>
+            <result column="DOSE_DRUG" property="doseDrug"/>
+            <result column="DOSE_SUM" property="doseSum"/>
+            <result column="DOSE_REASON" property="doseReason"/>
+            <result column="DOSE_DATE" property="doseDate"/>
+            <result column="DOSE_SEND" property="doseSend"/>
+            <association property="drugInfos" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+                <id column="DRUG_SERIAL" property="drugSerial"/>
+                <result column="DRUG_ID" property="drugId"/>
+                <result column="DRUG_NAME" property="drugName"/>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="send" resultMap="sendDrugMapper">
+        select * from SEND_DRUG sd
+            left join DOSE ds on sd.SEND_ID=ds.DOSE_ID
+            left join PHARMACY pm on sd.SEND_DRUG=pm.PHARMACY_ID
+            left join USER_INFO ui on sd.SEND_PEOPLE=USER_ID
+            left join DRUG_INFO di on ds.DOSE_DRUG=DRUG_SERIAL
+    </select>
+
+</mapper>
