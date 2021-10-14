@@ -4,6 +4,8 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Arrange;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,4 +23,9 @@ public interface RegisterMapper {
     public void reCharge(TreatmentRecharge p);//新增记录
     public TreatmentCard selRecharge(String treatmentNo);//查询机诊疗卡余额
     public List<TreatmentRecharge>selseRecharge(@Param("treatmentNo") String treatmentNo);//查询诊疗卡记录
+    public List<Arrange>chaArrange(long medicalId);//排班表查询
+    public Medical chaMedical(Medical medical);//查询科室
+    public Register allRegister(String registerId);//查询床位
+    public List<Register>allR();//查询病人
+    public Medical allMedicals(Long  medicalName) ;//查询科室
 }

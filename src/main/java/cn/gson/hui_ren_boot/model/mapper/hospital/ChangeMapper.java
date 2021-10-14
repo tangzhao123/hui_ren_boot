@@ -13,4 +13,5 @@ public interface ChangeMapper {
     public void addChange(Change change);//添加
     public List<Change> allChange();//查询
     public void deChange(Change change);//删除
+    public List<Change>asChange(Change change);//分页查询
 }

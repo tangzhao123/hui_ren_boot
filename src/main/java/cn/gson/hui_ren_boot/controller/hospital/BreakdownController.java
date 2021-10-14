@@ -8,6 +8,7 @@ import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
 import cn.gson.hui_ren_boot.model.service.hospital.BlockupService;
 import cn.gson.hui_ren_boot.model.service.hospital.BreakdownService;
+import cn.gson.hui_ren_boot.model.service.hospital.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class BreakdownController {
     @Autowired
     BreakdownService breakdownService;
+    @Autowired
+    RegisterService registerService;
     @RequestMapping("/allBreaks")
     public List<Breakdown> allBreakt(@RequestBody Register register){
       List<Breakdown>kk=  breakdownService.selectBreak(register);
@@ -30,8 +33,8 @@ public class BreakdownController {
     }
     ///患者信息
     @RequestMapping("/allPars")
-    public List<Register> allPar(@RequestBody Register register){
-        return  breakdownService.allPar(register);
+    public List<Register> allPar(){
+        return  registerService.allR();
     }
     //护理床位记录查询
    @RequestMapping("/allHospitalcares")

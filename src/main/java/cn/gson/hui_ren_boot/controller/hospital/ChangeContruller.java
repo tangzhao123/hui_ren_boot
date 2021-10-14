@@ -35,5 +35,9 @@ public class ChangeContruller {
         changeService.deChange(change);
         return "ok";
     }
+    @RequestMapping("assChan")
+    public List<Change>assChaneg(@RequestBody Change change){
+       return changeService.asChange(change);
+    }
 }
 

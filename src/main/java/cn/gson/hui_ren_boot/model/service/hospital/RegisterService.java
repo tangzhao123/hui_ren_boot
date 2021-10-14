@@ -4,10 +4,10 @@ import cn.gson.hui_ren_boot.model.mapper.hospital.RegisterDao;
 import cn.gson.hui_ren_boot.model.mapper.hospital.RegisterMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.TreatmentCardMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
-import org.junit.validator.PublicClassValidator;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Arrange;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,4 +62,28 @@ public class RegisterService {
     public List<TreatmentRecharge> selseRecharge (String treatmentNo){//查询记录
         return registerMapper.selseRecharge(treatmentNo);
     }
+//    排班查询
+    public List<Arrange> chaArrange(Medical medical){
+        List<Arrange>k=registerMapper.chaArrange(medical.getMedicalId());
+        System.out.println(k);
+        return k;
+    }
+    //    排班查询
+    public List<Arrange> chaArrange2(Medical medical){
+        Medical kl=registerMapper.allMedicals(medical.getMedicalId());
+        List<Arrange>k=registerMapper.chaArrange(kl.getMedicalId());
+        System.out.println(k);
+        return k;
+    }
+
+    //不分页查询
+    public List<Register>allR(){
+        return registerMapper.allR();
+    }
+    //床位查询
+    public Register allRegister(String registerId){
+      return registerMapper.allRegister(registerId);
+    }
+    //科室查询
+
 }
