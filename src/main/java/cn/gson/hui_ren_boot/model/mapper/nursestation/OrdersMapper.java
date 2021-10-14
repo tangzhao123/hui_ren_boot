@@ -24,7 +24,7 @@ public interface OrdersMapper {
     public List<Details> selectDetails(String adviceId);
 
     //查询病人
-    public List<Record> allBing();
+    public List<Record> allBing(Record record);
 
     //查询医嘱
     public List<Advice> selectAdvice(String registerId);

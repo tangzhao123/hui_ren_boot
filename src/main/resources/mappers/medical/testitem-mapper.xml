@@ -32,6 +32,7 @@
         SELECT * FROM TEST_ITEMS ti LEFT JOIN STAFF st ON ti.STAFF_ID = st.STAFF_ID LEFT JOIN MEDICAL me ON ti.MEDICAL_ID = me.MEDICAL_ID
         LEFT JOIN OUTPATIENT_REGISTER re ON ti.OUTPATIENT_ID = re.OUTPATIENT_ID
             <where>
+                 ti.RECORDS_NO NOT IN (SELECT RECORDS_NO FROM TEST_RESULT)
                 <if test="testNumber != null and testNumber != ''">
                    or TEST_NUMBER like '%${testNumber}%'
                 </if>
@@ -40,4 +41,15 @@
                 </if>
             </where>
     </select>
+
+<!--    查询检验的项目，根据检验号-->
+    <select id="selitems" resultType="cn.gson.hui_ren_boot.model.pojos.outpatient.TestDetail">
+        SELECT * FROM TEST_DETAIL td LEFT JOIN TEST_ITEMS ti ON td.TEST_NUMBER = ti.TEST_NUMBER
+            where td.TEST_NUMBER = #{testNumber,jdbcType=VARCHAR}
+    </select>
+
+<!--    新增检验结果-->
+    <insert id="addresult">
+        INSERT INTO TEST_RESULT VALUES(seq_huiren.nextval,#{resultNumber},#{recordsNo},#{itemName},#{resultCheckout},#{staffName},current_timestamp)
+    </insert>
 </mapper>

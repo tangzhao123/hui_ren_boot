@@ -15,17 +15,18 @@
     <select id="selectCmobo" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Test">
         select * from test
         <where>
+            TEST_STATE = 2
             <if test="testName != null and testName != ''">
-                or TEST_NAME = '%${testName}%'
+                or TEST_NAME like '%${testName}%'
             </if>
             <if test="testPhone != null and testPhone != ''">
-                or  TEST_PHONE = '%${testPhone}%'
+                or  TEST_PHONE like '%${testPhone}%'
             </if>
             <if test="testGenre != null and testGenre != ''">
-                or TEST_GENRE = '%${testGenre}%'
+                or TEST_GENRE like '%${testGenre}%'
             </if>
             <if test="testAccount != null and testAccount != ''">
-                or TEST_ACCOUNT = '%${testAccount}%'
+                or TEST_ACCOUNT like  '%${testAccount}%'
             </if>
         </where>
     </select>
@@ -34,6 +35,11 @@
     <insert id="insertTest" >
         insert into test values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},#{testGenre},#{testTime},#{testMoney},#{testState},#{testAccount})
     </insert>
+
+<!--    删除-->
+    <delete id="dels">
+        delete from test where test_id = #{testId}
+    </delete>
 
     <insert id="addMiddle">
         insert into testmiddle values (#{testId},#{itemId})

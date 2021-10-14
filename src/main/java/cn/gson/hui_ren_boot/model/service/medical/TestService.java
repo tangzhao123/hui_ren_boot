@@ -32,8 +32,8 @@ public class TestService {
     }
 
     //删除
-    public void delTest(Long id){
-        testDao.deleteById(id);
+    public void dels (Long testId){
+        testMapper.dels(testId);
     }
 
     //修改预约体检
