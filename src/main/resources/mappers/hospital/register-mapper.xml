@@ -94,7 +94,7 @@
         left join sickbed kjs on hg.sickbed_mark=kjs.sickbed_mark
         left join medical o on o.medical_id=hg.medical_id
         left join staff  fh on fh.staff_id=hg.staff_id
-        left join treatmentcard kk on kk.treatment_no=hg.register_clinic
+        left join treatment_card kk on kk.treatment_no=hg.register_clinic  where hg.register_id=#{registerId}
     </select>
     <select id="allRegis" resultMap="allRegisMapper">
         SELECT*from register  hg
@@ -160,9 +160,7 @@
             <if test="registerId != null and '' != registerId">
                 or REGISTER_ID  like '%${registerId}%'
             </if>
-            <if test="registerId != null and '' != registerId">
-                or REGISTER_ID  like '%${registerId}%'
-            </if>
+
             <if test="medicalId != null and '' != medicalId">
                 or medical_id  like '%${medicalId}%'
             </if>
@@ -208,11 +206,11 @@
     </select>
 <!-- 充值修改金额-->
     <update id="upMedicalCard">
-        update TREATMENT_CARD set TREATMENT_BALANCE=#{treatmentBalance} where TREATMENT_NO=#{treatmentNo}
+        update TREATMENT_CARD set TREATMENT_BALANCE=TREATMENT_BALANCE+#{treatmentBalance} where TREATMENT_NO=#{treatmentNo}
     </update>
 <!-- 新增充值记录 -->
     <insert id="reCharge">
-        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney})
+        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney},'充值')
     </insert>
     <!--查询诊疗卡余额 -->
     <select id="selRecharge" resultType="TreatmentCard">

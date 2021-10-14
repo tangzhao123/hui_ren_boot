@@ -33,8 +33,8 @@ public class BreakdownController {
     }
     ///患者信息
     @RequestMapping("/allPars")
-    public List<Register> allPar(){
-        return  registerService.allR();
+    public List<Register> allPar(@RequestBody Register register){
+        return  registerService.allR(register);
     }
     //护理床位记录查询
    @RequestMapping("/allHospitalcares")

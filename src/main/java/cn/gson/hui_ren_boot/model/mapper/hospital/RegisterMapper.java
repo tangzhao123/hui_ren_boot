@@ -26,6 +26,6 @@ public interface RegisterMapper {
     public List<Arrange>chaArrange(long medicalId);//排班表查询
     public Medical chaMedical(Medical medical);//查询科室
     public Register allRegister(String registerId);//查询床位
-    public List<Register>allR();//查询病人
+    public List<Register>allR(Register register);//查询病人
     public Medical allMedicals(Long  medicalName) ;//查询科室
 }
