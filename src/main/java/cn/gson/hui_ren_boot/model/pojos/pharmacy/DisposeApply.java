@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
@@ -28,6 +29,27 @@ public class DisposeApply {
     private String staffNames;//审批人名称
     private String checkNo;//盘点单号
     private Long applyState;//审核状态
+    private UserInfo userInfos;
+    private DrugDeport deports;
+
+    @OneToOne
+    public UserInfo getUserInfos() {
+        return userInfos;
+    }
+
+    public void setUserInfos(UserInfo userInfos) {
+        this.userInfos = userInfos;
+    }
+
+    @OneToOne
+    public DrugDeport getDeports() {
+        return deports;
+    }
+
+    public void setDeports(DrugDeport deports) {
+        this.deports = deports;
+    }
+
 
     @Id
     @Column(name = "APPLY_ID")
@@ -155,6 +177,7 @@ public class DisposeApply {
     public void setStaffNames(String staffNames) {
         this.staffNames = staffNames;
     }
+
 
     @OneToMany
     public List<Destruction> getDisposeApplyData() {

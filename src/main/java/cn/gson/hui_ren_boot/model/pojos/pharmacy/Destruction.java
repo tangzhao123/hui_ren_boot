@@ -13,6 +13,17 @@ public class Destruction {
     private String applyId; //销毁单编号
     private String deBatch; //产品批号
     private String drugName;//产品名称
+    private String deInventoryNote;//盘点备注
+    private DrugInfo drugInfos;
+
+    @OneToOne
+    public DrugInfo getDrugInfos() {
+        return drugInfos;
+    }
+
+    public void setDrugInfos(DrugInfo drugInfos) {
+        this.drugInfos = drugInfos;
+    }
 
     @Id
     @Column(name = "DE_SERIAL")
@@ -81,6 +92,15 @@ public class Destruction {
 
     public void setDrugName(String drugName) {
         this.drugName = drugName;
+    }
+
+    @Transient
+    public String getDeInventoryNote() {
+        return deInventoryNote;
+    }
+
+    public void setDeInventoryNote(String deInventoryNote) {
+        this.deInventoryNote = deInventoryNote;
     }
 
     @Override

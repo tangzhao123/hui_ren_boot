@@ -64,9 +64,18 @@ public class DrugStockController {
                 d.setDeId(getOrderIdByTime());
             }
             if(""!=disposeApply.getCheckNo() && null != disposeApply.getCheckNo()){
-                drugCheckService.updateCheckGo(disposeApply.getApplyNum(),disposeApply.getCheckNo());
+                //drugCheckService.updateCheckGo(disposeApply.getApplyNum(),disposeApply.getCheckNo());
             }
-            disposeApplyService.addDisposeApply(disposeApply);
+            List<Destruction> lists = new ArrayList<>();
+            for (Destruction d : list) {
+                if(d.getDeInventoryNote().equals("盘盈")){
+                    drugStockService.updateDrugStock1(d.getDeSum(),d.getDeBatch());
+                }else{
+                    lists.add(d);
+                }
+            }
+            disposeApplyService.addDisposeApply(disposeApply,lists);
+
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,6 +94,19 @@ public class DrugStockController {
     public String updateDisposeApply(@RequestBody CheckInfo checkInfo){
         try {
             disposeApplyService.updateDisposeApply(checkInfo);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+
+    }
+
+    //审批销毁申请
+    @RequestMapping("update-disposeApply1")
+    public String updateDisposeApply1(@RequestBody CheckInfo checkInfo){
+        try {
+            disposeApplyService.updateDisposeApply1(checkInfo);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();

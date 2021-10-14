@@ -2,8 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.GoBankMapper">
+
+    <resultMap id="goBankMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.GoBank">
+        <id property="goId" column="go_id"/>
+        <result property="goNum" column="go_num"/>
+        <result property="goDate" column="go_date"/>
+        <result property="staffName" column="staff_name"/>
+        <result property="deportName" column="deport_name"/>
+        <result property="goBatch" column="go_batch"/>
+    </resultMap>
+
     <!-- 新增出库记录 -->
     <insert id="addGoBank">
         insert into go_bank values (seq_huiren.nextval,#{goNum},#{goDate},#{goTouching},#{goWarehouse},#{goBatch})
     </insert>
+
+    <!-- 历史出库单查询 -->
+    <select id="findAllGoBank" resultMap="goBankMap">
+        select * from go_bank gb
+        left join staff st on gb.go_touching = st.staff_id
+        left join drug_deport dd on gb.go_warehouse = dd.deport_id
+        <where>
+            <if test="start !=null and start !='' and end != null and end != ''">
+                to_char(gb.go_date,'yyyy-MM-dd') between #{start} and #{end}
+            </if>
+            <if test="search != null and search != ''">
+                and gb.go_num like '%${search}%' or  st.staff_name like '%${search}%' or dd.deport_name like '%${search}%' or gb.go_batch like '%${search}%'
+            </if>
+        </where>
+        order by gb.go_date
+    </select>
 </mapper>

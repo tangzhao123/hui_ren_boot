@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +26,11 @@ public class GoBank {
     private UserInfo userInfos;
     private DrugDeport deports;
     private List<Stockout> stockouts;
-
+    private String staffName;
+    private String deportName;
+    private Date str;
+    private Date str1;
+    private String search;
 
     @OneToOne
     public DrugDeport getDeports() {
@@ -142,6 +147,52 @@ public class GoBank {
 
     public void setTransfersId(String transfersId) {
         this.transfersId = transfersId;
+    }
+
+    @Transient
+    public String getStaffName() {
+        return staffName;
+    }
+
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
+    }
+
+    @Transient
+    public String getDeportName() {
+        return deportName;
+    }
+
+    public void setDeportName(String deportName) {
+        this.deportName = deportName;
+    }
+
+    @Transient
+    public Date getStr() {
+        return str;
+    }
+
+    public void setStr(Date str) {
+        this.str = str;
+    }
+
+    @Transient
+    public Date getStr1() {
+        return str1;
+    }
+
+    public void setStr1(Date str1) {
+        this.str1 = str1;
+    }
+
+    @Transient
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     @Override

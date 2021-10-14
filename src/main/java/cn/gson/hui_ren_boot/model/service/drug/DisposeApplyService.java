@@ -4,6 +4,7 @@ package cn.gson.hui_ren_boot.model.service.drug;
 import cn.gson.hui_ren_boot.model.mapper.drug.CheckInfoMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.DestructionMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.DisposeApplyMapper;
+import cn.gson.hui_ren_boot.model.mapper.drug.DrugCheckMapper;
 import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.Destruction;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DisposeApply;
@@ -28,10 +29,14 @@ public class DisposeApplyService {
     @Autowired
     CheckInfoMapper checkInfoMapper;
 
+    @Autowired
+    DrugCheckMapper drugCheckMapper;
+
     //新增销毁申请单跟销毁申请详单
-    public void addDisposeApply(DisposeApply disposeApply){
+    public void addDisposeApply(DisposeApply disposeApply,List<Destruction> lists){
+        drugCheckMapper.updateDrugCheck2(disposeApply.getCheckNo());
         disposeApplyMapper.addDisposeApply(disposeApply);
-        destructionMapper.addDestruction(disposeApply.getDisposeApplyData(),disposeApply.getApplyNum());
+        destructionMapper.addDestruction(lists,disposeApply.getApplyNum());
     }
 
     //查询所有的销毁申请详单
@@ -53,6 +58,12 @@ public class DisposeApplyService {
     public void updateDisposeApply(CheckInfo checkInfo){
         checkInfoMapper.addCheckInfo(checkInfo);
         disposeApplyMapper.updateDisposeApply(checkInfo.getApplyNum());
+    }
+
+    //驳回销毁申请单
+    public void updateDisposeApply1(CheckInfo checkInfo){
+        checkInfoMapper.addCheckInfo(checkInfo);
+        disposeApplyMapper.updateDisposeApply1(checkInfo.getApplyNum());
     }
 
     //查询所有已经审批的销毁申请

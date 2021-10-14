@@ -110,7 +110,14 @@ public class GoBankService {
             }
         }
 
+    //查询历史出库记录
+    public List<GoBank> findAllGoBank(String start,String end,String search){
+        return goBankMapper.findAllGoBank(start, end, search);
+    }
 
 
-
+    //根据出库单号查询出库详单
+    public List<Stockout> findAllStockOut(String stockoutGo){
+        return stockOutMapper.findAllStockOut(stockoutGo);
+    }
 }

@@ -1,6 +1,8 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -18,7 +20,27 @@ public class SendDrug {
     private Long sendPeople;
     private String prescriptionNo;
     private List<Dose> doses;
+    private Pharmacy pharmacys;
+    private UserInfo userInfos;
 
+
+    @OneToOne
+    public Pharmacy getPharmacys() {
+        return pharmacys;
+    }
+
+    public void setPharmacys(Pharmacy pharmacys) {
+        this.pharmacys = pharmacys;
+    }
+
+    @OneToOne
+    public UserInfo getUserInfos() {
+        return userInfos;
+    }
+
+    public void setUserInfos(UserInfo userInfos) {
+        this.userInfos = userInfos;
+    }
 
     @Id
     @Column(name = "SEND_ID")

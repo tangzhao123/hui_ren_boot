@@ -13,6 +13,16 @@
         delete from arrange where arrange_id = #{arrangeId}
     </delete>
 
+    <!-- 根据时间跟班次员工编号查询是否存在员工 -->
+    <select id="allStaffId" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Arrange">
+        select * from arrange
+        where to_char(arrange_start,'yyyy-MM-dd') = #{arrangeStart} and category_id = #{categoryId}
+        and staff_id in
+        <foreach collection="staffId" item="d" index="i" separator="," open="(" close=")">
+            #{d}
+        </foreach>
+    </select>
+
     <!-- 根据员工查询排班记录 -->
     <select id="findAllArrange" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Arrange">
         select ca.category_shift categoryShift,ca.userrole_start userroleStart,ca.userrole_over userroleOver,

@@ -37,6 +37,11 @@
         update purchase_plan set purchase_state = 1 where purchase_id = #{purchaseId}
     </update>
 
+    <!-- 驳回采购计划单审批 -->
+    <update id="trial1">
+        update purchase_plan set purchase_state = 3 where purchase_id = #{purchaseId}
+    </update>
+
     <!-- 更改采购计划单状态（根据采购计划生成采购订单） -->
     <update id="trials">
         update purchase_plan set purchase_state = 2 where purchase_id = #{purchaseId}

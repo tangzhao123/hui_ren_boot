@@ -80,4 +80,16 @@ public class PlanDetailsController {
             return "fail";
         }
     }
+
+    //驳回采购计划单审核
+    @RequestMapping("trial1")
+    public String trial1(@RequestBody CheckInfo checkInfo){
+        try{
+            purchaseService.trial1(checkInfo);
+            return "ok";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

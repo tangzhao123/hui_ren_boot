@@ -23,4 +23,7 @@ public class ChangeService {
     public void deChange(Change change){
          changeMapper.deChange(change); ;
      }
+     public List<Change>asChange(Change change){
+        return changeMapper.asChange(change);
+     }
 }

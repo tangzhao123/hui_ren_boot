@@ -13,6 +13,16 @@ public class Dose {
     private String doseReason;
     private Timestamp doseDate;
     private String doseSend;
+    private DrugInfo drugInfos;
+
+    @OneToOne
+    public DrugInfo getDrugInfos() {
+        return drugInfos;
+    }
+
+    public void setDrugInfos(DrugInfo drugInfos) {
+        this.drugInfos = drugInfos;
+    }
 
     @Id
     @Column(name = "DOSE_ID")

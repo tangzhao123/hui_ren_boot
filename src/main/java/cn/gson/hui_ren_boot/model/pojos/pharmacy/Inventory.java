@@ -17,8 +17,16 @@ public class Inventory {
     private String inventoryBatch;//药品批号
     private String inventoryNote;//药品盘点备注
     private String drugName;
+    private DrugInfo drugInfos;
 
+    @OneToOne
+    public DrugInfo getDrugInfos() {
+        return drugInfos;
+    }
 
+    public void setDrugInfos(DrugInfo drugInfos) {
+        this.drugInfos = drugInfos;
+    }
 
     @Id
     @Column(name = "INVENTORY_ID")

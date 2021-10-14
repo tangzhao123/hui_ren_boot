@@ -53,6 +53,12 @@ public class DrugCheckService {
         drugCheckMapper.updateDrugCheck(checkInfo.getCheckNo());
     }
 
+    //驳回盘点单
+    public void updateDrugCheck1(CheckInfo checkInfo){
+        checkInfoService.addCheckInfo(checkInfo);
+        drugCheckMapper.updateDrugCheck1(checkInfo.getCheckNo());
+    }
+
     //新增销毁申请单号
     public void updateCheckGo( String checkGo,String checkNo){
         drugCheckMapper.updateCheckGo(checkGo, checkNo);

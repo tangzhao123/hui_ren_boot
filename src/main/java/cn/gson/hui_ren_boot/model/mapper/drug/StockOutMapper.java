@@ -10,4 +10,7 @@ public interface  StockOutMapper {
 
     //批量新增出库详单
     public void addStockOut(List<Stockout> storageData,String stockoutGo);
+
+    //根据出库单号查询出库详单
+    public List<Stockout> findAllStockOut(String stockoutGo);
 }

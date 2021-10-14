@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.DrugChecksMapper">
+    <resultMap id="checkMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugCheck">
+        <id column="CHECK_ID" property="checkId"/>
+        <result column="CHECK_NO" property="checkNo"/>
+        <result column="CHECK_PEOPLE" property="checkPeople"/>
+        <result column="CHECK_AUDITOR" property="checkAuditor"/>
+        <result column="CHECK_TYPE" property="checkType"/>
+        <result column="CHECK_NUM" property="checkNum"/>
+        <result column="CHECK_WAREHOUSE" property="checkWarehouse"/>
+        <result column="CHECK_DATE" property="checkDate"/>
+        <association property="userInfos" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo">
+            <id column="USER_ID" property="userId"/>
+            <result column="USER_NAME" property="userName"/>
+        </association>
+        <association property="deports" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+            <id column="DEPORT_ID" property="deportId"/>
+            <result column="DEPORT_NAME" property="deportName"/>
+        </association>
+        <collection property="inventoryData" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Inventory">
+            <id column="INVENTORY_ID" property="inventoryId"/>
+            <result column="INVENTORY_DRUG" property="inventoryDrug"/>
+            <result column="INVENTORY_NUM" property="inventoryNum"/>
+            <result column="INVENTORY_KNUM" property="inventoryKnum"/>
+            <result column="INVENTORY_SUM" property="inventorySum"/>
+            <result column="INVENTORY_MARGUN" property="inventoryMargun"/>
+            <result column="INVENTORY_RETAIL" property="inventoryRetail"/>
+            <result column="INVENTORY_CHECK" property="inventoryCheck"/>
+            <result column="INVENTORY_BATCH" property="inventoryBatch"/>
+            <association property="drugInfos" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+                <id column="DRUG_SERIAL" property="drugSerial"/>
+                <result column="DRUG_ID" property="drugId"/>
+                <result column="DRUG_NAME" property="drugName"/>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="check" resultMap="checkMapper">
+        select * from DRUG_CHECK dc
+                          left join INVENTORY it on dc.CHECK_GO=it.INVENTORY_CHECK
+                          left join USER_INFO ui on dc.CHECK_PEOPLE=ui.USER_ID
+                          left join DRUG_DEPORT dd on dc.CHECK_WAREHOUSE=dd.DEPORT_ID
+                          left join DRUG_INFO di on it.INVENTORY_ID=di.DRUG_SERIAL
+    </select>
+</mapper>

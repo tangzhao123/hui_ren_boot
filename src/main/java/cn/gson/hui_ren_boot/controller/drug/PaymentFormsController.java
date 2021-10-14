@@ -27,33 +27,23 @@ public class PaymentFormsController {
         return paymentFormsService.allPayment();
     }
 
-//    //查询收费总金额
-//    @RequestMapping("allPaymentMoneys")
-//    public double allPaymentMoneys(){
-//        return paymentFormsService.allPaymentMoneys();
-//    }
-//
-//    //查询用户数量
-//    @RequestMapping("allStaffSum")
-//    public int allStaffSum(){
-//        return paymentFormsService.allStaffSum();
-//    }
-//
-//    //查询药品数量
-//    @RequestMapping("allStockSurplus")
-//    public int allStockSurplus(){
-//        return paymentFormsService.allStockSurplus();
-//    }
-//
-//    //查询出库数量
-//    @RequestMapping("allStockoutAmount")
-//    public int allStockoutAmount(){
-//        return paymentFormsService.allStockoutAmount();
-//    }
-//
-//    //查询入库数量
-//    @RequestMapping("allDetailNumber")
-//    public int allDetailNumber(){
-//        return paymentFormsService.allDetailNumber();
-//    }
+    //查询收费总金额
+    @RequestMapping("allPaymentMoneys")
+    public double allPaymentMoneys(){
+        return paymentFormsService.allPaymentMoneys();
+    }
+
+    //查询用户数量
+    @RequestMapping("allStaffSum")
+    public int allStaffSum(){
+        return paymentFormsService.allStaffSum();
+    }
+
+    //查询药品数量
+    @RequestMapping("allStockSurplus")
+    public int allStockSurplus(){
+        return paymentFormsService.allStockSurplus();
+    }
+
+
 }
