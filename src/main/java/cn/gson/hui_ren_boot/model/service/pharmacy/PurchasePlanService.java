@@ -13,7 +13,7 @@ import java.util.List;
 public class PurchasePlanService {
     @Autowired
     PurchasePlanMapper purchasePlanMapper;
-    public Object allPlanByPage(Integer pageNo, Integer size,PurchasePlan purchasePlan){
-        return purchasePlanMapper.allPlan(purchasePlan);
+    public Object allPlanByPage(Integer pageNo, Integer size,String purchaseId,String drugName){
+        return purchasePlanMapper.allPlan(purchaseId, drugName);
     }
 }

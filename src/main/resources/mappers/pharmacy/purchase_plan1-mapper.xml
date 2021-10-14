@@ -30,6 +30,17 @@
 
     </resultMap>
     <select id="allPlan" resultMap="PurchasePlanMapper">
-        SELECT * FROM PURCHASE_PLAN PU LEFT JOIN PLAN_DETAILS PS ON PS.PURCHASE_ID = PU.PURCHASE_ID LEFT JOIN DRUG_INFO DI ON DI.DRUG_ID = PS.DRUG_ID LEFT JOIN DRUG_SUPPLIER DS ON DS.SUPPLIER_ID = PS.SUPPLIER_ID
+        SELECT * FROM PURCHASE_PLAN PU
+            LEFT JOIN PLAN_DETAILS PS ON PS.PURCHASE_ID = PU.PURCHASE_ID
+            LEFT JOIN DRUG_INFO DI ON DI.DRUG_ID = PS.DRUG_ID
+            LEFT JOIN DRUG_SUPPLIER DS ON DS.SUPPLIER_ID = PS.SUPPLIER_ID
+        <where>
+            <if test="purchaseId !=null and '' !=purchaseId">
+                or PU.PURCHASE_ID like '%${purchaseId}%'
+            </if>
+            <if test="drugName != null and '' !=drugName">
+                or DI.DRUG_NAME like '%${drugName}%'
+            </if>
+        </where>
     </select>
 </mapper>

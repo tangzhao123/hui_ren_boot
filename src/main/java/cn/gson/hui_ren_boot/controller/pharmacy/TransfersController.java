@@ -18,8 +18,9 @@ public class TransfersController {
     TransfersService transfersService;
    //分页
     @RequestMapping("/transfers")
-    public Object allTransfers(Integer pageNo, Integer size,Transfers transfers){
-        return transfersService.allTransfersByPage(pageNo,size,transfers);
+    public Object allTransfers(@RequestBody Transfers transfers){
+        return transfersService.allTransfersByPage(transfers.getPageNo(),transfers.getSize(),
+                transfers.getTransfersId(),transfers.getDrugName());
     }
     @RequestMapping("/addTransfers")
     public String addTransfers(@RequestBody Transfers drugTransfers){

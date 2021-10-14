@@ -28,6 +28,33 @@ public class Transfers {
     private Pharmacy pharmacys;
     private DrugDeport deports;
     private UserInfo userInfos;
+    private Integer pageNo;
+    private  Integer size;
+    private String drugName;
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
 
     @OneToOne
     public Pharmacy getPharmacys() {

@@ -43,13 +43,11 @@
             LEFT JOIN ALLOCATING ac ON ts.TRANSFERS_ORDER = ac.TRANSFERS_ID
             LEFT JOIN DRUG_INFO di ON ac.ALL_DRUG = di.DRUG_ID
         <where>
+            <if test="transfersId != null and '' != transfersId">
+                or ts.TRANSFERS_ID like '%${transfersId}%'
+            </if>
             <if test="drugName != null and '' !=drugName">
                 or di.DRUG_NAME like '%${drugName}%'
-            </if>
-            <if test="types != null">
-                <if test="types.typeId != null and '' !=types.typeId">
-                    and di.type_id =#{types.typeId}
-                </if>
             </if>
         </where>
     </select>

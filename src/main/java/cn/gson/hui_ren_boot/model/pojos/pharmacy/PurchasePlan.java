@@ -22,6 +22,20 @@ public class PurchasePlan {
     private Long reviewerId;//审核人
     private List<PlanDetails> planDetails;
 
+    private String drugName;
+
+    private Integer pageNo;
+
+    private Integer size;
+
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
 
     @Id
     @Column(name = "PURCHASE_SERIAL")
@@ -100,6 +114,30 @@ public class PurchasePlan {
 
     public void setStaffName(String staffName) {
         this.staffName = staffName;
+    }
+
+    public Long getPurchaseState() {
+        return purchaseState;
+    }
+
+    public void setPurchaseState(Long purchaseState) {
+        this.purchaseState = purchaseState;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     @Override
