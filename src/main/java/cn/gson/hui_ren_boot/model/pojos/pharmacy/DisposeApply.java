@@ -29,6 +29,7 @@ public class DisposeApply {
     private String checkNo;//盘点单号
     private Long applyState;//审核状态
 
+
     @Id
     @Column(name = "APPLY_ID")
     public String getApplyId() {
@@ -155,6 +156,7 @@ public class DisposeApply {
     public void setStaffNames(String staffNames) {
         this.staffNames = staffNames;
     }
+
 
     @OneToMany
     public List<Destruction> getDisposeApplyData() {

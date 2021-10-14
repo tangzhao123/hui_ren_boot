@@ -48,6 +48,12 @@ public class PurchaseService {
         purchaseMapper.trial(checkInfo.getPurchaseId());
     }
 
+    //驳回采购计划单审核
+    public void trial1(CheckInfo checkInfo){
+        checkInfoService.addCheckInfo(checkInfo);
+        purchaseMapper.trial1(checkInfo.getPurchaseId());
+    }
+
     //更改采购计划单状态（根据采购计划生成采购订单）
     public void trials(String purchaseId){
         purchaseMapper.trials(purchaseId);

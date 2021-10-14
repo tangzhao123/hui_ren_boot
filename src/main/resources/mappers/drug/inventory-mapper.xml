@@ -44,6 +44,6 @@
     <select id="findAllInventory" resultMap="inventoryMap">
         select * from inventory i
         inner join drug_info dr on i.inventory_drug = dr.drug_id
-        where inventory_check = #{inventoryCheck}
+        where inventory_check = #{inventoryCheck} and inventory_knum !=0
     </select>
 </mapper>

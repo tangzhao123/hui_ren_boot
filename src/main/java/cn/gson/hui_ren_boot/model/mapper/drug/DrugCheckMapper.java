@@ -21,6 +21,12 @@ public interface DrugCheckMapper {
     //审批盘点单
     public void updateDrugCheck(String checkNo);
 
+    //驳回盘点单
+    public void updateDrugCheck1(String checkNo);
+
+    //驳回盘点单
+    public void updateDrugCheck2(String checkNo);
+
     //新增销毁申请单号
     public void updateCheckGo(@Param("checkGo") String checkGo,@Param("checkNo") String checkNo);
 }

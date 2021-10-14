@@ -63,9 +63,14 @@
             </foreach>
     </insert>
 
-    <!-- 修改库存数量根据保质期去扣 -->
+    <!-- 修改库存数量根据批次去扣 -->
     <update id="updateDrugStock">
         update drug_stock set stock_surplus = stock_surplus-#{stockSurplus} where stock_batch = #{stockBatch}
+    </update>
+
+    <!-- 修改库存数量根据批次去扣 -->
+    <update id="updateDrugStock1">
+        update drug_stock set stock_surplus = stock_surplus+#{stockSurplus} where stock_batch = #{stockBatch}
     </update>
     
     <!-- 查询临期的库存药品 -->

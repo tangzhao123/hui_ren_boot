@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,9 +68,17 @@ public class ArrangeController {
         for (int i = 0; i < staffId.size(); i++) {
             list.add(new Arrange(staffId.get(i).longValue(),arrange.getCategoryId(),arrange.getArrangeStart(),arrange.getArrangeEnd()));
         }
+        SimpleDateFormat sf = new SimpleDateFormat("yyy-MM-dd");
+        String start = sf.format(arrange.getArrangeStart());
+        List<Arrange> arranges = arrangeService.allStaffId(start,arrange.getCategoryId(),staffId);
         try {
-            arrangeService.addArrange(list);
-            return "ok";
+            if(arranges.isEmpty()){
+                arrangeService.addArrange(list);
+                return "ok";
+            }else{
+                return "have";
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
@@ -79,7 +88,6 @@ public class ArrangeController {
     //根据员工编号查询排班
     @RequestMapping("arrange-byId")
     public List<Arrange> allArrange(Long staffId){
-        System.out.println(staffId);
         return arrangeService.findAllArrange(staffId);
     }
 

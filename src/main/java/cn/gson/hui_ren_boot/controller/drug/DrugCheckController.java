@@ -67,4 +67,16 @@ public class DrugCheckController {
             return "fail";
         }
     }
+
+    //驳回盘点单
+    @RequestMapping("update-drugCheck1")
+    public String updateDrugCheck1(@RequestBody CheckInfo checkInfo){
+        try {
+            drugCheckService.updateDrugCheck1(checkInfo);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

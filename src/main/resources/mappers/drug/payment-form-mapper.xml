@@ -16,24 +16,17 @@
         group by extract (month from payment_time) order by extract (month from payment_time)
     </select>
 
-<!--    &lt;!&ndash; 查询用户数量 &ndash;&gt;-->
-<!--    <select id="allStaffSum" resultType="_int">-->
-<!--        select count(*) as staffSum from staff-->
-<!--    </select>-->
-<!--    &lt;!&ndash; 查询药品数量 &ndash;&gt;-->
-<!--    <select id="allStockSurplus" resultType="_int">-->
-<!--        select sum(stock_surplus) as stockSurplus from drug_stock group by stock_surplus-->
-<!--    </select>-->
-<!--    &lt;!&ndash; 查询收费总金额 &ndash;&gt;-->
-<!--    <select id="allPaymentMoneys" resultType="double">-->
-<!--        select sum(payment_money) as paymentMoneys from payment_form-->
-<!--    </select>-->
-<!--    &lt;!&ndash; 查询出库数量 &ndash;&gt;-->
-<!--    <select id="allStockoutAmount" resultType="_int">-->
-<!--        select sum(stockout_amount) as stockoutAmount from stockout-->
-<!--    </select>-->
-<!--    &lt;!&ndash; 查询入库数量 &ndash;&gt;-->
-<!--    <select id="allDetailNumber" resultType="_int">-->
-<!--        select sum(detail_number) as detailNumber from entry_details-->
-<!--    </select>-->
+    <!-- 查询用户数量 -->
+    <select id="allStaffSum" resultType="_int">
+        select count(*) as staffSum from staff
+    </select>
+    <!-- 查询药品数量 -->
+    <select id="allStockSurplus" resultType="_int">
+        select sum(stock_surplus) as stockSurplus from drug_stock
+    </select>
+    <!-- 查询收费总金额 -->
+    <select id="allPaymentMoneys" resultType="double">
+        select sum(payment_money) as paymentMoneys from payment_form
+    </select>
+
 </mapper>

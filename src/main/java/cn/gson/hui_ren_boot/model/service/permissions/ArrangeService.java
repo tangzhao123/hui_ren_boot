@@ -27,6 +27,11 @@ public class ArrangeService {
         return arrangeMapper.arrangeByMedical(medicalId,staffId);
     }
 
+    //根据时间跟班次员工编号查询是否存在员工
+    public List<Arrange> allStaffId(String arrangeStart,Long categoryId,List<Integer> staffId){
+        return arrangeMapper.allStaffId(arrangeStart, categoryId, staffId);
+    }
+
     //新增排班
     public void addArrange(List<Arrange> list){
         for (Arrange arrange : list) {

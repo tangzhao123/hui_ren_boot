@@ -3,6 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.StockOutMapper">
 
+    <resultMap id="stockOutMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.Stockout">
+        <id property="stockoutId" column="stockout_id"/>
+        <result property="drugId" column="drug_id"/>
+        <result property="stockoutGo" column="stockout_go"/>
+        <result property="stockoutAmount" column="stockout_amount"/>
+        <result property="drugName" column="drug_name"/>
+    </resultMap>
+
     <!-- 批量新增出库详单 -->
     <insert id="addStockOut">
         insert into stockout
@@ -17,4 +25,11 @@
             </if>
         </foreach>
     </insert>
+
+    <!-- 根据出库单号查询出库详单 -->
+    <select id="findAllStockOut" resultMap="stockOutMap">
+        select * from stockout st
+        left join drug_info dr on st.stockout_product = dr.drug_id
+        where st.stockout_go = #{stockoutGo}
+    </select>
 </mapper>
