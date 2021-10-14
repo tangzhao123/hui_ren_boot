@@ -55,7 +55,7 @@
           </if>
           <if test="types != null">
               <if test="types.typeId != null and '' !=types.typeId">
-                  and di.type_id =#{types.typeId}d1
+                  and di.type_id =#{types.typeId}
               </if>
           </if>
       </where>

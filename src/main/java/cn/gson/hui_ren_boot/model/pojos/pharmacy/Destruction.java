@@ -13,6 +13,16 @@ public class Destruction {
     private String applyId; //销毁单编号
     private String deBatch; //产品批号
     private String drugName;//产品名称
+    private DrugInfo drugInfos;
+
+    @OneToOne
+    public DrugInfo getDrugInfos() {
+        return drugInfos;
+    }
+
+    public void setDrugInfos(DrugInfo drugInfos) {
+        this.drugInfos = drugInfos;
+    }
 
     @Id
     @Column(name = "DE_SERIAL")

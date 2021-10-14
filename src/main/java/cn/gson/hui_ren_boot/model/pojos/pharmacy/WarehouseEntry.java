@@ -22,6 +22,20 @@ public class WarehouseEntry {
     private List<EntryDetails> entryDetailsData;
     private List<DrugStock> drugStocks;
 
+    private DrugDeport deports;
+
+    @OneToOne
+    public DrugDeport getDeports() {
+        return deports;
+    }
+
+    public void setDeports(DrugDeport deports) {
+        this.deports = deports;
+    }
+
+
+
+
     @Id
     @Column(name = "ENTRY_ID")
     public long getEntryId() {

@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import cn.gson.hui_ren_boot.model.pojos.permissions.UserInfo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
@@ -24,7 +25,26 @@ public class DrugCheck {
     private String checkGo;//销毁单号
     private Long checkState;//审核状态
     private List<Inventory> inventoryData;//盘点详情集合
+    private UserInfo userInfos;
+    private DrugDeport deports;
 
+    @OneToOne
+    public UserInfo getUserInfos() {
+        return userInfos;
+    }
+
+    public void setUserInfos(UserInfo userInfos) {
+        this.userInfos = userInfos;
+    }
+
+    @OneToOne
+    public DrugDeport getDeports() {
+        return deports;
+    }
+
+    public void setDeports(DrugDeport deports) {
+        this.deports = deports;
+    }
 
     @Id
     @Column(name = "CHECK_ID")
