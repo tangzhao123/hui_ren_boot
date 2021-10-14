@@ -19,8 +19,8 @@ public class TransfersService {
     TransfersMapper transfersMapper;
     @Autowired
     AllocatingsMapper allocatingsMapper;
-    public Object allTransfersByPage(Integer pageNo, Integer size,Transfers transfers){
-        return transfersMapper.allTransfers(transfers);
+    public Object allTransfersByPage(Integer pageNo, Integer size,Long transfersId,String drugName){
+        return transfersMapper.allTransfers(transfersId,drugName);
     }
 
     public void addTransfers(Transfers drugTransfers){

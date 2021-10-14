@@ -38,6 +38,18 @@
         </collection>
     </resultMap>
     <select id="allTransfers" resultMap="TransfersMapper">
+        SELECT * FROM TRANSFERS ts
+            LEFT JOIN GO_BANK gb ON ts.TRANSFERS_GO = gb.GO_NUM
+            LEFT JOIN ALLOCATING ac ON ts.TRANSFERS_ORDER = ac.TRANSFERS_ID
+            LEFT JOIN DRUG_INFO di ON ac.ALL_DRUG = di.DRUG_ID
+        <where>
+            <if test="transfersId != null and '' != transfersId">
+                or ts.TRANSFERS_ID like '%${transfersId}%'
+            </if>
+            <if test="drugName != null and '' !=drugName">
+                or di.DRUG_NAME like '%${drugName}%'
+            </if>
+        </where>
         SELECT * FROM TRANSFERS ts   LEFT JOIN GO_BANK gb ON ts.TRANSFERS_GO = gb.GO_NUM LEFT JOIN ALLOCATING ac ON ts.TRANSFERS_ORDER = ac.TRANSFERS_ID  LEFT JOIN DRUG_INFO di ON ac.ALL_DRUG = di.DRUG_ID
     </select>
    <!-- 新增-->
