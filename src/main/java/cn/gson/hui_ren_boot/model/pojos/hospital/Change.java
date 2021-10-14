@@ -1,5 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
@@ -14,10 +16,11 @@ public class Change {
     private String changeReason;//转科原因
     private String changeDoctor;//医生姓名
     private String changeState;//申请状态
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date changeDate;//申请时间
     private String medicalName;//科室名
-
-
+    private String medicalstartName;//原科室
+    private String staffName;//新医生
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -29,6 +32,15 @@ public class Change {
 
     public void setChangeId(long changeId) {
         this.changeId = changeId;
+    }
+    @Basic
+    @Column(name = "STAFF_NAME")
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
     }
 
     @Basic
@@ -49,6 +61,22 @@ public class Change {
     public void setMedicalName(String medicalName) {
         this.medicalName = medicalName;
     }
+    @Basic
+    @Column(name = "MEDICAL_STARTNAME")
+    public String getMedicalstartName() {
+        return medicalstartName;
+    }
+
+    public void setMedicalstartName(String medicalstartName) {
+        this.medicalstartName = medicalstartName;
+    }
+
+
+
+
+
+
+
 
     @Basic
     @Column(name = "REGISTER_ID")
@@ -105,12 +133,12 @@ public class Change {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Change change = (Change) o;
-        return changeId == change.changeId && Objects.equals(changeName, change.changeName) && Objects.equals(registerId, change.registerId) && Objects.equals(changeReason, change.changeReason) && Objects.equals(changeDoctor, change.changeDoctor) && Objects.equals(changeState, change.changeState) && Objects.equals(changeDate, change.changeDate);
+        return changeId == change.changeId && Objects.equals(changeName, change.changeName) && Objects.equals(registerId, change.registerId) && Objects.equals(changeReason, change.changeReason) && Objects.equals(changeDoctor, change.changeDoctor) && Objects.equals(changeState, change.changeState) && Objects.equals(changeDate, change.changeDate)&& Objects.equals(medicalstartName, change.medicalstartName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(changeId, changeName, registerId, changeReason, changeDoctor, changeState, changeDate);
+        return Objects.hash(changeId, changeName, registerId, changeReason, changeDoctor, changeState, changeDate,medicalstartName);
     }
 
     @Override

@@ -4,6 +4,8 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Hospital;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Arrange;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.service.hospital.HospialService;
 import cn.gson.hui_ren_boot.model.service.hospital.RegisterService;
 import com.alibaba.fastjson.JSON;
@@ -86,16 +88,16 @@ public class RegisterConvertor {
     }
     @RequestMapping("/upRecharge")
     public String upRecharge(@RequestBody TreatmentCard k){
+        System.err.println(k);
         try{
-            TreatmentCard lj= registerService.Recharge(k.getTreatmentNo());//查询诊疗卡
-            System.out.println(lj.getTreatmentBalance());
+
+
             TreatmentRecharge p=new TreatmentRecharge();//新增记录
             p.setRechargeMoney(k.getTreatmentBalance());
             p.setTreatmentNo(k.getTreatmentNo());
+            System.err.println(123);
             registerService.reCharge(p);
 
-            long ljBalance= lj.getTreatmentBalance()+k.getTreatmentBalance();//金额累加
-            k.setTreatmentBalance(ljBalance);//累加赋值
             registerService.upMedicalCard(k);//修改金额
             //————————————————————————
 
@@ -127,5 +129,13 @@ public class RegisterConvertor {
         }catch (Exception e){
             return "fail";
         }
+    }//    排班查询
+    @RequestMapping("arrenge")
+    public List<Arrange>chaArrange(@RequestBody Medical medical){//查询排班表
+      return   registerService.chaArrange(medical);
+    }
+    @RequestMapping("arrenge2")
+    public List<Arrange>chaArrange2(@RequestBody Medical medical){//查询排班表
+        return   registerService.chaArrange2(medical);
     }
 }

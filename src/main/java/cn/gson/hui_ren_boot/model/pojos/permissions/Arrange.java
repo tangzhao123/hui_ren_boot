@@ -14,7 +14,9 @@ public class Arrange {
     private long arrangeId;
     private Long staffId;
     private Long categoryId;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Timestamp arrangeStart;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Timestamp arrangeEnd;
     private String staffName;
     private String categoryShift;
@@ -23,7 +25,9 @@ public class Arrange {
     private String userroleOver;
     private String medicalName;
     private String color;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date start;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date end;
 
     @Id

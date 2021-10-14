@@ -18,6 +18,9 @@ public interface ArrangeMapper {
     //根据员工编号查询所有的排班记录
     public List<Arrange> findAllArrange(Long staffId);
 
+    //根据时间跟班次员工编号查询是否存在员工
+    public List<Arrange> allStaffId(String arrangeStart,Long categoryId,List<Integer> staffId);
+
     //根据科室编号查询排班记录
     public List<Arrange> arrangeByMedical(@Param("medicalId") Long medicalId,@Param("staffId") Long staffId);
 }

@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.ChangeMapper">
     <insert id="addChange">--新增
-        insert into change values (seq_huiren.nextval,#{changeName},#{registerId},#{changeReason},#{changeDoctor},0,current_timestamp,#{medicalName})
+        insert into change values (seq_huiren.nextval,#{changeName},#{registerId},#{changeReason},#{changeDoctor},0,current_timestamp,#{medicalName},#{startmedicalName},#{staffName})
     </insert>
     <select id="allChange" resultType="change">--查询
             select *from change where change_state=0
@@ -11,4 +11,23 @@
     <delete id="deChange">--删除
         delete from change where change_id=#{changeId}
     </delete>
+    <select id="asChange" resultType="Change" >
+        select * from change
+        <where>
+            change_state=0
+            <if test="registerId != null and '' != registerId">
+                or REGISTER_ID like '%${registerId}%'
+            </if>
+            <if test="changeName != null and '' != changeName">
+                or change_name like '%${change_name}%'
+            </if>
+            <if test="changeDoctor != null and '' != changeDoctor">
+                or change_doctor like '%${change_doctor}%'
+            </if>
+            <if test="changeDoctor != null and '' != changeDoctor">
+                or change_doctor like '%${change_doctor}%'
+            </if>
+        </where>
+
+    </select>
 </mapper>

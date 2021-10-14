@@ -12,6 +12,8 @@ public class Stockout {
     private String stockoutGo;
     private Long stockoutAmount;
     private DrugInfo drugInfos;
+    private String drugId;
+    private String drugName;
 
     @OneToOne
     public DrugInfo getDrugInfos() {
@@ -60,6 +62,24 @@ public class Stockout {
 
     public void setStockoutAmount(Long stockoutAmount) {
         this.stockoutAmount = stockoutAmount;
+    }
+
+    @Transient
+    public String getDrugId() {
+        return drugId;
+    }
+
+    public void setDrugId(String drugId) {
+        this.drugId = drugId;
+    }
+
+    @Transient
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
     }
 
     @Override

@@ -17,6 +17,9 @@ public interface PurchaseMapper {
     //采购计划单审批通过
     public void trial(String purchaseId);
 
+    //驳回采购计划
+    public void trial1(String purchaseId);
+
     //更改采购计划单状态（根据采购计划生成采购订单）
     public void trials(String purchaseId);
 

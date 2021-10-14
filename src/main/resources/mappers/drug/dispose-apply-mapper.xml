@@ -34,6 +34,11 @@
         update dispose_apply set apply_state = 1 where apply_num = #{applyNum}
     </update>
 
+    <!-- 驳回销毁申请审批 -->
+    <update id="updateDisposeApply1">
+        update dispose_apply set apply_state = 2 where apply_num = #{applyNum}
+    </update>
+
     <!-- 查询所有已经通过审批的销毁单 -->
     <select id="allDisposeApply" resultMap="disposeApplyMap">
         select  * from dispose_apply da

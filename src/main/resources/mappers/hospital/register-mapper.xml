@@ -34,6 +34,10 @@
             <result column="SICKBED_MARK" property="sickbedMark"/>
             <result column="WARD_MARK" property="wardMark"/>
         </association>
+        <association property="treatment" javaType="TreatmentCard">
+            <id column="treatment_id" property="treatmentId"/>
+            <result column="treatment_balance" property="treatmentBalance"/>
+        </association>
     </resultMap>
     <resultMap id="allRegisMappert" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
         <id column="REGISTER_SERICA" property="registerSerica"/>
@@ -53,6 +57,7 @@
         <result column="REGISTER_CALL" property="registerCall"/>
         <result column="REGISTER_RECORD" property="registerRecord"/>
         <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <result column="sickbed_mark" property="sickbedMark"/>
         <!--        科室-->
         <association property="medical" javaType="Medical">
             <id column="MEDICAL_ID" property="medicalId"/>
@@ -73,7 +78,24 @@
 
         </association>
     </resultMap>
+    <resultMap id="getMep" type="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+            <id column="staff_id" property="staffId" />
+            <id column="staff_name" property="staffName" />
+            <id column="staff_phone" property="staffPhone" />
+            <id column="section_id" property="sectionId" />
+            <id column="medical_id" property="medicalId" />
+            <id column="rank_id" property="rankId" />
+            <id column="staff_state" property="staffState" />
+            <id column="staff_card" property="staffCard" />
+    </resultMap>
    <!-- 查询病人信息-->
+    <select id="allR" resultMap="allRegisMapper">
+        SELECT*from register  hg
+        left join sickbed kjs on hg.sickbed_mark=kjs.sickbed_mark
+        left join medical o on o.medical_id=hg.medical_id
+        left join staff  fh on fh.staff_id=hg.staff_id
+        left join treatment_card kk on kk.treatment_no=hg.register_clinic  where hg.register_id=#{registerId}
+    </select>
     <select id="allRegis" resultMap="allRegisMapper">
         SELECT*from register  hg
             left join sickbed kjs on hg.sickbed_mark=kjs.sickbed_mark
@@ -138,9 +160,7 @@
             <if test="registerId != null and '' != registerId">
                 or REGISTER_ID  like '%${registerId}%'
             </if>
-            <if test="registerId != null and '' != registerId">
-                or REGISTER_ID  like '%${registerId}%'
-            </if>
+
             <if test="medicalId != null and '' != medicalId">
                 or medical_id  like '%${medicalId}%'
             </if>
@@ -158,12 +178,12 @@
     <insert id="addRegister">
         insert into register (register_serica,register_id,register_date,register_name,register_sex,register_site,
                 register_card,register_print,register_age,register_home,register_address,register_phone,register_relation,
-                register_contact,register_call,medical_id,register_record,register_clinic,register_state)
+                register_contact,register_call,medical_id,register_record,staff_id,register_clinic,register_state)
             values(seq_huiren.nextval,#{registerId},current_timestamp,#{registerName}
                 ,#{registerSex},#{registerSite},#{registerCard},#{registerPrint},
                 #{registerAge},#{registerHome},#{registerAddress},#{registerPhone},
                 #{registerRelation},#{registerContact},#{registerCall},#{medicalId},
-                 #{registerRecord},#{registerClinic},0)
+                 #{registerRecord},#{staffId},#{registerClinic},0)
     </insert>
     <!--修改个人信息-->
     <update id="upRegister">
@@ -186,11 +206,11 @@
     </select>
 <!-- 充值修改金额-->
     <update id="upMedicalCard">
-        update TREATMENT_CARD set TREATMENT_BALANCE=#{treatmentBalance} where TREATMENT_NO=#{treatmentNo}
+        update TREATMENT_CARD set TREATMENT_BALANCE=TREATMENT_BALANCE+#{treatmentBalance} where TREATMENT_NO=#{treatmentNo}
     </update>
 <!-- 新增充值记录 -->
     <insert id="reCharge">
-        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney})
+        insert into TREATMENT_RECHARGE values (seq_huiren.nextval,#{treatmentNo},current_timestamp,#{rechargeMoney},'充值')
     </insert>
     <!--查询诊疗卡余额 -->
     <select id="selRecharge" resultType="TreatmentCard">
@@ -199,5 +219,27 @@
     <!--查询诊疗卡 -->
     <select id="selseRecharge" resultType="TreatmentRecharge">
         select*from treatment_recharge where treatment_no=#{treatmentNo}
+    </select>
+<!--    查询排班表-->
+    <select id="chaArrange" resultType="Arrange">
+        select * from staff s
+        inner join section se on s.section_id = se.section_id
+        inner join medical me on s.medical_id = me.medical_id
+        inner join arrange ar on s.staff_id = ar.staff_id
+        left join category ca on ar.category_id = ca.category_id
+        where me.medical_id =#{medicalId} and se.section_id = 2
+         and to_char( sysdate,'yyyy-MM-dd') between to_char(ar.arrange_start,'yyyy-mm-dd')
+        and to_char(ar.arrange_end,'yyyy-mm-dd') and s.rank_id = 5
+
+    </select>
+<!--&lt;!&ndash;    查询科室&ndash;&gt;-->
+<!--    <select id="chaMedical" resultType="Medical">-->
+<!--        select *from  medical  where medical_id=#{medicalId}-->
+<!--    </select>-->
+    <select id="allRegister" resultType="Register">
+        select*from  register where registerId=#{registerId}
+    </select>
+    <select id="allMedicals" resultType="Medical">
+        select*from  medical where medical_name=#{medicalName}
     </select>
 </mapper>

@@ -34,6 +34,16 @@
         update drug_check set check_state = 1 where check_no = #{checkNo}
     </update>
 
+    <!-- 驳回盘点单 -->
+    <update id="updateDrugCheck1">
+        update drug_check set check_state = 2 where check_no = #{checkNo}
+    </update>
+
+    <!-- 修改状态（已生成销毁单） -->
+    <update id="updateDrugCheck2">
+        update drug_check set check_state = 3 where check_no = #{checkNo}
+    </update>
+
     <!-- 查询已审批的盘点单 -->
     <select id="allDrugCheck" resultMap="drugCheckMap">
         select * from drug_check c

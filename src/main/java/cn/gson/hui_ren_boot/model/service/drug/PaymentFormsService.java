@@ -26,28 +26,19 @@ public class PaymentFormsService {
         return paymentFormsMapper.allPayment();
     }
 
-//    //查询收费总金额
-//    public double allPaymentMoneys(){
-//        return paymentFormsMapper.allPaymentMoneys();
-//    }
-//
-//    //查询用户数量
-//    public int allStaffSum(){
-//        return paymentFormsMapper.allStaffSum();
-//    }
-//
-//    //查询药品数量
-//    public int allStockSurplus(){
-//        return paymentFormsMapper.allStockSurplus();
-//    }
-//
-//    //查询出库数量
-//    public int allStockoutAmount(){
-//        return paymentFormsMapper.allStockoutAmount();
-//    }
-//
-//    //查询入库数量
-//    public int allDetailNumber(){
-//        return paymentFormsMapper.allDetailNumber();
-//    }
+    //查询收费总金额
+    public double allPaymentMoneys(){
+        return paymentFormsMapper.allPaymentMoneys();
+    }
+
+    //查询用户数量
+    public int allStaffSum(){
+        return paymentFormsMapper.allStaffSum();
+    }
+
+    //查询药品数量
+    public int allStockSurplus(){
+        return paymentFormsMapper.allStockSurplus();
+    }
+
 }

@@ -4,6 +4,7 @@ import cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentDetaiMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentFormMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionDetailMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionListMapper;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.PaymentDetai;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PaymentForm;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
@@ -26,8 +27,8 @@ public class PaymentService {
     PaymentDetaiMapper paymentDetaiMapper;
 
     //收费，查询处方单
-    public List<PrescriptionList> allList(String recordsNo){
-        return listMapper.allList(recordsNo);
+    public List<PrescriptionList> allList(String outpatientCard){
+        return listMapper.allList(outpatientCard);
     }
 
     //根据处方号查询详单
@@ -42,7 +43,17 @@ public class PaymentService {
     }
 
     //查询缴费记录
-    public Object selPaymentByPage(Integer pageNo,Integer size){
-        return paymentFormMapper.selPayment();
+    public Object selPaymentByPage(Integer pageNo,Integer size,String start,String end,long paymentType,String outpatientName,String staffName){
+        return paymentFormMapper.selPayment(start,end,paymentType,outpatientName,staffName);
+    }
+
+    //挂号时新增收费表
+    public void sendPayment(PaymentForm paymentForm){
+        paymentFormMapper.sendPayment(paymentForm);
+    }
+
+    //根据缴费号查询缴费详单
+    public List<PaymentDetai> selPaymentDetail(String paymentNo){
+        return paymentDetaiMapper.selPaymentDetail(paymentNo);
     }
 }

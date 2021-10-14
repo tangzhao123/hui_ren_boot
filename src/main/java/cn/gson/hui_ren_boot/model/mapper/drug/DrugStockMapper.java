@@ -15,6 +15,9 @@ public interface DrugStockMapper {
     //修改库存数量
     public void updateDrugStock(@Param("stockSurplus") Long stockSurplus, @Param("stockBatch") String stockBatch);
 
+    //修改库存数量
+    public void updateDrugStock1(@Param("stockSurplus") Long stockSurplus, @Param("stockBatch") String stockBatch);
+
     //根据药品编号查询药品库存
     public List<DrugStock> findAllStock(Long drugId);
 

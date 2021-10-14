@@ -1,9 +1,6 @@
 package cn.gson.hui_ren_boot.controller.nursestation;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Sickbed;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Ward;
+import cn.gson.hui_ren_boot.model.pojos.hospital.*;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.WardEntity;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
@@ -28,38 +25,36 @@ public class SickbedController {
     //c查询病床
     @GetMapping("/select-bed")
     public List<Sickbed> selectbed(String warkMark){
-//        System.out.println("病房号："+warkMark);
-//        System.out.println("病床："+sickbedService.selectbed(warkMark));
         return sickbedService.selectbed(warkMark);
     }
 
     //查询病房（根据科室，护士，病房号）
     @GetMapping("/select-ward")
     public Object selectWard(int pageNo, int size,String wardName){
-//        System.out.println("============open==============");
         WardEntity wardEntity = JSONObject.parseObject(wardName,WardEntity.class);
-//        System.out.println(wardEntity.toString());
         return sickbedService.selectWardByPage(pageNo,size,wardEntity);
     }
 
     //新增病房
     @RequestMapping("/insert-ward")
     public String addWard(@RequestBody Ward ward){
-        System.out.println("====opennnnn==========");
+       System.out.println("====opennnnn==========");
         Ward w = ward;
-//        System.out.println("病房"+ward.toString());
+        System.out.println("病房"+ward.toString());
 //        System.out.println(w.toString());
+        Long o = Long.valueOf(0);
        if (ward.getWardId() == 0){
+           sickbedService.addWard(w);//新增病房
            for (int i = 1; i <= w.getWardSite(); i++) {
-               String sickbedMark = MyUtil.genrateNo("BC-");
-//               System.out.println("病房号："+w.getWardMark());
-//               System.out.println("病床号："+sickbedMark);
+               o = o+1;
+               String sickbedMark = w.getWardMark() + "-" + o;//病床号
+               System.out.println("病房号："+w.getWardMark());
+               System.out.println("病床号："+sickbedMark);
                Sickbed sickbed = new Sickbed();
                sickbed.setWardMark(w.getWardMark());
                sickbed.setSickbedMark(sickbedMark);
                sickbedService.insertbed(sickbed);//新增病床
            }
-           sickbedService.addWard(w);//新增病房
        }else {
            sickbedService.updateWard(w);//修改病房
        }
@@ -70,48 +65,53 @@ public class SickbedController {
     //查询不同科室的护士
     @GetMapping("/record-hushi")
     public List<Staff> hushi(Long medicalId){
-//        System.out.println("========open==========");
-//        System.out.println("护士"+sickbedService.staffHu(medicalId));
         return sickbedService.staffHu(medicalId);
     }
 
     //调换病床
     @RequestMapping("/record-diaohuan")
     public String ChangingBed(@RequestBody Map<String,Object> map){
-//        System.out.println("=========open========");
-        ObjectMapper mapper = new ObjectMapper();
-        Record xgjl = mapper.convertValue(map.get("xgjl"), Record.class);
-        String sickbedMarks = map.get("sickbedMarks").toString();
-        sickbedService.updateRecord(xgjl);//修改床位记录
-        sickbedService.updateSickbed(xgjl.getSickbedMark());//把病床状态改成已使用
-        sickbedService.updateTwo(sickbedMarks);//把病床状态改成未使用
-//        System.out.println(xgjl.toString());
-//        System.out.println(sickbedMarks+"他爸");
-        return "ok";
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Record xgjl = mapper.convertValue(map.get("xgjl"), Record.class);
+            String sickbedMarks = map.get("sickbedMarks").toString();
+            sickbedService.updateRecord(xgjl);//修改床位记录
+            sickbedService.updateSickbed(xgjl.getSickbedMark());//把病床状态改成已使用
+            sickbedService.updateTwo(sickbedMarks);//把病床状态改成未使用
+            return "ok";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+
     }
 
     //查询病床
     @GetMapping("/record-select")
     public Object selectRecord(int pageNo, int size,String marks){
         Record r = JSONObject.parseObject(marks,Record.class);
-        System.out.println("病床使用记录："+sickbedService.selectRecordByPage(pageNo,size,r));
         return sickbedService.selectRecordByPage(pageNo,size,r);
     }
 
     //病床使用记录表，修改病床状态，修改病人资料添加病床号
     @RequestMapping("/record-insert")
     public String addRecord(@RequestBody Record jl){
-//        System.out.println(jl.toString());
-        String danhao=  MyUtil.genrateNo("BCJL");//订单编号
-        Register register=new Register();
-        register.setRegisterId(jl.getRegisterId());
-        register.setSickbedMark(jl.getSickbedMark());
-        jl.setRecordSerial(danhao);
-//        System.out.println(jl+"数据1");
-        sickbedService.addRecord(jl);//新增
-        sickbedService.updateRegister(register);//修改病人信息
-        sickbedService.updateSickbed(jl.getSickbedMark());//修改病床状态
-        return "ok";
+        try {
+            String danhao=  MyUtil.genrateNo("BCJL");//订单编号
+            Register register=new Register();
+            register.setRegisterId(jl.getRegisterId());
+            register.setSickbedMark(jl.getSickbedMark());
+            jl.setRecordSerial(danhao);
+            sickbedService.addRecord(jl);//新增
+            sickbedService.updateRegister(register);//修改病人信息
+            sickbedService.updateSickbed(jl.getSickbedMark());//修改病床状态
+            return "ok";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+
+
     }
 
     //病人资料查询
@@ -124,7 +124,6 @@ public class SickbedController {
     //病床的查询
     @GetMapping("/sick-select")
     public List<SickbedEntity> selSickbed(Long medicalId){
-//        System.out.println("病床"+sickbedService.bingchuang(medicalId));
         return sickbedService.bingchuang(medicalId);
     }
 }

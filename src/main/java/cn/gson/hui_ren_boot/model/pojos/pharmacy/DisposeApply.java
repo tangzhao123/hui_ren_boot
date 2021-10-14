@@ -50,6 +50,7 @@ public class DisposeApply {
         this.deports = deports;
     }
 
+
     @Id
     @Column(name = "APPLY_ID")
     public String getApplyId() {
@@ -176,6 +177,7 @@ public class DisposeApply {
     public void setStaffNames(String staffNames) {
         this.staffNames = staffNames;
     }
+
 
     @OneToMany
     public List<Destruction> getDisposeApplyData() {

@@ -25,4 +25,7 @@ public interface DisposeApplyMapper {
 
     //审批销毁申请单
     public void updateDisposeApply(String applyNum);
+
+    //驳回销毁申请单
+    public void updateDisposeApply1(String applyNum);
 }

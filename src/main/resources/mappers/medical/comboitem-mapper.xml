@@ -42,7 +42,7 @@
     <!-- 修改体检项目 -->
     <update id="updateComboitem">
         update COMBOITEM set ITEM_NAME = #{itemName},ITEM_OFFICE = #{itemOffice},
-            ITEM_MONEY = #{itemMoney},ITEM_TYPE = #{itemType} where ITEM_ID = #{itemId}
+            ITEM_MONEY = #{itemMoney},ITEM_TYPE = #{itemType},ITEM_UNIT = #{itemUnit} where ITEM_ID = #{itemId}
     </update>
 <!--    删除体检项目，只有刚新增的次可以删除-->
 <!--    <delete id="delComboitem">-->

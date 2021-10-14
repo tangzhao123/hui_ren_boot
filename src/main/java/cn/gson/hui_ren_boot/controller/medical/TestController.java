@@ -37,7 +37,7 @@ public class TestController {
         String account = MyUtil.genrateNo("TJ");
         t.setTestAccount(account);
         if (t.getTestId() == 0){
-            testService.addTest(t);
+            testService.insertTest(t);
         }
         System.out.println("体检人信息"+t);
        // testService.insertTest(t);
@@ -66,7 +66,7 @@ public class TestController {
                     testmiddle1.setItemId(t.getTestId());
                     System.out.println("套餐项目"+c.getItemId());
                     testmiddle1.setItemId(c.getItemId());
-                    testService.addMiddle(testmiddle1);
+                    testService.insertMiddle(testmiddle1);
                 }
             }
         }
@@ -84,7 +84,7 @@ public class TestController {
     //删除
     @RequestMapping("/test-del")
     public String testDel(Long id){
-        testService.delTest(id);
+        testService.dels(id);
         return "ok";
     }
 

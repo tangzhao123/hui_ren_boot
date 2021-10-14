@@ -17,6 +17,11 @@ public class PaymentVo {
     private double paymentSum;
     private double paymentSmall;
     private String staffName;
+    private String treatmentName;
+    private Date start;
+    private Date end;
+    private int pageNo;
+    private int size;
 
     public String getOutpatientName() {
         return outpatientName;
@@ -104,5 +109,45 @@ public class PaymentVo {
 
     public void setStaffName(String staffName) {
         this.staffName = staffName;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public int getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(int pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public String getTreatmentName() {
+        return treatmentName;
+    }
+
+    public void setTreatmentName(String treatmentName) {
+        this.treatmentName = treatmentName;
     }
 }
