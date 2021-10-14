@@ -18,5 +18,5 @@ public interface PrescriptionListMapper {
     public void addChineseList(PrescriptionList prescriptionList);
 
     //收费，查询处方单
-    public List<PrescriptionList> allList(String recordsNo);
+    public List<PrescriptionList> allList(String outpatientCard);
 }

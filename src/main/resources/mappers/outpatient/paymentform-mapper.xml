@@ -49,5 +49,24 @@
                           left join medical_record_info mr on pf.records_no = mr.records_no
                           left join treatment_card tc on mr.treatment_no = tc.treatment_no
                           left join outpatient_register pr on tc.treatment_card  = pr.outpatient_card
+    <where>
+        <if test="start != null and '' != start and end != null and '' != end">
+            to_char(pf.PAYMENT_TIME,'yyyy-MM-dd') between #{start} and #{end}
+        </if>
+        <if test="paymentType != null and '' != paymentType">
+            and pf.PAYMENT_TYPE = #{paymentType}
+        </if>
+        <if test="outpatientName != null and '' != outpatientName">
+            and tc.OUTPATIENT_NAME = #{outpatientName}
+        </if>
+        <if test="staffName != null and '' != staffName">
+            and st.STAFF_NAME = #{staffName}
+        </if>
+    </where>
     </select>
+
+    <!--挂号时新增收费表-->
+    <insert id="sendPayment">
+        insert into payment_form values (seq_huiren.nextval,#{paymentNo},#{recordsNo},#{paymentMoney},current_timestamp,#{staffId},1,#{paymentSum},#{paymentSmall})
+    </insert>
 </mapper>
