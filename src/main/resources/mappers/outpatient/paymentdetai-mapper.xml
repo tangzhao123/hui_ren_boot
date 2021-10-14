@@ -32,4 +32,8 @@
         </foreach>
     </insert>
 
+    <!--根据缴费号查询缴费详单-->
+    <select id="selPaymentDetail" resultMap="detaiMap">
+        select * from payment_detai where PAYMENT_NO = #{paymentNo}
+    </select>
 </mapper>
