@@ -31,7 +31,7 @@
                 or ITEM_TYPE like '%${itemType}%'
             </if>
             <if test="itemNumber != null and itemNumber != ''">
-                or ITEM_NUMBER = #{itemNumber}
+                or ITEM_NUMBER like '%${itemNumber}%'
             </if>
         </where>
     </select>

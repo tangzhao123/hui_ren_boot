@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.ZhuYuanMapper">
+
+<!--    新增结果-->
+    <insert id="zyspection">
+        INSERT INTO COMBINSPECTION VALUES(seq_huiren.nextval,#{inspectionName},#{inspectionContent},#{itemName},#{testId},#{comboName},#{inspectionUnit},#{inspectionPhone},current_timestamp)
+    </insert>
+
+<!--    查询项目-->
+    <select id="zyitem" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Comboitem">
+        SELECT * FROM COMBOITEM co LEFT JOIN TESTMIDDLE te ON co.item_id = te.item_id
+            LEFT JOIN TEST st ON te.test_account = st.test_account
+            WHERE st.test_account = #{testAccount,jdbcType=VARCHAR}
+
+    </select>
+
 <!--    查询住院要检验的-->
     <select id="zycomo" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Test">
         SELECT * FROM TEST

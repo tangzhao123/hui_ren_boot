@@ -19,7 +19,10 @@
         SELECT * FROM ADDITIONAL
             <where>
                 <if test="additionalName != null and additionalName != ''">
-                    ADDITIONAL_NAME LIKE '%${additionalName}%'
+                    or ADDITIONAL_NAME LIKE '%${additionalName}%'
+                </if>
+                <if test="medicalName != null and medicalName != ''">
+                    or MEDICAL_NAME like '%${medicalName}%'
                 </if>
             </where>
     </select>
