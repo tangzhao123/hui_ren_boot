@@ -77,8 +77,8 @@ public class RegisterService {
     }
 
     //不分页查询
-    public List<Register>allR(){
-        return registerMapper.allR();
+    public List<Register>allR(Register register){
+        return registerMapper.allR(register);
     }
     //床位查询
     public Register allRegister(String registerId){

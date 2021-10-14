@@ -23,7 +23,7 @@ public class Register {
     private Date registerDate;//入院时间3
     private String registerName;//姓名4
     private int registerSex;//性别5
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date registerSite;//出生日期6
     private int registerCard;//婚否7
     private String registerPrint;//职业8

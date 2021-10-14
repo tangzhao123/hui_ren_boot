@@ -88,16 +88,16 @@ public class RegisterConvertor {
     }
     @RequestMapping("/upRecharge")
     public String upRecharge(@RequestBody TreatmentCard k){
+        System.err.println(k);
         try{
-            TreatmentCard lj= registerService.Recharge(k.getTreatmentNo());//查询诊疗卡
-            System.out.println(lj.getTreatmentBalance());
+
+
             TreatmentRecharge p=new TreatmentRecharge();//新增记录
             p.setRechargeMoney(k.getTreatmentBalance());
             p.setTreatmentNo(k.getTreatmentNo());
+            System.err.println(123);
             registerService.reCharge(p);
 
-            long ljBalance= lj.getTreatmentBalance()+k.getTreatmentBalance();//金额累加
-            k.setTreatmentBalance(ljBalance);//累加赋值
             registerService.upMedicalCard(k);//修改金额
             //————————————————————————
 

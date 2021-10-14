@@ -57,7 +57,7 @@
             and pf.PAYMENT_TYPE = #{paymentType}
         </if>
         <if test="outpatientName != null and '' != outpatientName">
-            and tc.OUTPATIENT_NAME = #{outpatientName}
+            and pr.OUTPATIENT_NAME = #{outpatientName}
         </if>
         <if test="staffName != null and '' != staffName">
             and st.STAFF_NAME = #{staffName}
