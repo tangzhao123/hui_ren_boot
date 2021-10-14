@@ -55,7 +55,7 @@
           </if>
           <if test="types != null">
               <if test="types.typeId != null and '' !=types.typeId">
-                  and di.type_id =#{types.typeId}
+                  and di.type_id =#{types.typeId}d1
               </if>
           </if>
       </where>
@@ -75,13 +75,12 @@
         values (seq_huiren.nextval,#{drugId},#{drugName},#{drugTack},#{drugDosage},#{standards.standardId},#{drugNext},#{types.typeId},
                 #{drugSmall},#{drugBig},#{suppliers.supplierId},#{drugSelling},#{purchasePrice},0)
     </insert>
-
     <update id="upMange">
         update DRUG_INFO set DRUG_NAME=#{drugName},SUPPLIER_ID=#{suppliers.supplierId},
                              SURPLUS_ID=#{standards.standardId},DRUG_DOSAGE=#{drugDosage},
                              TYPE_ID=#{types.typeId},DRUG_TACK=#{drugTack},DRUG_SMALL=#{drugSmall},
                              DRUG_BIG=#{drugBig},DRUG_NEXT=#{drugNext},
                              DRUG_SELLING=#{drugSelling},PURCHASE_PRICE=#{purchasePrice}
-        where DRUG_SERIAL=#{drugSerial}
+        where DRUG_ID=#{drugId}
     </update>
 </mapper>

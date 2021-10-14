@@ -21,4 +21,6 @@ public interface DruginfoMapper {
     //修改药品字段
     public void upMange(DrugInfo drugInfo);
 
+    public List<DrugInfo> allDrugInfo(DrugInfo drugInfo);
+
 }
