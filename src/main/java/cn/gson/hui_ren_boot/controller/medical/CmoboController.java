@@ -37,47 +37,50 @@ public class CmoboController {
     //新增套餐表
     @RequestMapping("/cmobos-middle")
     public String xinzeng(@RequestBody Map<String,Object> map){
-        System.out.println("=========open========");
-        ObjectMapper mapper = new ObjectMapper();
-        Cmobo c = mapper.convertValue(map.get("cmobo"),Cmobo.class);//套餐类
-        String serial = MyUtil.genrateNo("TC");//体检套餐序号
-        c.setComboSerial(serial);
-        Combomiddle combomiddle = new Combomiddle();//中间表
-        //拿到选中的项目的编号
-        String idss = map.get("idss").toString();
-        String str[] = idss.split(",");
-        Long money = Long.valueOf(0);
-        for (String s: str) {
-            if (s != null && !s.equals("") ){
-                int o = Integer.valueOf(s);
-                combomiddle.setComboSerial(serial);
-                combomiddle.setItemId(Integer.valueOf(s));
-                List<Comboitem> selecitem = comboitemService.selecitem(Long.valueOf(s));
-                for (Comboitem cc: selecitem) {
-                    System.out.println("价格："+cc.getItemMoney());
-                    money += cc.getItemMoney();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Cmobo c = mapper.convertValue(map.get("cmobo"),Cmobo.class);//套餐类
+            String serial = MyUtil.genrateNo("TC");//体检套餐序号
+            c.setComboSerial(serial);
+            Combomiddle combomiddle = new Combomiddle();//中间表
+            //拿到选中的项目的编号
+            String idss = map.get("idss").toString();
+            String str[] = idss.split(",");
+            Long money = Long.valueOf(0);
+            for (String s: str) {
+                if (s != null && !s.equals("") ){
+                    int o = Integer.valueOf(s);
+                    combomiddle.setComboSerial(serial);
+                    combomiddle.setItemId(Integer.valueOf(s));
+                    List<Comboitem> selecitem = comboitemService.selecitem(Long.valueOf(s));
+                    for (Comboitem cc: selecitem) {
+                        System.out.println("价格："+cc.getItemMoney());
+                        money += cc.getItemMoney();
+                    }
+                    cmoboSerivice.addMiddle(combomiddle);
+                    c.setComboMoney(money);
                 }
-                cmoboSerivice.addMiddle(combomiddle);
-                c.setComboMoney(money);
             }
-        }
-        cmoboSerivice.addCmobo(c);
+            cmoboSerivice.addCmobo(c);
 
-        return "ok";
+            return "ok";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+
     }
 
     //查询体检套餐
     @GetMapping("/cmobo-select")
     public Object seeCmobo(String cmoboss){
         Cmobo c = JSONObject.parseObject(cmoboss,Cmobo.class);
-        System.out.println("套餐===="+cmoboSerivice.seeCmoboByPage(c));
         return cmoboSerivice.seeCmoboByPage(c);
     }
 
     //查询体检项目
     @GetMapping("/comboitem-all")
     public List<Comboitem> allComboitem(){
-//        System.out.println("项目========"+cmoboSerivice.allComboitem());
         return cmoboSerivice.allComboitem();
     }
 }

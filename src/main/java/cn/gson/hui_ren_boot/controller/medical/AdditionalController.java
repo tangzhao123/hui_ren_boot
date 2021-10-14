@@ -17,16 +17,21 @@ public class AdditionalController {
 
     @RequestMapping("/add-itional")
     public String additional(@RequestBody Additional additional){
-        System.out.println("=======opens========");
-        System.out.println("项目："+additional.toString());
-        Additional a = additional;
-        System.out.println(a);
-        if (additional.getAdditionalId() == null){
-            service.additional(a); //新增手术项目
-        }else{
-            service.updateitional(a);
+        try {
+            System.out.println("项目："+additional.toString());
+            Additional a = additional;
+            System.out.println(a);
+            if (additional.getAdditionalId() == null){
+                service.additional(a); //新增手术项目
+            }else{
+                service.updateitional(a);
+            }
+            return "yes";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
         }
-        return "yes";
+
     }
 
     //查询

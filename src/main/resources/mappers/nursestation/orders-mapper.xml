@@ -41,7 +41,24 @@
 <!--    查询病人-->
     <select id="allBing" resultMap="allRecord">
         SELECT * FROM RECORD c LEFT JOIN REGISTER r ON r.register_id = c.register_id
-                 LEFT JOIN STAFF s ON r.staff_id = s.staff_id LEFT JOIN MEDICAL m ON r.medical_id = m.medical_id
+            LEFT JOIN STAFF s ON r.staff_id = s.staff_id LEFT JOIN MEDICAL m ON r.medical_id = m.medical_id
+            <where>
+                <if test="recordName != null and recordName != ''">
+                   or c.record_name like '%${recordName}%'
+                </if>
+                <if test="registerId != null and registerId != ''">
+                    or c.register_id like '%${registerId}%'
+                </if>
+                <if test="sickbedMark != null and sickbedMark != ''">
+                    or c.sickbed_mark like '%${sickbedMark}%'
+                </if>
+<!--                <if test="registerHome != null and registerHome != ''">-->
+<!--                    or r.register_home like '%${registerHome}%'-->
+<!--                </if>-->
+<!--                <if test="registerClinic != null  and registerClinic != ''">-->
+<!--                    or r.register_clinic = '%${registerClinic}%'-->
+<!--                </if>-->
+            </where>
     </select>
 
 <!--    查医嘱-->
@@ -102,5 +119,6 @@
 <!--   连表查询医嘱详情-->
     <select id="selAll" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
         select d.* from details d left join advice a on d.advice_id = a.advice_id where a.ADVICE_COST = 1 and d.REGISTER_ID = #{registerId,jdbcType=VARCHAR}
+            and d.daralis_mark not in (select order_details from orders where order_way = sysdate)
     </select>
 </mapper>

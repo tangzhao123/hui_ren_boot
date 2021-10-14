@@ -36,8 +36,8 @@ public class OrdersService {
     }
 
     //查询病人
-    public List<Record> allBing(){
-        return ordersMapper.allBing();
+    public List<Record> allBing(Record record){
+        return ordersMapper.allBing(record);
     }
 
     //查询医嘱

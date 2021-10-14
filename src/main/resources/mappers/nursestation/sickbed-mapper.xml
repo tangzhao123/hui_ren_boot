@@ -44,12 +44,12 @@
 
 <!--    新增病房-->
     <insert id="addWard">
-        INSERT INTO WARD VALUES(seq_huiren.nextval,#{wardMark},#{medicalId},#{staffId},#{wardSite},#{wardBeds},#{wardHave},#{wardCost},#{wardNursing})
+        INSERT INTO WARD VALUES(seq_huiren.nextval,#{wardMark},#{medicalId},#{staffId},#{wardSite},#{wardBeds},0,#{wardCost},#{wardNursing})
     </insert>
 
 <!--    修改病房-->
     <update id="updateWard">
-        UPDATE WARD SET MEDICAL_ID = #{medicalId}, STAFF_ID = #{staffId}, WARD_SITE = #{wardSite}, WARD_COST = #{wardCost}, WARD_NURSING = #{wardNursing} WHERE WARD_MARK = #{wardMark}
+        UPDATE WARD SET MEDICAL_ID = #{medicalId}, STAFF_ID = #{staffId}, WARD_SITE = #{wardSite}, WARD_BEDS= #{wardBeds}, WARD_COST = #{wardCost}, WARD_NURSING = #{wardNursing} WHERE WARD_MARK = #{wardMark}
     </update>
 
 <!--    查询不同科室的护士-->

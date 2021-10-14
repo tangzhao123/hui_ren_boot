@@ -9,6 +9,9 @@ import java.util.List;
 @Mapper
 public interface TestMapper {
 
+    //删除
+    public void dels (Long testId);
+
     //新增体检人员
     public void insertTest(Test test);
 

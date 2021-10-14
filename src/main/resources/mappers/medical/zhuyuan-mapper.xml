@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.ZhuYuanMapper">
+<!--    查询住院要检验的-->
+    <select id="zycomo" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Test">
+        SELECT * FROM TEST
+            <where>
+                TEST_PHONE NOT IN (SELECT INSPECTION_PHONE FROM COMBINSPECTION)
+                <if test="testName != null and testName != ''">
+                    or TEST_NAME like '%${testName}%'
+                </if>
+                <if test="testPhone != null and testPhone != ''">
+                    or  TEST_PHONE like '%${testPhone}%'
+                </if>
+                <if test="testGenre != null and testGenre != ''">
+                    or TEST_GENRE like '%${testGenre}%'
+                </if>
+                <if test="testAccount != null and testAccount != ''">
+                    or TEST_ACCOUNT like '%${testAccount}%'
+                </if>
+            </where>
+    </select>
+</mapper>

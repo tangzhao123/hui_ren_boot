@@ -13,7 +13,7 @@ public class Combinspection {
     private String inspectionName;//检验人
     private String inspectionContent;//检验结果
     private String itemName;//项目名
-    private Long testId;//体检单号
+    private String testId;//体检单号
     private String comboName;//套餐名
     private String inspectionUnit;//单位值
     private String inspectionPhone;//电话
@@ -64,11 +64,11 @@ public class Combinspection {
 
     @Basic
     @Column(name = "TEST_ID")
-    public Long getTestId() {
+    public String getTestId() {
         return testId;
     }
 
-    public void setTestId(Long testId) {
+    public void setTestId(String testId) {
         this.testId = testId;
     }
 
