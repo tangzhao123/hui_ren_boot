@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.WarehousesMapper">
+    <resultMap id="warehouseMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.WarehouseEntry">
+        <id column="ENTRY_ID" property="entryId"/>
+        <result column="ENTRY_SERIAL" property="entrySerial"/>
+        <result column="ENTRY_DATE" property="entryDate"/>
+        <result column="ENTRY_PHARMACY" property="entryPharmacy"/>
+        <result column="ENTRY_BATCH" property="entryBatch"/>
+        <result column="ENTRY_ORDER" property="entryOrder"/>
+        <association property="deports" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugDeport">
+            <id column="DEPORT_ID" property="deportId"/>
+            <result column="DEPORT_NAME" property="deportName"/>
+        </association>
+        <collection property="entryDetailsData" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.EntryDetails">
+            <id column="DETAILS_ID" property="detailsId"/>
+            <result column="DETAILS_ENTRY" property="detailsEntry"/>
+            <result column="DETAIL_BATCH" property="detailBatch"/>
+            <result column="DETAIL_NUMBER" property="detailNumber"/>
+            <result column="DETAIL_PRODUCTION" property="detailProduction"/>
+            <result column="DETAIL_VALIDITY" property="detailValidity"/>
+            <association property="drugInfos" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+                <id column="DRUG_SERIAL" property="drugSerial"/>
+                <result column="DRUG_ID" property="drugId"/>
+                <result column="DRUG_NAME" property="drugName"/>
+            </association>
+        </collection>
+
+    </resultMap>
+    <select id="house" resultMap="warehouseMapper">
+        select * from WAREHOUSE_ENTRY we
+                          left join ENTRY_DETAILS ed on we.ENTRY_SERIAL=ed.DETAILS_ENTRY
+                          left join DRUG_DEPORT dd on we.ENTRY_PHARMACY=dd.DEPORT_ID
+                          left join DRUG_INFO di on ed.DETAIL_DRUG=di.DRUG_SERIAL
+    </select>
+
+</mapper>
