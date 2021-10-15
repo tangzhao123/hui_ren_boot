@@ -24,6 +24,24 @@ public class PaymentForm {
     private double paymentSum;
     private double paymentSmall;
     private List<PrescriptionDetail> prescriptionDetails;
+    private String treatmentNo;
+    private double treatmentBalance;
+
+    public String getTreatmentNo() {
+        return treatmentNo;
+    }
+
+    public void setTreatmentNo(String treatmentNo) {
+        this.treatmentNo = treatmentNo;
+    }
+
+    public double getTreatmentBalance() {
+        return treatmentBalance;
+    }
+
+    public void setTreatmentBalance(double treatmentBalance) {
+        this.treatmentBalance = treatmentBalance;
+    }
 
     @OneToMany
     public List<PrescriptionDetail> getPrescriptionDetails() {

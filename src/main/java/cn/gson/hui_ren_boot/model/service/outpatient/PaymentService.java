@@ -1,13 +1,7 @@
 package cn.gson.hui_ren_boot.model.service.outpatient;
 
-import cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentDetaiMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.PaymentFormMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionDetailMapper;
-import cn.gson.hui_ren_boot.model.mapper.outpatient.PrescriptionListMapper;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.PaymentDetai;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.PaymentForm;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionList;
+import cn.gson.hui_ren_boot.model.mapper.outpatient.*;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +19,10 @@ public class PaymentService {
     PaymentFormMapper paymentFormMapper;
     @Autowired
     PaymentDetaiMapper paymentDetaiMapper;
+    @Autowired
+    TreatmentCardMapper treatmentCardMapper;
+    @Autowired
+    TreatmentRechargeMapper treatmentRechargeMapper;
 
     //收费，查询处方单
     public List<PrescriptionList> allList(String outpatientCard){
@@ -40,6 +38,12 @@ public class PaymentService {
     public void addPayment(PaymentForm paymentForm,List<PrescriptionDetail> prescriptionDetails){
         paymentFormMapper.addPayment(paymentForm);
         paymentDetaiMapper.addPaymentDetail(prescriptionDetails, paymentForm.getPaymentNo());
+        if(paymentForm.getPaymentType() == 2){
+            TreatmentCard treatmentCard = new TreatmentCard(paymentForm.getTreatmentNo(),paymentForm.getTreatmentBalance());
+            treatmentCardMapper.editBalance(treatmentCard);
+            TreatmentRecharge recharge = new TreatmentRecharge(paymentForm.getTreatmentNo(), paymentForm.getPaymentMoney(),"门诊缴费");
+            treatmentRechargeMapper.addCharge(recharge);
+        }
     }
 
     //查询缴费记录
