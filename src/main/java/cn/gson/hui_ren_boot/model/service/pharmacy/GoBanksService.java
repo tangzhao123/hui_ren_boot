@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class GoBanksService {
     @Autowired
     GoBanksMapper goBankMapper;
-    public Object goBankByPage(Integer pageNo,Integer size,GoBank goBank){
-        return goBankMapper.goBank(goBank);
+    public Object goBankByPage(Integer pageNo,Integer size,String goNum,String goBatch,String drugName){
+        return goBankMapper.goBank(goNum, goBatch, drugName);
     }
 }

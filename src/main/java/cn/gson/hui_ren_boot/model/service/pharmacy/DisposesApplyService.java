@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class DisposesApplyService {
     @Autowired
     DisposesApplyMapper disposeApplyMapper;
-    public Object disposeByPage(Integer pageNo,Integer size, DisposeApply disposeApply){
-        return disposeApplyMapper.dispose(disposeApply);
+    public Object disposeByPage(Integer pageNo,Integer size, String applyNum,String applyBatch,String drugName){
+        return disposeApplyMapper.dispose(applyNum, applyBatch, drugName);
     }
 
 }

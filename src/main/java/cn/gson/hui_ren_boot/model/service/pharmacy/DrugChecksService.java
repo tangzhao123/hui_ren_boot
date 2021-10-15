@@ -13,7 +13,7 @@ public class DrugChecksService {
 
     @Autowired
     DrugChecksMapper drugChecksMapper;
-    public Object checkByPage(Integer pageNo, Integer size, DrugCheck drugCheck){
-        return drugChecksMapper.check(drugCheck);
+    public Object checkByPage(Integer pageNo, Integer size,String checkNo,String drugName){
+        return drugChecksMapper.check(checkNo, drugName);
     }
 }
