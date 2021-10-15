@@ -3,17 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.PaymentFormsMapper">
 
-    <!-- 查询药品每个月的销售金额 -->
+    <!-- 查询住院药品每个月的销售金额 -->
     <select id="allPaymentForm" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.PaymentFormVo">
-        select extract (month from payment_time)||'月' as paymentTime ,sum(payment_money) as paymentMoney from payment_form group by extract (month from payment_time) order by extract (month from payment_time)
+                select sum(hospitalcare_money) as hospitalcareMoney ,hospitalcare_date || '月' as hospitalcareDate from
+            (select hospitalcare_money,extract(month from hospitalcare_date) as hospitalcare_date from hospitalcare
+             union all
+             select additional_money as hospitalcare_money ,extract(month from apply_time) as hospitalcare_date from applyrecord
+             union all
+             select prndebit_sum as hospitalcare_money,extract(month from prndebit_date) as hospitalcare_date from prndebit ) hos group by hos.hospitalcare_date order by hos.hospitalcare_date
     </select>
 
 
-    <!-- 查询药品上月销售额 -->
+    <!-- 查询门诊药品每月销售额 -->
     <select id="allPayment" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.PaymentFormVo">
-        select extract (month from payment_time)||'月' as paymentTime ,sum(payment_money) as paymentMoney from payment_form
-        where payment_time &lt; trunc(sysdate,'month')-1
-        group by extract (month from payment_time) order by extract (month from payment_time)
+        select sum(payment_money) as hospitalcareMoney,extract (month from payment_time) || '月' as hospitalcareDate from payment_form  group by extract (month from payment_time) order by extract (month from payment_time)
     </select>
 
     <!-- 查询用户数量 -->
