@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 public class Prndebit {
     private long prndebitId;//主键
-    private Long prndebitSum;//扣费总额
+    private double prndebitSum;//扣费总额
     private String prndebitUser;//执行人
     private String registerId;//住院号
     private Date prndebitDate;//扣费时间
@@ -41,11 +41,11 @@ public class Prndebit {
 
     @Basic
     @Column(name = "PRNDEBIT_SUM")
-    public Long getPrndebitSum() {
+    public double getPrndebitSum() {
         return prndebitSum;
     }
 
-    public void setPrndebitSum(Long prndebitSum) {
+    public void setPrndebitSum(double prndebitSum) {
         this.prndebitSum = prndebitSum;
     }
 

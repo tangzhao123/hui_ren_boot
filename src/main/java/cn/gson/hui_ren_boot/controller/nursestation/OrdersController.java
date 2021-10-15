@@ -47,7 +47,7 @@ public class OrdersController {
             String card = (String)map.get("card");//诊疗卡号
             String huanzhe = (String) map.get("names");//患者名
 
-            Long money = Long.valueOf(0);//记录费用
+            double money = 0;//记录费用
 
             Prndebit prndebit = new Prndebit();//医嘱执行记录扣费
             prndebit.setPrndebitUser(name);//执行人
@@ -73,7 +73,7 @@ public class OrdersController {
 
             prndebitService.addPrndebit(prndebit);//新增扣费记录
 
-            Long money2 = treatmentCards.get(0).getTreatmentBalance() - money;
+            double money2 = treatmentCards.get(0).getTreatmentBalance() - money;
 
             prndebitService.updateCard(money2,card);
 

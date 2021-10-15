@@ -16,5 +16,5 @@ public interface PrndebitMapper {
     public List<TreatmentCard> selectCard(@Param("treatmentNo") String treatmentNo);
 
     //修改诊疗卡的余额
-    public void updateCard(@Param("treatmentBalance")Long treatmentBalance,@Param("treatmentNo")String treatmentNo);
+    public void updateCard(@Param("treatmentBalance")double treatmentBalance,@Param("treatmentNo")String treatmentNo);
 }

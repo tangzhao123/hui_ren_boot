@@ -12,11 +12,11 @@ public class TreatmentCard {
     private long treatmentId;
     private String treatmentNo;
     private String treatmentPassword;
-    private Long treatmentBalance;
+    private double treatmentBalance;
     private String treatmentName;
     private String treatmentCard;
     private Long treatmentLock;
-    private long money;
+    private double money;
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -52,11 +52,11 @@ public class TreatmentCard {
 
     @Basic
     @Column(name = "TREATMENT_BALANCE")
-    public Long getTreatmentBalance() {
+    public double getTreatmentBalance() {
         return treatmentBalance;
     }
 
-    public void setTreatmentBalance(Long treatmentBalance) {
+    public void setTreatmentBalance(double treatmentBalance) {
         this.treatmentBalance = treatmentBalance;
     }
 
@@ -90,11 +90,11 @@ public class TreatmentCard {
         this.treatmentLock = treatmentLock;
     }
 
-    public long getMoney() {
+    public double getMoney() {
         return money;
     }
 
-    public void setMoney(long money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
@@ -122,5 +122,13 @@ public class TreatmentCard {
                 ", treatmentCard='" + treatmentCard + '\'' +
                 ", treatmentLock=" + treatmentLock +
                 '}';
+    }
+
+    public TreatmentCard() {
+    }
+
+    public TreatmentCard(String treatmentNo, double treatmentBalance) {
+        this.treatmentNo = treatmentNo;
+        this.treatmentBalance = treatmentBalance;
     }
 }

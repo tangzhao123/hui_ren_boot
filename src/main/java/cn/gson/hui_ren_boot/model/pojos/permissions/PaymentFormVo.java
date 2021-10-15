@@ -5,22 +5,22 @@ import java.sql.Time;
 //查询月销售额的VO类
 public class PaymentFormVo {
 
-    private double paymentMoney;
-    private String paymentTime;
+    private double hospitalcareMoney;
+    private String hospitalcareDate;
 
-    public double getPaymentMoney() {
-        return paymentMoney;
+    public double getHospitalcareMoney() {
+        return hospitalcareMoney;
     }
 
-    public void setPaymentMoney(double paymentMoney) {
-        this.paymentMoney = paymentMoney;
+    public void setHospitalcareMoney(double hospitalcareMoney) {
+        this.hospitalcareMoney = hospitalcareMoney;
     }
 
-    public String getPaymentTime() {
-        return paymentTime;
+    public String getHospitalcareDate() {
+        return hospitalcareDate;
     }
 
-    public void setPaymentTime(String paymentTime) {
-        this.paymentTime = paymentTime;
+    public void setHospitalcareDate(String hospitalcareDate) {
+        this.hospitalcareDate = hospitalcareDate;
     }
 }

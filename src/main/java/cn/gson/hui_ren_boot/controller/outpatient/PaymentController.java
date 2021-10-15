@@ -44,6 +44,7 @@ public class PaymentController {
         return paymentService.selNo(prescriptionNo);
     }
 
+    //新增缴费记录
     @RequestMapping("/add-payment")
     public String addPayment(@RequestBody PaymentForm payment){
         try{
@@ -60,6 +61,7 @@ public class PaymentController {
         }
     }
 
+    //多单缴费新增缴费记录
     @RequestMapping("/add-payments")
     public String addPayments(@RequestBody PaymentForm payments){
         try{
