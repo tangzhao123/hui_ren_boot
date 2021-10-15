@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.controller.outpatient;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Hospital;
+import cn.gson.hui_ren_boot.model.pojos.medical.TestResult;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.MedicalRecord;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.MedicalRecordInfo;
 import cn.gson.hui_ren_boot.model.service.outpatient.MedicalRecordService;
@@ -54,5 +55,11 @@ public class MedicalRecordController {
     @RequestMapping("/sel-info")
     public List<MedicalRecordInfo> selInfo(int medicalId,int staffId){
         return recordService.selInfo(medicalId, staffId);
+    }
+
+    //根据就诊记录号门诊查询检验结果
+    @RequestMapping("/sel-test-result")
+    public List<TestResult> selTestResult(String recordsNo){
+        return recordService.selTestResult(recordsNo);
     }
 }

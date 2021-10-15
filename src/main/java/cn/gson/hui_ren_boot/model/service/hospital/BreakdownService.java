@@ -68,7 +68,7 @@ public class BreakdownService {
             double yiZhu=0.00;//医嘱
             double yiZhus=0.00;//医嘱接收并且转换
             for (Prndebit pt : pow) {
-                yiZhus=pt.getPrndebitSum().doubleValue();
+                yiZhus=pt.getPrndebitSum();
                 yiZhu+=yiZhus;
 
 

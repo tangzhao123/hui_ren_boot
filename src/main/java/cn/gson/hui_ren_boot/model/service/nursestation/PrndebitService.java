@@ -24,7 +24,7 @@ public class PrndebitService {
     }
 
     //修改诊疗卡的余额
-    public void updateCard(Long treatmentBalance,String treatmentNo){
+    public void updateCard(double treatmentBalance,String treatmentNo){
         prndebitMapper.updateCard(treatmentBalance,treatmentNo);
     }
 }
