@@ -71,13 +71,13 @@ public class TreatmentRecharge {
     public TreatmentRecharge() {
     }
 
-    public TreatmentRecharge(String treatmentNo, long rechargeMoney, String rechargeType) {
+    public TreatmentRecharge(String treatmentNo, double rechargeMoney, String rechargeType) {
         this.treatmentNo = treatmentNo;
         this.rechargeMoney = rechargeMoney;
         this.rechargeType = rechargeType;
     }
 
-    public TreatmentRecharge(String treatmentNo, long rechargeMoney) {
+    public TreatmentRecharge(String treatmentNo, double rechargeMoney) {
         this.treatmentNo = treatmentNo;
         this.rechargeMoney = rechargeMoney;
     }

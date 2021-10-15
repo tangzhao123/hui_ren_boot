@@ -39,7 +39,7 @@
     </resultMap>
     <!--新增缴费记录-->
     <insert id="addPayment">
-        insert into payment_form values (seq_huiren.nextval,#{paymentNo},#{recordsNo},#{paymentMoney},current_timestamp,#{staffId},1,#{paymentSum},#{paymentSmall})
+        insert into payment_form values (seq_huiren.nextval,#{paymentNo},#{recordsNo},#{paymentMoney},current_timestamp,#{staffId},#{paymentType},#{paymentSum},#{paymentSmall})
     </insert>
 
     <!--查询缴费记录-->
