@@ -31,7 +31,7 @@
     </resultMap>
 <!--    查询病房-->
     <select id="selectWard" resultMap="wardEntity">
-        SELECT * FROM WARD w LEFT JOIN MEDICAL me ON w.MEDICAL_ID = me.MEDICAL_ID LEFT JOIN SICKBED s ON w.WARD_MARK = s.WARD_MARK
+        SELECT * FROM WARD w LEFT JOIN MEDICAL me ON w.MEDICAL_ID = me.MEDICAL_ID
         <where>
                 <if test="wardMark != null and wardMark != ''">
                     or w.WARD_MARK like '%${wardMark}%'
@@ -54,7 +54,7 @@
 
 <!--    查询不同科室的护士-->
     <select id="staffHu" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
-        SELECT * FROM STAFF WHERE RANK_ID = 2 AND MEDICAL_ID = #{medicalId,jdbcType=DECIMAL}
+        SELECT * FROM STAFF WHERE RANK_ID = 1 AND MEDICAL_ID = #{medicalId,jdbcType=DECIMAL}
     </select>
 
     <resultMap id="selSick" type="cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity">
@@ -83,7 +83,7 @@
         select * from sickbed s LEFT JOIN ward w on s.WARD_MARK = w.WARD_MARK
             LEFT JOIN MEDICAL m on w.MEDICAL_ID = m.MEDICAL_ID
         <where>
-            s.SICKBED_STATE = 0
+            s.sickbed_mark not in (SELECT sickbed_mark FROM RECORD)
             <if test="medicalId != 0 ">
                 or w.MEDICAL_ID = #{medicalId}
             </if>

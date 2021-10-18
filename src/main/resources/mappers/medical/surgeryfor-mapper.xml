@@ -18,10 +18,6 @@
         </where>
     </select>
 
-<!--    新增手术室使用记录-->
-    <insert id="addApply">
-        INSERT INTO applyrecord VALUES (seq_huiren.nextval,#{operationId},#{additionalName},#{registerName},#{registerId},current_timestamp,#{additionalMoney},0,#{regisiterClinic} )
-    </insert>
 
 <!--    修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）-->
     <update id="updateOperation">
@@ -32,11 +28,6 @@
     <update id="updateFor">
         UPDATE SURGERYFOR SET SURGERYFOR_STATE = 1 WHERE REGISTER_ID = #{registerId}
     </update>
-
-<!--    查询已经安排了手术室的手术项目,手术室为0的为没有被执行的-->
-    <select id="selectRecord" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord">
-        SELECT * FROM APPLYRECORD WHERE APPLY_STATE = 0
-    </select>
 
 <!--    新增手术室-->
     <insert id="insertOpeart">
@@ -64,8 +55,5 @@
         UPDATE OPERATION set OPERATION_ADDRESS = #{operationAddress}, MEDICAL_NAME = #{medicalName} WHERE OPERATION_ID = #{operationId}
     </update>
 
-<!--    查询医生-->
-<!--    <select id="selDoctort" resultType="">-->
-<!--        -->
-<!--    </select>-->
+
 </mapper>

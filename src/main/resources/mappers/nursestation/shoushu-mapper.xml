@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.ShouShuMapper">
+<!--    执行手术-->
+    <update id="xiushoushu">
+        update surgery set surgery_finish = #{surgeryFinish}, surgery_result = #{surgeryResult} where register_id = #{registerId}
+    </update>
+
+<!--    查询安排了手术室-->
+    <select id="selshoushu" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Surgery">
+        SELECT * FROM SURGERY WHERE SURGERY_RESULT is null
+    </select>
+
+<!--    查询主刀医生-->
+    <select id="zhudao" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+        select * from staff where RANK_ID = 8
+    </select>
+
+<!--    查询麻醉师-->
+    <select id="mazui" resultType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
+        select * from staff where RANK_ID = 7
+    </select>
+
+<!--    新增手术结果-->
+    <insert id="addshoushu">
+        INSERT into SURGERY VALUES(seq_huiren.nextval,#{surgeryDoctor},#{surgeryName},#{surgerysStart},'',#{registerId},
+                                   #{surgeryUser},#{surgeryCost},#{surgeryOper},#{surgeryLogist},'')
+    </insert>
+</mapper>

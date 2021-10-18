@@ -31,9 +31,14 @@
         </where>
     </select>
 
+<!--    删除修改状态为4已取消-->
+    <update id="updateYuyue">
+        update test set test_state = 4 where test_account = #{testAccount}
+    </update>
+
 <!--    新增-->
     <insert id="insertTest" >
-        insert into test values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},#{testGenre},#{testTime},#{testMoney},#{testState},#{testAccount})
+        insert into test values (seq_huiren.nextval,#{testName},#{testSex},#{testPhone},#{testGenre},#{testTime},#{testMoney},2,#{testAccount})
     </insert>
 
 <!--    删除-->
@@ -42,6 +47,10 @@
     </delete>
 
     <insert id="addMiddle">
-        insert into testmiddle values (#{testId},#{itemId})
+        insert into testmiddle values (#{testAccount},#{itemId})
+    </insert>
+
+    <insert id="addMiddles">
+        insert into testmiddle values (#{testAccount},#{itemId})
     </insert>
 </mapper>

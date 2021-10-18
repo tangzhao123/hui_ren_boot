@@ -42,11 +42,6 @@ public class SurgeryforService {
         return surygeryforMapper.selectOperation(medicalName);
     }
 
-    //    新增手术室使用记录
-    public void addApply(Applyrecord applyrecord){
-        surygeryforMapper.addApply(applyrecord);
-    }
-
     //    修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）
     public void updateOperation(String operationId){
         surygeryforMapper.updateOperation(operationId);

@@ -8,6 +8,8 @@ import java.util.List;
 
 @Mapper
 public interface TestMapper {
+    //删除修改预约的状态
+    public void updateYuyue(String testAccount);
 
     //删除
     public void dels (Long testId);
@@ -20,4 +22,5 @@ public interface TestMapper {
 
     //新增体检中间表
     public void addMiddle(Testmiddle testmiddle);
+    public void addMiddles(Testmiddle testmiddle);
 }

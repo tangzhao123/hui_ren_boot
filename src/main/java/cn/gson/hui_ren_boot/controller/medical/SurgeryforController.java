@@ -58,34 +58,7 @@ public class SurgeryforController {
         return surgeryforService.selectRecord();
     }
 
-    //安排手术室
-    @RequestMapping("/insert-all")
-    public String insertAll(@RequestBody Map<String,Object> map){
-//        System.out.println("==========open==================");
-        ObjectMapper mapper = new ObjectMapper();
-        Surgeryfor surgeryfor = mapper.convertValue(map.get("surgery"),Surgeryfor.class);
-        System.out.println("病人手术项目安排手术室诊疗卡："+surgeryfor.getRegisterClinic());
-
-        Operation operation = mapper.convertValue(map.get("ation"),Operation.class);
-//        System.out.println("手术室的使用状态手术室的名称："+operation.getMedicalName());
-
-        Applyrecord applyrecord = new Applyrecord();//手术室安排
-//        applyrecord.setOperationId(operation.getOperationId());//手术室id
-        applyrecord.setAdditionalName(surgeryfor.getAdditionalName());//手术项目名称
-        applyrecord.setRegisterName(surgeryfor.getRegisterName());//患者姓名
-        applyrecord.setRegisterId(surgeryfor.getRegisterId());//住院号
-        applyrecord.setAdditionalMoney(surgeryfor.getAdditionalMoney());//手术费用
-//        applyrecord.setRegisiterClinic(surgeryfor.getRegisterClinic());//诊疗卡
-        surgeryforService.addApply(applyrecord);//新增手术室使用记录
-
-        surgeryforService.updateFor(surgeryfor.getRegisterId());//修改病人手术项目，改为已安排手术室
-
-        surgeryforService.updateOperation(operation.getOperationId());//修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）
-
-        return "ok";
-    }
-
-    //    查询状态为0的手术项目，为没有安排手术室的
+    //    查询状态为0的手术项目，为没有安排手术室的*************
     @GetMapping("/select-for")
     public List<Surgeryfor> selectFor(){
 //        System.out.println(surgeryforService.selectFor());

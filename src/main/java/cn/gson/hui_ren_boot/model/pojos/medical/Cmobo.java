@@ -79,4 +79,15 @@ public class Cmobo {
     public int hashCode() {
         return Objects.hash(comboId, comboName, comboMoney, comboSerial);
     }
+
+    @Override
+    public String toString() {
+        return "Cmobo{" +
+                "comboId=" + comboId +
+                ", comboName='" + comboName + '\'' +
+                ", comboMoney=" + comboMoney +
+                ", comboSerial='" + comboSerial + '\'' +
+                ", comboitems=" + comboitems +
+                '}';
+    }
 }

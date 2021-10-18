@@ -4,7 +4,9 @@ import cn.gson.hui_ren_boot.model.mapper.nursestation.OrdersMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Advice;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Orders;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,10 @@ public class OrdersService {
     @Autowired
     OrdersMapper ordersMapper;
 
+
     //查询医嘱详情（连表）
-    public List<Advice> selAll(String registerId){
-        return ordersMapper.selAll(registerId);
+    public List<Advice> selAll(Long adviceCost,String registerId){
+        return ordersMapper.selAll(Long.valueOf(adviceCost),registerId);
     }
 
     //新增执行记录
@@ -25,9 +28,9 @@ public class OrdersService {
         ordersMapper.insertOrders(orders);
     }
 
-    //修改医嘱详单状态
-    public void updateOrder(String daralisMark){
-        ordersMapper.updateOrder(daralisMark);
+    //修改临时医嘱的状态
+    public void updateAdvice(String registerId){
+        ordersMapper.updateAdvice(registerId);
     }
 
     //医嘱详情
@@ -36,7 +39,7 @@ public class OrdersService {
     }
 
     //查询病人
-    public List<Record> allBing(Record record){
+    public List<Register> allBing(Register record){
         return ordersMapper.allBing(record);
     }
 

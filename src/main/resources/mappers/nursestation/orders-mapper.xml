@@ -2,55 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.nursestation.OrdersMapper">
-    <resultMap id="allRecord" type="cn.gson.hui_ren_boot.model.pojos.hospital.Record">
-        <id property="recordId" column="RECORD_ID"></id>
-        <result column="RECORD_SERIAL" property="recordSerial"/>
+    <resultMap id="allRecord" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_SEX" property="registerSex"/>
+        <result column="REGISTER_SITE" property="registerSite"/>
+        <result column="REGISTER_CARD" property="registerCard"/>
+        <result column="REGISTER_PRINT" property="registerPrint"/>
+        <result column="REGISTER_AGE" property="registerAge"/>
+        <result column="REGISTER_HOME" property="registerHome"/>
+        <result column="REGISTER_ADDRESS" property="registerAddress"/>
+        <result column="REGISTER_PHONE" property="registerPhone"/>
+        <result column="REGISTER_RELATION" property="registerRelation"/>
+        <result column="REGISTER_CONTACT" property="registerContact"/>
+        <result column="REGISTER_CALL" property="registerCall"/>
+        <result column="REGISTER_RECORD" property="registerRecord"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
         <result column="SICKBED_MARK" property="sickbedMark"/>
-        <result column="RECORD_NAME" property="recordName"/>
-        <result column="RECORD_DATE" property="recordDate"/>
-        <association property="register" javaType="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
-            <id column="REGISTER_SERICA" property="registerSerica"/>
-            <result column="REGISTER_ID" property="registerId"/>
-            <result column="REGISTER_DATE" property="registerDate"/>
-            <result column="REGISTER_NAME" property="registerName"/>
-            <result column="REGISTER_SEX" property="registerSex"/>
-            <result column="REGISTER_SITE" property="registerSite"/>
-            <result column="REGISTER_CARD" property="registerCard"/>
-            <result column="REGISTER_PRINT" property="registerPrint"/>
-            <result column="REGISTER_AGE" property="registerAge"/>
-            <result column="REGISTER_HOME" property="registerHome"/>
-            <result column="REGISTER_ADDRESS" property="registerAddress"/>
-            <result column="REGISTER_PHONE" property="registerPhone"/>
-            <result column="REGISTER_RELATION" property="registerRelation"/>
-            <result column="REGISTER_CONTACT" property="registerContact"/>
-            <result column="REGISTER_CALL" property="registerCall"/>
-            <result column="REGISTER_RECORD" property="registerRecord"/>
-            <result column="REGISTER_CLINIC" property="registerClinic"/>
             <!--        科室-->
-            <association property="medical" javaType="Medical">
-                <id column="MEDICAL_ID" property="medicalId"/>
-                <result column="MEDICAL_NAME" property="medicalName"/>
-            </association>
+        <association property="medical" javaType="Medical">
+            <id column="MEDICAL_ID" property="medicalId"/>
+            <result column="MEDICAL_NAME" property="medicalName"/>
+        </association>
 <!--            员工-->
-            <association property="staff" javaType="Staff" >
-                <id column="STAFF_ID" property="staffId"/>
-                <result column="STAFF_NAME" property="staffName"/>
-            </association>
+        <association property="staff" javaType="Staff" >
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
         </association>
     </resultMap>
 <!--    查询病人-->
     <select id="allBing" resultMap="allRecord">
-        SELECT * FROM RECORD c LEFT JOIN REGISTER r ON r.register_id = c.register_id
-            LEFT JOIN STAFF s ON r.staff_id = s.staff_id LEFT JOIN MEDICAL m ON r.medical_id = m.medical_id
-            <where>
-                <if test="recordName != null and recordName != ''">
-                   or c.record_name like '%${recordName}%'
+        SELECT * FROM REGISTER r LEFT JOIN STAFF s ON r.staff_id = s.staff_id
+            LEFT JOIN MEDICAL m ON r.medical_id = m.medical_id
+        <where>
+            r.sickbed_mark is not null
+                <if test="registerName != null and registerName != ''">
+                   or r.register_name like '%${registerName}%'
                 </if>
                 <if test="registerId != null and registerId != ''">
-                    or c.register_id like '%${registerId}%'
+                    or r.register_id like '%${registerId}%'
                 </if>
                 <if test="sickbedMark != null and sickbedMark != ''">
-                    or c.sickbed_mark like '%${sickbedMark}%'
+                    or r.sickbed_mark like '%${sickbedMark}%'
                 </if>
 <!--                <if test="registerHome != null and registerHome != ''">-->
 <!--                    or r.register_home like '%${registerHome}%'-->
@@ -77,8 +72,8 @@
     </insert>
 
 <!--    修改医嘱详情状态-->
-    <update id="updateOrder">
-        UPDATE DETAILS SET DARALIS_DSTATE = 2 WHERE DARALIS_MARK = #{daralisMark}
+    <update id="updateAdvice">
+        UPDATE ADVICE SET ADVICE_STATE = 0 WHERE REGISTER_ID = #{registerId,jdbcType=VARCHAR}
     </update>
 
     <resultMap id="selectDetails" type="cn.gson.hui_ren_boot.model.pojos.hospital.Advice">
@@ -118,7 +113,8 @@
     </resultMap>
 <!--   连表查询医嘱详情-->
     <select id="selAll" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Details">
-        select d.* from details d left join advice a on d.advice_id = a.advice_id where a.ADVICE_COST = 1 and d.REGISTER_ID = #{registerId,jdbcType=VARCHAR}
-            and d.daralis_mark not in (select order_details from orders where order_way = sysdate)
+        select d.* from details d left join advice a on d.advice_id = a.advice_id where a.ADVICE_COST = #{adviceCost} and d.REGISTER_ID = #{registerId,jdbcType=VARCHAR}
+          and a.ADVICE_STATE = 1 and d.daralis_mark not in (select order_details from orders where order_way = sysdate)
     </select>
+
 </mapper>
