@@ -167,6 +167,10 @@ public class WarehouseEntry {
                 ", entryOrder='" + entryOrder + '\'' +
                 ", entryDetailsData=" + entryDetailsData +
                 ", drugStocks=" + drugStocks +
+                ", deports=" + deports +
+                ", pageNo=" + pageNo +
+                ", size=" + size +
+                ", drugName='" + drugName + '\'' +
                 '}';
     }
 }

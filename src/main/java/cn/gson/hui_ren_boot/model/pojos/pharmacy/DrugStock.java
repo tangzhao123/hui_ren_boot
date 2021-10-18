@@ -24,6 +24,43 @@ public class DrugStock {
     private String drugBig;
     private String drugSelling;
     private String purchasePrice;
+    private List<DrugInfo> drugInfos;
+    private Integer pageNo;
+    private Integer size;
+    private String typeName;
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    @OneToMany
+    public List<DrugInfo> getDrugInfos() {
+        return drugInfos;
+    }
+
+    public void setDrugInfos(List<DrugInfo> drugInfos) {
+        this.drugInfos = drugInfos;
+    }
 
     @Id
     @Column(name = "STOCK_ID")

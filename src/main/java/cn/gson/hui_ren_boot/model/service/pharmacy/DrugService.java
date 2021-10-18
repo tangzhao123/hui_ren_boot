@@ -12,10 +12,9 @@ public class DrugService {
     @Autowired
     DruginfoMapper drugMapper;
 
-
     //查询处方选药/查药品信息
-    public Object allDrugByPage(Integer pageNo, Integer size,DrugInfo drugInfo){
-        return drugMapper.allDrug(drugInfo);
+    public Object allDrugByPage(Integer pageNo, Integer size,String typeName,String drugName){
+        return drugMapper.allDrug(typeName,drugName);
     }
     //修改药品状态
     public void allState(DrugInfo drugInfo){

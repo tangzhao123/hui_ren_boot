@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SendDrugsService {
     @Autowired
     SendDrugsMapper sendDrugsMapper;
-    public Object sendByPage(Integer pageNo, Integer size, SendDrug sendDrug){
-        return sendDrugsMapper.send(sendDrug);
+    public Object sendByPage(Integer pageNo, Integer size, String sendNum,String drugName){
+        return sendDrugsMapper.send(sendNum, drugName);
     }
 }

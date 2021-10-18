@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.pharmacy.DrugStocksMapper">
+    <!--查询药品库存-->
+    <resultMap id="stockMapper" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStock">
+        <id property="stockId" column="stock_id"/>
+        <result property="stockSurplus" column="stock_surplus"/>
+        <result property="stockNumber" column="stock_number"/>
+        <result property="stockDate" column="stock_date"/>
+        <result property="stockBatch" column="stock_batch"/>
+        <result property="stockIndate" column="stock_indate"/>
+        <result property="drugId" column="drug_id"/>
+        <collection property="drugInfos" ofType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo">
+            <id property="drugSerial" column="drug_serial"/>
+            <result property="drugId" column="drug_id"/>
+            <result property="drugName" column="drug_name"/>
+            <result property="drugUse" column="drug_use"/>
+            <result property="drugDosage" column="drug_dosage"/>
+            <result property="drugTack" column="drug_tack"/>
+            <result property="drugRemark" column="drug_remark"/>
+            <result property="drugSelling" column="drug_selling"/>
+            <result property="purchasePrice" column="purchase_price"/>
+            <result property="drugNext" column="drug_next"/>
+            <result property="drugBig" column="drug_big"/>
+            <result property="drugSmall" column="drug_small"/>
+            <result property="smallSelling" column="small_selling"/>
+            <result property="smallPrice" column="small_price"/>
+            <result property="drugState" column="drug_state"/>
+            <result property="drugLife" column="drug_life"/>
+            <association property="types" javaType="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugType">
+                <id property="typeId" column="type_id"/>
+                <result property="typeName" column="type_name"/>
+                <result property="typeSon" column="typeSon"/>
+                <result property="typeRank" column="type_rank"/>
+            </association>
+        </collection>
+    </resultMap>
+    <!--联表查询药品库存-->
+    <select id="seStock" resultMap="stockMapper">
+        select * from DRUG_STOCK ds
+                          left join DRUG_INFO di on ds.DRUG_ID=di.DRUG_ID
+                          left join DRUG_TYPE dt on di.TYPE_ID =dt.TYPE_ID
+        <where>
+            <if test="drugName != null and '' != drugName">
+                or di.DRUG_NAME like '%${drugName}%'
+            </if>
+            <if test="typeName != null and '' != typeName">
+                or dt.TYPE_NAME like '%${typeName}%'
+            </if>
+            <if test="stockBatch != null and '' !=stockBatch">
+                or ds.STOCK_BATCH like '%${stockBatch}%'
+            </if>
+        </where>
+    </select>
+</mapper>

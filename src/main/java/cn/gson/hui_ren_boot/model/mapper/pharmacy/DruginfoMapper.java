@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface DruginfoMapper {
     //查询处方选药
-    public List<DrugInfo> allDrug(DrugInfo drugInfo);
+    public List<DrugInfo> allDrug(@Param("typeName")String typeName,@Param("drugName")String drugName);
 
     //修改药品状态
     public void allState(DrugInfo drugInfo);
@@ -21,6 +21,5 @@ public interface DruginfoMapper {
     //修改药品字段
     public void upMange(DrugInfo drugInfo);
 
-    public List<DrugInfo> allDrugInfo(DrugInfo drugInfo);
 
 }

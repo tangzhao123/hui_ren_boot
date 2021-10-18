@@ -14,6 +14,7 @@ public class WarehousesController {
     WarehousesService warehousesService;
     @RequestMapping("entry")
     public Object houseByPage(@RequestBody WarehouseEntry warehouseEntry){
+        System.err.println(warehouseEntry);
         return warehousesService.huoseByPage(warehouseEntry.getPageNo(),warehouseEntry.getSize(),
                 warehouseEntry.getEntrySerial(),
                 warehouseEntry.getEntryBatch(),warehouseEntry.getDrugName());

@@ -45,21 +45,15 @@
         left join DRUG_TYPE dt on di.TYPE_ID=dt.TYPE_ID
         left join DRUG_SUPPLIER ds on di.SUPPLIER_ID=ds.SUPPLIER_ID
         left join DRUG_STANDARD dd on di.SURPLUS_ID=dd.STANDARD_ID
-        left join DRUG_STOCK dk on di.STOCK_ID=dk.STOCK_ID
+        left join DRUG_STOCK dk on di.DRUG_ID=dk.DRUG_ID
       <where>
-          <if test="drugId != null and '' !=drugId">
-              or di.DRUG_ID like '%${drugId}%'
-          </if>
           <if test="drugName != null and '' !=drugName">
               or di.DRUG_NAME like '%${drugName}%'
           </if>
-          <if test="types != null">
-              <if test="types.typeId != null and '' !=types.typeId">
-                  and di.type_id =#{types.typeId}d1
-              </if>
+          <if test="typeName != null and '' !=typeName">
+              and dt.TYPE_NAME like '%${typeName}%'
           </if>
       </where>
-    order by di.DRUG_ID asc
     </select>
     <!--查询药品新增类别-->
     <select id="allType" resultType="DrugType">
