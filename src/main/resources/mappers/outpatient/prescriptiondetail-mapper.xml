@@ -87,4 +87,9 @@
             )detail
         where detail.PRESCRIPTION_NO = #{prescriptionNo}
     </select>
+
+    <select id="selMedicine" resultMap="detailMap">
+        select * from prescription_detail pd left join prescription_list pl on pd.prescription_no = pl.prescription_no
+        where pl.records_no = #{recordsNo}
+    </select>
 </mapper>

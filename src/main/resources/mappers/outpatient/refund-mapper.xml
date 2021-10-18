@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--退费表-->
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.RefundMapper">
+    <resultMap id="refundMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.Refund">
+        <id column="REFUND_ID" property="refundId"/>
+        <result column="BOOKING_NO" property="bookingNo"/>
+        <result column="REFUND_FEE" property="refundFee"/>
+        <result column="REFUND_DATE" property="refundDate"/>
+        <association property="staff" javaType="Staff">
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
+            <result column="STAFF_PHONE" property="staffPhone"/>
+            <result column="SECTION_ID" property="sectionId"/>
+            <result column="MEDICAL_ID" property="medicalId"/>
+            <result column="RANK_ID" property="rankId"/>
+            <result column="STAFF_STATE" property="staffState"/>
+            <result column="STAFF_CARD" property="staffCard"/>
+        </association>
+    </resultMap>
+
+    <!--新增退费记录-->
+    <insert id="addRefund">
+        insert into refund values (seq_huiren.nextval,#{bookingNo},#{refundFee},current_timestamp ,#{staffId})
+    </insert>
+
+    <!--查询退费记录-->
+    <select id="selRefund" resultMap="refundMap">
+        select * from refund rf left join staff st on rf.staff_id = st.staff_id
+        <where>
+            <if test="start != null and '' != start and end != null and '' != end">
+                to_char(rf.REFUND_DATE,'yyyy-MM-dd') between #{start} and #{end}
+            </if>
+            <if test="staffName != null and '' != staffName">
+                and st.STAFF_NAME = #{staffName}
+            </if>
+        </where>
+    </select>
+</mapper>

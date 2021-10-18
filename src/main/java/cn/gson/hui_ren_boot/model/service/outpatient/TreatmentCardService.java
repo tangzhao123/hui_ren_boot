@@ -39,7 +39,7 @@ public class TreatmentCardService {
     //充值，根据卡号修改余额，同时新增诊疗卡充值记录
     public void editBalance(TreatmentCard treatmentCard){
         treatmentCardMapper.editBalance(treatmentCard);
-        TreatmentRecharge recharge = new TreatmentRecharge(treatmentCard.getTreatmentNo(), treatmentCard.getMoney(),"充值");
+        TreatmentRecharge recharge = new TreatmentRecharge(treatmentCard.getTreatmentNo(), treatmentCard.getMoney(),treatmentCard.getRechargeType());
         treatmentRechargeMapper.addCharge(recharge);
     }
 

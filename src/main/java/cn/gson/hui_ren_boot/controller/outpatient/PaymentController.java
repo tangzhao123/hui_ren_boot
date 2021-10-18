@@ -61,23 +61,6 @@ public class PaymentController {
         }
     }
 
-    //多单缴费新增缴费记录
-    @RequestMapping("/add-payments")
-    public String addPayments(@RequestBody PaymentForm payments){
-        try{
-            System.out.println(payments);
-            List<PrescriptionDetail> list = payments.getPrescriptionDetails();
-            for (PrescriptionDetail p : list) {
-                p.setDetailNo(getOrderIdByTime());
-            }
-            paymentService.addPayment(payments,payments.getPrescriptionDetails());
-            return "ok";
-        } catch (Exception e){
-            e.printStackTrace();
-            return "fail";
-        }
-    }
-
     //查询缴费记录
     @RequestMapping("/sel-payment")
     public Object selPayment(@RequestBody PaymentVo paymentVo){

@@ -41,7 +41,7 @@ public class PaymentService {
         if(paymentForm.getPaymentType() == 2){
             TreatmentCard treatmentCard = new TreatmentCard(paymentForm.getTreatmentNo(),paymentForm.getTreatmentBalance());
             treatmentCardMapper.editBalance(treatmentCard);
-            TreatmentRecharge recharge = new TreatmentRecharge(paymentForm.getTreatmentNo(), paymentForm.getPaymentMoney(),"门诊缴费");
+            TreatmentRecharge recharge = new TreatmentRecharge(paymentForm.getTreatmentNo(), paymentForm.getPaymentMoney(),paymentForm.getRechargeType());
             treatmentRechargeMapper.addCharge(recharge);
         }
     }

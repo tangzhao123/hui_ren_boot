@@ -17,6 +17,15 @@ public class TreatmentCard {
     private String treatmentCard;
     private Long treatmentLock;
     private double money;
+    private String rechargeType;
+
+    public String getRechargeType() {
+        return rechargeType;
+    }
+
+    public void setRechargeType(String rechargeType) {
+        this.rechargeType = rechargeType;
+    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)

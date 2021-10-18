@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Mapper
 public interface PaymentDetaiMapper {
+    //新增缴费详情
     public void addPaymentDetail(List<PrescriptionDetail> prescriptionDetails,String paymentNo);
 
     //根据缴费号查询缴费详单

@@ -57,4 +57,9 @@
     <select id="selRegister" resultMap="registerMapper">
         select * from OUTPATIENT_REGISTER where OUTPATIENT_CARD = #{outpatientCard}
     </select>
+
+    <!--挂号时，如果已存在该患者，则修改患者的某些基本信息-->
+    <update id="editRegister">
+        update OUTPATIENT_REGISTER set OUTPATIENT_NATION = #{outpatientNation},OUTPATIENT_PHONE = #{outpatientPhone},OUTPATIENT_ADDRESS = #{outpatientAddress} where OUTPATIENT_CARD = #{outpatientCard}
+    </update>
 </mapper>

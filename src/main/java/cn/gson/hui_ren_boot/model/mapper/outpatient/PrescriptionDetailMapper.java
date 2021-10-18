@@ -19,4 +19,7 @@ public interface PrescriptionDetailMapper {
 
     //根据处方号查询处方详单
     public List<PrescriptionDetail> selNo(String prescriptionNo);
+
+    //查询患者每次所开的处方
+    public List<PrescriptionDetail> selMedicine(String recordsNo);
 }

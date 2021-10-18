@@ -11,6 +11,8 @@ public class Withdrawal {
     private Date withdrawalDate;
     private String cause;
     private OutpatientRegister outpatient;
+    private double bookingFee;
+    private int staffId;
 
     @OneToOne
     public OutpatientRegister getOutpatient() {
@@ -63,4 +65,19 @@ public class Withdrawal {
         this.cause = cause;
     }
 
+    public double getBookingFee() {
+        return bookingFee;
+    }
+
+    public void setBookingFee(double bookingFee) {
+        this.bookingFee = bookingFee;
+    }
+
+    public int getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
+    }
 }

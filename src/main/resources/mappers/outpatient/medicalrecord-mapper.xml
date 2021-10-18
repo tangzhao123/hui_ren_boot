@@ -62,6 +62,8 @@
             left join outpatient_register pr on mr.outpatient_id = pr.outpatient_id
             left join staff s on mr.staff_id = s.staff_id
             left join medical me on mr.medical_id = me.medical_id
+            left join prescription_list pl on mr.records_no = pl.records_no
+            left join prescription_detail pd on pd.prescription_no = pl.prescription_no
         where mr.outpatient_id = #{outpatientId}
     </select>
 </mapper>
