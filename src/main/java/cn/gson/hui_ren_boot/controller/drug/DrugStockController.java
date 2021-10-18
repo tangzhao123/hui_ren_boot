@@ -64,7 +64,7 @@ public class DrugStockController {
                 d.setDeId(getOrderIdByTime());
             }
             if(""!=disposeApply.getCheckNo() && null != disposeApply.getCheckNo()){
-                //drugCheckService.updateCheckGo(disposeApply.getApplyNum(),disposeApply.getCheckNo());
+                drugCheckService.updateCheckGo(disposeApply.getApplyNum(),disposeApply.getCheckNo());
             }
             List<Destruction> lists = new ArrayList<>();
             for (Destruction d : list) {
@@ -132,4 +132,17 @@ public class DrugStockController {
     public Object allDisposeApply(Integer pageNo,Integer size){
         return disposeApplyService.allDisposeApplyByPage(pageNo,size);
     }
+
+    //查询所有药品库存
+    @RequestMapping("stockList")
+    public Object findAllDrugStock(Integer pageNo,Integer size,String search,Long typeId){
+        return drugStockService.findAllDrugStockByPage(pageNo, size,search,typeId);
+    }
+
+    //查询所有的药品拆零记录
+    @RequestMapping("findAllScattered")
+    public Object allScattered(Integer pageNo,Integer size){
+        return drugStockService.allScatteredByPage(pageNo,size);
+    }
+
 }

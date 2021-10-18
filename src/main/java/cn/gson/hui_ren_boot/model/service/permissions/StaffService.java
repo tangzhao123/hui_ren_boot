@@ -27,8 +27,8 @@ public class StaffService {
     DepartureMapper departureMapper;
 
     //查询所有员工
-    public Object allStaffByPage(Integer  pageNo,Integer size,String search){
-        return staffMapper.allStaff(search);
+    public Object allStaffByPage(Integer  pageNo,Integer size,String search,Long medicalId,Long sectionId){
+        return staffMapper.allStaff(search,medicalId,sectionId);
     }
 
     public List<Staff> findAllStaff(){

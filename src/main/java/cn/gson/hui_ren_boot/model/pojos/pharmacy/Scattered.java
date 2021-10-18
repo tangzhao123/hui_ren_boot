@@ -1,5 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.pharmacy;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -12,6 +14,7 @@ public class Scattered {
     private String drugName;
     private Long scNumber;
     private String drugBatch;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date drugDate;
 
 

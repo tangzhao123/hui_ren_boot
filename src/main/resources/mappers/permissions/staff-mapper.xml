@@ -10,6 +10,12 @@
             <if test="search !=null and ''!=search">
                 st.staff_name like '%${search}%' or us.user_name like '%${search}%' or st.staff_card like '%${search}%' or st.staff_phone  like '%${search}%' or se.section_name like '%${search}%' or me.medical_name like '%${search}%' or r.rank_name like '%${search}%'
             </if>
+            <if test="medicalId !=  null and medicalId !=''">
+                and st.medical_id = #{medicalId}
+            </if>
+            <if test="sectionId !=  null and sectionId !=''">
+                and st.section_id = #{sectionId}
+            </if>
         </where>
         order by st.staff_id desc
     </select>

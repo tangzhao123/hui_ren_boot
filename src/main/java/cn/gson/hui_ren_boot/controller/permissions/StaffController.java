@@ -34,8 +34,8 @@ public class StaffController {
 
     //查询所有员工
     @GetMapping("staff-list")
-    public Object allStaff(Integer  pageNo,Integer size,String search){
-        return staffService.allStaffByPage(pageNo,size,search);
+    public Object allStaff(Integer  pageNo,Integer size,String search,Long medicalId,Long sectionId){
+        return staffService.allStaffByPage(pageNo,size,search,medicalId,sectionId);
     }
 
     @GetMapping("allStaff-list")

@@ -14,6 +14,19 @@
         <result property="drugId" column="drug_id"/>
     </resultMap>
 
+    <!-- 库存查询的映射 -->
+    <resultMap id="stockMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStockVo">
+        <id property="stockId" column="stock_id"/>
+        <result property="stockSurplus" column="stock_surplus"/>
+        <result property="stockNumber" column="stock_number"/>
+        <result property="stockDate" column="stock_date"/>
+        <result property="stockBatch" column="stock_batch"/>
+        <result property="stockIndate" column="stock_indate"/>
+        <result property="drugId" column="drug_id"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+
     <!-- 临期药品的查询映射 -->
     <resultMap id="drugStockPeriodMap" type="cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugStock">
         <id property="stockId" column="stock_id"/>
@@ -93,5 +106,21 @@
         select * from drug_stock dst
         inner join drug_info di on dst.drug_id = di.drug_id
         where di.type_id = #{typeId} and dst.stock_surplus >0
+    </select>
+
+    <!-- 查询药品库存 -->
+    <select id="findAllDrugStock" resultMap="stockMap">
+        select * from drug_stock ds
+        left join drug_info dr on ds.drug_id = dr.drug_id
+        left join drug_type dt on dr.type_id = dt.type_id
+        <where>
+            <if test="search != null and search != ''">
+                (ds.drug_id like '%${search}%' or ds.stock_batch like '%${search}%' or dr.drug_name like '%${search}%')
+            </if>
+            <if test="typeId != null and typeId !=''">
+                and dt.type_id = #{typeId}
+            </if>
+        </where>
+        order by ds.stock_date
     </select>
 </mapper>

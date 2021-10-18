@@ -21,6 +21,7 @@
         select * from scattered
     </select>
 
+
     <!-- 根据生产批号修改数量 -->
     <update id="scNumber">
         update scattered set sc_number = sc_number-#{scNumber} where drug_batch = #{drugBatch}

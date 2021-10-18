@@ -12,7 +12,7 @@ import java.util.Map;
 public interface StaffMapper {
 
     //查询所有员工
-    public List<Staff> allStaff(String search);
+    public List<Staff> allStaff(String search,Long medicalId,Long sectionId);
 
     public List<Staff> findAllStaff();
 
