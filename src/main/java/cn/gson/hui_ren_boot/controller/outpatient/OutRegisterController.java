@@ -2,6 +2,7 @@ package cn.gson.hui_ren_boot.controller.outpatient;
 
 import cn.gson.hui_ren_boot.model.pojos.outpatient.MedicalRecord;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.PrescriptionDetail;
 import cn.gson.hui_ren_boot.model.service.outpatient.OutRegisterService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -33,5 +34,11 @@ public class OutRegisterController {
     @RequestMapping("/sel-record")
     public List<MedicalRecord> selRecord(int outpatientId){
         return outRegisterService.selRecord(outpatientId);
+    }
+
+    //查询患者每次所开的处方
+    @RequestMapping("/sel-medicine")
+    public List<PrescriptionDetail> selMedicine(String recordsNo){
+        return outRegisterService.selMedicine(recordsNo);
     }
 }

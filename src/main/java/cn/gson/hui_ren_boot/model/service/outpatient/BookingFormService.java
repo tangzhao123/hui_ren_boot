@@ -1,10 +1,7 @@
 package cn.gson.hui_ren_boot.model.service.outpatient;
 
 import cn.gson.hui_ren_boot.model.mapper.outpatient.*;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.BookingForm;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.RegisterType;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.Withdrawal;
+import cn.gson.hui_ren_boot.model.pojos.outpatient.*;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +30,9 @@ public class BookingFormService {
 
     @Autowired
     RegisterTypeMapper registerTypeMapper;
+
+    @Autowired
+    RefundMapper refundMapper;
 
     //查询挂号类型
     public List<RegisterType> selType(){
@@ -64,6 +64,7 @@ public class BookingFormService {
         }else{
             bookingForm.setOutpatientId(register.getOutpatientId());
             bookingFormMapper.addBooking(bookingForm);
+            outRegisterMapper.editRegister(outPatient.getOutpatientNation(),outPatient.getOutpatientPhone(),outPatient.getOutpatientAddress(),outPatient.getOutpatientCard());
         }
         rowNumbersMapper.addNumber(bookingForm.getBookingNo());
     }
@@ -79,13 +80,15 @@ public class BookingFormService {
     }
 
     //退号，分页查询当天未诊的挂号单
-    public Object selBooking(String bookingNo,String outpatientName,String outpatientCard){
-        return bookingFormMapper.selBooking(bookingNo,outpatientName,outpatientCard);
+    public Object selBooking(String search){
+        return bookingFormMapper.selBooking(search);
     }
 
-    //退号，修改挂号单的状态，同时新增一条退号单
+    //退号，修改挂号单的状态，同时新增一条退号单,同时新增一条退费记录
     public void addDrawal(Withdrawal withdrawal){
         bookingFormMapper.editState(withdrawal.getBookingNo());
         withdrawalMapper.addDrawal(withdrawal);
+        Refund refund = new Refund(withdrawal.getBookingNo(),withdrawal.getBookingFee(), withdrawal.getStaffId());
+        refundMapper.addRefund(refund);
     }
 }

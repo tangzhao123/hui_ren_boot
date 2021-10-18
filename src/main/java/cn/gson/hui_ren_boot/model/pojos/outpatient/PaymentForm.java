@@ -26,6 +26,15 @@ public class PaymentForm {
     private List<PrescriptionDetail> prescriptionDetails;
     private String treatmentNo;
     private double treatmentBalance;
+    private String rechargeType;
+
+    public String getRechargeType() {
+        return rechargeType;
+    }
+
+    public void setRechargeType(String rechargeType) {
+        this.rechargeType = rechargeType;
+    }
 
     public String getTreatmentNo() {
         return treatmentNo;
