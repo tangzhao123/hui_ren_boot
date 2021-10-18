@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class WarehousesService {
     @Autowired
     WarehousesMapper warehousesMapper;
-    public Object huoseByPage(Integer pageNo,Integer size,WarehouseEntry warehouseEntry){
-        return warehousesMapper.house(warehouseEntry);
+    public Object huoseByPage(Integer pageNo,Integer size,String entrySerial,String entryBatch,String drugName){
+        return warehousesMapper.house(entrySerial,entryBatch,drugName);
     }
 }

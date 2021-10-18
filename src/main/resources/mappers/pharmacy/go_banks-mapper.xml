@@ -34,5 +34,16 @@
             left join DRUG_DEPORT dd on gb.GO_WAREHOUSE = dd.DEPORT_ID
             left join STOCKOUT so on gb.GO_NUM = so.STOCKOUT_GO
             left join DRUG_INFO di on so.STOCKOUT_PRODUCT=di.DRUG_SERIAL
+        <where>
+            <if test="goNum !=null and '' != goNum">
+                or gb.GO_NUM like '%${goNum}%'
+            </if>
+            <if test="goBatch != null and '' != goBatch">
+                or gb.GO_BATCH like '%${goBatch}%'
+            </if>
+            <if test="drugName != null and ''!= drugName">
+                or di.DRUG_NAME like '%${drugName}%'
+            </if>
+        </where>
     </select>
 </mapper>

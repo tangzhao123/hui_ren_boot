@@ -21,8 +21,34 @@ public class WarehouseEntry {
     private String entryOrder;
     private List<EntryDetails> entryDetailsData;
     private List<DrugStock> drugStocks;
-
     private DrugDeport deports;
+    private Integer pageNo;
+    private Integer size;
+    private String drugName;
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
 
     @OneToOne
     public DrugDeport getDeports() {
@@ -141,6 +167,10 @@ public class WarehouseEntry {
                 ", entryOrder='" + entryOrder + '\'' +
                 ", entryDetailsData=" + entryDetailsData +
                 ", drugStocks=" + drugStocks +
+                ", deports=" + deports +
+                ", pageNo=" + pageNo +
+                ", size=" + size +
+                ", drugName='" + drugName + '\'' +
                 '}';
     }
 }

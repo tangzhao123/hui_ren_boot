@@ -50,10 +50,11 @@
                 or di.DRUG_NAME like '%${drugName}%'
             </if>
         </where>
+        SELECT * FROM TRANSFERS ts   LEFT JOIN GO_BANK gb ON ts.TRANSFERS_GO = gb.GO_NUM LEFT JOIN ALLOCATING ac ON ts.TRANSFERS_ORDER = ac.TRANSFERS_ID  LEFT JOIN DRUG_INFO di ON ac.ALL_DRUG = di.DRUG_ID
     </select>
    <!-- 新增-->
     <insert id="addTransfers">
         insert into TRANSFERS(TRANSFERS_ID,TRANSFERS_TIME,TRANSFERS_DEPORT,TRANSFERS_PHARMACY,TRANSFERS_ORDER,TRANSFERS_REVIEWER)
-        values(seq_huiren.nextval,current_timestamp,#{transfersDeport},#{transfersPharmacy},#{transfersOrder},#{users})
+        values(seq_huiren.nextval,#{transfersTime},#{transfersDeport},#{transfersPharmacy},#{transfersOrder},#{users})
     </insert>
 </mapper>

@@ -27,7 +27,34 @@ public class DrugInfo {
     private DrugSupplier suppliers;//供应商
     private DrugStandard standards;//规格
     private DrugStock stocks;//库存
+    private Integer pageNo;
+    private Integer size;
+    private String typeName;
 
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
     //类别
     @OneToOne

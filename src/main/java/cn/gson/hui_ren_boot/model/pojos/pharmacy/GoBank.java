@@ -31,6 +31,33 @@ public class GoBank {
     private Date str;
     private Date str1;
     private String search;
+    private String drugName;
+    private Integer pageNo;
+    private Integer size;
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
 
     @OneToOne
     public DrugDeport getDeports() {

@@ -165,6 +165,9 @@ public class PurchasePlan {
                 ", purchaseState=" + purchaseState +
                 ", reviewerId=" + reviewerId +
                 ", planDetails=" + planDetails +
+                ", drugName='" + drugName + '\'' +
+                ", pageNo=" + pageNo +
+                ", size=" + size +
                 '}';
     }
 }
