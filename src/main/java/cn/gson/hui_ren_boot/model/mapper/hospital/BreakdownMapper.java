@@ -1,6 +1,5 @@
 package cn.gson.hui_ren_boot.model.mapper.hospital;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Breakdown;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Hospitalcare;
 import cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
@@ -9,7 +8,6 @@ import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface BreakdownMapper {

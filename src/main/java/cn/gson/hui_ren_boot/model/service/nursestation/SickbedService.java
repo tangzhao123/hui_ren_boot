@@ -1,6 +1,5 @@
 package cn.gson.hui_ren_boot.model.service.nursestation;
 
-import cn.gson.hui_ren_boot.model.dao.medical.WardDao;
 import cn.gson.hui_ren_boot.model.mapper.nursestation.SickbedMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
@@ -9,7 +8,6 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Ward;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.WardEntity;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

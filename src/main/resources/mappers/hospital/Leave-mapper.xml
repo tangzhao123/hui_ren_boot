@@ -23,7 +23,44 @@
         insert  into leave(leave_serial,leave_name,leave_date,leave_state,leave_arrears,register_id )values (seq_huiren.nextval,#{leaveName},current_timestamp,#{leaveState},#{leaveArrears},#{registerId})
     </insert>
     <update id="upTreatmentCard">--补款退款修改金额
-        update treatment_card set treatment_balance=treatment_balance-#{treatmentBalance} where treatment_no=#{treatmentNo}
+        update treatment_card set treatment_balance=0 where treatment_no=#{treatmentNo}
     </update>
+<!--    修改住院信息表-->
+    <update id="upRegisters">
+        update register set  register_state=1 where  register_id=#{registerId}
+    </update>
+    <!--    清空病人信息的床位号-->
+    <update id="upRegisters2">
+        update register set  sickbed_mark='' where  register_id=#{registerId}
+    </update>
+    <!--    查住院患者表-->
+    <select id="allRegistew" resultType="Register">
+        select*from   register  where register_id=#{registerId}
+    </select>
+    <select id="allLeave" resultType="Leave">
+        select *from leave
+        <where>
+            <if test="leaveName != null and '' != leaveName">
+                or leave_name like '%${leaveName}%'
+            </if>
+            <if test="registerId != null and '' != registerId">
+                or register_id like '%${registerId}%'
+            </if>
+        </where>
+    </select>
+    <select id="dayLeave" resultType="chargeVo">
 
+        select * from
+            (select prndebit_sum as prndebitSum,null as prndebitUser,register_id as registerId,prndebit_date as prndebitDate,null as adviceId, register_name as registerName,'医嘱扣费' as projectName   from prndebit
+
+             union
+             select debit_money,debit_project,null,debit_date,test_phone,null,'检验扣费' from inspect_debit
+             union
+             select sickbed_cost,null,register_id,hospitalcare_date,null,hospitalcare_name ,'床位扣费'from hospitalcare
+             union
+             select sickbed_nursing,null,register_id,hospitalcare_date,null,hospitalcare_name ,'护理扣费'from hospitalcare
+             union
+             select additional_money,additional_name,register_id,apply_time,null,register_name ,'手术扣费' from applyrecord) detail where prndebitSum !=0 and registerId=#{registerId} or adviceId=#{adviceId}
+                order by prndebitDate desc
+    </select>
 </mapper>

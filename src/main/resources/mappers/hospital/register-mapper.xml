@@ -103,9 +103,13 @@
             left join staff  fh on fh.staff_id=hg.staff_id
 
      <where>
-            <if test="registerId != null and '' != registerId">
+
+         <if test="registerId != null and '' != registerId">
                 or REGISTER_ID like '%${registerId}%'
             </if>
+
+
+
             <if test="registerName != null and '' != registerName">
                 or REGISTER_NAME like '%${registerName}%'
             </if>
@@ -136,6 +140,7 @@
             <if test="registerClinic != null and '' != registerClinic">
                 or REGISTER_CLINIC like '%${registerClinic}%'
             </if>
+             and hg.register_state =0
         </where>
         order by hg.register_date desc
     </select>
@@ -169,6 +174,14 @@
             </if>
         </where>
         order by hg.register_date desc
+    </select>
+    <select id="allRegist2" resultMap="allRegisMappert">
+        SELECT*from register  hg
+        left join sickbed kjs  on hg.sickbed_mark=kjs.sickbed_mark
+        left join  medical o on o.medical_id=hg.medical_id
+        left join staff  fh on fh.staff_id=hg.staff_id
+        left join treatment_card kjh on  kjh.treatment_no=hg.register_clinic
+        where hg.register_state=0 and hg.staff_id=#{staffId}
     </select>
 <!--    查询科室-->
     <select id="allMedica" resultType="Medical">

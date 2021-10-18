@@ -2,7 +2,6 @@ package cn.gson.hui_ren_boot.model.service.drug;
 
 import cn.gson.hui_ren_boot.model.mapper.drug.PlanDetailsMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.PurchaseMapper;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
 import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PlanDetails;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.PurchasePlan;

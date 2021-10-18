@@ -1,7 +1,6 @@
 package cn.gson.hui_ren_boot.controller.hospital;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Additional;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Operation;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;

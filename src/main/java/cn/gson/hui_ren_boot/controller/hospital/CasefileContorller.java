@@ -1,6 +1,5 @@
 package cn.gson.hui_ren_boot.controller.hospital;
 
-import cn.gson.hui_ren_boot.model.mapper.hospital.CasefileMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Casefile;
 import cn.gson.hui_ren_boot.model.service.hospital.CasefileService;
 import org.springframework.beans.factory.annotation.Autowired;

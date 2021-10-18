@@ -6,7 +6,6 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
-import cn.gson.hui_ren_boot.model.service.hospital.BlockupService;
 import cn.gson.hui_ren_boot.model.service.hospital.BreakdownService;
 import cn.gson.hui_ren_boot.model.service.hospital.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.Action;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/Breaks")

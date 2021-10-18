@@ -3,7 +3,6 @@ package cn.gson.hui_ren_boot.model.pojos.hospital;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,6 +20,15 @@ public class Change {
     private String medicalName;//科室名
     private String medicalstartName;//原科室
     private String staffName;//新医生
+    private Register register;//
+    @OneToOne
+    public Register getRegister() {
+        return register;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
+    }
 
     @Id
     @SequenceGenerator(sequenceName = "seq_huiren",name = "seq",allocationSize = 1,initialValue = 1)
@@ -133,12 +141,12 @@ public class Change {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Change change = (Change) o;
-        return changeId == change.changeId && Objects.equals(changeName, change.changeName) && Objects.equals(registerId, change.registerId) && Objects.equals(changeReason, change.changeReason) && Objects.equals(changeDoctor, change.changeDoctor) && Objects.equals(changeState, change.changeState) && Objects.equals(changeDate, change.changeDate)&& Objects.equals(medicalstartName, change.medicalstartName);
+        return changeId == change.changeId && Objects.equals(changeName, change.changeName) && Objects.equals(registerId, change.registerId) && Objects.equals(changeReason, change.changeReason) && Objects.equals(changeDoctor, change.changeDoctor) && Objects.equals(changeState, change.changeState) && Objects.equals(changeDate, change.changeDate)&& Objects.equals(medicalName, change.medicalName)&& Objects.equals(medicalstartName, change.medicalstartName)&& Objects.equals(staffName, change.staffName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(changeId, changeName, registerId, changeReason, changeDoctor, changeState, changeDate,medicalstartName);
+        return Objects.hash(changeId, changeName, registerId, changeReason, changeDoctor, changeState, changeDate,medicalName,medicalstartName,staffName);
     }
 
     @Override

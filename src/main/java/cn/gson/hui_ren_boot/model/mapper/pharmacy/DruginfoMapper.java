@@ -1,9 +1,7 @@
 package cn.gson.hui_ren_boot.model.mapper.pharmacy;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugInfo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

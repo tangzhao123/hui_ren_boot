@@ -1,6 +1,5 @@
 package cn.gson.hui_ren_boot.controller.medical;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Operation;
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.service.medical.ComboitemService;
 import cn.gson.hui_ren_boot.utils.MyUtil;

@@ -181,9 +181,9 @@ public class SendDrugService {
         for (DrugInfo drugInfo : drugById) {
             for (Details allDetail : allDetails) {
                 if (drugInfo.getTypes().getTypeId() == 2) {
-                    sendDrugs.add(new SendDrug(sendDrug.getSendNum(), 2L, allDetail.getDaralisNumber() * allDetail.getDaralisPrice().doubleValue(), sendDrug.getSendPeople(), allDetail.getAdviceId()));
+                    sendDrugs.add(new SendDrug(sendDrug.getSendNum(), 2L, allDetail.getDaralisNumber() * allDetail.getDaralisPrice(), sendDrug.getSendPeople(), allDetail.getAdviceId()));
                 } else {
-                    sendDrugs.add(new SendDrug(sendDrug.getSendNum(), 1L, allDetail.getDaralisNumber() * allDetail.getDaralisPrice().doubleValue(), sendDrug.getSendPeople(), allDetail.getAdviceId()));
+                    sendDrugs.add(new SendDrug(sendDrug.getSendNum(), 1L, allDetail.getDaralisNumber() * allDetail.getDaralisPrice(), sendDrug.getSendPeople(), allDetail.getAdviceId()));
                 }
             }
         }

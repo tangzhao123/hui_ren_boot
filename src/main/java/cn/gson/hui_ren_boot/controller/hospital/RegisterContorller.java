@@ -15,23 +15,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/PatientRegistration")
-public class RegisterConvertor {
+public class RegisterContorller {
     @Autowired
     RegisterService registerService;
     @Autowired
     HospialService hospialService;
     //病人信息多条件分页查询患者信息
     @RequestMapping("/registers")
-    public Object allregis(Integer pageNo, Integer size, String shu) {
+    public Object allregis( Integer pageNo, Integer size,String shu) {
         // Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(inputbox),Register.class);
         Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
 
-        return registerService.allRegisByPage(pageNo, size, inputboxs);
+        return registerService.allRegisByPage(pageNo, size,inputboxs);
     }
     @RequestMapping("/registerst")//缴费表
     public Object allregist(Integer pageNo, Integer size, String shu) {
@@ -43,7 +42,7 @@ public class RegisterConvertor {
     public List<Register>allregistw(String shu){
 
         Register inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Register.class);
-        return registerService.allRegisw(inputboxs);
+        return registerService.allRegist2(inputboxs);
      }
     //新增住院病人信息
     @RequestMapping("/saveRegis")

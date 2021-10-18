@@ -3,7 +3,6 @@ package cn.gson.hui_ren_boot.model.pojos.hospital;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 

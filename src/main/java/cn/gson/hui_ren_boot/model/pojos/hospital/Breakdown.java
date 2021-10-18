@@ -1,7 +1,5 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
-import java.util.Date;
-
 public class Breakdown {//接收各记录表里的数据
     private String   registerName;//患者住名
     private String   registerId;//患者住院号

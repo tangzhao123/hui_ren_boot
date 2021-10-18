@@ -1,8 +1,6 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
-import cn.gson.hui_ren_boot.model.pojos.medical.Combinspection;
-import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
@@ -10,7 +8,6 @@ import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;

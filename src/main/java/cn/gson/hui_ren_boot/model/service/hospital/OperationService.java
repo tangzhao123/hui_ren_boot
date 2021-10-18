@@ -3,7 +3,6 @@ package cn.gson.hui_ren_boot.model.service.hospital;
 import cn.gson.hui_ren_boot.model.mapper.hospital.OperationMapper;
 import cn.gson.hui_ren_boot.model.mapper.medical.ApplyrecordMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Additional;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Operation;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
