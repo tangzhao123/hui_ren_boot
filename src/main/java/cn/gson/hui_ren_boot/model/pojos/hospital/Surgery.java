@@ -1,7 +1,13 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.exception.DataException;
+
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -10,8 +16,10 @@ public class Surgery {
     private long surgeryId;//序号主键
     private String surgeryDoctor;//医生姓名
     private String surgeryName;//手术名称
-    private Time surgerysStart;//开始时间
-    private Time surgeryFinish;//结束时间
+    private Date surgerysStart;//开始时间
+    //将数据库的类型返回成指定类型
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="Asia/Shanghai")
+    private Timestamp surgeryFinish;//结束时间
     private String registerId;//住院号
     private String surgeryUser;//操作员
     private Long surgeryCost;//手术费
@@ -55,21 +63,21 @@ public class Surgery {
 
     @Basic
     @Column(name = "SURGERYS_START")
-    public Time getSurgerysStart() {
+    public Date getSurgerysStart() {
         return surgerysStart;
     }
 
-    public void setSurgerysStart(Time surgerysStart) {
+    public void setSurgerysStart(Date surgerysStart) {
         this.surgerysStart = surgerysStart;
     }
 
     @Basic
     @Column(name = "SURGERY_FINISH")
-    public Time getSurgeryFinish() {
+    public Timestamp getSurgeryFinish() {
         return surgeryFinish;
     }
 
-    public void setSurgeryFinish(Time surgeryFinish) {
+    public void setSurgeryFinish(Timestamp surgeryFinish) {
         this.surgeryFinish = surgeryFinish;
     }
 
@@ -144,5 +152,22 @@ public class Surgery {
     @Override
     public int hashCode() {
         return Objects.hash(surgeryId, surgeryDoctor, surgeryName, surgerysStart, surgeryFinish, registerId, surgeryUser, surgeryCost, surgeryOper, surgeryLogist, surgeryResult);
+    }
+
+    @Override
+    public String toString() {
+        return "Surgery{" +
+                "surgeryId=" + surgeryId +
+                ", surgeryDoctor='" + surgeryDoctor + '\'' +
+                ", surgeryName='" + surgeryName + '\'' +
+                ", surgerysStart=" + surgerysStart +
+                ", surgeryFinish=" + surgeryFinish +
+                ", registerId='" + registerId + '\'' +
+                ", surgeryUser='" + surgeryUser + '\'' +
+                ", surgeryCost=" + surgeryCost +
+                ", surgeryOper='" + surgeryOper + '\'' +
+                ", surgeryLogist='" + surgeryLogist + '\'' +
+                ", surgeryResult='" + surgeryResult + '\'' +
+                '}';
     }
 }

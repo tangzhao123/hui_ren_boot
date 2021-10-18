@@ -53,7 +53,7 @@ public class BlockupService {
             inspectDebitMapper.addinsert(inspectDebit);
             applyrecordmapper.uptApp(k.getItemMoney(),jh.getRegisterClinic()); //诊疗卡余额
         }
-        test.setTestMoney((long) km);
+        test.setTestMoney(km);
         blockupMapper.addTest(test);//新增体检单
 
 

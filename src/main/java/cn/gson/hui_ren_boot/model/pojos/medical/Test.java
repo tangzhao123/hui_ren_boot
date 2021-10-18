@@ -18,7 +18,7 @@ public class Test {
     //将数据库的类型返回成指定类型
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="Asia/Shanghai")
     private Date testTime;
-    private Long testMoney;
+    private Double testMoney;
     private Long testState;
     private String testAccount;
 
@@ -99,11 +99,11 @@ public class Test {
 
     @Basic
     @Column(name = "TEST_MONEY")
-    public Long getTestMoney() {
+    public Double getTestMoney() {
         return testMoney;
     }
 
-    public void setTestMoney(Long testMoney) {
+    public void setTestMoney(Double testMoney) {
         this.testMoney = testMoney;
     }
 

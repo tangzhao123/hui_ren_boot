@@ -26,8 +26,7 @@ public interface SurgeryforMapper {
 //    查询手术室，0为未使用的，根据科室名称
     public List<Operation> selectOperation(String medicalName);
 
-//    新增手术室使用记录
-    public void addApply(Applyrecord applyrecord);
+
 
 //    修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）
     public void updateOperation(String operationId);

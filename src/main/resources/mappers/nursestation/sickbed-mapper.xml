@@ -31,7 +31,7 @@
     </resultMap>
 <!--    查询病房-->
     <select id="selectWard" resultMap="wardEntity">
-        SELECT * FROM WARD w LEFT JOIN MEDICAL me ON w.MEDICAL_ID = me.MEDICAL_ID LEFT JOIN SICKBED s ON w.WARD_MARK = s.WARD_MARK
+        SELECT * FROM WARD w LEFT JOIN MEDICAL me ON w.MEDICAL_ID = me.MEDICAL_ID
         <where>
                 <if test="wardMark != null and wardMark != ''">
                     or w.WARD_MARK like '%${wardMark}%'

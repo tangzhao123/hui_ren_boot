@@ -1,9 +1,6 @@
 package cn.gson.hui_ren_boot.controller.nursestation;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Additional;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Advice;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
+import cn.gson.hui_ren_boot.model.pojos.hospital.*;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Orders;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
@@ -13,6 +10,7 @@ import cn.gson.hui_ren_boot.model.service.nursestation.PrndebitService;
 import cn.gson.hui_ren_boot.utils.MyUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,14 +31,24 @@ public class OrdersController {
 
     //医嘱表连接详表
     @GetMapping("/details-all")
-    public List<Advice> selAll(String registerId){
-        return ordersService.selAll(registerId);
+    public List<Advice> selAll(Long adviceCost,String registerId){
+        System.out.println("hshdjfh:"+adviceCost);
+        return ordersService.selAll(adviceCost,registerId);
     }
 
     //新增执行记录
     @RequestMapping("/insert-orders")
     public String zhixing(@RequestBody Map<String,Object> map){
         try {
+            System.out.println("医嘱类型："+map.get("lei"));
+            String zhuyang = (String) map.get("zhuy");
+            System.out.println("住院号："+zhuyang);
+            Integer type = (Integer) map.get("lei");
+            System.out.println("装换后的医嘱类型："+type);
+           if (type == 2){
+               ordersService.updateAdvice(zhuyang);
+           }
+
             ObjectMapper mapper = new ObjectMapper();
             String name = (String)map.get("user");//执行人员
 
@@ -62,7 +70,7 @@ public class OrdersController {
                 String xiang = MyUtil.genrateNo("ZXYZ");//执行医嘱号
                 orders.setOrdersId(xiang);
                 orders.setOrdersUser(name);//执行人
-                orders.setOrdersSerial(details.getDaralisPrice());//费用
+//                orders.setOrdersSerial(details.getDaralisPrice());//费用
                 orders.setOrderDetails(details.getDaralisMark());//医嘱详单单号
                 ordersService.insertOrders(orders);//新增执行医嘱记录
 
@@ -75,7 +83,7 @@ public class OrdersController {
 
             double money2 = treatmentCards.get(0).getTreatmentBalance() - money;
 
-            prndebitService.updateCard(money2,card);
+            prndebitService.updateCard(money2,card);//扣除诊疗卡里的钱
 
             return "ok";
         }catch (Exception e) {
@@ -99,8 +107,9 @@ public class OrdersController {
 
     //查询病人
     @GetMapping("/all-order")
-    public List<Record> allBing(String chaxun){
-        Record r = JSONObject.parseObject(chaxun,Record.class);
+    public List<Register> allBing(String chaxun){
+        Register r = JSONObject.parseObject(chaxun,Register.class);
+        System.out.println("bingren:"+ordersService.allBing(r));
         return ordersService.allBing(r);
     }
 }

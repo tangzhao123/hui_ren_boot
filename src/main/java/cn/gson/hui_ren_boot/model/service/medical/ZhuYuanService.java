@@ -14,6 +14,11 @@ public class ZhuYuanService {
     @Autowired
     ZhuYuanMapper mapper;
 
+    //修改体检的状态
+    public void updateitem(String testAccount){
+        mapper.updateitem(testAccount);
+    }
+
     //新增检验结果
     public void zyspection(Combinspection combinspection){
         mapper.zyspection(combinspection);

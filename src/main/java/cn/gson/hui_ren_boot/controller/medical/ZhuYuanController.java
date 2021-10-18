@@ -24,8 +24,9 @@ public class ZhuYuanController {
     public String zyspection(@RequestBody Combinspection combinspection){
         try {
             Combinspection cc = combinspection;
-            System.out.println("结果"+cc.getInspectionUnit());
-            service.zyspection(cc);
+            System.out.println("结果"+cc.getTestId());
+            service.zyspection(cc);//新增体检结果
+            service.updateitem(cc.getTestId());//修改体检的状态
             return "ok";
         }catch (Exception e){
             e.printStackTrace();

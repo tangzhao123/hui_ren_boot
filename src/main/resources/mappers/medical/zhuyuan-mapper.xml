@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.ZhuYuanMapper">
+<!--    修改检查完后的状态为3-->
+    <update id="updateitem">
+        update test set test_state = 3 where test_account = #{testAccount}
+    </update>
 
 <!--    新增结果-->
     <insert id="zyspection">
@@ -20,7 +24,7 @@
     <select id="zycomo" resultType="cn.gson.hui_ren_boot.model.pojos.medical.Test">
         SELECT * FROM TEST
             <where>
-                TEST_PHONE NOT IN (SELECT INSPECTION_PHONE FROM COMBINSPECTION)
+                TEST_STATE = 1
                 <if test="testName != null and testName != ''">
                     or TEST_NAME like '%${testName}%'
                 </if>
