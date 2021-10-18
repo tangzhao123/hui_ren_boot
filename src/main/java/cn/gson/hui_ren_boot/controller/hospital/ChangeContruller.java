@@ -2,6 +2,8 @@ package cn.gson.hui_ren_boot.controller.hospital;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Change;
 import cn.gson.hui_ren_boot.model.service.hospital.ChangeService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +38,9 @@ public class ChangeContruller {
         return "ok";
     }
     @RequestMapping("assChan")
-    public List<Change>assChaneg(@RequestBody Change change){
-       return changeService.asChange(change);
+    public Object assChaneg( Integer pageNo, Integer size, String shu){
+        Change inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Change.class);
+        return changeService.asChangeByPage(pageNo,size,inputboxs);
     }
 }
 

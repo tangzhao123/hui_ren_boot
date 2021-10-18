@@ -14,7 +14,7 @@
     <select id="asChange" resultType="Change" >
         select * from change
         <where>
-            change_state=0
+
             <if test="registerId != null and '' != registerId">
                 or REGISTER_ID like '%${registerId}%'
             </if>
@@ -24,9 +24,7 @@
             <if test="changeDoctor != null and '' != changeDoctor">
                 or change_doctor like '%${change_doctor}%'
             </if>
-            <if test="changeDoctor != null and '' != changeDoctor">
-                or change_doctor like '%${change_doctor}%'
-            </if>
+            change_state=0
         </where>
 
     </select>

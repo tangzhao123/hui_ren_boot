@@ -1,7 +1,6 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ public class Details {
     private Long  daralisDstate;//详情状况
     private Date daralisDisable;//停用时间1
     private Date daralisStart;//开始时间
-    private Long daralisPrice;//单价
+    private double daralisPrice;//单价
     private Long daralisNumber;//药品数量
     private String standardUse;//剂型
     private String daralisMark;//医嘱详情号
@@ -189,11 +188,11 @@ public class Details {
 
     @Basic
     @Column(name = "DARALIS_PRICE")
-    public Long getDaralisPrice() {
+    public double getDaralisPrice() {
         return daralisPrice;
     }
 
-    public void setDaralisPrice(Long daralisPrice) {
+    public void setDaralisPrice(double daralisPrice) {
         this.daralisPrice = daralisPrice;
     }
 

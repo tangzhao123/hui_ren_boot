@@ -1,6 +1,5 @@
 package cn.gson.hui_ren_boot.model.pojos.nursestation;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Sickbed;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 
 import javax.persistence.*;

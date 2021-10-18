@@ -15,14 +15,14 @@ public class InformService {
     InformMapper informMapper;
     public void addInform(Inform inform){//新增出院通知
         informMapper.addInform(inform);
-    }
+    }//新增
     public List<Inform> selectInform(Inform inform){//查出演通知
         return informMapper.selectInform(inform);
-    }
+    }//病人查询
     public void deleteInform(Inform inform){//删除
         informMapper.deleteInform(inform);
-    }
-    public List<Inform> allInform(){
-        return  informMapper.allInform();
-    }
+    }//删除
+    public Object allInformByPage(Integer pageNo, Integer size,Inform inform){
+        return  informMapper.allInform(inform);
+    }//模糊查
 }

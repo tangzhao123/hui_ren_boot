@@ -61,18 +61,14 @@
     </update>
 
     <select id="selectAdvice" resultType="Advice">-- 查询
-        select * from advice
-        <where>
-            <if test="registerId != null and '' != registerId">
-                or register_id = #{registerId}
-            </if>
-        </where>
+        select * from advice where register_id = #{registerId}
+
 
     </select>
 
     <insert id="addAdvice">-- 新增
-        insert  into advice(advice_serial,advice_id,register_id,advice_start,advice_sickbed,staff_name,advice_cost,advice_end,advice_chinese,advice_doctors,register_name,advice_chindose,medical_id)
-        values (seq_huiren.nextval,#{adviceId},#{registerId},#{adviceStart},#{adviceSickbed},#{staffName},1,#{adviceEnd},#{adviceChinese},#{adviceDoctors},#{registerName},#{adviceChindose},#{medicalId})
+        insert  into advice(advice_serial,advice_id,register_id,advice_start,advice_sickbed,staff_name,advice_cost,advice_end,advice_chinese,advice_doctors,register_name,advice_chindose,advice_state,medical_id)
+        values (seq_huiren.nextval,#{adviceId},#{registerId},#{adviceStart},#{adviceSickbed},#{staffName},1,#{adviceEnd},#{adviceChinese},#{adviceDoctors},#{registerName},#{adviceChindose},1,#{medicalId})
     </insert>
 
 </mapper>

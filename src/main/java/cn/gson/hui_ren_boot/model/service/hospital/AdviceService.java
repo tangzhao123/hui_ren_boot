@@ -28,8 +28,8 @@ public class AdviceService {
         adviceMapper.addAdvice(advice);
         detailsMapper.addDetails(detail);
     }
-    public Object selectAdviceByPage(Integer pageNo,Integer size, Advice inputboxs){//医嘱管理查询
-        return adviceMapper.selectAdvice(inputboxs);
+    public List<Advice> selectAdvice(Advice advice){//医嘱管理查询
+        return adviceMapper.selectAdvice(advice);
     }
     public void assAdvice(Advice j){//修改主单时间
         adviceMapper.assAdvice(j);

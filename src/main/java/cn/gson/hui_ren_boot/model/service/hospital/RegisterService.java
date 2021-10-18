@@ -1,6 +1,5 @@
 package cn.gson.hui_ren_boot.model.service.hospital;
 
-import cn.gson.hui_ren_boot.model.mapper.hospital.RegisterDao;
 import cn.gson.hui_ren_boot.model.mapper.hospital.RegisterMapper;
 import cn.gson.hui_ren_boot.model.mapper.outpatient.TreatmentCardMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
@@ -19,8 +18,7 @@ import java.util.List;
 public class RegisterService {
     @Autowired
     RegisterMapper registerMapper;
-    @Autowired
-    RegisterDao registerDao;
+
     @Autowired
     TreatmentCardMapper treatmentCardMapper;
     public Object allRegisByPage(Integer pageNo, Integer size, Register inputboxs){
@@ -32,9 +30,7 @@ public class RegisterService {
     public List<Register>allRegisw(Register inputboxs){
         return registerMapper.allRegist(inputboxs);
     }
-    public void saveRegis(Register j){
-        registerDao.save(j);
-    }
+
     public void addRegister(Register ter){
         registerMapper.addRegister(ter);
     }
@@ -70,7 +66,7 @@ public class RegisterService {
     }
     //    排班查询
     public List<Arrange> chaArrange2(Medical medical){
-        Medical kl=registerMapper.allMedicals(medical.getMedicalId());
+        Medical kl=registerMapper.allMedicals(medical.getMedicalName());
         List<Arrange>k=registerMapper.chaArrange(kl.getMedicalId());
         System.out.println(k);
         return k;
@@ -85,5 +81,9 @@ public class RegisterService {
       return registerMapper.allRegister(registerId);
     }
     //科室查询
+    //医生站患者查询
 
+    public List<Register>allRegist2(Register inputboxs){
+        return registerMapper.allRegist2(inputboxs);
+    }
 }

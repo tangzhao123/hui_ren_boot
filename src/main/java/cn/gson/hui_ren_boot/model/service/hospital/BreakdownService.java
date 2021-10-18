@@ -6,8 +6,6 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Hospitalcare;
 import cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
-import cn.gson.hui_ren_boot.model.pojos.medical.Combinspection;
-import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Transactional

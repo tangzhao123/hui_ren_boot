@@ -3,12 +3,9 @@ package cn.gson.hui_ren_boot.controller.hospital;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Advice;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Casefile;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
 import cn.gson.hui_ren_boot.model.service.hospital.AdviceService;
 import cn.gson.hui_ren_boot.model.service.hospital.CasefileService;
 import cn.gson.hui_ren_boot.utils.MyUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,9 +64,9 @@ public class AdviceController {
 //       }
     }
     @RequestMapping("/seletAdvicvt")//医嘱管理
-    public Object  seletAdvicvt(Integer pageNo, Integer size,String shu){
-        Advice inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Advice.class);
+    public List<Advice>  seletAdvicvt(@RequestBody Advice advice){
 
-        return adviceService.selectAdviceByPage(pageNo,size,inputboxs);
+
+        return adviceService.selectAdvice(advice);
     }
 }

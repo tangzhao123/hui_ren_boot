@@ -6,7 +6,6 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 

@@ -1,0 +1,68 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.RecordformMapper">
+<!--    查询科室下的病床-->
+    <select id="allWard"  resultType="Sickbed">
+        select *from ward vb left join sickbed ks on vb.ward_mark=ks.ward_mark where  medical_id=#{medicalId}  and sickbed_state=0
+
+    </select>
+    <!-- 新增转科记录表-->
+    <insert id="addRecorForm">
+        insert into record_form values (seq_huiren.nextval,#{registerId},current_timestamp,#{formStart},#{formEnd},#{formName},#{formStaff},#{formStartstaff},#{sickbedMark},#{sickbedStartmark})
+    </insert>
+<!--    新增现病房记录-->
+    <insert id="addRecorForm2">
+        insert into     record(record_id,record_serial,sickbed_mark,record_date,register_id,)
+        values (seq_huiren.nextval,#{recordSerial},#{sickbedMark},current_timestamp,#{registerId})
+    </insert>
+<!--    修改患者信息表-->
+    <update id="upRecorForm">
+            update register set sickbed_mark=#{sickbedMark} where register_id=#{registerId}
+    </update>
+    <!-- 修改原病房病床数-->
+    <update id="upRecorForm2">
+        update ward set ward_have=ward_have+1 where ward_mark=#{wardMark}
+
+    </update>
+    <!-- 修改先病房病床数-->
+    <update id="upRecorForm3">
+        update ward set ward_have=ward_have-1 where ward_mark=#{wardMark}
+
+    </update>
+    <!-- 修改病床使用记录-->
+    <update id="upRecorForm4">
+        update record set record_Leave=current_timestamp where sickbed_mark=#{sickbedMark}
+
+    </update>
+<!--    修改原病床状态-->
+    <update id="upRecorForm5">
+        update Sickbed set sickbed_state=0 where sickbed_mark=#{sickbedMark}
+
+    </update>
+    <!--    修改现病床状态-->
+    <update id="upRecorForm6">
+        update Sickbed set sickbed_state=1 where sickbed_mark=#{sickbedMark}
+
+    </update>
+<!--    查询病床拿 病房号-->
+    <select id="allWards" resultType="Sickbed">
+        select *from  sickbed where  sickbed_mark=#{sickbedMark}
+    </select>
+<!--    修改申请表状态-->
+    <update id="updaChagen">
+        update Change set change_state=1 where register_id=#{registerId}
+    </update>
+<!--    查询转科记录表-->
+    <select id="allRecordForm" resultType="RecordForm">
+       select*from record_form
+        <where>
+            <if test="formName != null and '' != formName">
+                or form_name like '%${formName}%'
+            </if>
+            <if test="registerId != null and '' != registerId">
+                or register_id like '%${registerId}%'
+            </if>
+        </where>
+    </select>
+
+</mapper>

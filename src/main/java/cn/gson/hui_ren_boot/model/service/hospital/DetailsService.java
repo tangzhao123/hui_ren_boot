@@ -1,7 +1,6 @@
 package cn.gson.hui_ren_boot.model.service.hospital;
 
 import cn.gson.hui_ren_boot.model.mapper.hospital.DetailsMapper;
-import cn.gson.hui_ren_boot.model.pojos.hospital.Advice;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,11 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Leave {
+public class Leave {//出院登记表
 
     private long leaveSerial;//序号
     private String leaveName;//患者名

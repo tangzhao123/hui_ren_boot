@@ -11,7 +11,16 @@
         delete from inform where  inform_id= #{informId}
     </delete>
     <select id="allInform" resultType="Inform">-- 查
-    select*from inform where inform_state=0
+    select*from inform
+    <where>
+        <if test="registerId != null and '' != registerId">
+            or register_id like '%${registerId}%'
+        </if>
+        <if test="informPatients != null and '' != informPatients">
+            or inform_Patients like '%${informPatients}%'
+        </if>
+        inform_state=0
+    </where>
     </select>
     <update id="upInform">
         update inform set inform_state=1 where register_id= #{registerId}

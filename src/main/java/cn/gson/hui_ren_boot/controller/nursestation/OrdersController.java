@@ -1,13 +1,11 @@
 package cn.gson.hui_ren_boot.controller.nursestation;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Additional;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Advice;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Details;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Record;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Orders;
 import cn.gson.hui_ren_boot.model.pojos.nursestation.Prndebit;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
-import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.service.nursestation.OrdersService;
 import cn.gson.hui_ren_boot.model.service.nursestation.PrndebitService;
 import cn.gson.hui_ren_boot.utils.MyUtil;
@@ -62,7 +60,7 @@ public class OrdersController {
                 String xiang = MyUtil.genrateNo("ZXYZ");//执行医嘱号
                 orders.setOrdersId(xiang);
                 orders.setOrdersUser(name);//执行人
-                orders.setOrdersSerial(details.getDaralisPrice());//费用
+//              orders.setOrdersSerial(details.getDaralisPrice());//费用
                 orders.setOrderDetails(details.getDaralisMark());//医嘱详单单号
                 ordersService.insertOrders(orders);//新增执行医嘱记录
 

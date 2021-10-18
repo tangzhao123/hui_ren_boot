@@ -1,7 +1,6 @@
 package cn.gson.hui_ren_boot.model.mapper.hospital;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
-import cn.gson.hui_ren_boot.model.pojos.outpatient.OutpatientRegister;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Arrange;
@@ -27,5 +26,6 @@ public interface RegisterMapper {
     public Medical chaMedical(Medical medical);//查询科室
     public Register allRegister(String registerId);//查询床位
     public List<Register>allR(Register register);//查询病人
-    public Medical allMedicals(Long  medicalName) ;//查询科室
+    public Medical allMedicals(String  medicalName) ;//查询科室
+    public List<Register>allRegist2(Register inputboxs);//住院医师站
 }

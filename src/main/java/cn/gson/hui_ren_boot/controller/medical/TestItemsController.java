@@ -1,13 +1,10 @@
 package cn.gson.hui_ren_boot.controller.medical;
 
-import cn.gson.hui_ren_boot.model.pojos.hospital.Operation;
 import cn.gson.hui_ren_boot.model.pojos.medical.TestResult;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TestDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TestItems;
 import cn.gson.hui_ren_boot.model.service.medical.TestItemsService;
-import cn.gson.hui_ren_boot.utils.MyUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class TestItemsController {

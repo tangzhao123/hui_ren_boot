@@ -2,8 +2,9 @@ package cn.gson.hui_ren_boot.controller.hospital;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Inform;
 import cn.gson.hui_ren_boot.model.service.hospital.InformService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +44,8 @@ public class InformController {
 
     }
     @RequestMapping("allImforms")
-    public  List allInform(){
-        return informService.allInform();
+    public  Object allInform( Integer pageNo, Integer size,String shu){
+        Inform inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Inform.class);
+        return informService.allInformByPage(pageNo, size,inputboxs);
     }
 }
