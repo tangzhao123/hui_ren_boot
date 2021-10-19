@@ -34,6 +34,8 @@ public class RecipelService {
     TestDetailMapper testDetailMapper;
     @Autowired
     DrugMapper drugMapper;
+    @Autowired
+    BookingFormMapper bookingFormMapper;
 
     //查询药品
     public List<DrugInfo> allDrug(DrugInfo drugInfo){
@@ -61,6 +63,7 @@ public class RecipelService {
     //接诊，删除当前接诊的排号
     public void delRow(String bookingNo){
         rowNumbersMapper.delRow(bookingNo);
+        bookingFormMapper.editStates(bookingNo);
     }
 
     //过号，根据挂号单修改id为最后一位

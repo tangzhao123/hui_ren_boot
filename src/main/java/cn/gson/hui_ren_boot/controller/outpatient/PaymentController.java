@@ -47,6 +47,7 @@ public class PaymentController {
     //新增缴费记录
     @RequestMapping("/add-payment")
     public String addPayment(@RequestBody PaymentForm payment){
+        System.err.println(payment);
         try{
             System.out.println(payment);
             List<PrescriptionDetail> list = payment.getPrescriptionDetails();

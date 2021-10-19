@@ -17,6 +17,7 @@ public class Refund {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date refundDate;
     private long staffId;
+    private String refundCause;
     private Staff staff;
     private String staffName;
     private Date start;
@@ -83,6 +84,16 @@ public class Refund {
         this.staffId = staffId;
     }
 
+    @Basic
+    @Column(name = "REFUND_CAUSE")
+    public String getRefundCause() {
+        return refundCause;
+    }
+
+    public void setRefundCause(String refundCause) {
+        this.refundCause = refundCause;
+    }
+
     public String getStaffName() {
         return staffName;
     }
@@ -110,9 +121,10 @@ public class Refund {
     public Refund() {
     }
 
-    public Refund(String bookingNo, double refundFee, long staffId) {
+    public Refund(String bookingNo, double refundFee, long staffId, String refundCause) {
         this.bookingNo = bookingNo;
         this.refundFee = refundFee;
         this.staffId = staffId;
+        this.refundCause = refundCause;
     }
 }

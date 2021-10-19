@@ -13,6 +13,7 @@ public class Withdrawal {
     private OutpatientRegister outpatient;
     private double bookingFee;
     private int staffId;
+    private String refundCause;
 
     @OneToOne
     public OutpatientRegister getOutpatient() {
@@ -79,5 +80,13 @@ public class Withdrawal {
 
     public void setStaffId(int staffId) {
         this.staffId = staffId;
+    }
+
+    public String getRefundCause() {
+        return refundCause;
+    }
+
+    public void setRefundCause(String refundCause) {
+        this.refundCause = refundCause;
     }
 }

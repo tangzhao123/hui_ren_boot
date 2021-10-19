@@ -88,7 +88,7 @@ public class BookingFormService {
     public void addDrawal(Withdrawal withdrawal){
         bookingFormMapper.editState(withdrawal.getBookingNo());
         withdrawalMapper.addDrawal(withdrawal);
-        Refund refund = new Refund(withdrawal.getBookingNo(),withdrawal.getBookingFee(), withdrawal.getStaffId());
+        Refund refund = new Refund(withdrawal.getBookingNo(),withdrawal.getBookingFee(), withdrawal.getStaffId(),withdrawal.getRefundCause());
         refundMapper.addRefund(refund);
     }
 }

@@ -33,4 +33,7 @@ public interface BookingFormMapper {
 
     //修改挂号单为退号状态
     public void editState(String bookingNo);
+
+    //修改挂号单为就诊状态
+    public void editStates(String bookingNo);
 }

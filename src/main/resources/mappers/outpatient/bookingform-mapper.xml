@@ -131,4 +131,9 @@
     <update id="editState">
         update booking_form set BOOKING_STATE = 3 where BOOKING_NO = #{bookingNo}
     </update>
+
+    <!--修改挂号单为就诊状态-->
+    <update id="editStates">
+        update booking_form set BOOKING_STATE = 1 where BOOKING_NO = #{bookingNo}
+    </update>
 </mapper>

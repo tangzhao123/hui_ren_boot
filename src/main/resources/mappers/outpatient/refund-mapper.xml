@@ -8,6 +8,7 @@
         <result column="BOOKING_NO" property="bookingNo"/>
         <result column="REFUND_FEE" property="refundFee"/>
         <result column="REFUND_DATE" property="refundDate"/>
+        <result column="REFUND_CAUSE" property="refundCause"/>
         <association property="staff" javaType="Staff">
             <id column="STAFF_ID" property="staffId"/>
             <result column="STAFF_NAME" property="staffName"/>
@@ -22,7 +23,7 @@
 
     <!--新增退费记录-->
     <insert id="addRefund">
-        insert into refund values (seq_huiren.nextval,#{bookingNo},#{refundFee},current_timestamp ,#{staffId})
+        insert into refund values (seq_huiren.nextval,#{bookingNo},#{refundFee},current_timestamp ,#{staffId},#{refundCause})
     </insert>
 
     <!--查询退费记录-->
