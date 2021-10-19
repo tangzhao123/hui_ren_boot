@@ -6,6 +6,7 @@ import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentRecharge;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Arrange;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
+import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.service.hospital.HospialService;
 import cn.gson.hui_ren_boot.model.service.hospital.RegisterService;
 import com.alibaba.fastjson.JSON;
@@ -58,7 +59,7 @@ public class RegisterContorller {
                String result = k.substring(k.length()-4,k.length());//截取身份证后四位数
                ya.setTreatmentPassword("123456"+result);//密码
                ya.setTreatmentCard(j.getRegisterHome());//身份
-               ya.setTreatmentBalance(0L);//金额
+               ya.setTreatmentBalance(0);//金额
                registerService.addtreatmentCard(ya);//新增就诊卡
                registerService.addRegister(j);//新增病人信息
                Hospital hj=new Hospital();
@@ -85,19 +86,19 @@ public class RegisterContorller {
             return false;
         }
     }
-    @RequestMapping("/upRecharge")
-    public String upRecharge(@RequestBody TreatmentCard k){
-        System.err.println(k);
-        try{
+    @RequestMapping("/upRecharge")//修改诊疗卡金额
+    public String upRecharge(@RequestBody TreatmentCard treatmentCard){
+
+       try{
 
 
             TreatmentRecharge p=new TreatmentRecharge();//新增记录
-            p.setRechargeMoney(k.getTreatmentBalance());
-            p.setTreatmentNo(k.getTreatmentNo());
+            p.setRechargeMoney(treatmentCard.getTreatmentBalance());
+            p.setTreatmentNo(treatmentCard.getTreatmentNo());
             System.err.println(123);
-            registerService.reCharge(p);
+            registerService.reCharge(p);//新增记录
 
-            registerService.upMedicalCard(k);//修改金额
+            registerService.upMedicalCard(treatmentCard);//修改金额
             //————————————————————————
 
 
@@ -106,12 +107,7 @@ public class RegisterContorller {
             return "fail";
         }
     }
-//    @RequestMapping("/selseRecords")
-//    public Object allRecords(@RequestBody Integer pageNo, Integer size, TreatmentRecharge treatmentNo){//查询记录
-//        System.out.println(treatmentNo.getTreatmentNo());
-//
-//      return   registerService.selseRechargeByPage(pageNo,size,treatmentNo);
-//    }
+
     @RequestMapping("/selseRecords")
     public List<TreatmentRecharge> allRecords(String treatmentNo){//查询记录
         System.out.println(treatmentNo);
