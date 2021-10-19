@@ -1,20 +1,16 @@
 package cn.gson.hui_ren_boot.controller.medical;
 
-import cn.gson.hui_ren_boot.model.pojos.medical.Cmobo;
-import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
-import cn.gson.hui_ren_boot.model.pojos.medical.Test;
-import cn.gson.hui_ren_boot.model.pojos.medical.Testmiddle;
+import cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit;
+import cn.gson.hui_ren_boot.model.pojos.medical.*;
 import cn.gson.hui_ren_boot.model.service.medical.CmoboSerivice;
 import cn.gson.hui_ren_boot.model.service.medical.ComboitemService;
 import cn.gson.hui_ren_boot.model.service.medical.TestService;
+import cn.gson.hui_ren_boot.model.service.medical.ZhuYuanService;
 import cn.gson.hui_ren_boot.utils.MyUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +22,44 @@ public class TestController {
 
     @Autowired
     CmoboSerivice cmoboSerivice;//套餐
+    @Autowired
+    ZhuYuanService service;
+
+    //查看检验结果
+    @GetMapping("/look-all")
+    public List<Combinspection> lookresult(String inspectionPhone){
+        System.out.println("电话号码"+inspectionPhone);
+        System.out.println("jie过"+testService.lookresult(inspectionPhone));
+        return testService.lookresult(inspectionPhone);
+    }
+
+    //新增检验结果
+    @RequestMapping("/pay-spection")
+    public String zyspection(@RequestBody Combinspection combinspection){
+        try {
+            Combinspection cc = combinspection;
+            System.out.println("结果"+cc.getTestId());
+            service.zyspection(cc);//新增体检结果
+            testService.payitem(cc.getTestId());//修改体检的状态
+            return "ok";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    //缴费
+    @PostMapping("/add-debit")
+    public String addDebit(@RequestBody InspectDebit debit){
+        try{
+            System.out.println("缴费记录："+debit);
+            testService.addDebit(debit);
+            return "ok";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 
 
     //预约体检的信息
@@ -56,6 +90,7 @@ public class TestController {
     //查询预约体检
     @GetMapping("/test-list")
     public Object testAll(int pageNo,int size,String testName){
+        System.out.println("查询条件："+testName);
         Test t = JSONObject.parseObject(testName,Test.class);
         return testService.selectCmoboByPage(pageNo,size,t);
     }

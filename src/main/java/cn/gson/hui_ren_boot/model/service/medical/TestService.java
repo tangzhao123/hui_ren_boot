@@ -3,10 +3,9 @@ package cn.gson.hui_ren_boot.model.service.medical;
 import cn.gson.hui_ren_boot.model.dao.medical.TestDao;
 import cn.gson.hui_ren_boot.model.dao.medical.TestmiddleDao;
 import cn.gson.hui_ren_boot.model.mapper.medical.TestMapper;
-import cn.gson.hui_ren_boot.model.pojos.medical.Cmobo;
-import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
-import cn.gson.hui_ren_boot.model.pojos.medical.Test;
-import cn.gson.hui_ren_boot.model.pojos.medical.Testmiddle;
+import cn.gson.hui_ren_boot.model.mapper.medical.ZhuYuanMapper;
+import cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit;
+import cn.gson.hui_ren_boot.model.pojos.medical.*;
 import cn.gson.hui_ren_boot.utils.MyUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,36 @@ public class TestService {
     @Autowired
     TestMapper testMapper;//预约体检
 
-
     @Autowired
     TestmiddleDao testmiddleDao;//中间表的dao成
 
     @Autowired
     CmoboSerivice cmoboSerivice;//套餐
 
+    @Autowired
+    ZhuYuanMapper zhuYuanMapper;//住院检验的mapper
+
+    //查看检验结果
+    public List<Combinspection> lookresult(String inspectionPhone){
+            return testMapper.lookresult(inspectionPhone);
+    }
+
+    //检验后修改状态
+    public void payitem(String testAccount){
+        if (testAccount != null && testAccount != " "){
+            testMapper.payitem(testAccount);
+        }
+    }
+
+    //新增缴费记录
+    public void addDebit(InspectDebit debit){
+        if (debit.getDebitId() == 0){
+            testMapper.addDebit(debit);
+            testMapper.updateDebit(debit.getTestPhone());
+        }
+    }
+
+    //新增单个项目
     public void allItem(List<Object> list,String id){
         ObjectMapper mapper = new ObjectMapper();
         //选择的单个项目
@@ -42,6 +64,7 @@ public class TestService {
 
     }
 
+    //新增套餐里面的项目
     public void allCmob(List<Object> list1,String id){
         ObjectMapper mapper = new ObjectMapper();
         //选择的套餐
@@ -62,8 +85,6 @@ public class TestService {
         }
     }
 
-
-
     //取消预约修改状态
     public void dels (String account){
         if (account != null && account != " "){
@@ -79,7 +100,12 @@ public class TestService {
 
     }
 
+    //查询预约体检
     public Object selectCmoboByPage(int pageNo, int size, Test test ){
+        List<Test> list = testMapper.selectCmobo(test);
+        for (Test i: list) {
+            System.out.println("haahhhha===："+i);
+        }
         return testMapper.selectCmobo(test);
     }
 }

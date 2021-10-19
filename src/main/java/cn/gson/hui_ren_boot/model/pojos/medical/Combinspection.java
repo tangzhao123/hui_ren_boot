@@ -1,5 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.medical;
 
+import cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -18,6 +20,8 @@ public class Combinspection {
     private String inspectionUnit;//单位值
     private String inspectionPhone;//电话
     private Timestamp inspectionDate;//时间
+    private Test test;//体检人
+    private InspectDebit inspectDebit;//缴费
 
 
     @Id
@@ -30,6 +34,24 @@ public class Combinspection {
 
     public void setInspectionId(long inspectionId) {
         this.inspectionId = inspectionId;
+    }
+
+    @ManyToOne
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
+    @ManyToOne
+    public InspectDebit getInspectDebit() {
+        return inspectDebit;
+    }
+
+    public void setInspectDebit(InspectDebit inspectDebit) {
+        this.inspectDebit = inspectDebit;
     }
 
     @Basic
