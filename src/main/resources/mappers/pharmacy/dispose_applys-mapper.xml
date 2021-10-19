@@ -34,10 +34,10 @@
     </resultMap>
     <select id="dispose" resultMap="disposesApplyMapper">
         select * from  DISPOSE_APPLY da
-                           left join DESTRUCTION dc on da.APPLY_ID=dc.DE_ID
-                           left join DRUG_INFO di on dc.DE_DRUG=di.DRUG_SERIAL
-                           left join USER_INFO ui on da.APPLY_PEOPLE=ui.USER_ID
-                           left join DRUG_DEPORT dd on da.APPLY_GO=dd.DEPORT_ID
+            left join DESTRUCTION dc on da.APPLY_NUM=dc.APPLY_ID
+            left join DRUG_INFO di on dc.DE_DRUG=di.DRUG_ID
+            left join USER_INFO ui on da.APPLY_PEOPLE=ui.USER_ID
+            left join DRUG_DEPORT dd on da.APPLY_GO=dd.DEPORT_ID
         <where>
             <if test="applyNum != null and '' != applyNum">
                 or da.APPLY_NUM like '%${applyNum}%'

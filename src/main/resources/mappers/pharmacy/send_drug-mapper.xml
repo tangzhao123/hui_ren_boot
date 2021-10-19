@@ -33,10 +33,11 @@
     </resultMap>
     <select id="send" resultMap="sendDrugMapper">
         select * from SEND_DRUG sd
-            left join DOSE ds on sd.SEND_ID=ds.DOSE_ID
-            left join PHARMACY pm on sd.SEND_DRUG=pm.PHARMACY_ID
-            left join USER_INFO ui on sd.SEND_PEOPLE=USER_ID
-            left join DRUG_INFO di on ds.DOSE_DRUG=DRUG_SERIAL
+             left join DOSE ds on sd.SEND_ID=ds.DOSE_ID
+             left join PHARMACY pm on sd.SEND_DRUG=pm.PHARMACY_ID
+             left join USER_INFO ui on sd.SEND_PEOPLE=USER_ID
+             left join DRUG_INFO di on ds.DOSE_DRUG=DRUG_ID
+
         <where>
             <if test="sendNum != null and '' != sendNum">
                 or SEND_NUM like '%${sendNum}%'
