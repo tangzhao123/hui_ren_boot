@@ -107,9 +107,6 @@
          <if test="registerId != null and '' != registerId">
                 or REGISTER_ID like '%${registerId}%'
             </if>
-
-
-
             <if test="registerName != null and '' != registerName">
                 or REGISTER_NAME like '%${registerName}%'
             </if>
@@ -245,6 +242,7 @@
         and to_char(ar.arrange_end,'yyyy-mm-dd') and s.rank_id = 5
 
     </select>
+
 <!--&lt;!&ndash;    查询科室&ndash;&gt;-->
 <!--    <select id="chaMedical" resultType="Medical">-->
 <!--        select *from  medical  where medical_id=#{medicalId}-->
