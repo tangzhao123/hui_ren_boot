@@ -32,7 +32,7 @@
         select * from WAREHOUSE_ENTRY we
                           left join ENTRY_DETAILS ed on we.ENTRY_SERIAL=ed.DETAILS_ENTRY
                           left join DRUG_DEPORT dd on we.ENTRY_PHARMACY=dd.DEPORT_ID
-                          left join DRUG_INFO di on ed.DETAILS_DRUG=di.DRUG_SERIAL
+                          left join DRUG_INFO di on ed.DETAILS_DRUG=di.DRUG_ID
         <where>
             <if test="entrySerial != null and '' != entrySerial">
                 or we.ENTRY_SERIAL like '%${entrySerial}%'

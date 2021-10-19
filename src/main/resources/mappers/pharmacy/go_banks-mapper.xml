@@ -33,7 +33,7 @@
             left join USER_INFO ui on gb.GO_TOUCHING = ui.USER_ID
             left join DRUG_DEPORT dd on gb.GO_WAREHOUSE = dd.DEPORT_ID
             left join STOCKOUT so on gb.GO_NUM = so.STOCKOUT_GO
-            left join DRUG_INFO di on so.STOCKOUT_PRODUCT=di.DRUG_SERIAL
+            left join DRUG_INFO di on so.STOCKOUT_PRODUCT=di.DRUG_ID
         <where>
             <if test="goNum !=null and '' != goNum">
                 or gb.GO_NUM like '%${goNum}%'

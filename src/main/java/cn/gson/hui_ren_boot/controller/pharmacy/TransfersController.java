@@ -16,7 +16,7 @@ import java.util.List;
 public class TransfersController {
     @Autowired
     TransfersService transfersService;
-   //分页
+   //分页模糊查询
     @RequestMapping("/transfers")
     public Object allTransfers(@RequestBody Transfers transfers){
         return transfersService.allTransfersByPage(transfers.getPageNo(),transfers.getSize(),
