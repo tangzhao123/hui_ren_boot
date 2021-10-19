@@ -3,6 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--开检验项目详表-->
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.outpatient.TestDetailMapper">
+    <resultMap id="itemMap" type="cn.gson.hui_ren_boot.model.pojos.outpatient.TestDetail">
+        <id column="CHECK_ID" property="checkId"/>
+        <result column="TEST_NUMBER" property="testNumber"/>
+        <result column="ITEM_NAME" property="itemName"/>
+        <result column="ITEM_MONEY" property="itemMoney"/>
+    </resultMap>
     <!--新增检验项目详表-->
     <insert id="addItemDetail">
         insert into test_detail
@@ -20,4 +26,9 @@
             </if>
         </foreach>
     </insert>
+
+    <!--查询患者当次所开的检验项目-->
+    <select id="selItem" resultMap="itemMap">
+        select * from test_detail td left join test_items ti on td.test_number = ti.test_number where ti.records_no = #{recordsNo}
+    </select>
 </mapper>
