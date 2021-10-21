@@ -37,4 +37,8 @@
     <select id="findAllSupplier" resultMap="supplierMapper">
         select * from drug_supplier
     </select>
+
+    <delete id="deSupplier">
+        delete from DRUG_SUPPLIER where SUPPLIER_ID=#{supplierId}
+    </delete>
 </mapper>

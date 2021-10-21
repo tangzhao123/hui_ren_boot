@@ -12,7 +12,7 @@
     </insert>
 <!--    新增现病房记录-->
     <insert id="addRecorForm2">
-        insert into     record(record_id,record_serial,sickbed_mark,record_date,register_id,)
+        insert into  record(record_id,record_serial,sickbed_mark,record_date,register_id)
         values (seq_huiren.nextval,#{recordSerial},#{sickbedMark},current_timestamp,#{registerId})
     </insert>
 <!--    修改患者信息表-->

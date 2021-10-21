@@ -33,7 +33,7 @@ public interface SendDrugMapper {
     public List<PaymentDetai> findAllPaymentDetail(List<String> paymentNo);
 
     //查询处方单有没有发药记录
-    public List<SendDrug> findAllSendDrug(String prescriptionNo);
+    public List<SendDrug> findAllSendDrug(List<String> prescriptionNo);
 
     //新增发药单
     public void addSendDrug(SendDrug sendDrug);

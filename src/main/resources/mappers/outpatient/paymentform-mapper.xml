@@ -62,6 +62,7 @@
             <if test="staffName != null and '' != staffName">
                 and st.STAFF_NAME = #{staffName}
             </if>
+                and pf.payment_money != 0
         </where>
     </select>
 

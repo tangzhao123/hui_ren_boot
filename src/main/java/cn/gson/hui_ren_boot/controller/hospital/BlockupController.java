@@ -30,7 +30,7 @@ public class BlockupController {
     @RequestMapping("/blockuptj")//医嘱管理
     private String blockupTj(@RequestBody Blockup blockup){
         //查询详单号
-        try{
+//        try{
             List<Details> Jh=detailsService.queryDeta(blockup.getAdviceId());//按照医嘱号查询详单号
             Details adv=new Details();
             Advice a=new Advice();
@@ -47,9 +47,9 @@ public class BlockupController {
                 }
             }
             return "ok";
-        }catch(Exception e){
-            return "fail";
-        }
+//        }catch(Exception e){
+//            return "fail";
+//        }
 
 
     }

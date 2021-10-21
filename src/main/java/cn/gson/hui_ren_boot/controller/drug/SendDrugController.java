@@ -54,15 +54,19 @@ public class SendDrugController {
             allPaymentDetail = sendDrugService.findAllPaymentDetail(strings);
             List<String> str = new ArrayList<>();//处方单号的集合
             List<SendDrug> allSendDrug = new ArrayList<>();
+            List<String> st = new ArrayList<>();
             //根据缴费详情里面的处方单号去判断该处方单是否缴费，缴费的就进行发药
             for (PaymentDetai pay : allPaymentDetail) {
                 str.add(pay.getPrescriptionNo());
                 //如果处方单号不为空就进行查询
                 if (pay.getPrescriptionNo() != null) {
                     //根据处方单号去查询发药记录表
-                    allSendDrug = sendDrugService.findAllSendDrug(pay.getPrescriptionNo());
+                    st.add(pay.getPrescriptionNo());
+
                 }
             }
+            allSendDrug = sendDrugService.findAllSendDrug(st);
+            System.err.println(allSendDrug);
             //如果没有发药记录才进行发药
             if (allSendDrug.isEmpty()) {
                 allPrescriptionList = sendDrugService.findAllPrescriptionList(str);

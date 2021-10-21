@@ -276,7 +276,13 @@
     <select id="findAllSendDrug" resultMap="sendDrugMap">
         select *
         from send_drug
-        where prescription_no = #{prescriptionNo}
+        where 
+        <if test="prescriptionNo.size()>0 ">
+            prescription_no in
+            <foreach collection="prescriptionNo" item="d" index="i" separator="," open="(" close=")">
+                #{d}
+            </foreach>
+        </if>
     </select>
 
     <!-- 新增发药记录 -->
@@ -308,7 +314,7 @@
             <if test="medicalId != null and medicalId !=''">
                 and ad.medical_id = #{medicalId}
             </if>
-            and ad.advice_id not in (select prescription_no from send_drug)
+            and de.advice_id not in (select prescription_no from send_drug)
         </where>
     </select>
 

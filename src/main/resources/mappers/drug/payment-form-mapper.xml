@@ -29,7 +29,15 @@
     </select>
     <!-- 查询收费总金额 -->
     <select id="allPaymentMoneys" resultType="double">
-        select sum(payment_money) as paymentMoneys from payment_form
+        select sum(payment_money) as paymentMoneys from
+            (select hospitalcare_money as payment_money from hospitalcare
+             union all
+             select additional_money as payment_money  from applyrecord
+             union all
+             select prndebit_sum as payment_money from prndebit
+             union all
+             select payment_money as payment_money from payment_form
+            ) hos
     </select>
 
 </mapper>

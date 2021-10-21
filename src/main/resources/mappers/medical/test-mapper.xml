@@ -79,6 +79,7 @@
                 or TEST_ACCOUNT like  '%${testAccount}%'
             </if>
             and not TEST_STATE = 1
+            and not TEST_STATE = 3
         </where>
     </select>
 

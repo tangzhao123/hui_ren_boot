@@ -68,7 +68,7 @@
 
     <insert id="addAdvice">-- 新增
         insert  into advice(advice_serial,advice_id,register_id,advice_start,advice_sickbed,staff_name,advice_cost,advice_end,advice_chinese,advice_doctors,register_name,advice_chindose,advice_state,medical_id)
-        values (seq_huiren.nextval,#{adviceId},#{registerId},#{adviceStart},#{adviceSickbed},#{staffName},1,#{adviceEnd},#{adviceChinese},#{adviceDoctors},#{registerName},#{adviceChindose},1,#{medicalId})
+        values (seq_huiren.nextval,#{adviceId},#{registerId},#{adviceStart},#{adviceSickbed},#{staffName},#{adviceCost},#{adviceEnd},#{adviceChinese},#{adviceDoctors},#{registerName},#{adviceChindose},1,#{medicalId})
     </insert>
 
 </mapper>

@@ -75,7 +75,7 @@ public class SendDrugService {
     }
 
     //查询处方单有没有发药记录
-    public List<SendDrug> findAllSendDrug(String prescriptionNo) {
+    public List<SendDrug> findAllSendDrug(List<String> prescriptionNo) {
         return sendDrugMapper.findAllSendDrug(prescriptionNo);
     }
 

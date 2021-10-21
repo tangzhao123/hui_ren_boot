@@ -2,8 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.hospital.ChangeMapper">
+
+    <resultMap id="Changes" type="cn.gson.hui_ren_boot.model.pojos.hospital.Change">
+        <id property="changeId" column="change_id"/>
+        <result property="changeName" column="change_name"/>
+        <result property="registerId" column="register_id"/>
+        <result property="changeReason" column="change_reason"/>
+        <result property="changeDoctor" column="change_doctor"/>
+        <result property="changeState" column="change_state"/>
+        <result property="changeDate" column="change_date"/>
+        <result property="medicalName" column="medical_name"/>
+        <result property="medicalstartName" column="medical_startname"/>
+        <result property="staffName" column="staff_name"/>
+        <association  property="register" javaType="Register">
+            <result property="sickbedMark" column="sickbed_mark"/>
+        </association>
+
+    </resultMap>
     <insert id="addChange">--新增
-        insert into change values (seq_huiren.nextval,#{changeName},#{registerId},#{changeReason},#{changeDoctor},0,current_timestamp,#{medicalName},#{startmedicalName},#{staffName})
+        insert into change values (seq_huiren.nextval,#{changeName},#{registerId},#{changeReason},#{changeDoctor},0,current_timestamp,#{medicalName},#{medicalstartName},#{staffName})
     </insert>
     <select id="allChange" resultType="change">--查询
             select *from change where change_state=0
@@ -11,8 +28,8 @@
     <delete id="deChange">--删除
         delete from change where change_id=#{changeId}
     </delete>
-    <select id="asChange" resultType="Change" >
-        select * from change
+    <select id="asChange" resultMap="Changes" >
+        select * from change k left  join register l on k.register_id=l.register_id
         <where>
 
             <if test="registerId != null and '' != registerId">

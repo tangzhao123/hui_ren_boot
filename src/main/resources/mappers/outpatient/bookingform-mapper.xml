@@ -69,7 +69,7 @@
 
     <!-- 查询所有的科室 -->
     <select id="allMedicals" resultMap="medicalMap">
-        select * from medical where medical_sublevel != 0
+        select * from medical where medical_sublevel != 0 and medical_sublevel != -1
     </select>
 
     <!--根据科室查询门诊医生-->

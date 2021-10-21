@@ -17,17 +17,17 @@ import java.util.List;
 public class ChangeContruller {
     @Autowired
     ChangeService changeService;
-    @RequestMapping("addChan")
+    @RequestMapping("addChan")//新增转科通知
     public String addChanges(@RequestBody Change change){
-        try{
+//        try{
             changeService.addChange(change);
             return "ok";
-          }catch(Exception e){
-            return "fail";
-          }
+//          }catch(Exception e){
+//            return "fail";
+//          }
 
     }
-    @RequestMapping("allchan")
+    @RequestMapping("allchan")//查询转科通知
     public List<Change> allChange(){//查询
          return  changeService.allChange();
     }

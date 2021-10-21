@@ -11,10 +11,10 @@ public class Leave {//出院登记表
     private String leaveName;//患者名
     private String diagnosisId;//出院诊断
     private Date leaveDate;//出院日期
-    private Long leaveAmount;//住院累计金额
+    private Double leaveAmount;//住院累计金额
     private String staffId;//操作员
     private Long leaveState;//结算状态 0退款，1补款
-    private Long leaveArrears;//结算交的费用
+    private Double leaveArrears;//结算交的费用
     private String registerId;//住院号
 
 
@@ -63,11 +63,11 @@ public class Leave {//出院登记表
 
     @Basic
     @Column(name = "LEAVE_AMOUNT")
-    public Long getLeaveAmount() {
+    public Double getLeaveAmount() {
         return leaveAmount;
     }
 
-    public void setLeaveAmount(Long leaveAmount) {
+    public void setLeaveAmount(Double leaveAmount) {
         this.leaveAmount = leaveAmount;
     }
 
@@ -95,11 +95,11 @@ public class Leave {//出院登记表
 
     @Basic
     @Column(name = "LEAVE_ARREARS")
-    public Long getLeaveArrears() {
+    public Double getLeaveArrears() {
         return leaveArrears;
     }
 
-    public void setLeaveArrears(Long leaveArrears) {
+    public void setLeaveArrears(Double leaveArrears) {
         this.leaveArrears = leaveArrears;
     }
 

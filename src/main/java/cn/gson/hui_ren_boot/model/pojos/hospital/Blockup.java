@@ -2,13 +2,14 @@ package cn.gson.hui_ren_boot.model.pojos.hospital;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class Blockup {
     private long blockupSeriald;//序号
     private String detailsMark;//详单号
-    private Timestamp blockupDate;//时间
+    private Date blockupDate;//时间
     private String staffName;//医生名
     private String registerId;//住院号
     private String blockupWhy;//停医原因
@@ -47,11 +48,11 @@ public class Blockup {
 
     @Basic
     @Column(name = "BLOCKUP_DATE")
-    public Timestamp getBlockupDate() {
+    public Date getBlockupDate() {
         return blockupDate;
     }
 
-    public void setBlockupDate(Timestamp blockupDate) {
+    public void setBlockupDate(Date blockupDate) {
         this.blockupDate = blockupDate;
     }
 

@@ -65,9 +65,9 @@
     </update>
     <!--新增-->
     <insert id="addDrug">
-        insert into DRUG_INFO(DRUG_SERIAL,DRUG_ID,DRUG_NAME,DRUG_TACK,DRUG_DOSAGE,SURPLUS_ID,DRUG_NEXT,TYPE_ID,DRUG_SMALL,DRUG_BIG,SUPPLIER_ID,DRUG_SELLING,PURCHASE_PRICE,DRUG_STATE)
+        insert into DRUG_INFO(DRUG_SERIAL,DRUG_ID,DRUG_NAME,DRUG_TACK,DRUG_DOSAGE,SURPLUS_ID,DRUG_NEXT,TYPE_ID,DRUG_SMALL,DRUG_BIG,SUPPLIER_ID,DRUG_SELLING,PURCHASE_PRICE,DRUG_STATE,DRUG_LIFE)
         values (seq_huiren.nextval,#{drugId},#{drugName},#{drugTack},#{drugDosage},#{standards.standardId},#{drugNext},#{types.typeId},
-                #{drugSmall},#{drugBig},#{suppliers.supplierId},#{drugSelling},#{purchasePrice},0)
+                #{drugSmall},#{drugBig},#{suppliers.supplierId},#{drugSelling},#{purchasePrice},0,12)
     </insert>
     <update id="upMange">
         update DRUG_INFO set DRUG_NAME=#{drugName},SUPPLIER_ID=#{suppliers.supplierId},

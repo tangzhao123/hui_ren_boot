@@ -22,7 +22,7 @@ public class LeaveController {
     public List<Register> allRegisters(@RequestBody Register register){//结算页面的查询
         return leaveService.allRegisters(register);
     }
-    @RequestMapping("/addLeaves")
+    @RequestMapping("/addLeaves")//出院结算
     public String addLeave(@RequestBody Leave leave){
         leaveService.addLeave(leave);
         return "ok";
