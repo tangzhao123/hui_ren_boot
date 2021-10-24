@@ -1,10 +1,15 @@
 package cn.gson.hui_ren_boot.controller.hospital;
 
+import cn.gson.hui_ren_boot.model.mapper.medical.ApplyrecordMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Additional;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Surgery;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.service.hospital.OperationService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +22,13 @@ import java.util.List;
 public class OperationController {
     @Autowired
     OperationService operationService;
+    @Autowired
+    ApplyrecordMapper applyrecordMapper;
     @RequestMapping("/attOpera")//查询手术项目表
-    private List<Additional> attOperation(){
-        return operationService.allOperation();
+    private Object attOperation(Integer pageNo, Integer size,String shu){
+        Additional inputboxs = JSONObject.toJavaObject(JSON.parseObject(shu), Additional.class);
+
+        return operationService.allOperationByPage(pageNo,size,inputboxs);
     }
     @RequestMapping("skkStaff")
     private List<Staff> allsStaff(@RequestBody Medical staffu){
@@ -58,6 +67,10 @@ public class OperationController {
             e.printStackTrace();
             return"fail";//异常判断新增失败
         }
+    }
+    @RequestMapping("allSurgery")
+    public List<Surgery> allSurgery(@RequestBody  Register register){//手术结果查询
+        return    applyrecordMapper.allSurgery(register);
     }
 
 }

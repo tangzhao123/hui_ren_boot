@@ -11,7 +11,7 @@
     <result column="HOSPITAL_DOCTOR" property="hospitalDoctor"/>
     <result column="HOSPITAL_STATE" property="hospitalState"/>
     <result column="HOSPITAL_CLINIC" property="hospitalClinic"/>
-    <association property="medicals" javaType="Medical">
+    <association property="medicalZy" javaType="Medical">
          <id column="MEDICAL_ID" property="medicalId"/>
         <result column="MEDICAL_NAME" property= "medicalName"/>
     </association>

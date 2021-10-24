@@ -1,7 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.hospital;
 
 public class Breakdown {//接收各记录表里的数据
-    private String   registerName;//患者住名
+    private String   registerPhone;//电话号码
     private String   registerId;//患者住院号
     private String   breakName;//扣费项目
     private double  breakMoney ;//扣费金额
@@ -10,19 +10,19 @@ public class Breakdown {//接收各记录表里的数据
     public Breakdown() {
     }
 
-    public Breakdown(String registerName, String registerId, String breakName, double breakMoney) {
-        this.registerName = registerName;
+    public Breakdown(String registerPhone, String registerId, String breakName, double breakMoney) {
+        this.registerPhone = registerPhone;
         this.registerId = registerId;
         this.breakName = breakName;
         this.breakMoney = breakMoney;
     }
 
-    public String getRegisterName() {
-        return registerName;
+    public String getRegisterPhone() {
+        return registerPhone;
     }
 
-    public void setRegisterName(String registerName) {
-        this.registerName = registerName;
+    public void setRegisterPhone(String registerPhone) {
+        this.registerPhone = registerPhone;
     }
 
     public String getRegisterId() {
@@ -52,7 +52,7 @@ public class Breakdown {//接收各记录表里的数据
     @Override
     public String toString() {
         return "Breakdown{" +
-                "registerName='" + registerName + '\'' +
+                "registerPhone='" + registerPhone + '\'' +
                 ", registerId='" + registerId + '\'' +
                 ", breakName='" + breakName + '\'' +
                 ", breakMoney=" + breakMoney +

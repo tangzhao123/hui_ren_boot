@@ -18,7 +18,7 @@ public class Hospital {
     private Long hospitalMedical;//科室编号
     private String  hospitalClinic;//诊疗卡
     private long hospitalState;//申请状态
-    private Medical medicals;//科室
+    private Medical medicalZy;//科室
 
     public Hospital(long hospitalId, String hospitalName, String hospitalSite, String hospitalCard) {
         this.hospitalId = hospitalId;
@@ -28,8 +28,8 @@ public class Hospital {
     }
 
     @OneToOne
-   public Medical getMedical() {
-      return medicals;
+   public Medical getMedicalZy() {
+      return medicalZy;
    }
 
     public Hospital(long hospitalId, String hospitalCause, String hospitalName, Date hospitalDate, String hospitalSite, String hospitalCard, long hospitalState) {
@@ -42,8 +42,8 @@ public class Hospital {
         this.hospitalState = hospitalState;
     }
 
-    public void setMedical(Medical medicals) {
-     this.medicals = medicals;
+    public void setMedicalZy(Medical medicalZy) {
+     this.medicalZy = medicalZy;
   }
 
     public Hospital() {

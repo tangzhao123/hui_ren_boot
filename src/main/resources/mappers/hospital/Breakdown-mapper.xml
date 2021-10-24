@@ -180,4 +180,18 @@
             </if>
         </where>
     </select>
+    <select id="allBreakdown" resultType="Breakdown">--联合查询费用总额
+    select  breakMoney,breakName,registerId,registerPhone from
+        (
+            select sum(sickbed_nursing) as breakMoney,'护理费' as breakName,register_id as registerId ,null as registerPhone from  hospitalcare group by register_id
+            union all
+            select sum(sickbed_cost) as breakMoney,'床位费' as breakName,register_id as registerId,null as registerPhone from hospitalcare group by register_id
+            union all
+            select sum(additional_money) as breakMoney,'手术费' as breakName,register_id as registerId ,null as registerPhone from applyrecord group by register_id
+            union all
+            select sum(prndebit_sum) as breakMoney ,'医嘱费' as breakName,register_id as registerId,null as registerPhone from prndebit  group by register_id
+            union all
+            select sum(debit_money) as breakMoney ,'检验费' as breakName,null as registerId,test_phone as registerPhone from inspect_debit  group by test_phone
+        )detail   where  breakMoney !=0 and registerId=#{registerId} or registerPhone=#{registerPhone}
+    </select>
 </mapper>

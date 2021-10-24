@@ -46,11 +46,6 @@ public class AdviceController {
                     p.setDaralisDstate(1L);
                     p.setDaralisMark(danhao);
                     System.out.println(p.getDetailsDrip());
-                    if(p.getDetailsDrip()==null){
-                        p.setDetailsDrip("null");
-                    }
-
-
                 }
                 adviceService.addAdvices(advice,detail);
                 return "ok";

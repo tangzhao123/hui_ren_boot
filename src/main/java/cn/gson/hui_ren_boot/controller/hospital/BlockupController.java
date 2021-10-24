@@ -71,8 +71,7 @@ public class BlockupController {
     private String addTests(@RequestBody Test test){//新增体检单和中间表
          try{
 
-        System.out.println(test);
-        System.out.println(test.getInspector());
+
               blockupService.addTest(test);
               return "ok";
          }catch(Exception e){

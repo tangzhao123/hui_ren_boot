@@ -19,6 +19,7 @@
     <select id="allRegisters" resultMap="lbRegister">--连表查询
         select *from register kl left join  treatment_card ca on kl.register_clinic=ca.treatment_no left join inform cs on cs.register_id=kl.register_id where kl.register_id=#{registerId}
     </select>
+
     <insert id="addLeave">--添加将出演登记表
         insert  into leave(leave_serial,leave_name,leave_date,leave_state,leave_arrears,register_id )values (seq_huiren.nextval,#{leaveName},current_timestamp,#{leaveState},#{leaveArrears},#{registerId})
     </insert>

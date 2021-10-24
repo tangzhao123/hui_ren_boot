@@ -62,7 +62,7 @@ public class HosptoalController {
     @RequestMapping("/allHospt")//查询分页
     public Object allHopsts(Integer pageNo, Integer size,String shuk){
         Hospital hop= JSONObject.toJavaObject(JSON.parseObject(shuk),Hospital.class);
-        return hospialService.allhosptialByPage(pageNo,size,hop);
+        return hospialService.allHosptialByPage(pageNo,size,hop);
     }
     @RequestMapping("/deHospot")//删除
     public String deHopspot(Integer hospitalId){

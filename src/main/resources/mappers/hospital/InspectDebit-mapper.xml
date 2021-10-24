@@ -5,6 +5,22 @@
 <insert id="addinsert">
     insert into inspect_debit(debit_id,debit_date,debit_money,debit_project,test_phone)values (seq_huiren.nextval,current_timestamp,#{debitMoney},#{debitProject},#{testPhone})
 </insert>
-
-
+<!--    删除体检单-->
+    <delete id="deText">
+        delete from test where test_account=#{testAccount}
+    </delete>
+<!--    删除中间表-->
+    <delete id="deTestmiddle">
+    delete  from testmiddle where test_account=#{testAccount}
+    </delete>
+<!-- 修改金额   -->
+    <update id="upTreatmentCard">
+        update  treatment_card set treatment_balance=treatment_balance+#{treatmentBalance} where treatment_card=#{treatmentCard}
+    </update>
+    <select id="allReistery" resultType="Register">
+        select *from  register where register_phone=#{testPhone}
+    </select>
+    <delete id="deInsert">
+        delete from  inspect_debit where test_phone=#{testPhone}
+    </delete>
 </mapper>
