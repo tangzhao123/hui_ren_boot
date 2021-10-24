@@ -19,6 +19,13 @@ public class ZhuYuanController {
     @Autowired
     ZhuYuanService service;
 
+    //查看检验接结果
+    @GetMapping("/look-zhu")
+    public List<Combinspection> lookresultzhu(String inspectionPhone){
+        return service.lookresultzhu(inspectionPhone);
+    }
+
+
     //新增检验结果
     @RequestMapping("/zy-spection")
     public String zyspection(@RequestBody Combinspection combinspection){
@@ -42,6 +49,7 @@ public class ZhuYuanController {
 
     @GetMapping("/zy-select")
     public Object zycomo(int pageNo, int size,String zhus){
+        System.err.println(zhus);
         Test test = JSONObject.parseObject(zhus,Test.class);
         return service.zycomoByPage(pageNo,size,test);
     }

@@ -4,6 +4,7 @@ import cn.gson.hui_ren_boot.model.mapper.medical.ZhuYuanMapper;
 import cn.gson.hui_ren_boot.model.pojos.medical.Combinspection;
 import cn.gson.hui_ren_boot.model.pojos.medical.Comboitem;
 import cn.gson.hui_ren_boot.model.pojos.medical.Test;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,11 @@ import java.util.List;
 public class ZhuYuanService {
     @Autowired
     ZhuYuanMapper mapper;
+
+    //查看检验结果
+    public List<Combinspection> lookresultzhu(String inspectionPhone){
+        return mapper.lookresultzhu(inspectionPhone);
+    }
 
     //修改体检的状态
     public void updateitem(String testAccount){

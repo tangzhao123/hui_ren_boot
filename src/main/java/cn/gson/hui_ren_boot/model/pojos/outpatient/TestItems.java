@@ -20,6 +20,7 @@ public class TestItems {
     private Medical medical;
     private OutpatientRegister outpatient;
     private List<Comboitem> comboitems;
+    private long itemState;
 
     @OneToOne
     public Staff getOutdoctor() {
@@ -107,6 +108,16 @@ public class TestItems {
 
     public void setItemsDate(Date itemsDate) {
         this.itemsDate = itemsDate;
+    }
+
+    @Basic
+    @Column(name = "ITEM_STATE")
+    public long getItemState() {
+        return itemState;
+    }
+
+    public void setItemState(long itemState) {
+        this.itemState = itemState;
     }
 
     @Override

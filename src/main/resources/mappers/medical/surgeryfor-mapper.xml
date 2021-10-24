@@ -5,7 +5,22 @@
 <!--    手术项目-->
 <!--    查询手术项目，没有安排手术室的,状态为0的-->
     <select id="selectFor" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor">
-        SELECT * FROM SURGERYFOR WHERE SURGERYFOR_STATE = 0
+        SELECT * FROM SURGERYFOR
+            <where>
+                <if test="registerName != null and registerName != ''">
+                    register_name like '%${registerName}%'
+                </if>
+                <if test="registerId != null and registerId != ''">
+                    or register_id like '%${registerId}%'
+                </if>
+                <if test="registerClinic != null and registerClinic != ''">
+                    or register_clinic like '%${registerClinic}%'
+                </if>
+                <if test="additionalName != null and additionalName != ''">
+                    or additional_name like '%${additionalName}%'
+                </if>
+                and SURGERYFOR_STATE = 0
+            </where>
     </select>
 <!--    查询手术室，0为未使用的，按照科室-->
     <select id="selectOperation" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Operation">

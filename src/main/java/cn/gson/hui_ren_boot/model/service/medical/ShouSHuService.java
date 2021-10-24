@@ -21,8 +21,8 @@ public class ShouSHuService {
     }
 
     //安排了手术室的
-    public List<Surgery> selshoushu(){
-        return mapper.selshoushu();
+    public Object selshoushuByPage(int pageNo,int size,Surgery surgery){
+        return mapper.selshoushu(surgery);
     }
 
     //新增手术结果

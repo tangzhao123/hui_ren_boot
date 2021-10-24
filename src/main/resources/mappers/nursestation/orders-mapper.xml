@@ -37,7 +37,6 @@
         SELECT * FROM REGISTER r LEFT JOIN STAFF s ON r.staff_id = s.staff_id
             LEFT JOIN MEDICAL m ON r.medical_id = m.medical_id
         <where>
-            r.sickbed_mark is not null
                 <if test="registerName != null and registerName != ''">
                    or r.register_name like '%${registerName}%'
                 </if>
@@ -53,6 +52,7 @@
 <!--                <if test="registerClinic != null  and registerClinic != ''">-->
 <!--                    or r.register_clinic = '%${registerClinic}%'-->
 <!--                </if>-->
+                and r.sickbed_mark is not null
             </where>
     </select>
 

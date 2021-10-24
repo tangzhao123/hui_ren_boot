@@ -10,6 +10,9 @@ import java.util.List;
 
 @Mapper
 public interface ZhuYuanMapper {
+    //查看检验结果
+    public List<Combinspection> lookresultzhu(@Param("inspectionPhone") String inspectionPhone);
+
     //修改体检的状态
     public void updateitem(String testAccount);
 

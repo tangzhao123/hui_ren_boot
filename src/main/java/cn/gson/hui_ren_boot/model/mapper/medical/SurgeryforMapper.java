@@ -21,7 +21,7 @@ public interface SurgeryforMapper {
     public void insertOpeart(Operation operation);
 
 //    查询状态为0的手术项目，为没有安排手术室的
-    public List<Surgeryfor> selectFor();
+    public List<Surgeryfor> selectFor(Surgeryfor surgeryfor);
 
 //    查询手术室，0为未使用的，根据科室名称
     public List<Operation> selectOperation(String medicalName);

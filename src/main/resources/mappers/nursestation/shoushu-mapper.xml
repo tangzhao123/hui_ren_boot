@@ -9,7 +9,24 @@
 
 <!--    查询安排了手术室-->
     <select id="selshoushu" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Surgery">
-        SELECT * FROM SURGERY WHERE SURGERY_RESULT is null
+        SELECT * FROM SURGERY
+            <where>
+                <if test="surgeryDoctor != null and surgeryDoctor != ''">
+                    or surgery_doctor like '%${surgeryDoctor}%'
+                </if>
+                <if test="surgeryName != null and surgeryName !=''">
+                    or surgery_name like '%${surgeryName}%'
+                </if>
+                <if test="registerId != null and registerId != ''">
+                    or register_id like '%${registerId}%'
+                </if>
+                <if test="surgeryOper != null and surgeryOper != ''">
+                    or surgery_oper like '%${surgeryOper}%'
+                </if>
+                <if test="surgeryLogist != null and surgeryLogist != ''">
+                    or surgery_logist like '%${surgeryLogist}%'
+                </if>
+            </where>
     </select>
 
 <!--    查询主刀医生-->
