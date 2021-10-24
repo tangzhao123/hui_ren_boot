@@ -1,5 +1,6 @@
 package cn.gson.hui_ren_boot.model.mapper.hospital;
 
+import cn.gson.hui_ren_boot.model.pojos.hospital.Breakdown;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Hospitalcare;
 import cn.gson.hui_ren_boot.model.pojos.hospital.InspectDebit;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
@@ -18,4 +19,5 @@ public interface BreakdownMapper {
     public List<InspectDebit>allInspectDebit(String register);//检验扣费查询
     public List<Applyrecord>allApplyrecord(String register);//手术扣费记录表查询
     public Register akkRegister(Register register);//患者查询
+    public List<Breakdown>allBreakdown(Breakdown breakdown);//联合查询费用详情
 }

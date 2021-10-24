@@ -13,7 +13,7 @@ public class HospialService {
     @Autowired
     HosptialMapper hosptialMapper;
 
-    public Object allhosptialByPage(Integer pageNo, Integer size, Hospital inputboxt){//分页查询
+    public Object allHosptialByPage(Integer pageNo, Integer size, Hospital inputboxt){//分页查询
             return hosptialMapper.allHosptial(inputboxt);
     }
     public Hospital allspital(String idCard){//出重

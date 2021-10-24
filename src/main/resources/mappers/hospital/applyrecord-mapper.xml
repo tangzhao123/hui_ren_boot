@@ -10,4 +10,7 @@
     <update id="uptApp">
         update treatment_card set treatment_balance=treatment_balance-#{treatmentBalance} where treatment_no=#{treatmentNo}
     </update>
+    <select id="allSurgery" resultType="Surgery">-- 查询手术结果
+        select*from surgery where register_id=#{registerId} and surgery_result is not null   order by hg.surgeryfor_date desc
+    </select>
 </mapper>

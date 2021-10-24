@@ -248,7 +248,7 @@
 <!--        select *from  medical  where medical_id=#{medicalId}-->
 <!--    </select>-->
     <select id="allRegister" resultType="Register">
-        select*from  register where registerId=#{registerId}
+        select*from  register where register_id=#{registerId}
     </select>
     <select id="allMedicals" resultType="Medical">
         select*from  medical where medical_name=#{medicalName}

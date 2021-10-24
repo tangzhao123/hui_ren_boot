@@ -53,18 +53,52 @@
 <!--    </insert>-->
     <insert id="addDetails" parameterType="java.util.List">
             insert all into details
-        <selectKey keyProperty="detailsSerial" resultType="_int" order="BEFORE">
+        <selectKey keyProperty="detailsSerial" resultType="_int" order="BEFORE" >
             select seq_huiren.nextval from dual
         </selectKey>
-        <foreach collection="detail" item="p" index="i" separator="">
+        <foreach collection="detail" item="p" index="i" separator="" >
             <if test="i!=detail.size()-1">
                 into details
                         (details_serial,drug_name,details_drip,datails_dosage,daralis_usage,daralis_time,advice_id,daralis_dstate,daralis_disable,daralis_start,daralis_price,daralis_number,standard_use,daralis_mark,register_id,details_money,drug_recipe,standard_name)
-                values(#{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},#{p.standardUse},#{p.daralisMark},#{p.registerId},#{p.detailsMoney},#{p.drugRecipe},#{p.standardName})
+                values(#{detailsSerial},
+                       #{p.drugName},
+                       #{p.detailsDrip,jdbcType=VARCHAR},
+                       #{p.datailsDosage,jdbcType=VARCHAR},
+                       #{p.daralisUsage,jdbcType=VARCHAR},
+                       #{p.daralisTime,jdbcType=VARCHAR},
+                       #{p.adviceId},
+                       #{p.daralisDstate,jdbcType=VARCHAR},
+                       #{p.daralisDisable,jdbcType=VARCHAR},
+                       #{p.daralisStart,jdbcType=VARCHAR},
+                       #{p.daralisPrice},
+                       #{p.daralisNumber,jdbcType=VARCHAR},
+                       #{p.standardUse},
+                       #{p.daralisMark},
+                       #{p.registerId},
+                       #{p.detailsMoney},
+                       #{p.drugRecipe},
+                       #{p.standardName})
             </if>
             <if test="i==detail.size()-1">
-                select #{detailsSerial},#{p.drugName},#{p.detailsDrip},#{p.datailsDosage},#{p.daralisUsage},#{p.daralisTime},#{p.adviceId},#{p.daralisDstate},#{p.daralisDisable},#{p.daralisStart},#{p.daralisPrice},#{p.daralisNumber},
-               #{p.standardUse},#{p.daralisMark},#{p.registerId},#{p.detailsMoney},#{p.drugRecipe},#{p.standardName} from dual
+                select #{detailsSerial},
+                       #{p.drugName},
+                       #{p.detailsDrip,jdbcType=VARCHAR},
+                       #{p.datailsDosage,jdbcType=VARCHAR},
+                       #{p.daralisUsage,jdbcType=VARCHAR},
+                       #{p.daralisTime,jdbcType=VARCHAR},
+                       #{p.adviceId},
+                       #{p.daralisDstate,jdbcType=VARCHAR},
+                       #{p.daralisDisable,jdbcType=VARCHAR},
+                       #{p.daralisStart,jdbcType=VARCHAR},
+                       #{p.daralisPrice},
+                       #{p.daralisNumber,jdbcType=VARCHAR},
+                       #{p.standardUse},
+                       #{p.daralisMark},
+                       #{p.registerId},
+                       #{p.detailsMoney},
+                       #{p.drugRecipe},
+                       #{p.standardName}
+                       from dual
             </if>
         </foreach>
     </insert>

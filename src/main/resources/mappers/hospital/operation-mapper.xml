@@ -5,6 +5,13 @@
     <!--查询手术室表只要没在手术中的-->
     <select id="allOperation" resultType="Additional">
         select *from additional
+        <where>
+
+                <if test="additionalName != null and '' != additionalName">
+                    or additional_name like '%${additionalName}%'
+                </if>
+
+        </where>
     </select>
     <!--查询员工表-->
     <select id="allStaff" resultType="Staff">
@@ -23,7 +30,12 @@
     <select id="allSurgeryfor" resultType="Surgeryfor">
         select*from surgeryfor where register_id=#{registerId}
     </select>
+<!--    删除申请表-->
     <delete id="deleteSurgeryfor">
         delete from surgeryfor where surgeryfor_id=#{surgeryforId}
+    </delete>
+<!--    删除手术记录表-->
+    <delete id="deApplyrecord">
+        delete from applyrecord where apply_time=#{surgeryforDate} and additional_name=#{additionalName}
     </delete>
 </mapper>
