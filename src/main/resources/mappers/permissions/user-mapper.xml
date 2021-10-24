@@ -18,7 +18,7 @@
     </resultMap>
     <!-- 登录 -->
     <select id="allUser" resultMap="userMapper">
-        select * from user_info us inner join staff s on us.staff_id = s.staff_id inner join medical me on s.medical_id = me.medical_id  where us.user_name = #{userName} and us.user_possword = #{userPossword} and s.staff_state = 0
+        select * from user_info us inner join staff s on us.staff_id = s.staff_id inner join medical me on s.medical_id = me.medical_id  where us.user_name = #{userName}  and s.staff_state = 0
     </select>
 
     <!-- 新增用户 -->

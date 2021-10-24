@@ -46,8 +46,7 @@ public class GoBankController {
             start = sf.format(goBank.getStr());
             end = sf.format(goBank.getStr1());
         }
-        List<GoBank> allGoBank = goBankService.findAllGoBank(start, end, goBank.getSearch());
-        return allGoBank;
+        return goBankService.findAllGoBank(start, end, goBank.getSearch());
     }
 
     //根据出库单号查询出库详单

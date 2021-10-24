@@ -46,31 +46,9 @@ public class StaffController {
     //新增用户和员工
     @RequestMapping("add-staff")
     public String addStaff(@RequestBody Staff staff){
-
-        Long staffId = Long.valueOf(staff.getStaffId());
-        String staffName = staff.getStaffName();
-        Long staffPhone =Long.valueOf(staff.getStaffPhone());
-        Long sectionId = Long.valueOf(staff.getSectionName());
-        Long medicalId = Long.valueOf(staff.getMedicalName());
-        Long rankId = Long.valueOf(staff.getRankName());
-
-        String userName = staff.getUserName();
-        String passWord = staff.getPassWord();
-        String staffCard = staff.getStaffCard();
-        Staff staffs = new Staff();
-        staffs.setStaffName(staffName);
-        staffs.setStaffPhone(staffPhone);
-        staffs.setSectionId(sectionId);
-        staffs.setMedicalId(medicalId);
-        staffs.setRankId(rankId);
-        staffs.setStaffCard(staffCard);
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUserName(userName);
-        userInfo.setUserPossword(passWord);
-
-
+        System.err.println(staff);
         try {
-            staffService.addStaff(userInfo,staffs);
+            staffService.addStaff(staff);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,33 +59,8 @@ public class StaffController {
     //修改员工和用户
     @RequestMapping("update-staff")
     public String updateStaff(@RequestBody Staff staff){
-
-        Long userId = Long.valueOf(staff.getUserId());
-        Long staffId = Long.valueOf(staff.getStaffId());
-        String staffName = staff.getStaffName();
-        Long staffPhone =Long.valueOf(staff.getStaffPhone());
-
-        Long sectionId = Long.valueOf(staff.getSectionName());
-        Long medicalId = Long.valueOf(staff.getMedicalName());
-        Long rankId = Long.valueOf(staff.getRankName());
-        String userName = staff.getUserName();
-        String passWord = staff.getPassWord();
-        String staffCard = staff.getStaffCard();
-        Staff staffs = new Staff();
-        staffs.setStaffId(staffId);
-        staffs.setStaffName(staffName);
-        staffs.setStaffPhone(staffPhone);
-        staffs.setSectionId(sectionId);
-        staffs.setMedicalId(medicalId);
-        staffs.setRankId(rankId);
-        staffs.setStaffCard(staffCard);
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUserId(userId);
-        userInfo.setUserName(userName);
-        userInfo.setUserPossword(passWord);
-
         try {
-            staffService.updateStaff(userInfo,staffs);
+            staffService.updateStaff(staff);
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();

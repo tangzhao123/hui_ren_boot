@@ -1,8 +1,10 @@
 package cn.gson.hui_ren_boot.model.service.drug;
 
+import cn.gson.hui_ren_boot.model.mapper.drug.CorrectionMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.DrugCheckMapper;
 import cn.gson.hui_ren_boot.model.mapper.drug.InventoryMapper;
 import cn.gson.hui_ren_boot.model.pojos.permissions.CheckInfo;
+import cn.gson.hui_ren_boot.model.pojos.pharmacy.Correction;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.DrugCheck;
 import cn.gson.hui_ren_boot.model.pojos.pharmacy.Inventory;
 import cn.gson.hui_ren_boot.model.service.permissions.CheckInfoService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,10 +28,22 @@ public class DrugCheckService {
     @Autowired
     CheckInfoService checkInfoService;
 
+    @Autowired
+    CorrectionMapper correctionMapper;
+
     //新增盘点表跟盘点详情表
     public void addDrugCheck(DrugCheck drugCheck){
         drugCheckMapper.addDrugCheck(drugCheck);
         inventoryMapper.addInventory(drugCheck.getInventoryData(),drugCheck.getCheckNo());
+        List<Correction> corrections = new ArrayList<>();
+        drugCheck.getInventoryData().forEach(d->{
+            if(d.getInventoryKnum()!=0){
+                corrections.add(new Correction(d.getInventoryDrug(),d.getInventoryBatch(),d.getInventorySum().intValue(),d.getInventoryKnum().intValue(),(d.getInventorySum().intValue()-Math.abs(d.getInventoryKnum().intValue()))));
+            }
+        });
+        corrections.forEach(c->{
+            correctionMapper.addCorrection(c);
+        });
     }
 
 

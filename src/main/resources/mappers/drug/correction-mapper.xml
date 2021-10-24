@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.drug.CorrectionMapper">
+
+    <!-- 新增库存修正记录表 -->
+    <insert id="addCorrection">
+        insert into correction values (seq_huiren.nextval,#{drugId},#{stockBatch},#{stockNumber},#{correctionNumber},#{stockNum},current_date )
+    </insert>
+
+    <!-- 查询库存修正记录 -->
+    <select id="findAllCorrection" resultType="cn.gson.hui_ren_boot.model.pojos.pharmacy.Correction">
+        select * from correction co
+        left join drug_info dr on co.drug_id = dr.drug_id
+        <where>
+            <if test="start !=null and start !='' and end != null and end != ''">
+                to_char(co.correction_date,'yyyy-MM-dd') between #{start} and #{end}
+            </if>
+            <if test="search != null and search != ''">
+                and co.stock_batch like '%${search}%' or co.drug_id like '%${search}%' or dr.drug_name like '%${search}%'
+            </if>
+        </where>
+        order by co.correction_date
+    </select>
+</mapper>
