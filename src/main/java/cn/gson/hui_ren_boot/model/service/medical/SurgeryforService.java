@@ -33,8 +33,8 @@ public class SurgeryforService {
     }
 
     //    查询状态为0的手术项目，为没有安排手术室的
-    public List<Surgeryfor> selectFor(){
-        return surygeryforMapper.selectFor();
+    public Object selectForByPage(int pageNo,int size,Surgeryfor surgeryfor){
+        return surygeryforMapper.selectFor(surgeryfor);
     }
 
     //    查询手术室，0为未使用的，根据科室名称

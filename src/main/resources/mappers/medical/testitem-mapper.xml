@@ -2,12 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.TestItemMapper">
+<!--    查看门诊检验的结果-->
+    <select id="kanmen" resultType="cn.gson.hui_ren_boot.model.pojos.medical.TestResult">
+        SELECT * FROM TEST_RESULT tr LEFT JOIN TEST_ITEMS ti ON tr.result_number = ti.test_number WHERE tr.result_number = #{resultNumber}
+    </select>
     <resultMap id="selAll" type="cn.gson.hui_ren_boot.model.pojos.outpatient.TestItems">
         <id property="testId" column="TEST_ID"></id>
         <result property="testNumber" column="TEST_NUMBER"></result>
         <result property="recordsNo" column="RECORDS_NO"></result>
         <result property="testSumtotal" column="TEST_SUMTOTAL"></result>
         <result property="itemsDate" column="ITEMS_DATE"></result>
+        <result property="itemState" column="item_state"></result>
         <association property="outdoctor" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.Staff">
             <id property="staffId" column="STAFF_ID"></id>
             <result property="staffName" column="STAFF_NAME"></result>
@@ -32,13 +37,14 @@
         SELECT * FROM TEST_ITEMS ti LEFT JOIN STAFF st ON ti.STAFF_ID = st.STAFF_ID LEFT JOIN MEDICAL me ON ti.MEDICAL_ID = me.MEDICAL_ID
         LEFT JOIN OUTPATIENT_REGISTER re ON ti.OUTPATIENT_ID = re.OUTPATIENT_ID
             <where>
-                 ti.RECORDS_NO NOT IN (SELECT RECORDS_NO FROM TEST_RESULT)
                 <if test="testNumber != null and testNumber != ''">
                    or TEST_NUMBER like '%${testNumber}%'
                 </if>
                 <if test="recordsNo != null and recordsNo != ''">
                    or RECORDS_NO like '%${recordsNo}%'
                 </if>
+                and ti.item_state = 0
+                or ti.item_state = 1
             </where>
     </select>
 

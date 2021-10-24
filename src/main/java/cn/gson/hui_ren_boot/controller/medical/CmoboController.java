@@ -30,7 +30,7 @@ public class CmoboController {
     //查询套餐里面的项目
     @GetMapping("select-All")
     public List<Comboitem> selectAll(String comboSerial){
-        System.out.println("套餐编号："+comboSerial);
+//        System.out.println("套餐编号："+comboSerial);
         return cmoboSerivice.selectAll(comboSerial);
     }
 
@@ -46,6 +46,7 @@ public class CmoboController {
                 Combomiddle combomiddle = new Combomiddle();//中间表
                 //拿到选中的项目的编号
                 String idss = map.get("idss").toString();
+                System.out.println("选择的项目："+idss);
                 String str[] = idss.split(",");
                 Long money = Long.valueOf(0);
                 for (String s: str) {
@@ -53,22 +54,18 @@ public class CmoboController {
                         int o = Integer.valueOf(s);
                         combomiddle.setComboSerial(serial);
                         combomiddle.setItemId(o);
-                        System.out.println("项目编号：" + o);
                         List<Comboitem> selecitem = comboitemService.selecitem(Long.valueOf(s));
                         for (Comboitem cc: selecitem) {
                             System.out.println("价格："+cc.getItemMoney());
                             money += cc.getItemMoney();
                         }
                         cmoboSerivice.addMiddle(combomiddle);
-                        c.setComboMoney(money);
                     }
-                    cmoboSerivice.addCmobo(c);//新增套餐
+                    c.setComboMoney(money);
                 }
-
+                cmoboSerivice.addCmobo(c);//新增套餐
             }
             System.out.println("套餐名称："+c.toString());
-
-
             return "ok";
         }catch (Exception e) {
             e.printStackTrace();

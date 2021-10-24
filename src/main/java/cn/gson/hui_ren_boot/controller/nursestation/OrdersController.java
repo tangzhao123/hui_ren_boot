@@ -111,6 +111,7 @@ public class OrdersController {
     //查询病人
     @GetMapping("/all-order")
     public List<Register> allBing(String chaxun){
+        System.out.println("查询："+chaxun);
         Register r = JSONObject.parseObject(chaxun,Register.class);
         System.out.println("bingren:"+ordersService.allBing(r));
         return ordersService.allBing(r);

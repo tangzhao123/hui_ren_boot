@@ -16,7 +16,7 @@ public interface ShouShuMapper {
     public void xiushoushu(@Param("surgeryFinish") Timestamp surgeryFinish, @Param("surgeryResult") String surgeryResult, @Param("registerId") String registerId);
 
     //安排了手术室的
-    public List<Surgery> selshoushu();
+    public List<Surgery> selshoushu(Surgery surgery);
 
     //新增手术结果
     public void addshoushu(Surgery surgery);

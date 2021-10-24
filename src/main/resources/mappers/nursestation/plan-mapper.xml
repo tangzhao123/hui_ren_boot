@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.hui_ren_boot.model.mapper.nursestation.PlanMapper">
+    <resultMap id="allsBingren" type="cn.gson.hui_ren_boot.model.pojos.hospital.Register">
+        <id column="REGISTER_SERICA" property="registerSerica"/>
+        <result column="REGISTER_ID" property="registerId"/>
+        <result column="REGISTER_DATE" property="registerDate"/>
+        <result column="REGISTER_NAME" property="registerName"/>
+        <result column="REGISTER_SEX" property="registerSex"/>
+        <result column="REGISTER_SITE" property="registerSite"/>
+        <result column="REGISTER_CARD" property="registerCard"/>
+        <result column="REGISTER_PRINT" property="registerPrint"/>
+        <result column="REGISTER_AGE" property="registerAge"/>
+        <result column="REGISTER_HOME" property="registerHome"/>
+        <result column="REGISTER_ADDRESS" property="registerAddress"/>
+        <result column="REGISTER_PHONE" property="registerPhone"/>
+        <result column="REGISTER_RELATION" property="registerRelation"/>
+        <result column="REGISTER_CONTACT" property="registerContact"/>
+        <result column="REGISTER_CALL" property="registerCall"/>
+        <result column="REGISTER_RECORD" property="registerRecord"/>
+        <result column="REGISTER_CLINIC" property="registerClinic"/>
+        <result column="SICKBED_MARK" property="sickbedMark"/>
+        <!--        科室-->
+        <association property="medical" javaType="Medical">
+            <id column="MEDICAL_ID" property="medicalId"/>
+            <result column="MEDICAL_NAME" property="medicalName"/>
+        </association>
+        <association property="staff" javaType="Staff" >
+            <id column="STAFF_ID" property="staffId"/>
+            <result column="STAFF_NAME" property="staffName"/>
+        </association>
+<!--        <association property="sickbed" javaType="Sickbed">-->
+<!--            <id column="SICKBED_ID" property="sickbedId"/>-->
+<!--            <result column="SICKBED_MARK" property="sickbedMark"/>-->
+<!--            <result column="WARD_MARK" property="wardMark"/>-->
+<!--        </association>-->
+    </resultMap>
+<!--    查询住院的病人并且床位位空的-->
+    <select id="chabing" resultMap="allsBingren">
+        SELECT * from REGISTER r LEFT JOIN MEDICAL m on r.MEDICAL_ID = m.MEDICAL_ID
+            LEFT JOIN staff s on r.STAFF_ID = s.STAFF_ID
+            <where>
+                <if test="registerId != null and registerId != ''">
+                    or r.REGISTER_ID like '%${registerId}%'
+                </if>
+                <if test="registerName != null and registerName != ''">
+                    or r.REGISTER_NAME like '%${registerName}%'
+                </if>
+<!--                <if test="medicalName != null and medicalName != ''">-->
+<!--                    or m.MDICAL_NAME = #{medicalName}-->
+<!--                </if>-->
+                and REGISTER_STATE = 0
+            </where>
+    </select>
+
+
+    <resultMap id="selSickss" type="cn.gson.hui_ren_boot.model.pojos.nursestation.SickbedEntity">
+        <id property="sickbedSerial" column="SICKBED_SERIAL"/>
+        <result property="sickbedMark" column="SICKBED_MARK"/>
+        <result property="sickbedState" column="SICKBED_STATE"/>
+        <association property="wardEntity" javaType="cn.gson.hui_ren_boot.model.pojos.nursestation.WardEntity">
+            <id property="wardId" column="WARD_ID"/>
+            <result property="wardMark" column="WARD_MARK"/>
+            <!--            <result property="medicalId" column="MEDICAL_ID"/>-->
+            <result property="staffId" column="STAFF_ID"/>
+            <result property="wardSite" column="WARD_SITE"/>
+            <result property="wardBeds" column="WARD_BEDS"/>
+            <result property="wardHave" column="WARD_HAVE"/>
+            <result property="wardCost" column="WARD_COST"/>
+            <result property="wardNursing" column="WARD_NURSING"/>
+            <association property="medical" javaType="cn.gson.hui_ren_boot.model.pojos.permissions.Medical">
+                <id property="medicalId" column="MEDICAL_ID"/>
+                <result property="medicalName" column="MEDICAL_NAME"/>
+                <result property="medicalSublevel" column="MEDICAL_SUBLEVEL"/>
+            </association>
+        </association>
+    </resultMap>
+<!--    根据病人所在的科室查询病床-->
+    <select id="chabedss" resultMap="selSickss">
+        SELECT * FROM SICKBED si LEFT JOIN WARD wr ON si.ward_mark = wr.ward_mark LEFT JOIN MEDICAL me ON wr.medical_id = me.medical_id
+            WHERE me.medical_id = #{medicalId} and si.sickbed_state = 0
+    </select>
+
+    <!--    新增病床使用记录-->
+    <insert id="xinRecord" >
+        insert into record(RECORD_ID,RECORD_SERIAL,SICKBED_MARK,RECORD_NAME,RECORD_DATE,RECORD_STATE,REGISTER_ID)
+        values(seq_huiren.nextval,#{recordSerial},#{sickbedMark},#{recordName},current_timestamp ,1,#{registerId})
+    </insert>
+
+<!--    查询病床记录-->
+    <select id="chaRecords" resultType="cn.gson.hui_ren_boot.model.pojos.hospital.Record">
+        SELECT * FROM RECORD WHERE register_id = #{registerId}
+    </select>
+
+<!--    修改病床记录，的床位根据病床记录-->
+    <update id="xinRecordupdate">
+        UPDATE RECORD SET SICKBED_MARK = #{sickbedMark} where register_id = #{registerId}
+    </update>
+
+<!--    修改病人资料-->
+    <update id="xinupdateRegister">
+        UPDATE REGISTER set sickbed_mark = #{sickbedMark} where register_id = #{registerId}
+    </update>
+
+    <!--    调换病床后秀给病床的状态-->
+    <update id="xinupdateTwo">
+        UPDATE SICKBED set sickbed_state = 1 where sickbed_mark = #{sickbedMark}
+    </update>
+
+    <!--    调换病床后秀给病床的状态-->
+    <update id="xinupdateOne">
+        UPDATE SICKBED set sickbed_state = 0 where sickbed_mark = #{sickbedMark}
+    </update>
+</mapper>

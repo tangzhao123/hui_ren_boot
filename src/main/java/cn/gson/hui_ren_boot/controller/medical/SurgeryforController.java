@@ -60,9 +60,11 @@ public class SurgeryforController {
 
     //    查询状态为0的手术项目，为没有安排手术室的*************
     @GetMapping("/select-for")
-    public List<Surgeryfor> selectFor(){
-//        System.out.println(surgeryforService.selectFor());
-        return surgeryforService.selectFor();
+    public Object selectFor(int pageNo,int size,String surgerfors){
+        Surgeryfor surgeryfor = JSONObject.parseObject(surgerfors,Surgeryfor.class);
+        System.out.println("查看："+pageNo);
+        System.out.println(size);
+        return surgeryforService.selectForByPage(pageNo,size,surgeryfor);
     }
 
     //    查询手术室，0为未使用的，根据科室名称选择

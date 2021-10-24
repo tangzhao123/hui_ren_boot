@@ -5,6 +5,7 @@ import cn.gson.hui_ren_boot.model.pojos.outpatient.TestDetail;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TestItems;
 import cn.gson.hui_ren_boot.model.service.medical.TestItemsService;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,14 @@ import java.util.List;
 public class TestItemsController {
     @Autowired
     TestItemsService itemsService;
+
+    //查看结果
+    @GetMapping("/cha-kan")
+    //查看结果
+    public List<TestResult> kanmen(String resultNumber){
+        System.err.println("检验好"+resultNumber);
+        return itemsService.kanmen(resultNumber);
+    }
 
     //检查结果
     @RequestMapping("/result-add")

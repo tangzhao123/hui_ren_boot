@@ -4,6 +4,7 @@ import cn.gson.hui_ren_boot.model.pojos.hospital.Surgery;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
 import cn.gson.hui_ren_boot.model.service.medical.ShouSHuService;
 import cn.gson.hui_ren_boot.model.service.medical.SurgeryforService;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,9 @@ public class ShouShuController {
 
     //安排了手术室的
     @GetMapping("/sel-shoushu")
-    public List<Surgery> selshoushu(){
-        return service.selshoushu();
+    public Object selshoushu(int pageNo,int size,String suoger){
+        Surgery surgery = JSONObject.parseObject(suoger,Surgery.class);
+        return service.selshoushuByPage(pageNo,size,surgery);
     }
 
     //新增手术结果
