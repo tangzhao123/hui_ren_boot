@@ -24,6 +24,7 @@
     </insert>
     <select id="allChange" resultType="change">--查询
             select *from change where change_state=0
+            order by change_date desc
     </select>
     <delete id="deChange">--删除
         delete from change where change_id=#{changeId}
@@ -43,6 +44,6 @@
             </if>
             change_state=0
         </where>
-
+        order by change_date desc
     </select>
 </mapper>

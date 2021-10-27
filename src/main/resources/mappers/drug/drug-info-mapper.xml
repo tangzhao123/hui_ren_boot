@@ -139,18 +139,18 @@
                left join DRUG_STOCK dk on di.DRUG_ID=dk.DRUG_ID
         <where>
             <if test="drugId != null and '' !=drugId">
-                and di.DRUG_ID like '%${drugId}%'
+                or di.DRUG_ID like '%${drugId}%'
             </if>
             <if test="drugName != null and '' !=drugName">
-                and di.DRUG_NAME like '%${drugName}%'
+                or di.DRUG_NAME like '%${drugName}%'
             </if>
             <if test="types != null">
                 <if test="types.typeId != null and '' !=types.typeId">
                     and di.type_id =#{types.typeId}
                 </if>
             </if>
-           <if test="drugState == 1">
-               and di.drug_state = 1
+           <if test="drugState == 0">
+               and di.drug_state = 0
            </if>
         </where>
         GROUP BY dk.drug_id

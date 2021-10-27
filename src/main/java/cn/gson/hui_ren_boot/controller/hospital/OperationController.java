@@ -72,5 +72,9 @@ public class OperationController {
     public List<Surgery> allSurgery(@RequestBody  Register register){//手术结果查询
         return    applyrecordMapper.allSurgery(register);
     }
+    @RequestMapping("allSurgeryfor2")
+    public List<Surgery>allSurgeryfor2(@RequestBody Surgery surgery){
+        return operationService.allSurgeryfor2(surgery);
+    }
 
 }

@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.pojos.medical;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Test {
     private long testId;
     private String testName;

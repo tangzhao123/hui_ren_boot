@@ -225,10 +225,13 @@
     <!--查询诊疗卡余额 -->
     <select id="selRecharge" resultType="TreatmentCard">
         select*from TREATMENT_CARD where TREATMENT_NO=#{treatmentNo}
+
+
     </select>
-    <!--查询诊疗卡 -->
+    <!--查询充值记录 -->
     <select id="selseRecharge" resultType="TreatmentRecharge">
         select*from treatment_recharge where treatment_no=#{treatmentNo}
+        order by recharge_time desc
     </select>
 <!--    查询排班表-->
     <select id="chaArrange" resultType="Arrange">
@@ -253,4 +256,5 @@
     <select id="allMedicals" resultType="Medical">
         select*from  medical where medical_name=#{medicalName}
     </select>
+
 </mapper>

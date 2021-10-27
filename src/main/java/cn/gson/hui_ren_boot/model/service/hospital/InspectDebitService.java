@@ -19,7 +19,7 @@ public class InspectDebitService {
         inspectDebitMapper.deTestmiddle(test.getTestAccount());//删除体检单中间表
         Register m= inspectDebitMapper.allReistery(test.getTestPhone());//通过电话号码查询就诊卡号
         TreatmentCard l=new TreatmentCard();//新建就诊卡实体类赋值
-        l.setTreatmentCard(m.getRegisterClinic());
+        l.setTreatmentNo(m.getRegisterClinic());
         l.setTreatmentBalance(test.getTestMoney());
         inspectDebitMapper.upTreatmentCard(l);//修改就诊卡金额
         inspectDebitMapper.deInsert(test.getTestPhone());//删除检验扣费记录

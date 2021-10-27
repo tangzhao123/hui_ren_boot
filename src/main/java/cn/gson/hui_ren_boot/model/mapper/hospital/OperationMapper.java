@@ -1,6 +1,7 @@
 package cn.gson.hui_ren_boot.model.mapper.hospital;
 
 import cn.gson.hui_ren_boot.model.pojos.hospital.Additional;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Surgery;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Medical;
 import cn.gson.hui_ren_boot.model.pojos.permissions.Staff;
@@ -18,4 +19,5 @@ public interface OperationMapper {
     public List<Surgeryfor> allSurgeryfor(Surgeryfor surgeryfor);//查询手术申请
     public void deleteSurgeryfor(Surgeryfor surgeryfor);//删除手术申请
     public void deApplyrecord(Surgeryfor surgeryfor);//删除手术记录
+    public List<Surgery>allSurgeryfor2(Surgery surgery);//查询手术结果
 }

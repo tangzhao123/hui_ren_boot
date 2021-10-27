@@ -32,8 +32,9 @@ public class ShouShuController {
            String surgeryFinish = map.get("surgeryFinish").toString();
            String surgeryResult = map.get("surgeryResult").toString();
            String registerId = map.get("registerId").toString();
-
+           String shou = map.get("ss").toString();
            service.xiushoushu(Timestamp.valueOf(surgeryFinish),surgeryResult,registerId);
+           surgeryfor.updateOperations(shou);//执行手术后修改手术室的状态
            return "ok";
        }catch (Exception e){
            e.printStackTrace();

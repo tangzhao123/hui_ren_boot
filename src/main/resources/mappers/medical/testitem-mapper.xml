@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gson.hui_ren_boot.model.mapper.medical.TestItemMapper">
+<!--    修改门诊检验了的，以便查看-->
+    <update id="updateSee">
+        UPDATE TEST_ITEMS SET ITEM_STATE = 0 WHERE RECORDS_NO = #{recordsNo}
+    </update>
+
 <!--    查看门诊检验的结果-->
     <select id="kanmen" resultType="cn.gson.hui_ren_boot.model.pojos.medical.TestResult">
         SELECT * FROM TEST_RESULT tr LEFT JOIN TEST_ITEMS ti ON tr.result_number = ti.test_number WHERE tr.result_number = #{resultNumber}

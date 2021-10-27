@@ -23,6 +23,8 @@ public class TestItemsService {
     //检验结果
     public void addresult(TestResult result){
         itemsMapper.addresult(result);
+        //修改状态
+        itemsMapper.updateSee(result.getRecordsNo());
     }
 
     //查询检验的项目，根据检验号

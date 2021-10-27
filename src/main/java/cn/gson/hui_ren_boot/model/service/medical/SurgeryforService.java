@@ -47,6 +47,11 @@ public class SurgeryforService {
         surygeryforMapper.updateOperation(operationId);
     }
 
+    //执行手术后修改手术室的使用状态
+    public void updateOperations(String operationId){
+        surygeryforMapper.updateOperations(operationId);
+    }
+
     //    修改病人手术状态为1，已安排手术室，根据住院号进行修改
     public void updateFor(String registerId){
         surygeryforMapper.updateFor(registerId);

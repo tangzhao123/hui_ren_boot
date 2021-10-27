@@ -6,6 +6,7 @@ import cn.gson.hui_ren_boot.model.mapper.hospital.RegisterMapper;
 import cn.gson.hui_ren_boot.model.mapper.medical.ApplyrecordMapper;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Additional;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Register;
+import cn.gson.hui_ren_boot.model.pojos.hospital.Surgery;
 import cn.gson.hui_ren_boot.model.pojos.hospital.Surgeryfor;
 import cn.gson.hui_ren_boot.model.pojos.medical.Applyrecord;
 import cn.gson.hui_ren_boot.model.pojos.outpatient.TreatmentCard;
@@ -49,23 +50,28 @@ public class OperationService {
         applyrecord.setRegisterId(surgeryfor.getRegisterId());//住院号
         applyrecord.setRegisterName(surgeryfor.getRegisterName());//患者名
         applyrecordmapper.insertApp(applyrecord); //新增手术扣费单
-        applyrecordmapper.uptApp(surgeryfor.getAdditionalMoney(),surgeryfor.getAdditionalBlade()); //诊疗卡余额
+        applyrecordmapper.uptApp(surgeryfor.getAdditionalMoney(),surgeryfor.getRegisterClinic()); //诊疗卡余额
         }
     public List<Surgeryfor> allSurgeryfor(Surgeryfor surgeryfor){
         return operationMapper.allSurgeryfor(surgeryfor);
     }
     public void deleteSurgeryfor(Surgeryfor surgeryfor){
+        System.out.println(surgeryfor);
         //删除手术申请
         operationMapper.deleteSurgeryfor(surgeryfor);
         //查询诊疗卡
         Register m= registerMapper.allRegister(surgeryfor.getRegisterId());
+        System.out.println(m);
         //删除手术扣费记录
         operationMapper.deApplyrecord(surgeryfor);
         //修改金额
         TreatmentCard l=new TreatmentCard();//新建就诊卡实体类赋值
-        l.setTreatmentCard(m.getRegisterClinic());
+        l.setTreatmentNo(m.getRegisterClinic());
         l.setTreatmentBalance(surgeryfor.getAdditionalMoney());
         inspectDebitMapper.upTreatmentCard(l);//修改就诊卡金额
 
+    }
+    public List<Surgery>allSurgeryfor2(Surgery surgery){//查询手术结果
+       return operationMapper.allSurgeryfor2(surgery);
     }
 }

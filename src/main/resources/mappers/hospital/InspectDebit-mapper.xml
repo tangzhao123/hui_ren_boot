@@ -15,7 +15,7 @@
     </delete>
 <!-- 修改金额   -->
     <update id="upTreatmentCard">
-        update  treatment_card set treatment_balance=treatment_balance+#{treatmentBalance} where treatment_card=#{treatmentCard}
+        update  treatment_card set treatment_balance=treatment_balance+#{treatmentBalance} where treatment_no=#{treatmentNo}
     </update>
     <select id="allReistery" resultType="Register">
         select *from  register where register_phone=#{testPhone}

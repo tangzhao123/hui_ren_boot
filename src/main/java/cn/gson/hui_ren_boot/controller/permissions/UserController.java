@@ -23,8 +23,12 @@ public class UserController {
     @PostMapping("/login")
     public Object login(@RequestBody UserInfo user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserInfo info = userService.login(user);
-        if(MD5.validPassword(user.getUserPossword(),info.getUserPossword())){
-            return info;
+        if(info != null){
+            if(MD5.validPassword(user.getUserPossword(),info.getUserPossword())){
+                return info;
+            }else{
+                return "fail";
+            }
         }else{
             return "fail";
         }

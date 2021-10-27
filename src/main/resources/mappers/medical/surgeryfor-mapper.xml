@@ -39,6 +39,11 @@
         UPDATE OPERATION SET OPERATION_SITE = 1 WHERE OPERATION_ID = #{operationId}
     </update>
 
+<!--    执行手术后修改手术室的状态-->
+    <update id="updateOperations">
+        UPDATE OPERATION SET OPERATION_SITE = 0 WHERE OPERATION_ID = #{operationId}
+    </update>
+
 <!--    修改病人手术状态为1，已安排手术室，根据住院号进行修改-->
     <update id="updateFor">
         UPDATE SURGERYFOR SET SURGERYFOR_STATE = 1 WHERE REGISTER_ID = #{registerId}

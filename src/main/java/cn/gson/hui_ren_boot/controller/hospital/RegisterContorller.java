@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,22 @@ public class RegisterContorller {
     RegisterService registerService;
     @Autowired
     HospialService hospialService;
+
+    public static boolean checkObjFieldIsNotNull(Object obj) {   // true 不为空  false 为空
+        boolean flag = false;
+        try {
+            for (Field f : obj.getClass().getDeclaredFields()) {
+                f.setAccessible(true);
+                if (f.get(obj) == null || f.get(obj) == "") {
+                } else {
+                    flag = true;
+                }
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return flag;
+    }
     //病人信息多条件分页查询患者信息
     @RequestMapping("/registers")
     public Object allregis( Integer pageNo, Integer size,String shu) {
@@ -48,25 +65,42 @@ public class RegisterContorller {
     //新增住院病人信息
     @RequestMapping("/saveRegis")
     public String saveRegis(@RequestBody Register j) {
-        System.out.println(j);
+
 
        try {
            if( Thequery(j)==true){//如果为空就新增
-               TreatmentCard ya=new TreatmentCard();
-               ya.setTreatmentNo(j.getRegisterClinic());//就诊卡号
-               ya.setTreatmentName(j.getRegisterName());//姓名
-               String k = j.getRegisterHome();
-               String result = k.substring(k.length()-4,k.length());//截取身份证后四位数
-               ya.setTreatmentPassword("123456"+result);//密码
-               ya.setTreatmentCard(j.getRegisterHome());//身份
-               ya.setTreatmentBalance(0);//金额
-               registerService.addtreatmentCard(ya);//新增就诊卡
-               registerService.addRegister(j);//新增病人信息
-               Hospital hj=new Hospital();
-               hj.setHospitalCard(j.getRegisterHome());
-               System.out.println(j.getRegisterHome());
-               hj.setHospitalState(1);
-               hospialService.upHostpState(hj);//修改申请表状态
+                TreatmentCard card=  registerService.Recharge(j.getRegisterClinic());
+               System.err.println(checkObjFieldIsNotNull(card));
+                if(checkObjFieldIsNotNull(card)==true){
+                    registerService.addRegister(j);//新增病人信息
+
+                    Hospital hj=new Hospital();
+                    hj.setHospitalCard(j.getRegisterHome());
+                    System.out.println(j.getRegisterHome());
+                    hj.setHospitalState(1);
+                    hospialService.upHostpState(hj);//修改申请表状态
+                }else{
+                    TreatmentCard ya=new TreatmentCard();
+                    ya.setTreatmentNo(j.getRegisterClinic());//就诊卡号
+                    ya.setTreatmentName(j.getRegisterName());//姓名
+                    String k = j.getRegisterHome();
+                    String result = k.substring(k.length()-4,k.length());//截取身份证后四位数
+                    ya.setTreatmentPassword("123456"+result);//密码
+                    ya.setTreatmentCard(j.getRegisterHome());//身份
+                    ya.setTreatmentBalance(0);//金额
+                    registerService.addtreatmentCard(ya);//新增就诊卡
+
+                    registerService.addRegister(j);//新增病人信息
+
+                    Hospital hj=new Hospital();
+                    hj.setHospitalCard(j.getRegisterHome());
+                    System.out.println(j.getRegisterHome());
+                    hj.setHospitalState(1);
+                    hospialService.upHostpState(hj);//修改申请表状态
+                }
+
+
+
                return "ok";//新增成功
            }else {//不为空就修改
                registerService.upRegiste(j);

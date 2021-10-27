@@ -6,6 +6,7 @@
     </insert>
     <select id="selectInform" resultType="Inform">-- 查
         select*from inform where register_id= #{registerId}
+        order by inform_date desc
     </select>
     <delete id="deleteInform">-- 删除
         delete from inform where  inform_id= #{informId}
@@ -21,6 +22,7 @@
         </if>
         inform_state=0
     </where>
+        order by inform_date desc
     </select>
     <update id="upInform">
         update inform set inform_state=1 where register_id= #{registerId}

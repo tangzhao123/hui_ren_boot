@@ -62,7 +62,7 @@
 
     <select id="selectAdvice" resultType="Advice">-- 查询
         select * from advice where register_id = #{registerId}
-
+        order by  advice_start desc
 
     </select>
 

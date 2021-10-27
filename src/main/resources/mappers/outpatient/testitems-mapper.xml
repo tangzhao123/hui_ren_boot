@@ -6,6 +6,6 @@
     <!--开检验项目-->
     <insert id="addItem">
         insert into test_items values (seq_huiren.nextval,#{testNumber},#{recordsNo},#{testSumtotal},#{outdoctor.staffId},
-                                       #{medical.medicalId},#{outpatient.outpatientId},current_timestamp )
+                                       #{medical.medicalId},#{outpatient.outpatientId},current_timestamp ,1)
     </insert>
 </mapper>

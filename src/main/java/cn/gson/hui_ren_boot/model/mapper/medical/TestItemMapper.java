@@ -10,6 +10,9 @@ import java.util.List;
 
 @Mapper
 public interface TestItemMapper {
+    //修改门诊检验的状态
+    public void updateSee(@Param("recordsNo") String recordsNo);
+
     //查看结果
     public List<TestResult> kanmen(@Param("resultNumber") String resultNumber);
 

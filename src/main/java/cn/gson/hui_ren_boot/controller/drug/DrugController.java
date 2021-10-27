@@ -31,12 +31,12 @@ public class DrugController {
 
     //查询处方跟医嘱的药品
     @RequestMapping("drugInfo-list")
-    public Object findAllDrugInfo(Integer pageNo,Integer size,DrugInfo drugInfo){
-        drugInfo.setDrugState(1L);
+    public Object findAllDrugInfo(@RequestBody DrugInfo drugInfo){
+        drugInfo.setDrugState(0L);
         //drugInfo.setDrugName("999感冒药");
-        System.out.println(pageNo);
-        System.out.println(size);
+        System.out.println(drugInfo.getPageNo());
+        System.out.println(drugInfo.getSize());
         System.out.println(drugInfo);
-        return drugInfoService.findAllDrugInfoByPage(pageNo, size, drugInfo);
+        return drugInfoService.findAllDrugInfoByPage(drugInfo.getPageNo(), drugInfo.getSize(), drugInfo);
     }
 }

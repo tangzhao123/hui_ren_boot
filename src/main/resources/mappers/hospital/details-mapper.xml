@@ -27,6 +27,7 @@
 <!--    医嘱详情管理-->
     <select id="seletDetails" resultType="Details">
         select *from details where register_id = #{registerId}
+        order by daralis_start desc
     </select>
 <!--    主表停嘱-->
     <update id="upDetails">

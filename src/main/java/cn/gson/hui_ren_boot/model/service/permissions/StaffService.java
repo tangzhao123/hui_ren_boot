@@ -61,9 +61,9 @@ public class StaffService {
         staffs.setStaffCard(staffCard);
         UserInfo userInfo = new UserInfo();
         userInfo.setUserName(userName);
-        userInfo.setUserPossword(passWord);
+        userInfo.setUserPossword(md5);
         staffMapper.addStaff(staffs); //新增员工
-        userInfo.setStaffId(staff.getStaffId());
+        userInfo.setStaffId(staffs.getStaffId());
         System.err.println(staffs.getStaffId());
         //System.err.println(staffId);
         userMapper.addUser(userInfo);//新增用户

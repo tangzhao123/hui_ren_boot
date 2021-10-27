@@ -153,18 +153,22 @@
     <!--护理 床位查询-->
     <select id="allHospitalcare" resultType="Hospitalcare">
         select *from hospitalcare where  register_id=#{registerId}
+        order by hospitalcare_date desc
     </select>
     <!--医嘱查询-->
     <select id="allPrndebit" resultMap="Prndt">
         select *from prndebit km    left join details  ls  on  km.register_id =ls.register_id where  km.register_id=#{registerId}
+        order by prndebit_date desc
     </select>
     <!--检验查询-->
     <select id="allInspectDebit" resultType="InspectDebit">
         select *from   inspect_debit where test_phone =#{registerPhone}
+        order by debit_date desc
     </select>
     <!--手术查询-->
     <select id="allApplyrecord" resultType="Applyrecord">
         select *from applyrecord where register_id=#{registerId}
+        order by apply_time desc
     </select>
     <select id="akkRegister" resultType="Register">
         select *from register

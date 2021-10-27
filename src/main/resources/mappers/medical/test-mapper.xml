@@ -80,6 +80,7 @@
             </if>
             and not TEST_STATE = 1
             and not TEST_STATE = 3
+            and not TEST_STATE = 4
         </where>
     </select>
 

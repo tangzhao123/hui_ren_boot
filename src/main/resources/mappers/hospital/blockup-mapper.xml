@@ -20,7 +20,7 @@
     <insert id="addTestmiddle">-- 添加体检中间表
         insert into testmiddle values (#{testAccount},#{itemId})
     </insert>
-    <select id="selText" resultType="Test">-->
+    <select id="selText" resultType="Test">-- 体检单
         select*from test  where test_phone=#{testPhone}  order by test_time desc
    </select>
     <select id="allResults" resultType="Combinspection">

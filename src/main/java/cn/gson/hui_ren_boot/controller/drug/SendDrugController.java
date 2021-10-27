@@ -65,6 +65,7 @@ public class SendDrugController {
 
                 }
             }
+            System.err.println(st);
             allSendDrug = sendDrugService.findAllSendDrug(st);
             System.err.println(allSendDrug);
             //如果没有发药记录才进行发药

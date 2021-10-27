@@ -30,9 +30,9 @@
             <if test="itemType != null and itemType != ''">
                 or ITEM_TYPE like '%${itemType}%'
             </if>
-            <if test="itemNumber != null and itemNumber != ''">
-                or ITEM_NUMBER like '%${itemNumber}%'
-            </if>
+<!--            <if test="itemNumber != null and itemNumber != ''">-->
+<!--                or ITEM_NUMBER like '%${itemNumber}%'-->
+<!--            </if>-->
         </where>
     </select>
     <!-- 新增体检项目 -->

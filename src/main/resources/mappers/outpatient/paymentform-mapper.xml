@@ -64,6 +64,7 @@
             </if>
                 and pf.payment_money != 0
         </where>
+        order by pf.PAYMENT_TIME desc
     </select>
 
     <!--挂号时新增收费表-->

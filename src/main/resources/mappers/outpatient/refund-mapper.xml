@@ -37,5 +37,6 @@
                 and st.STAFF_NAME = #{staffName}
             </if>
         </where>
+        order by rf.REFUND_DATE desc
     </select>
 </mapper>

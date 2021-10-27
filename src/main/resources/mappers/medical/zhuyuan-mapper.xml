@@ -73,6 +73,7 @@
                 and not TEST_STATE = 6
                 and not TEST_STATE = 5
                 and not TEST_STATE = 2
+                and not TEST_STATE = 4
             </where>
     </select>
 </mapper>

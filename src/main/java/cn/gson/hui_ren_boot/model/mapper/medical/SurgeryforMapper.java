@@ -27,9 +27,10 @@ public interface SurgeryforMapper {
     public List<Operation> selectOperation(String medicalName);
 
 
-
 //    修改手术室的状态，（安排了手术后，手术室的状态改为1，已安排）
     public void updateOperation(String operationId);
+    //执行手术收修改手术室的状态
+    public void updateOperations(String operationId);
 
 //    修改病人手术状态为1，已安排手术室，根据住院号进行修改
     public void updateFor(String registerId);

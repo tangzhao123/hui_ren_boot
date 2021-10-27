@@ -29,6 +29,13 @@
     </insert>
     <select id="allSurgeryfor" resultType="Surgeryfor">
         select*from surgeryfor where register_id=#{registerId}
+
+        order by  surgeryfor_date desc
+    </select>
+    <select id="allSurgeryfor2" resultType="Surgery">-- 手术结果
+        select*from surgery where register_id=#{registerId}
+        and surgery_result is not null
+        order by surgerys_start desc
     </select>
 <!--    删除申请表-->
     <delete id="deleteSurgeryfor">

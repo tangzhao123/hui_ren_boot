@@ -9,7 +9,7 @@ public class Casefile {
 
     private long casefileSeriald;//序号
     private String casefileId;//病例编号
-    private Date casefileDays;//建档日期
+    private Date casefileDate;//建档日期
     private String registerId;//住院号
     private String casefileName;//患者名
     private String casefileResults;//诊断结果
@@ -55,13 +55,13 @@ public class Casefile {
     }
 
     @Basic
-    @Column(name = "CASEFILE_DAYS")
-    public Date getCasefileDays() {
-        return casefileDays;
+    @Column(name = "CASEFILE_DATE")
+    public Date getCasefileDate() {
+        return casefileDate;
     }
 
-    public void setCasefileDays(Date casefileDays) {
-        this.casefileDays = casefileDays;
+    public void setCasefileDate(Date casefileDate) {
+        this.casefileDate = casefileDate;
     }
 
 
@@ -170,12 +170,12 @@ public class Casefile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Casefile casefile = (Casefile) o;
-        return casefileSeriald == casefile.casefileSeriald && Objects.equals(casefileId, casefile.casefileId) && Objects.equals(casefileDays, casefile.casefileDays) && Objects.equals(registerId, casefile.registerId) && Objects.equals(casefileName, casefile.casefileName) && Objects.equals(casefileResults, casefile.casefileResults) && Objects.equals(casefilePlan, casefile.casefilePlan) && Objects.equals(casefileHpi, casefile.casefileHpi) && Objects.equals(casefilePh, casefile.casefilePh) && Objects.equals(casefileFamily, casefile.casefileFamily) && Objects.equals(casefileUps, casefile.casefileUps) && Objects.equals(casefileAllergy, casefile.casefileAllergy) && Objects.equals(casefileUser, casefile.casefileUser);
+        return casefileSeriald == casefile.casefileSeriald && Objects.equals(casefileId, casefile.casefileId) && Objects.equals(casefileDate, casefile.casefileDate) && Objects.equals(registerId, casefile.registerId) && Objects.equals(casefileName, casefile.casefileName) && Objects.equals(casefileResults, casefile.casefileResults) && Objects.equals(casefilePlan, casefile.casefilePlan) && Objects.equals(casefileHpi, casefile.casefileHpi) && Objects.equals(casefilePh, casefile.casefilePh) && Objects.equals(casefileFamily, casefile.casefileFamily) && Objects.equals(casefileUps, casefile.casefileUps) && Objects.equals(casefileAllergy, casefile.casefileAllergy) && Objects.equals(casefileUser, casefile.casefileUser);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(casefileSeriald, casefileId, casefileDays,registerId, casefileName, casefileResults, casefilePlan, casefileHpi, casefilePh, casefileFamily, casefileUps, casefileAllergy, casefileUser);
+        return Objects.hash(casefileSeriald, casefileId, casefileDate,registerId, casefileName, casefileResults, casefilePlan, casefileHpi, casefilePh, casefileFamily, casefileUps, casefileAllergy, casefileUser);
     }
 
     @Override
@@ -183,7 +183,7 @@ public class Casefile {
         return "Casefile{" +
                 "casefileSeriald=" + casefileSeriald +
                 ", casefileId='" + casefileId + '\'' +
-                ", casefileDays=" + casefileDays +
+                ", casefileDays=" + casefileDate +
                 ", registerId='" + registerId + '\'' +
                 ", casefileName='" + casefileName + '\'' +
                 ", casefileResults='" + casefileResults + '\'' +

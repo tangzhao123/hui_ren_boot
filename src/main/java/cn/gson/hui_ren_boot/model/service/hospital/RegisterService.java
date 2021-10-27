@@ -33,6 +33,7 @@ public class RegisterService {
     }
 
     public void addRegister(Register ter){
+
         registerMapper.addRegister(ter);
     }
 
@@ -73,6 +74,7 @@ public class RegisterService {
         System.out.println(k);
         return k;
     }
+
     //    排班查询
     public List<Arrange> chaArrange2(Medical medical){
         Medical kl=registerMapper.allMedicals(medical.getMedicalName());
